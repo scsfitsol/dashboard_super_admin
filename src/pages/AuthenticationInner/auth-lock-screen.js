@@ -1,14 +1,14 @@
-import React from "react"
+import React from "react";
 
 // availity-reactstrap-validation
-import { AvForm, AvField } from "availity-reactstrap-validation"
-import { Link } from "react-router-dom"
+import { AvForm, AvField } from "availity-reactstrap-validation";
+import { Link } from "react-router-dom";
 
-import { Container, Row, Col, CardBody, Card, Button } from "reactstrap"
+import { Container, Row, Col, CardBody, Card, Button } from "reactstrap";
 
 // import images
-import logo from "../../assets/images/logo-sm-dark.png"
-import avatar1 from "../../assets/images/users/avatar-1.jpg"
+import logo from "../../assets/images/logo-sm-dark.png";
+import avatar1 from "../../assets/images/users/avatar-1.jpg";
 
 const LockScreen = () => {
   return (
@@ -27,19 +27,23 @@ const LockScreen = () => {
                   <div className="bg-login-overlay"></div>
                   <div className="position-relative">
                     <h5 className="text-white font-size-20">Lock screen</h5>
-                    <p className="text-white-50 mb-0">Enter your password to unlock the screen!</p>
+                    <p className="text-white-50 mb-0">
+                      Enter your password to unlock the screen!
+                    </p>
                     <Link to="/" className="logo logo-admin mt-4">
                       <img src={logo} alt="" height="30" />
                     </Link>
                   </div>
                 </div>
                 <CardBody className="pt-5">
-
                   <div className="p-2">
                     <AvForm className="form-horizontal">
                       <div className="user-thumb text-center mb-4">
-                        <img src={avatar1}
-                          className="rounded-circle img-thumbnail avatar-md" alt="thumbnail" />
+                        <img
+                          src={avatar1}
+                          className="rounded-circle img-thumbnail avatar-md"
+                          alt="thumbnail"
+                        />
                         <h5 className="font-size-15 mt-3">Maria Laird</h5>
                       </div>
 
@@ -61,7 +65,7 @@ const LockScreen = () => {
                             type="submit"
                           >
                             Unlock
-                            </Button>
+                          </Button>
                         </div>
                       </div>
                     </AvForm>
@@ -69,18 +73,23 @@ const LockScreen = () => {
                 </CardBody>
               </Card>
               <div className="mt-5 text-center">
-                <p>Not you ? return <Link to="/login" className="fw-medium text-primary"> Sign In
-                            </Link> </p>
                 <p>
-                  © {new Date().getFullYear()} Qovex. Crafted with{" "}
+                  Not you ? return{" "}
+                  <Link to="/login" className="fw-medium text-primary">
+                    {" "}
+                    Sign In
+                  </Link>{" "}
+                </p>
+                <p>
+                  © {new Date().getFullYear()} Fitsol. Crafted with{" "}
                   <i className="mdi mdi-heart text-danger" /> by Themesbrand
-                  </p>
+                </p>
               </div>
             </Col>
           </Row>
         </Container>
       </div>
     </React.Fragment>
-  )
-}
-export default LockScreen
+  );
+};
+export default LockScreen;

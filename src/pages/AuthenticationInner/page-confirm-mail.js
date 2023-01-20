@@ -1,10 +1,10 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import { Card, CardBody, Col, Container, Row } from "reactstrap"
+import React from "react";
+import { Link } from "react-router-dom";
+import { Card, CardBody, Col, Container, Row } from "reactstrap";
 
 // import images
-import logodark from "../../assets/images/logo-dark.png"
-import logolight from "../../assets/images/logo-light.png"
+import logodark from "../../assets/images/logo-dark.png";
+import logolight from "../../assets/images/logo-light.png";
 
 const ConfirmMail = () => {
   return (
@@ -47,13 +47,13 @@ const ConfirmMail = () => {
                         <h4>Success !</h4>
                         <p className="text-muted">
                           At vero eos et accusamus et iusto odio dignissimos
-                          ducimus qui blanditiis praesentium voluptatum
-                          deleniti atque corrupti quos dolores et
-                          </p>
+                          ducimus qui blanditiis praesentium voluptatum deleniti
+                          atque corrupti quos dolores et
+                        </p>
                         <div className="mt-4">
                           <Link to="dashboard" className="btn btn-success">
                             Back to Home
-                            </Link>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -62,16 +62,16 @@ const ConfirmMail = () => {
               </Card>
               <div className="mt-5 text-center">
                 <p>
-                  © {new Date().getFullYear()} Qovex. Crafted with{" "}
+                  © {new Date().getFullYear()} Fitsol. Crafted with{" "}
                   <i className="mdi mdi-heart text-danger"></i> by Themesbrand
-                  </p>
+                </p>
               </div>
             </Col>
           </Row>
         </Container>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default ConfirmMail
+export default ConfirmMail;
