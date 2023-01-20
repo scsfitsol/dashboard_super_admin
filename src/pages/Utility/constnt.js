@@ -1,3 +1,5 @@
+import { Button } from "reactstrap";
+
 const CONSTANT = {
   MENU_ITEM: [
     {
@@ -46,6 +48,11 @@ const CONSTANT = {
               to: "/drivers",
               lable: "Drivers",
             },
+            {
+              id: 3,
+              to: "/transporter",
+              lable: "Transporter",
+            },
           ],
         },
         {
@@ -67,9 +74,91 @@ const CONSTANT = {
             },
           ],
         },
+        {
+          id: 3,
+          className: "waves-effect",
+          to: "/trip",
+          lable: "trip",
+          icon: "bx bxs-paste",
+        },
+        {
+          id: 4,
+          className: "waves-effect",
+          to: "/Plant",
+          lable: "Plant",
+          icon: "bx bxs-factory",
+        },
       ],
     },
   ],
+
+  DATA_TABLE_COLUME: {
+    admin: [
+      {
+        label: "No",
+        field: "no",
+        sort: "asc",
+      },
+      {
+        label: "Email ID",
+        field: "email",
+        sort: "asc",
+      },
+      {
+        label: "Action",
+        field: "action",
+        sort: "asc",
+      },
+    ],
+  },
+};
+
+const STATIC_DATA = {
+  admin: [
+    {
+      no: 1,
+      email: "admin@gmail.com",
+      action: (
+        <Button
+          color="danger"
+          className="btn btn-danger waves-effect waves-light"
+        >
+          Delete
+        </Button>
+      ),
+    },
+    {
+      no: 1,
+      email: "admin@gmail.com",
+      action: (
+        <Button
+          color="danger"
+          className="btn btn-danger waves-effect waves-light"
+        >
+          Delete
+        </Button>
+      ),
+    },
+    {
+      no: 1,
+      email: "admin@gmail.com",
+      action: (
+        <Button
+          color="danger"
+          className="btn btn-danger waves-effect waves-light"
+        >
+          Delete
+        </Button>
+      ),
+    },
+  ],
+};
+
+export const getTableData = (dataKey, data) => {
+  return {
+    columns: CONSTANT.DATA_TABLE_COLUME[dataKey],
+    rows: data || STATIC_DATA[dataKey],
+  };
 };
 
 export default CONSTANT;
