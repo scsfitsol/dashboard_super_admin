@@ -71,12 +71,12 @@ const Header = (props) => {
   function tToggle() {
     var body = document.body;
     if (window.screen.width <= 768) {
-    body.classList.toggle("sidebar-enable");
+      body.classList.toggle("sidebar-enable");
     } else {
-    body.classList.toggle("vertical-collpsed");
-    body.classList.toggle("sidebar-enable");
+      body.classList.toggle("vertical-collpsed");
+      body.classList.toggle("sidebar-enable");
     }
-}
+  }
 
   return (
     <React.Fragment>
@@ -150,7 +150,7 @@ const Header = (props) => {
                     <img src={logoSm} alt="" height="20" />
                   </span>
                   <span className="logo-lg">
-                    <img src={logoDark} alt="" height="19" />
+                    <img src={logoDark} alt="" height="35" />
                   </span>
                 </Link>
 
@@ -159,21 +159,21 @@ const Header = (props) => {
                     <img src={logoSm} alt="" height="20" />
                   </span>
                   <span className="logo-lg">
-                    <img src={logoLight} alt="" height="19" />
+                    <img src={logoLight} alt="" height="35" />
                   </span>
                 </Link>
               </div>
               <button
-              type="button"
-              className="btn btn-sm px-3 font-size-16 d-lg-none header-item waves-effect waves-light"
-              data-toggle="collapse"
-              onClick={() => {
-                tToggle()
-              }}
-              data-target="#topnav-menu-content"
-            >
-              <i className="fa fa-fw fa-bars"></i>
-            </button>
+                type="button"
+                className="btn btn-sm px-3 font-size-16 d-lg-none header-item waves-effect waves-light"
+                data-toggle="collapse"
+                onClick={() => {
+                  tToggle();
+                }}
+                data-target="#topnav-menu-content"
+              >
+                <i className="fa fa-fw fa-bars"></i>
+              </button>
               <Form className="app-search d-none d-lg-inline-block">
                 <div className="position-relative">
                   <input
@@ -268,9 +268,7 @@ const Header = (props) => {
                               <Link to="#">{props.t("Compact Sidebar")}</Link>
                             </li>
                             <li>
-                              <Link to="#">
-                              {props.t("Horizontal layout")}
-                              </Link>
+                              <Link to="#">{props.t("Horizontal layout")}</Link>
                             </li>
                             <li>
                               <Link to="#">{props.t("Maintenance")}</Link>

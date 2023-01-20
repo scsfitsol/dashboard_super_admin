@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 
 import {
   Row,
@@ -11,43 +11,42 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-} from "reactstrap"
-import { Link } from "react-router-dom"
+} from "reactstrap";
+import { Link } from "react-router-dom";
 
 //Lightbox
-import Lightbox from "react-image-lightbox"
-import "react-image-lightbox/style.css"
-import ModalVideo from "react-modal-video"
-import "react-modal-video/scss/modal-video.scss"
+import Lightbox from "react-image-lightbox";
+import "react-image-lightbox/style.css";
+import ModalVideo from "react-modal-video";
+import "react-modal-video/scss/modal-video.scss";
 
 // import image
-import img1 from "../../assets/images/small/img-1.jpg"
-import img2 from "../../assets/images/small/img-2.jpg"
-import img3 from "../../assets/images/small/img-3.jpg"
-import img4 from "../../assets/images/small/img-4.jpg"
-import img5 from "../../assets/images/small/img-5.jpg"
-import img6 from "../../assets/images/small/img-6.jpg"
-import img7 from "../../assets/images/small/img-7.jpg"
+import img1 from "../../assets/images/small/img-1.jpg";
+import img2 from "../../assets/images/small/img-2.jpg";
+import img3 from "../../assets/images/small/img-3.jpg";
+import img4 from "../../assets/images/small/img-4.jpg";
+import img5 from "../../assets/images/small/img-5.jpg";
+import img6 from "../../assets/images/small/img-6.jpg";
+import img7 from "../../assets/images/small/img-7.jpg";
 
 //Import Breadcrumb
-import Breadcrumbs from "../../components/Common/Breadcrumb"
+import Breadcrumbs from "../../components/Common/Breadcrumb";
 
-const images = [img1, img2, img3, img4, img5, img6]
+const images = [img1, img2, img3, img4, img5, img6];
 
 const UiLightbox = () => {
-  const [photoIndex, setphotoIndex] = useState(0)
-  const [isFits, setisFits] = useState(false)
-  const [isEffects, setisEffects] = useState(false)
-  const [isGallery, setisGallery] = useState(false)
-  const [isGalleryZoom, setisGalleryZoom] = useState(false)
-  const [isOpen, setisOpen] = useState(false)
-  const [isOpen1, setisOpen1] = useState(false)
-  const [modal, setmodal] = useState(false)
+  const [photoIndex, setphotoIndex] = useState(0);
+  const [isFits, setisFits] = useState(false);
+  const [isEffects, setisEffects] = useState(false);
+  const [isGallery, setisGallery] = useState(false);
+  const [isGalleryZoom, setisGalleryZoom] = useState(false);
+  const [isOpen, setisOpen] = useState(false);
+  const [isOpen1, setisOpen1] = useState(false);
+  const [modal, setmodal] = useState(false);
 
   return (
     <React.Fragment>
       <div className="page-content">
-
         <Breadcrumbs title="UI Elements" breadcrumbItem="Lightbox" />
 
         {isFits ? (
@@ -58,7 +57,7 @@ const UiLightbox = () => {
               "Caption. Can be aligned it to any side and contain any HTML."
             }
             onCloseRequest={() => {
-              setisFits(!isFits)
+              setisFits(!isFits);
             }}
           />
         ) : null}
@@ -68,7 +67,7 @@ const UiLightbox = () => {
             mainSrc={images[3]}
             enableZoom={false}
             onCloseRequest={() => {
-              setisEffects(!isEffects)
+              setisEffects(!isEffects);
             }}
           />
         ) : null}
@@ -80,13 +79,13 @@ const UiLightbox = () => {
             prevSrc={images[(photoIndex + images.length - 1) % images.length]}
             enableZoom={true}
             onCloseRequest={() => {
-              setisGallery(false)
+              setisGallery(false);
             }}
             onMovePrevRequest={() => {
-              setphotoIndex((photoIndex + images.length - 1) % images.length)
+              setphotoIndex((photoIndex + images.length - 1) % images.length);
             }}
             onMoveNextRequest={() => {
-              setphotoIndex((photoIndex + 1) % images.length)
+              setphotoIndex((photoIndex + 1) % images.length);
             }}
             imageCaption={"Project " + parseFloat(photoIndex + 1)}
           />
@@ -98,13 +97,13 @@ const UiLightbox = () => {
             nextSrc={images[(photoIndex + 1) % images.length]}
             prevSrc={images[(photoIndex + images.length - 1) % images.length]}
             onCloseRequest={() => {
-              setisGalleryZoom(false)
+              setisGalleryZoom(false);
             }}
             onMovePrevRequest={() => {
-              setphotoIndex((photoIndex + images.length - 1) % images.length)
+              setphotoIndex((photoIndex + images.length - 1) % images.length);
             }}
             onMoveNextRequest={() => {
-              setphotoIndex((photoIndex + 1) % images.length)
+              setphotoIndex((photoIndex + 1) % images.length);
             }}
           />
         ) : null}
@@ -116,19 +115,17 @@ const UiLightbox = () => {
                 <CardTitle className="h4">Single image lightbox</CardTitle>
                 <p className="card-title-desc">
                   Three simple popups with different scaling settings.
-                  </p>
+                </p>
                 <Row>
                   <Col className="col-6">
                     <div>
-                      <h5 className="mt-0 font-size-14">
-                        Fits (Horz/Vert)
-                        </h5>
+                      <h5 className="mt-0 font-size-14">Fits (Horz/Vert)</h5>
                       <img
                         onClick={() => {
-                          setisFits(true)
+                          setisFits(true);
                         }}
                         className="img-fluid"
-                        alt="qovex"
+                        alt="Fitsol"
                         src={img2}
                         width="145"
                       />
@@ -139,7 +136,7 @@ const UiLightbox = () => {
                       <h5 className="mt-0 font-size-14">Effects</h5>
                       <img
                         onClick={() => {
-                          setisEffects(true)
+                          setisEffects(true);
                         }}
                         className="img-fluid"
                         alt=""
@@ -148,8 +145,7 @@ const UiLightbox = () => {
                       />
 
                       <CardText className="mt-2 mb-0 text-muted">
-                        No gaps, zoom animation, close icon in top-right
-                        corner.
+                        No gaps, zoom animation, close icon in top-right corner.
                       </CardText>
                     </div>
                   </Col>
@@ -163,8 +159,8 @@ const UiLightbox = () => {
               <CardBody>
                 <CardTitle className="h4">Lightbox gallery</CardTitle>
                 <p className="card-title-desc">
-                  In this example lazy-loading of images is enabled for the
-                    next image based on move direction.{" "}
+                  In this example lazy-loading of images is enabled for the next
+                  image based on move direction.{" "}
                 </p>
                 <div className="popup-gallery">
                   <div className="float-start">
@@ -172,8 +168,8 @@ const UiLightbox = () => {
                       <img
                         src={img1}
                         onClick={() => {
-                          setisGallery(true)
-                          setphotoIndex(0)
+                          setisGallery(true);
+                          setphotoIndex(0);
                         }}
                         alt=""
                         width="120"
@@ -185,8 +181,8 @@ const UiLightbox = () => {
                       <img
                         src={img2}
                         onClick={() => {
-                          setisGallery(true)
-                          setphotoIndex(1)
+                          setisGallery(true);
+                          setphotoIndex(1);
                         }}
                         alt=""
                         width="120"
@@ -198,8 +194,8 @@ const UiLightbox = () => {
                       <img
                         src={img3}
                         onClick={() => {
-                          setisGallery(true)
-                          setphotoIndex(2)
+                          setisGallery(true);
+                          setphotoIndex(2);
                         }}
                         alt=""
                         width="120"
@@ -211,8 +207,8 @@ const UiLightbox = () => {
                       <img
                         src={img4}
                         onClick={() => {
-                          setisGallery(true)
-                          setphotoIndex(3)
+                          setisGallery(true);
+                          setphotoIndex(3);
                         }}
                         alt=""
                         width="120"
@@ -224,8 +220,8 @@ const UiLightbox = () => {
                       <img
                         src={img5}
                         onClick={() => {
-                          setisGallery(true)
-                          setphotoIndex(4)
+                          setisGallery(true);
+                          setphotoIndex(4);
                         }}
                         alt=""
                         width="120"
@@ -237,8 +233,8 @@ const UiLightbox = () => {
                       <img
                         src={img6}
                         onClick={() => {
-                          setisGallery(true)
-                          setphotoIndex(5)
+                          setisGallery(true);
+                          setphotoIndex(5);
                         }}
                         alt=""
                         width="120"
@@ -258,15 +254,15 @@ const UiLightbox = () => {
                 <CardTitle className="h4">Zoom Gallery</CardTitle>
                 <p className="card-title-desc">
                   Zoom effect works only with images.
-                  </p>
+                </p>
 
                 <div className="zoom-gallery">
                   <img
                     src={img3}
                     className="float-start"
                     onClick={() => {
-                      setisGallery(true)
-                      setphotoIndex(2)
+                      setisGallery(true);
+                      setphotoIndex(2);
                     }}
                     alt=""
                     width="275"
@@ -275,8 +271,8 @@ const UiLightbox = () => {
                     src={img7}
                     className="float-start"
                     onClick={() => {
-                      setisGallery(true)
-                      setphotoIndex(4)
+                      setisGallery(true);
+                      setphotoIndex(4);
                     }}
                     alt=""
                     width="275"
@@ -291,8 +287,8 @@ const UiLightbox = () => {
               <CardBody>
                 <CardTitle className="h4">Popup with video or map</CardTitle>
                 <p className="card-title-desc">
-                  In this example lazy-loading of images is enabled for the
-                    next image based on move direction.{" "}
+                  In this example lazy-loading of images is enabled for the next
+                  image based on move direction.{" "}
                 </p>
 
                 <Row>
@@ -300,25 +296,25 @@ const UiLightbox = () => {
                     <Button
                       className="btn btn-secondary mo-mb-2"
                       onClick={() => {
-                        setisOpen(!isOpen)
+                        setisOpen(!isOpen);
                       }}
                     >
                       Open Youtube Video
-                      </Button>{" "}
+                    </Button>{" "}
                     <Button
                       className="btn btn-secondary mo-mb-2"
                       onClick={() => {
-                        setisOpen1(!isOpen1)
+                        setisOpen1(!isOpen1);
                       }}
                     >
                       Open Vimeo Video
-                      </Button>{" "}
+                    </Button>{" "}
                     <ModalVideo
                       videoId="L61p2uyiMSo"
                       channel="youtube"
                       isOpen={isOpen}
                       onClose={() => {
-                        setisOpen(!isOpen)
+                        setisOpen(!isOpen);
                       }}
                     />
                     <ModalVideo
@@ -326,7 +322,7 @@ const UiLightbox = () => {
                       channel="youtube"
                       isOpen={isOpen1}
                       onClose={() => {
-                        setisOpen1(false)
+                        setisOpen1(false);
                       }}
                     />
                   </Col>
@@ -340,30 +336,30 @@ const UiLightbox = () => {
                 <div>
                   <Link
                     onClick={() => {
-                      setmodal(!modal)
+                      setmodal(!modal);
                     }}
                     to="#"
                     className="popup-form btn btn-primary"
                   >
                     Popup form
-                    </Link>
+                  </Link>
                 </div>
 
                 <Modal
                   size="lg"
                   isOpen={modal}
                   toggle={() => {
-                    setmodal(!modal)
+                    setmodal(!modal);
                   }}
                 >
                   <ModalHeader
                     toggle={() => {
-                      setmodal(!modal)
+                      setmodal(!modal);
                     }}
                     className="h4 mt-0 mb-4"
                   >
                     Form
-                    </ModalHeader>
+                  </ModalHeader>
                   <ModalBody>
                     <form>
                       <Row>
@@ -418,7 +414,7 @@ const UiLightbox = () => {
                           <div className="text-right">
                             <button type="submit" className="btn btn-primary">
                               Submit
-                              </button>
+                            </button>
                           </div>
                         </Col>
                       </Row>
@@ -431,7 +427,7 @@ const UiLightbox = () => {
         </Row>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default UiLightbox
+export default UiLightbox;
