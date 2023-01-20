@@ -7,14 +7,14 @@ const CONSTANT = {
         {
           id: 1,
           className: "waves-effect",
-          to: "/#",
+          to: "/Report",
           lable: "Report",
           icon: "bx bxs-report",
         },
         {
           id: 2,
           className: "waves-effect",
-          to: "/test",
+          to: "/traking",
           lable: "Track vehicles",
           icon: "bx bxs-map",
         },
@@ -33,17 +33,17 @@ const CONSTANT = {
           submenu: [
             {
               id: 1,
-              to: "/dashboard",
+              to: "/admins",
               lable: "Admins",
             },
             {
               id: 2,
-              to: "/dashboard",
+              to: "/clients",
               lable: "Clients",
             },
             {
               id: 3,
-              to: "/dashboard",
+              to: "/drivers",
               lable: "Drivers",
             },
           ],
@@ -57,12 +57,12 @@ const CONSTANT = {
           submenu: [
             {
               id: 1,
-              to: "/dashboard",
+              to: "/vehicles",
               lable: "Vehicle List",
             },
             {
               id: 2,
-              to: "/dashboard",
+              to: "/vehicletype",
               lable: "Vehicle Type",
             },
           ],
