@@ -106,96 +106,34 @@ import LockScreen from "../pages/AuthenticationInner/auth-lock-screen";
 
 // Profile
 import UserProfile from "../pages/Authentication/user-profile";
+import Report from "../pages/Report";
+import Traking from "../pages/Traking";
+import Admin from "../pages/User";
+import Clients from "../pages/User/clients";
+import Driver from "../pages/User/driver";
+import Vehicals from "../pages/Vehicals";
+import VehicalsType from "../pages/Vehicals/vehical-type";
 
 const userRoutes = [
-  { path: "/dashboard", component: Dashboard },
-  { path: "/dashboard2", component: Dashboard2 },
-  { path: "/calendar", component: Calendar },
+  // Analytics
+  { path: "/report", component: Report },
+  { path: "/traking", component: Traking },
 
-  //Email
-  { path: "/email-inbox", component: EmailInbox },
-  { path: "/email-read", component: EmailRead },
-  { path: "/email-template-basic", component: EmailBasicTemplte },
-  { path: "/email-template-alert", component: EmailAlertTemplte },
-  { path: "/email-template-billing", component: EmailTemplateBilling },
+  // User
+  { path: "/admins", component: Admin },
+  { path: "/clients", component: Clients },
+  { path: "/drivers", component: Driver },
 
-  //Utility
-  { path: "/pages-starter", component: PagesStarter },
-  { path: "/pages-timeline", component: PagesTimeline },
-  { path: "/pages-faqs", component: PagesFaqs },
-  { path: "/pages-pricing", component: PagesPricing },
-  { path: "/invoice", component: PagesInvoice },
-
-  // Ui
-  { path: "/ui-alerts", component: UiAlert },
-  { path: "/ui-buttons", component: UiButtons },
-  { path: "/ui-cards", component: UiCards },
-  { path: "/ui-carousel", component: UiCarousel },
-  { path: "/ui-colors", component: UiColors },
-  { path: "/ui-dropdowns", component: UiDropdown },
-  { path: "/ui-general", component: UiGeneral },
-  { path: "/ui-grid", component: UiGrid },
-  { path: "/ui-images", component: UiImages },
-  { path: "/ui-lightbox", component: UiLightbox },
-  { path: "/ui-modals", component: UiModal },
-  { path: "/ui-progressbars", component: UiProgressbar },
-  { path: "/ui-sweet-alert", component: UiSweetAlert },
-  { path: "/ui-tabs-accordions", component: UiTabsAccordions },
-  { path: "/ui-typography", component: UiTypography },
-  { path: "/ui-video", component: UiVideo },
-  { path: "/ui-session-timeout", component: UiSessionTimeout },
-  { path: "/ui-rating", component: UiRating },
-  { path: "/ui-rangeslider", component: UiRangeSlider },
-  { path: "/ui-notifications", component: UiNotifications },
-  { path: "/ui-image-cropper", component: UiImageCropper },
-
-  // Forms
-  { path: "/basic-elements", component: BasicElements },
-  { path: "/form-layouts", component: FormLayouts },
-  { path: "/form-advanced", component: FormAdvanced },
-  { path: "/form-editors", component: FormEditors },
-  { path: "/form-repeater", component: FormRepeater },
-  { path: "/form-uploads", component: FormUpload },
-  { path: "/form-wizard", component: FormWizard },
-  { path: "/form-validation", component: FormValidations },
-  { path: "/form-xeditable", component: FormXeditable },
-  { path: "/form-mask", component: FormMask },
-
-  // Tables
-  { path: "/tables-basic", component: BasicTables },
-  { path: "/tables-datatable", component: DatatableTables },
-  { path: "/tables-responsive", component: ResponsiveTables },
-  { path: "/tables-editable", component: EditableTables },
-
-  //Charts
-  { path: "/apex-charts", component: ChartApex },
-  { path: "/chartjs-charts", component: ChartjsChart },
-  { path: "/e-charts", component: EChart },
-  { path: "/sparkline-charts", component: SparklineChart },
-  { path: "/charts-knob", component: ChartsKnob },
-
-  // Tasks
-  { path: "/tasks-list", component: TasksList },
-  { path: "/tasks-kanban", component: TasksKanban },
-  { path: "/tasks-create", component: TasksCreate },
-
-  // Icons
-  { path: "/icons-unicons", component: IconUnicons },
-  { path: "/icons-boxicons", component: IconBoxicons },
-  { path: "/icons-dripicons", component: IconDripicons },
-  { path: "/icons-materialdesign", component: IconMaterialdesign },
-  { path: "/icons-fontawesome", component: IconFontawesome },
-
-  // Maps
-  { path: "/maps-google", component: MapsGoogle },
-  { path: "/maps-vector", component: MapsVector },
-  { path: "/maps-leaflet", component: MapsLeaflet },
+  // Vehical
+  { path: "/vehicles", component: Vehicals },
+  { path: "/vehicletype", component: VehicalsType },
 
   // //profile
   { path: "/profile", component: UserProfile },
 
   // this route should be at the end of all other routes
   { path: "/", exact: true, component: () => <Redirect to="/login" /> },
+  { path: "/*", exact: true, component: Pages404 },
 ];
 
 const authRoutes = [
