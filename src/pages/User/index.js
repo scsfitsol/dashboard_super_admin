@@ -1,9 +1,11 @@
-import React from "react";
-import { Button, Row } from "reactstrap";
+import React, { useState } from "react";
+import { Button, Col, Modal, Row } from "reactstrap";
+import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
-import { getTableData } from "../Utility/constnt";
+import CONSTANT, { getTableData } from "../Utility/constnt";
 
 const Admin = () => {
+  const [showModel, setShowModel] = useState(false);
   return (
     <React.Fragment>
       <div className="page-content">
@@ -25,12 +27,21 @@ const Admin = () => {
         <Button
           color="primary"
           className="btn btn-primary waves-effect waves-light mb-3"
+          onClick={() => setShowModel(true)}
         >
           Create Admin
         </Button>
       </div>
 
       <Table title="Admin List" data={getTableData("admin")} />
+
+      <CustomModal
+        modalType="formModal"
+        show={showModel}
+        close={() => setShowModel(false)}
+        modalTitle="Add Client"
+        data={CONSTANT.FORM_FIELDS.ADMIN}
+      />
     </React.Fragment>
   );
 };

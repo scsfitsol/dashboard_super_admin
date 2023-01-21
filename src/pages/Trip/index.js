@@ -1,5 +1,7 @@
 import React from "react";
-import { Row } from "reactstrap";
+import { Button, Row } from "reactstrap";
+import Table from "../../components/Custome/table";
+import { getTableData } from "../Utility/constnt";
 
 const Trip = () => {
   return (
@@ -20,7 +22,14 @@ const Trip = () => {
             </div>
           </div>
         </Row>
+        <Button
+          color="primary"
+          className="btn btn-primary waves-effect waves-light mb-3"
+        >
+          Create Trip
+        </Button>
       </div>
+      <Table title="Trips List" data={getTableData("trips")} />
     </React.Fragment>
   );
 };
