@@ -28,9 +28,9 @@ import Admin from "../pages/User";
 import Clients from "../pages/User/clients";
 import Driver from "../pages/User/driver";
 import Vehicals from "../pages/Vehicals";
-import VehicalsType from "../pages/Vehicals/vehical-type";
 import Trip from "../pages/Trip";
 import Plants from "../pages/Plants";
+import Transporter from "../pages/User/transporter";
 
 const userRoutes = [
   // Analytics
@@ -42,9 +42,9 @@ const userRoutes = [
   { path: "/clients", component: Clients },
   { path: "/drivers", component: Driver },
   { path: "/drivers", component: Driver },
+  { path: "/transporter", component: Transporter },
   // Vehical
-  { path: "/transporter", component: Vehicals },
-  { path: "/vehicletype", component: VehicalsType },
+  { path: "/vehicles", component: Vehicals },
 
   // Trip
   { path: "/trip", component: Trip },

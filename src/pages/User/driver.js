@@ -1,7 +1,12 @@
-import React from "react";
-import { Row } from "reactstrap";
+import React, { useState } from "react";
+import { Button, Row } from "reactstrap";
+import CustomModal from "../../components/Custome/CustomModal";
+import Table from "../../components/Custome/table";
+import CONSTANT, { getTableData } from "../Utility/constnt";
 
 const Driver = () => {
+  const [showModel, setShowModel] = useState(false);
+
   return (
     <React.Fragment>
       <div className="page-content">
@@ -20,7 +25,22 @@ const Driver = () => {
             </div>
           </div>
         </Row>
+        <Button
+          color="primary"
+          className="btn btn-primary waves-effect waves-light mb-3"
+          onClick={() => setShowModel(true)}
+        >
+          Create Drive
+        </Button>
       </div>
+      <Table title="Driver List" data={getTableData("driver")} />
+      <CustomModal
+        modalType="formModal"
+        show={showModel}
+        close={() => setShowModel(false)}
+        modalTitle="Add Driver"
+        data={CONSTANT.FORM_FIELDS.DRIVER}
+      />
     </React.Fragment>
   );
 };

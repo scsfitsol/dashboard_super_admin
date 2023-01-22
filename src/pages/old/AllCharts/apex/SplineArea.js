@@ -1,47 +1,58 @@
-import React from "react"
-import ReactApexChart from "react-apexcharts"
+import React from "react";
+import ReactApexChart from "react-apexcharts";
 
 const Spinearea = () => {
   const series = [
     {
-      name: "series1",
+      name: "Carbon Emissions",
       data: [34, 40, 28, 52, 42, 109, 100],
     },
     {
-      name: "series2",
+      name: "Efficiency",
       data: [32, 60, 34, 46, 34, 52, 41],
     },
-  ]
+  ];
 
   const options = {
     dataLabels: {
-      enabled: !1
+      enabled: !1,
     },
     stroke: {
-      curve: 'smooth',
+      curve: "smooth",
       width: 3,
     },
-    series: [{
-      name: 'series1',
-      data: [34, 40, 28, 52, 42, 109, 100]
-    }, {
-      name: 'series2',
-      data: [32, 60, 34, 46, 34, 52, 41]
-    }],
-    colors: ['#45cb85', '#eeb902'],
+    series: [
+      {
+        name: "series1",
+        data: [34, 40, 28, 52, 42, 109, 100],
+      },
+      {
+        name: "series2",
+        data: [32, 60, 34, 46, 34, 52, 41],
+      },
+    ],
+    colors: ["#45cb85", "#eeb902"],
     xaxis: {
-      type: 'datetime',
-      categories: ["2018-09-19T00:00:00", "2018-09-19T01:30:00", "2018-09-19T02:30:00", "2018-09-19T03:30:00", "2018-09-19T04:30:00", "2018-09-19T05:30:00", "2018-09-19T06:30:00"],
+      type: "datetime",
+      categories: [
+        "2018-09-19T00:00:00",
+        "2018-09-19T01:30:00",
+        "2018-09-19T02:30:00",
+        "2018-09-19T03:30:00",
+        "2018-09-19T04:30:00",
+        "2018-09-19T05:30:00",
+        "2018-09-19T06:30:00",
+      ],
     },
     grid: {
-      borderColor: '#f1f1f1',
+      borderColor: "#f1f1f1",
     },
     tooltip: {
       x: {
-        format: 'dd/MM/yy HH:mm'
+        format: "dd/MM/yy HH:mm",
       },
-    }
-  }
+    },
+  };
 
   return (
     <ReactApexChart
@@ -51,7 +62,7 @@ const Spinearea = () => {
       height="350"
       className="apex-charts"
     />
-  )
-}
+  );
+};
 
-export default Spinearea
+export default Spinearea;
