@@ -29,7 +29,7 @@ const Transporter = () => {
           className="btn btn-primary waves-effect waves-light mb-3"
           onClick={() => setShowModel(true)}
         >
-          Create Transporter
+          Add Transporter
         </Button>
       </div>
       <Table title="Transporter List" data={getTableData("transporter")} />

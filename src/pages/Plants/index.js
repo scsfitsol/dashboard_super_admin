@@ -29,7 +29,7 @@ const Plants = () => {
           className="btn btn-primary waves-effect waves-light mb-3"
           onClick={() => setShowModel(true)}
         >
-          Create Plant
+          <i className="bx bx-plus"></i> &nbsp; Add Plant
         </Button>
       </div>
       <Table title="Plants List" data={getTableData("plant")} />

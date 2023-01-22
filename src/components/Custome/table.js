@@ -15,12 +15,16 @@ const Table = ({ title, data }) => {
                 <MDBDataTable
                   responsive
                   barReverse
-                  exportToCSV
                   noRecordsFoundLabel="No Record Found"
                   bordered
                   noBottomColumns
                   data={data}
+                  exportToCSV={true}
                   striped
+                  paginationLabel={[
+                    <i className="bx bx-chevrons-left"></i>,
+                    <i className="bx bx-chevrons-right"></i>,
+                  ]}
                 />
               </CardBody>
             </Card>

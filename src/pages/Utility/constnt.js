@@ -1,4 +1,58 @@
-import { Button } from "reactstrap";
+import { useState } from "react";
+import { Button, Tooltip } from "reactstrap";
+
+const EditButton = ({ onClick = {} }) => {
+  const [ttop, setttop] = useState(false);
+  return (
+    <>
+      <Tooltip
+        placement="top"
+        isOpen={ttop}
+        target="edit"
+        toggle={() => {
+          setttop(!ttop);
+        }}
+      >
+        Edit
+      </Tooltip>
+      <Button
+        color="primary"
+        className="btn btn-primary waves-effect waves-light me-3"
+        onClick={onClick}
+        id="edit"
+      >
+        <i className="bx bxs-edit-alt"></i>
+      </Button>
+    </>
+  );
+};
+
+const DeleteButton = ({ onClick = {} }) => {
+  const [ttop, setttop] = useState(false);
+  return (
+    <>
+      <Tooltip
+        placement="top"
+        isOpen={ttop}
+        target="delete"
+        toggle={() => {
+          setttop(!ttop);
+        }}
+      >
+        Delete
+      </Tooltip>
+
+      <Button
+        color="primary"
+        className="btn btn-danger waves-effect waves-light"
+        onClick={onClick}
+        id="delete"
+      >
+        <i className="bx bxs-trash-alt"></i>
+      </Button>
+    </>
+  );
+};
 
 const CONSTANT = {
   MENU_ITEM: [
@@ -475,18 +529,8 @@ const STATIC_DATA = {
       email: "abrandsma0@t.co",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -495,18 +539,8 @@ const STATIC_DATA = {
       email: "jborge1@alexa.com",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -515,18 +549,8 @@ const STATIC_DATA = {
       email: "smcharg2@constantcontact.com",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -535,18 +559,8 @@ const STATIC_DATA = {
       email: "eleyzell3@angelfire.com",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -555,18 +569,8 @@ const STATIC_DATA = {
       email: "epanswick4@ocn.ne.jp",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -578,18 +582,8 @@ const STATIC_DATA = {
       name: "Nishita Batta",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -599,18 +593,8 @@ const STATIC_DATA = {
       name: "Pravin Maharaj",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -620,18 +604,8 @@ const STATIC_DATA = {
       name: "Binoya Deo",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -641,18 +615,8 @@ const STATIC_DATA = {
       name: "Heer Bhagat",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -662,18 +626,8 @@ const STATIC_DATA = {
       name: "Kirti Jain",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -686,18 +640,8 @@ const STATIC_DATA = {
       mobileNumber: "911-525-9784",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -708,18 +652,8 @@ const STATIC_DATA = {
       mobileNumber: "820-771-3792",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -730,18 +664,8 @@ const STATIC_DATA = {
       mobileNumber: "592-272-9633",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -752,18 +676,8 @@ const STATIC_DATA = {
       mobileNumber: "436-857-1373",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -774,18 +688,8 @@ const STATIC_DATA = {
       mobileNumber: "410-675-8521",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -803,18 +707,8 @@ const STATIC_DATA = {
       vehicleTank: "petrol",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -830,18 +724,8 @@ const STATIC_DATA = {
       vehicleTank: "Diesel",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -857,18 +741,8 @@ const STATIC_DATA = {
       vehicleTank: "CNG",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -884,18 +758,8 @@ const STATIC_DATA = {
       vehicleTank: "Petrol",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -911,18 +775,8 @@ const STATIC_DATA = {
       vehicleTank: "Diesel",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -934,18 +788,8 @@ const STATIC_DATA = {
       gstNumber: "DO15 WCCX 6247 0439 9990 3502 2676",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -955,18 +799,8 @@ const STATIC_DATA = {
       gstNumber: "FR68 9585 0976 14HW YXKD JCAM V71",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -976,18 +810,8 @@ const STATIC_DATA = {
       gstNumber: "DO31 HYH8 6344 6275 7095 7970 3268",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -997,18 +821,8 @@ const STATIC_DATA = {
       gstNumber: "MT84 CVGU 6877 6UJL VTKP SHCL ENPW WKA",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -1018,18 +832,8 @@ const STATIC_DATA = {
       gstNumber: "IL60 8234 5377 6834 4348 099",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -1042,20 +846,10 @@ const STATIC_DATA = {
       gstNumber: "NO21 6959 5244 315",
       client: "Catina",
       action: (
-        <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
-        </>
+        <div>
+          <EditButton />
+          <DeleteButton />
+        </div>
       ),
     },
     {
@@ -1065,20 +859,10 @@ const STATIC_DATA = {
       gstNumber: "FR55 4128 7398 57LI MUYB AZ8R Q20",
       client: "Nobie",
       action: (
-        <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
-        </>
+        <div>
+          <EditButton />
+          <DeleteButton />
+        </div>
       ),
     },
     {
@@ -1088,20 +872,10 @@ const STATIC_DATA = {
       gstNumber: "IT37 Y637 3887 725N 1CIL GZVN GS9",
       client: "Caldwell",
       action: (
-        <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
-        </>
+        <div>
+          <EditButton />
+          <DeleteButton />
+        </div>
       ),
     },
     {
@@ -1111,20 +885,10 @@ const STATIC_DATA = {
       gstNumber: "LI57 4299 0BME OJEA EPNH S",
       client: "Sarita",
       action: (
-        <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
-        </>
+        <div>
+          <EditButton />
+          <DeleteButton />
+        </div>
       ),
     },
     {
@@ -1134,20 +898,10 @@ const STATIC_DATA = {
       gstNumber: "FI24 6732 6004 7966 36",
       client: "Glennie",
       action: (
-        <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
-        </>
+        <div>
+          <EditButton />
+          <DeleteButton />
+        </div>
       ),
     },
   ],
@@ -1170,18 +924,8 @@ const STATIC_DATA = {
       plantName: "Anchorage",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -1203,18 +947,8 @@ const STATIC_DATA = {
       plantName: "Fort Richardson",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -1236,18 +970,8 @@ const STATIC_DATA = {
       plantName: "Rosh Pina",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -1269,18 +993,8 @@ const STATIC_DATA = {
       plantName: "Fresno",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },
@@ -1302,18 +1016,8 @@ const STATIC_DATA = {
       plantName: "Hartsville",
       action: (
         <>
-          <Button
-            color="primary"
-            className="btn btn-primary waves-effect waves-light me-3"
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            className="btn btn-danger waves-effect waves-light"
-          >
-            Delete
-          </Button>
+          <EditButton />
+          <DeleteButton />
         </>
       ),
     },

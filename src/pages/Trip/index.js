@@ -26,7 +26,7 @@ const Trip = () => {
           color="primary"
           className="btn btn-primary waves-effect waves-light mb-3"
         >
-          Create Trip
+          Add Trip
         </Button>
       </div>
       <Table title="Trips List" data={getTableData("trips")} />
