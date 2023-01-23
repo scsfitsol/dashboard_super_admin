@@ -98,7 +98,7 @@ const Traking = (props) => {
         <Row>
           <div className="col-12">
             <div className="page-title-box d-flex align-items-center justify-content-between">
-              <h4 className="page-title mb-0 font-size-18">Traking</h4>
+              <h4 className="page-title mb-0 font-size-18">Tracking</h4>
 
               <div className="page-title-right">
                 <ol className="breadcrumb m-0">
@@ -222,7 +222,7 @@ const Traking = (props) => {
                           color="primary"
                           className="btn btn-primary waves-effect waves-light mb-3"
                         >
-                          Create Admin
+                          Add Admin
                         </Button>
                       </div>
                     </InfoWindow>

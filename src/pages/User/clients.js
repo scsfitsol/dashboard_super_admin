@@ -29,7 +29,7 @@ const Clients = () => {
           className="btn btn-primary waves-effect waves-light mb-3"
           onClick={() => setShowModel(true)}
         >
-          Create Client
+          Add Client
         </Button>
       </div>
       <Table title="Client List" data={getTableData("client")} />

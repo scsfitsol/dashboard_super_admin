@@ -29,7 +29,7 @@ const Vehicals = () => {
           className="btn btn-primary waves-effect waves-light mb-3"
           onClick={() => setShowModel(true)}
         >
-          Create Vehicle
+          Add Vehicle
         </Button>
       </div>
       <Table title="Vehicles List" data={getTableData("vehicles")} />
