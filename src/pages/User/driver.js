@@ -30,7 +30,7 @@ const Driver = () => {
           className="btn btn-primary waves-effect waves-light mb-3"
           onClick={() => setShowModel(true)}
         >
-          Create Drive
+          Add Drive
         </Button>
       </div>
       <Table title="Driver List" data={getTableData("driver")} />

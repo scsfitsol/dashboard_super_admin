@@ -29,7 +29,7 @@ const Admin = () => {
           className="btn btn-primary waves-effect waves-light mb-3"
           onClick={() => setShowModel(true)}
         >
-          Create Admin
+          Add Admin
         </Button>
       </div>
 
