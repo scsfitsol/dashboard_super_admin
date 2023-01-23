@@ -1,18 +1,20 @@
 import { AvField, AvForm } from "availity-reactstrap-validation";
 import React, { useState } from "react";
-import { Col, Label, Modal, Row } from "reactstrap";
+import { Col, Label, Modal, Row, InputGroup } from "reactstrap";
 import Select from "react-select";
+import Flatpickr from "react-flatpickr";
 
 const CustomModal = (props) => {
   const { modalType, show, close, modalTitle, data, defaultData } = props;
   const [inputData, setInputData] = useState({});
+  const [selectedValue, setSelectedValue] = useState({});
 
   const onChangeInput = (e) => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
 
   const onSelectValue = (selected, key) => {
-    console.log(selected);
+    setSelectedValue({ ...selectedValue, [key]: selected });
     setInputData({ ...inputData, [key]: selected.value });
   };
 
@@ -32,7 +34,15 @@ const CustomModal = (props) => {
             </div>
 
             <div>
-              <AvForm className="needs-validation" onSubmit={onSubmitForm}>
+              <AvForm
+                className="needs-validation"
+                onSubmit={onSubmitForm}
+                style={{
+                  height: "550px",
+                  overflowY: "scroll",
+                  overflowX: "hidden",
+                }}
+              >
                 <Row>
                   <Col md="12">
                     <div className="mb-3 px-3">
@@ -76,12 +86,41 @@ const CustomModal = (props) => {
                             <div className="mb-4">
                               <Label>{fieldName?.label}</Label>
                               <Select
-                                value={inputData[fieldName?.name]}
+                                value={selectedValue[fieldName?.name]}
                                 options={fieldName?.options}
+                                selected={"clientName" == fieldName?.name}
                                 classNamePrefix="select2-selection"
                                 onChange={(selected) =>
                                   onSelectValue(selected, fieldName?.name)
                                 }
+                              />
+                            </div>
+                          );
+                        } else if (fieldName.type === "selectTime") {
+                          return (
+                            <div className="mb-4">
+                              <Label>{fieldName?.label}</Label>
+                              <input
+                                name={fieldName?.name}
+                                className="form-control"
+                                type="time"
+                                defaultValue="13:45:00"
+                                id="example-time-input"
+                                onChange={onChangeInput}
+                              />
+                            </div>
+                          );
+                        } else if (fieldName.type === "selectDate&Time") {
+                          return (
+                            <div className="mb-4">
+                              <Label>{fieldName?.label}</Label>
+                              <input
+                                name={fieldName?.name}
+                                className="form-control"
+                                type="datetime-local"
+                                defaultValue="2019-08-19T13:45:00"
+                                id="example-datetime-local-input"
+                                onChange={onChangeInput}
                               />
                             </div>
                           );
