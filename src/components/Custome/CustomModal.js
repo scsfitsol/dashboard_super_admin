@@ -4,7 +4,7 @@ import { Col, Label, Modal, Row } from "reactstrap";
 import Select from "react-select";
 
 const CustomModal = (props) => {
-  const { modalType, show, close, modalTitle, data } = props;
+  const { modalType, show, close, modalTitle, data, defaultData } = props;
   const [inputData, setInputData] = useState({});
 
   const onChangeInput = (e) => {
@@ -48,6 +48,7 @@ const CustomModal = (props) => {
                               </Label>
                               <AvField
                                 name={fieldName?.name}
+                                // value={defaultData[fieldName?.name]}
                                 placeholder={fieldName?.placeholder}
                                 type={
                                   fieldName?.type ? fieldName?.type : "text"
