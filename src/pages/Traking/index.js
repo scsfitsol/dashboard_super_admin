@@ -258,7 +258,20 @@ const Traking = (props) => {
         <Card>
           <CardBody>
             <div className="modal-body">
-              <CardTitle className="font-size-12">TripID: #1215sdvsd</CardTitle>
+              <CardTitle className="font-size-12">
+                <div className="d-flex align-items-start">
+                  <i
+                    className="bx bxs-truck me-1"
+                    style={{
+                      fontSize: "25px",
+                    }}
+                  ></i>{" "}
+                  <div className="flex-1">
+                    <div className="font-size-16">#1215sdvsd</div>
+                  </div>
+                </div>
+              </CardTitle>
+
               <div className="mt-3 d-flex">
                 <strong className="ftext-truncate bold">{"Vehical"}</strong>{" "}
                 &nbsp;
@@ -293,16 +306,31 @@ const Traking = (props) => {
               <div className="mt-3 d-flex">
                 <strong className="ftext-truncate bold">{"Time"}</strong> &nbsp;
               </div>
-              <div className="mt-3 d-flex justify-content-between align-items-center">
-                <div className=" d-flex flex-column justify-content-center">
-                  <p className="ftext-truncate mb-0">{"Start Date"}</p>
+              <div className="d-flex justify-content-between align-items-center">
+                <div className=" d-flex flex-column justify-content-center align-items-center">
+                  <i
+                    className="bx bxs-map"
+                    style={{
+                      fontSize: "25px",
+                    }}
+                  ></i>
                   <p className="text-truncate ml-2">{"1/10/2022"}</p>
                 </div>
-                <div className="mb-4 w-50">
-                  <Progress color="primary" value={100} />
+                <div className="mb-4 w-75">
+                  <Progress
+                    className="mb-2 progress-sm"
+                    value={100}
+                    color="primary"
+                    style={{ height: "3px" }}
+                  />
                 </div>
-                <div className="d-flex flex-column justify-content-center">
-                  <p className="ftext-truncate mb-0">{"End Date"}</p>
+                <div className="d-flex flex-column justify-content-center align-items-center">
+                  <i
+                    className="bx bxs-map"
+                    style={{
+                      fontSize: "25px",
+                    }}
+                  ></i>
                   <p className="text-truncate ml-2">{"1/10/2022"}</p>
                 </div>
               </div>

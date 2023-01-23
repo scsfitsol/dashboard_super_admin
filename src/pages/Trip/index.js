@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Row } from "reactstrap";
+import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
-import { getTableData } from "../Utility/constnt";
+import CONSTANT, { getTableData } from "../Utility/constnt";
 
 const Trip = () => {
+  const [showModel, setShowModel] = useState(false);
   return (
     <React.Fragment>
       <div className="page-content">
@@ -25,11 +27,20 @@ const Trip = () => {
         <Button
           color="primary"
           className="btn btn-primary waves-effect waves-light mb-3"
+          onClick={() => setShowModel(true)}
         >
           Add Trip
         </Button>
       </div>
       <Table title="Trips List" data={getTableData("trips")} />
+      <CustomModal
+        modalType="formModal"
+        show={showModel}
+        close={() => setShowModel(false)}
+        modalTitle="Add Trip"
+        data={CONSTANT.FORM_FIELDS.TRIP}
+        defaultData=""
+      />
     </React.Fragment>
   );
 };
