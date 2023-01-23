@@ -40,6 +40,7 @@ const Vehicals = () => {
         close={() => setShowModel(false)}
         modalTitle="Add Vehicals"
         data={CONSTANT.FORM_FIELDS.VEHICLES}
+        defaultData=""
       />
     </React.Fragment>
   );

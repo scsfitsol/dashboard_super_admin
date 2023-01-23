@@ -1,30 +1,30 @@
-import React, { useState } from "react"
-import PropTypes from 'prop-types'
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-import { connect } from "react-redux"
+import { connect } from "react-redux";
 
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 // Redux Store
-import { showRightSidebarAction, toggleLeftmenu } from "../../store/actions"
+import { showRightSidebarAction, toggleLeftmenu } from "../../store/actions";
 
 // Import menuDropdown
-import LanguageDropdown from "../CommonForBoth/TopbarDropdown/LanguageDropdown"
-import NotificationDropdown from "../CommonForBoth/TopbarDropdown/NotificationDropdown"
-import ProfileMenu from "../CommonForBoth/TopbarDropdown/ProfileMenu"
+import LanguageDropdown from "../CommonForBoth/TopbarDropdown/LanguageDropdown";
+import NotificationDropdown from "../CommonForBoth/TopbarDropdown/NotificationDropdown";
+import ProfileMenu from "../CommonForBoth/TopbarDropdown/ProfileMenu";
 
-import logo from "../../assets/images/logo-sm.png"
-import logoLight from "../../assets/images/logo-light.png"
-import logoDark from "../../assets/images/logo-dark.png"
+import logo from "../../assets/images/logo-sm.png";
+import logoLight from "../../assets/images/logo-light.png";
+import logoDark from "../../assets/images/logo-dark.png";
 
-import Navbar from "./Navbar"
+import Navbar from "./Navbar";
 
 //i18n
-import { withTranslation } from "react-i18next"
+import { withTranslation } from "react-i18next";
 
-const Header = props => {
-  const isMenuOpened = 'false'
-  const [isSearch, setSearch] = useState(false)
+const Header = (props) => {
+  const isMenuOpened = "false";
+  const [isSearch, setSearch] = useState(false);
 
   function toggleFullscreen() {
     if (
@@ -34,21 +34,21 @@ const Header = props => {
     ) {
       // current working methods
       if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen()
+        document.documentElement.requestFullscreen();
       } else if (document.documentElement.mozRequestFullScreen) {
-        document.documentElement.mozRequestFullScreen()
+        document.documentElement.mozRequestFullScreen();
       } else if (document.documentElement.webkitRequestFullscreen) {
         document.documentElement.webkitRequestFullscreen(
           Element.ALLOW_KEYBOARD_INPUT
-        )
+        );
       }
     } else {
       if (document.cancelFullScreen) {
-        document.cancelFullScreen()
+        document.cancelFullScreen();
       } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen()
+        document.mozCancelFullScreen();
       } else if (document.webkitCancelFullScreen) {
-        document.webkitCancelFullScreen()
+        document.webkitCancelFullScreen();
       }
     }
   }
@@ -77,16 +77,16 @@ const Header = props => {
           </div>
 
           <button
-              type="button"
-              className="btn btn-sm px-3 font-size-16 d-lg-none header-item"
-              data-toggle="collapse"
-              onClick={() => {
-                props.toggleLeftmenu(!props.leftMenu)
-              }}
-              data-target="#topnav-menu-content"
-            >
-              <i className="fa fa-fw fa-bars" />
-            </button>
+            type="button"
+            className="btn btn-sm px-3 font-size-16 d-lg-none header-item"
+            data-toggle="collapse"
+            onClick={() => {
+              props.toggleLeftmenu(!props.leftMenu);
+            }}
+            data-target="#topnav-menu-content"
+          >
+            <i className="fa fa-fw fa-bars" />
+          </button>
 
           <Navbar menuOpen={isMenuOpened} />
         </div>
@@ -135,7 +135,7 @@ const Header = props => {
               type="button"
               className="btn header-item noti-icon waves-effect"
               onClick={() => {
-                toggleFullscreen()
+                toggleFullscreen();
               }}
               data-toggle="fullscreen"
             >
@@ -150,7 +150,7 @@ const Header = props => {
           <div className="dropdown d-inline-block">
             <button
               onClick={() => {
-                props.showRightSidebarAction(!props.showRightSidebar)
+                props.showRightSidebarAction(!props.showRightSidebar);
               }}
               type="button"
               className="btn header-item noti-icon right-bar-toggle waves-effect"
@@ -159,28 +159,25 @@ const Header = props => {
             </button>
           </div>
         </div>
-
-
-
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
 Header.propTypes = {
   leftMenu: PropTypes.any,
   showRightSidebar: PropTypes.any,
   showRightSidebarAction: PropTypes.func,
   t: PropTypes.any,
-  toggleLeftmenu: PropTypes.func
-}
+  toggleLeftmenu: PropTypes.func,
+};
 
-const mapStatetoProps = state => {
-  const { layoutType, showRightSidebar, leftMenu } = state.Layout
-  return { layoutType, showRightSidebar, leftMenu }
-}
+const mapStatetoProps = (state) => {
+  const { layoutType, showRightSidebar, leftMenu } = state.Layout;
+  return { layoutType, showRightSidebar, leftMenu };
+};
 
 export default connect(mapStatetoProps, {
   showRightSidebarAction,
   toggleLeftmenu,
-})(withTranslation()(Header))
+})(withTranslation()(Header));
