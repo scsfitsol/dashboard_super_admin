@@ -1,11 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
-import CONSTANT, { getTableData } from "../Utility/constnt";
+import { getAllTrip } from "../Utility/API/api";
+import CONSTANT, {
+  DeleteButton,
+  EditButton,
+  getTableData,
+} from "../Utility/constnt";
 
 const Trip = () => {
   const [showModel, setShowModel] = useState(false);
+  const [tripData, setTripData] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const res = await getAllTrip();
+      if (res?.data?.data.length > 0) {
+        setTripData(
+          res?.data?.data.map((tripData, index) => {
+            return {
+              ...tripData,
+              no: index + 1,
+              action: (
+                <>
+                  <EditButton />
+                  <DeleteButton />
+                </>
+              ),
+            };
+          })
+        );
+      }
+    })();
+  }, []);
+
   return (
     <React.Fragment>
       <div className="page-content">
@@ -32,7 +61,10 @@ const Trip = () => {
           Add Trip
         </Button>
       </div>
-      <Table title="Trips List" data={getTableData("trips")} />
+      <Table
+        title="Trips List"
+        data={{ columns: getTableData("trips")["columns"], rows: tripData }}
+      />
       <CustomModal
         modalType="formModal"
         show={showModel}

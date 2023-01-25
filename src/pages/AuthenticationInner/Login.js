@@ -19,7 +19,6 @@ import logo from "../../assets/images/logo-sm-dark.png";
 const Login = (props) => {
   useEffect(() => {
     document.body.className = "authentication-bg";
-    // remove classname when component will unmount
     return function cleanup() {
       document.body.className = "";
     };

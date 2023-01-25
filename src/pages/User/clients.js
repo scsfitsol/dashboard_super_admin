@@ -1,11 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
-import CONSTANT, { getTableData } from "../Utility/constnt";
+import { getAllClient } from "../Utility/API/api";
+import CONSTANT, {
+  DeleteButton,
+  EditButton,
+  getTableData,
+} from "../Utility/constnt";
 
 const Clients = () => {
   const [showModel, setShowModel] = useState(false);
+  const [clientData, setClientData] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const res = await getAllClient();
+      if (res?.data?.data.length > 0) {
+        setClientData(
+          res?.data?.data.map((clientData, index) => {
+            return {
+              ...clientData,
+              no: index + 1,
+              clientId: clientData.id,
+              action: (
+                <>
+                  <EditButton />
+                  <DeleteButton />
+                </>
+              ),
+            };
+          })
+        );
+      }
+    })();
+  }, []);
+
   return (
     <React.Fragment>
       <div className="page-content">
@@ -32,7 +62,10 @@ const Clients = () => {
           Add Client
         </Button>
       </div>
-      <Table title="Client List" data={getTableData("client")} />
+      <Table
+        title="Client List"
+        data={{ columns: getTableData("client")["columns"], rows: clientData }}
+      />
 
       <CustomModal
         modalType="formModal"

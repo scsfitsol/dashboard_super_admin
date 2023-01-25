@@ -1,11 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
-import CONSTANT, { getTableData } from "../Utility/constnt";
+import { getAllVehicle } from "../Utility/API/api";
+import CONSTANT, {
+  DeleteButton,
+  EditButton,
+  getTableData,
+} from "../Utility/constnt";
 
 const Vehicals = () => {
   const [showModel, setShowModel] = useState(false);
+  const [vehicleData, setVehicleData] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const res = await getAllVehicle();
+      if (res?.data?.data.length > 0) {
+        setVehicleData(
+          res?.data?.data.map((vehicleData, index) => {
+            return {
+              ...vehicleData,
+              no: index + 1,
+              action: (
+                <>
+                  <EditButton />
+                  <DeleteButton />
+                </>
+              ),
+            };
+          })
+        );
+      }
+    })();
+  }, []);
+
   return (
     <React.Fragment>
       <div className="page-content">
@@ -32,7 +61,13 @@ const Vehicals = () => {
           Add Vehicle
         </Button>
       </div>
-      <Table title="Vehicles List" data={getTableData("vehicles")} />
+      <Table
+        title="Vehicles List"
+        data={{
+          columns: getTableData("vehicles")["columns"],
+          rows: vehicleData,
+        }}
+      />
 
       <CustomModal
         modalType="formModal"

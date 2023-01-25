@@ -1,11 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
-import CONSTANT, { getTableData } from "../Utility/constnt";
+import { getAllDriver } from "../Utility/API/api";
+import CONSTANT, {
+  DeleteButton,
+  EditButton,
+  getTableData,
+} from "../Utility/constnt";
 
 const Driver = () => {
   const [showModel, setShowModel] = useState(false);
+  const [driverData, setDriverData] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const res = await getAllDriver();
+      if (res?.data?.data.length > 0) {
+        setDriverData(
+          res?.data?.data.map((driverData, index) => {
+            return {
+              ...driverData,
+              no: index + 1,
+              action: (
+                <>
+                  <EditButton />
+                  <DeleteButton />
+                </>
+              ),
+            };
+          })
+        );
+      }
+    })();
+  }, []);
 
   return (
     <React.Fragment>
@@ -33,7 +60,10 @@ const Driver = () => {
           Add Drive
         </Button>
       </div>
-      <Table title="Driver List" data={getTableData("driver")} />
+      <Table
+        title="Driver List"
+        data={{ columns: getTableData("driver")["columns"], rows: driverData }}
+      />
       <CustomModal
         modalType="formModal"
         show={showModel}

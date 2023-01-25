@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 
 import { Row, Col, Alert, Container } from "reactstrap";
 
 // Redux
 import { connect } from "react-redux";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter, Link, useHistory } from "react-router-dom";
 
 // availity-reactstrap-validation
 import { AvForm, AvField } from "availity-reactstrap-validation";
@@ -15,19 +15,29 @@ import { loginUser, apiError, socialLogin } from "../../store/actions";
 
 // import images
 import logo from "../../assets/images/logo-sm-dark.png";
+import { adminLogin } from "../Utility/API/api";
+import authStorage from "../Utility/API/authStroge";
 
 const Login = (props) => {
-  useEffect(() => {
-    document.body.className = "authentication-bg";
-    // remove classname when component will unmount
-    return function cleanup() {
-      document.body.className = "";
-    };
-  });
+  const [loginData, setLoginData] = useState({});
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
-  // handleValidSubmit
-  const handleValidSubmit = (event, values) => {
-    props.loginUser(values, props.history);
+  const onChangeInput = (e) => {
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
+  };
+
+  const onUserLogin = () => {
+    (async () => {
+      setLoading(true);
+      const res = await adminLogin(loginData);
+      if (res !== -1) {
+        authStorage.setAuthDetails(res?.data?.token);
+        localStorage.setItem("authUser", res?.data?.token);
+        history.push("/Report");
+      }
+      setLoading(false);
+    })();
   };
 
   return (
@@ -53,9 +63,7 @@ const Login = (props) => {
                   <div className="p-2">
                     <AvForm
                       className="form-horizontal"
-                      onValidSubmit={(e, v) => {
-                        handleValidSubmit(e, v);
-                      }}
+                      onValidSubmit={onUserLogin}
                     >
                       {props.error && typeof props.error === "string" ? (
                         <Alert color="danger">{props.error}</Alert>
@@ -70,6 +78,7 @@ const Login = (props) => {
                           placeholder="Enter email"
                           type="email"
                           required
+                          onChange={onChangeInput}
                         />
                       </div>
 
@@ -81,6 +90,7 @@ const Login = (props) => {
                           type="password"
                           required
                           placeholder="Enter Password"
+                          onChange={onChangeInput}
                         />
                       </div>
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Tooltip } from "reactstrap";
 
-const EditButton = ({ onClick = {} }) => {
+export const EditButton = ({ onClick = {} }) => {
   const [ttop, setttop] = useState(false);
   return (
     <>
@@ -27,7 +27,7 @@ const EditButton = ({ onClick = {} }) => {
   );
 };
 
-const DeleteButton = ({ onClick = {} }) => {
+export const DeleteButton = ({ onClick = {} }) => {
   const [ttop, setttop] = useState(false);
   return (
     <>
@@ -55,6 +55,8 @@ const DeleteButton = ({ onClick = {} }) => {
 };
 
 const CONSTANT = {
+  BASE_URL: process.env.REACT_APP_BASE_URL,
+
   MENU_ITEM: [
     {
       id: 1,
@@ -192,7 +194,7 @@ const CONSTANT = {
       },
       {
         label: "Mobile Number",
-        field: "mobileNumber",
+        field: "mobile",
         sort: "asc",
       },
       {
@@ -209,7 +211,7 @@ const CONSTANT = {
       },
       {
         label: "Registration Number",
-        field: "vehicleRegistrationNumber",
+        field: "registrationNumber",
         sort: "asc",
       },
       {
@@ -218,8 +220,8 @@ const CONSTANT = {
         sort: "asc",
       },
       {
-        label: "Fuel Tank",
-        field: "vehicleTank",
+        label: "Fuel Type",
+        field: "fuelType",
         sort: "asc",
       },
       {
@@ -229,7 +231,7 @@ const CONSTANT = {
       },
       {
         label: "Capacity",
-        field: "totalCapacity",
+        field: "capacity",
         sort: "asc",
       },
       {
@@ -239,7 +241,7 @@ const CONSTANT = {
       },
       {
         label: "Engine Type",
-        field: "vehicleEngineType",
+        field: "engineType",
         sort: "asc",
       },
       {
@@ -298,7 +300,7 @@ const CONSTANT = {
       },
       {
         label: "GST Number",
-        field: "gstNumber",
+        field: "GST",
         sort: "asc",
       },
       {
@@ -335,12 +337,12 @@ const CONSTANT = {
       },
       {
         label: "Source",
-        field: "source",
+        field: "sourceLocation",
         sort: "asc",
       },
       {
         label: "Destination",
-        field: "destination",
+        field: "destinationLocation",
         sort: "asc",
       },
       {
@@ -365,7 +367,7 @@ const CONSTANT = {
       },
       {
         label: "Targetted Date & Time",
-        field: "targettedDate_Time",
+        field: "targetedDateAndTime",
         sort: "asc",
       },
       {

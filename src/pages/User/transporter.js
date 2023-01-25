@@ -1,11 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
-import CONSTANT, { getTableData } from "../Utility/constnt";
+import { getAllTransporter } from "../Utility/API/api";
+import CONSTANT, {
+  DeleteButton,
+  EditButton,
+  getTableData,
+} from "../Utility/constnt";
 
 const Transporter = () => {
   const [showModel, setShowModel] = useState(false);
+  const [transporterData, setTransporterData] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const res = await getAllTransporter();
+      if (res?.data?.data.length > 0) {
+        setTransporterData(
+          res?.data?.data.map((transporterData, index) => {
+            return {
+              ...transporterData,
+              no: index + 1,
+              clientId: transporterData.id,
+              action: (
+                <>
+                  <EditButton />
+                  <DeleteButton />
+                </>
+              ),
+            };
+          })
+        );
+      }
+    })();
+  }, []);
+
   return (
     <React.Fragment>
       <div className="page-content">
@@ -32,7 +62,13 @@ const Transporter = () => {
           Add Transporter
         </Button>
       </div>
-      <Table title="Transporter List" data={getTableData("transporter")} />
+      <Table
+        title="Transporter List"
+        data={{
+          columns: getTableData("transporter")["columns"],
+          rows: transporterData,
+        }}
+      />
       <CustomModal
         modalType="formModal"
         show={showModel}

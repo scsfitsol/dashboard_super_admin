@@ -1,11 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
-import CONSTANT, { getTableData } from "../Utility/constnt";
+import { getAllPlant } from "../Utility/API/api";
+import CONSTANT, {
+  DeleteButton,
+  EditButton,
+  getTableData,
+} from "../Utility/constnt";
 
 const Plants = () => {
   const [showModel, setShowModel] = useState(false);
+  const [plantData, setPlantData] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const res = await getAllPlant();
+      if (res?.data?.data.length > 0) {
+        setPlantData(
+          res?.data?.data.map((plantData, index) => {
+            return {
+              ...plantData,
+              no: index + 1,
+              action: (
+                <>
+                  <EditButton />
+                  <DeleteButton />
+                </>
+              ),
+            };
+          })
+        );
+      }
+    })();
+  }, []);
   return (
     <React.Fragment>
       <div className="page-content">
@@ -32,7 +60,10 @@ const Plants = () => {
           <i className="bx bx-plus"></i> &nbsp; Add Plant
         </Button>
       </div>
-      <Table title="Plants List" data={getTableData("plant")} />
+      <Table
+        title="Plants List"
+        data={{ columns: getTableData("plant")["columns"], rows: plantData }}
+      />
       <CustomModal
         modalType="formModal"
         show={showModel}
