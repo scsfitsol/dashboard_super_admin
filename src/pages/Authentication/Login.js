@@ -17,11 +17,13 @@ import { loginUser, apiError, socialLogin } from "../../store/actions";
 import logo from "../../assets/images/logo-sm-dark.png";
 import { adminLogin } from "../Utility/API/api";
 import authStorage from "../Utility/API/authStroge";
+import notify from "../Utility/coustemFunction";
+import CONSTANT from "../Utility/constnt";
+import useHttp from "../../components/Hook/Use-http";
 
 const Login = (props) => {
   const [loginData, setLoginData] = useState({});
-  const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const API_CALL = useHttp();
 
   const onChangeInput = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -29,15 +31,19 @@ const Login = (props) => {
 
   const onUserLogin = () => {
     (async () => {
-      setLoading(true);
-      const res = await adminLogin(loginData);
-      if (res !== -1) {
-        authStorage.setAuthDetails(res?.data?.token);
-        localStorage.setItem("authUser", res?.data?.token);
-        history.push("/Report");
-      }
-      setLoading(false);
+      API_CALL.sendRequest(
+        CONSTANT.API.adminLogin,
+        onSetLoginData,
+        loginData,
+        "Login Successfully"
+      );
     })();
+  };
+
+  const onSetLoginData = (res) => {
+    authStorage.setAuthDetails(res?.token);
+    localStorage.setItem("authUser", res?.token);
+    // history.push("/Report");
   };
 
   return (

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
+import useHttp from "../../components/Hook/Use-http";
 import { getAllTransporter } from "../Utility/API/api";
 import CONSTANT, {
   DeleteButton,
@@ -12,29 +13,34 @@ import CONSTANT, {
 const Transporter = () => {
   const [showModel, setShowModel] = useState(false);
   const [transporterData, setTransporterData] = useState([]);
+  const API_CALL = useHttp();
 
   useEffect(() => {
     (async () => {
-      const res = await getAllTransporter();
-      if (res?.data?.data.length > 0) {
-        setTransporterData(
-          res?.data?.data.map((transporterData, index) => {
-            return {
-              ...transporterData,
-              no: index + 1,
-              clientId: transporterData.id,
-              action: (
-                <>
-                  <EditButton />
-                  <DeleteButton />
-                </>
-              ),
-            };
-          })
-        );
-      }
+      API_CALL.sendRequest(
+        CONSTANT.API.getAllTransporter,
+        transporterDataHandler
+      );
     })();
   }, []);
+
+  const transporterDataHandler = (res) => {
+    setTransporterData(
+      res?.data.map((transporterData, index) => {
+        return {
+          ...transporterData,
+          no: index + 1,
+          clientId: transporterData.id,
+          action: (
+            <>
+              <EditButton />
+              <DeleteButton />
+            </>
+          ),
+        };
+      })
+    );
+  };
 
   return (
     <React.Fragment>

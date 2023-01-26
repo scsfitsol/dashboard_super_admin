@@ -1,4 +1,5 @@
 import axios from "axios";
+import notify from "../coustemFunction";
 // import { toast } from "react-toastify";
 import Services from "./service";
 
@@ -20,16 +21,16 @@ const apiCall = async (
         return await Services.get(endPoint);
     }
   } catch (error) {
-    // toast.warning(
-    //   errorMessage.message !== ""
-    //     ? errorMessage.message
-    //     : "Enter valid email id and password",
-    //   errorMessage.heading !== "" ? errorMessage.heading : "Login Error",
-    //   3000,
-    //   null,
-    //   null,
-    //   ""
-    // );
+    notify.warning(
+      errorMessage.message !== ""
+        ? errorMessage.message
+        : "Enter valid email id and password",
+      errorMessage.heading !== "" ? errorMessage.heading : "Login Error",
+      3000,
+      null,
+      null,
+      ""
+    );
     return -1;
   }
 };

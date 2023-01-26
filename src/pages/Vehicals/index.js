@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
-import { getAllVehicle } from "../Utility/API/api";
+import useHttp from "../../components/Hook/Use-http";
 import CONSTANT, {
   DeleteButton,
   EditButton,
@@ -12,28 +12,31 @@ import CONSTANT, {
 const Vehicals = () => {
   const [showModel, setShowModel] = useState(false);
   const [vehicleData, setVehicleData] = useState([]);
+  const API_CALL = useHttp();
 
   useEffect(() => {
     (async () => {
-      const res = await getAllVehicle();
-      if (res?.data?.data.length > 0) {
-        setVehicleData(
-          res?.data?.data.map((vehicleData, index) => {
-            return {
-              ...vehicleData,
-              no: index + 1,
-              action: (
-                <>
-                  <EditButton />
-                  <DeleteButton />
-                </>
-              ),
-            };
-          })
-        );
-      }
+      API_CALL.sendRequest(CONSTANT.API.getAllVehicle, vehicleDataHandler);
     })();
   }, []);
+
+  const vehicleDataHandler = (res) => {
+    setVehicleData(
+      res?.data.map((vehicleData, index) => {
+        return {
+          ...vehicleData,
+          no: index + 1,
+          transporterName: vehicleData?.transporter?.transporterName,
+          action: (
+            <>
+              <EditButton />
+              <DeleteButton />
+            </>
+          ),
+        };
+      })
+    );
+  };
 
   return (
     <React.Fragment>

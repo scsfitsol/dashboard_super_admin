@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
-import { getAllPlant } from "../Utility/API/api";
+import useHttp from "../../components/Hook/Use-http";
 import CONSTANT, {
   DeleteButton,
   EditButton,
@@ -12,28 +12,32 @@ import CONSTANT, {
 const Plants = () => {
   const [showModel, setShowModel] = useState(false);
   const [plantData, setPlantData] = useState([]);
+  const API_CALL = useHttp();
 
   useEffect(() => {
     (async () => {
-      const res = await getAllPlant();
-      if (res?.data?.data.length > 0) {
-        setPlantData(
-          res?.data?.data.map((plantData, index) => {
-            return {
-              ...plantData,
-              no: index + 1,
-              action: (
-                <>
-                  <EditButton />
-                  <DeleteButton />
-                </>
-              ),
-            };
-          })
-        );
-      }
+      API_CALL.sendRequest(CONSTANT.API.getAllPlant, plantDataHandler);
     })();
   }, []);
+
+  const plantDataHandler = (res) => {
+    setPlantData(
+      res?.data.map((plantData, index) => {
+        return {
+          ...plantData,
+          no: index + 1,
+          clientName: plantData.client.name,
+          action: (
+            <>
+              <EditButton />
+              <DeleteButton />
+            </>
+          ),
+        };
+      })
+    );
+  };
+
   return (
     <React.Fragment>
       <div className="page-content">

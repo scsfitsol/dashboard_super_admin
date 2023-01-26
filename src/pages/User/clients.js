@@ -2,39 +2,43 @@ import React, { useEffect, useState } from "react";
 import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
+import useHttp from "../../components/Hook/Use-http";
 import { addClient, getAllClient } from "../Utility/API/api";
 import CONSTANT, {
   DeleteButton,
   EditButton,
   getTableData,
 } from "../Utility/constnt";
+import { notify } from "../Utility/coustemFunction";
 
 const Clients = () => {
   const [showModel, setShowModel] = useState(false);
   const [clientData, setClientData] = useState([]);
+  const API_CALL = useHttp();
 
   useEffect(() => {
     (async () => {
-      const res = await getAllClient();
-      if (res?.data?.data.length > 0) {
-        setClientData(
-          res?.data?.data.map((clientData, index) => {
-            return {
-              ...clientData,
-              no: index + 1,
-              clientId: clientData.id,
-              action: (
-                <>
-                  <EditButton />
-                  <DeleteButton />
-                </>
-              ),
-            };
-          })
-        );
-      }
+      API_CALL.sendRequest(CONSTANT.API.getAllClient, clientDataHandler);
     })();
   }, []);
+
+  const clientDataHandler = (res) => {
+    setClientData(
+      res?.data.map((clientData, index) => {
+        return {
+          ...clientData,
+          no: index + 1,
+          clientId: clientData.id,
+          action: (
+            <>
+              <EditButton />
+              <DeleteButton />
+            </>
+          ),
+        };
+      })
+    );
+  };
 
   const onSubmitForm = (payload) => {
     (async () => {

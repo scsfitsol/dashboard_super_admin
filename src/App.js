@@ -19,9 +19,10 @@ import NonAuthLayout from "./components/NonAuthLayout";
 import "./assets/scss/theme.scss";
 
 //Toastify css
-// import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";
 
 import fakeBackend from "./helpers/AuthType/fakeBackend";
+import { ToastContainer } from "react-toastify";
 
 // Activating fake backend
 fakeBackend();
@@ -44,6 +45,7 @@ const App = (props) => {
   const Layout = getLayout();
   return (
     <React.Fragment>
+      <ToastContainer />
       <Router>
         <Switch>
           {authRoutes.map((route, idx) => (

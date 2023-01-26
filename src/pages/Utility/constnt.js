@@ -56,6 +56,40 @@ export const DeleteButton = ({ onClick = {} }) => {
 
 const CONSTANT = {
   BASE_URL: process.env.REACT_APP_BASE_URL,
+  API: {
+    adminLogin: {
+      endpoint: `/admin/login`,
+      type: "POST",
+    },
+    getAllClient: {
+      endpoint: `/client`,
+      type: "GET",
+    },
+    addClient: {
+      endpoint: `/client`,
+      type: "POST",
+    },
+    getAllDriver: {
+      endpoint: `/driver`,
+      type: "GET",
+    },
+    getAllTransporter: {
+      endpoint: `/transporter`,
+      type: "GET",
+    },
+    getAllVehicle: {
+      endpoint: `/vehicle`,
+      type: "GET",
+    },
+    getAllTrip: {
+      endpoint: `/trip`,
+      type: "GET",
+    },
+    getAllPlant: {
+      endpoint: `/plant`,
+      type: "GET",
+    },
+  },
 
   MENU_ITEM: [
     {
@@ -285,7 +319,7 @@ const CONSTANT = {
       },
       {
         label: "Client",
-        field: "client",
+        field: "clientName",
         sort: "asc",
       },
       {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
+import useHttp from "../../components/Hook/Use-http";
 import { getAllTrip } from "../Utility/API/api";
 import CONSTANT, {
   DeleteButton,
@@ -12,28 +13,34 @@ import CONSTANT, {
 const Trip = () => {
   const [showModel, setShowModel] = useState(false);
   const [tripData, setTripData] = useState([]);
+  const API_CALL = useHttp();
 
   useEffect(() => {
     (async () => {
-      const res = await getAllTrip();
-      if (res?.data?.data.length > 0) {
-        setTripData(
-          res?.data?.data.map((tripData, index) => {
-            return {
-              ...tripData,
-              no: index + 1,
-              action: (
-                <>
-                  <EditButton />
-                  <DeleteButton />
-                </>
-              ),
-            };
-          })
-        );
-      }
+      API_CALL.sendRequest(CONSTANT.API.getAllTrip, tripDataHandler);
     })();
   }, []);
+
+  const tripDataHandler = (res) => {
+    setTripData(
+      res?.data.map((tripData, index) => {
+        return {
+          ...tripData,
+          no: index + 1,
+          clientName: tripData?.client?.name,
+          driverName: tripData?.driver?.name,
+          driverPhoneNumber: tripData?.driver?.mobile,
+          vehicleNumber: tripData?.vehicle?.registrationNumber,
+          action: (
+            <>
+              <EditButton />
+              <DeleteButton />
+            </>
+          ),
+        };
+      })
+    );
+  };
 
   return (
     <React.Fragment>

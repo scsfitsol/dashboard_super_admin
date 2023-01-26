@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
+import useHttp from "../../components/Hook/Use-http";
 import { getAllDriver } from "../Utility/API/api";
 import CONSTANT, {
   DeleteButton,
@@ -12,27 +13,30 @@ import CONSTANT, {
 const Driver = () => {
   const [showModel, setShowModel] = useState(false);
   const [driverData, setDriverData] = useState([]);
+  const API_CALL = useHttp();
+
   useEffect(() => {
     (async () => {
-      const res = await getAllDriver();
-      if (res?.data?.data.length > 0) {
-        setDriverData(
-          res?.data?.data.map((driverData, index) => {
-            return {
-              ...driverData,
-              no: index + 1,
-              action: (
-                <>
-                  <EditButton />
-                  <DeleteButton />
-                </>
-              ),
-            };
-          })
-        );
-      }
+      API_CALL.sendRequest(CONSTANT.API.getAllDriver, driverDataHandler);
     })();
   }, []);
+
+  const driverDataHandler = (res) => {
+    setDriverData(
+      res?.data.map((driverData, index) => {
+        return {
+          ...driverData,
+          no: index + 1,
+          action: (
+            <>
+              <EditButton />
+              <DeleteButton />
+            </>
+          ),
+        };
+      })
+    );
+  };
 
   return (
     <React.Fragment>
