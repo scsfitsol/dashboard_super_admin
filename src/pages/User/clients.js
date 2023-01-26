@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
-import { getAllClient } from "../Utility/API/api";
+import { addClient, getAllClient } from "../Utility/API/api";
 import CONSTANT, {
   DeleteButton,
   EditButton,
@@ -35,6 +35,13 @@ const Clients = () => {
       }
     })();
   }, []);
+
+  const onSubmitForm = (payload) => {
+    (async () => {
+      const res = await addClient(payload);
+      console.log(res);
+    })();
+  };
 
   return (
     <React.Fragment>
@@ -72,6 +79,7 @@ const Clients = () => {
         show={showModel}
         close={() => setShowModel(false)}
         modalTitle="Add Client"
+        onSubmit={(data) => onSubmitForm(data)}
         data={CONSTANT.FORM_FIELDS.CLIENT}
       />
     </React.Fragment>

@@ -5,7 +5,8 @@ import Select from "react-select";
 import Flatpickr from "react-flatpickr";
 
 const CustomModal = (props) => {
-  const { modalType, show, close, modalTitle, data, defaultData } = props;
+  const { modalType, show, close, modalTitle, data, onSubmit, defaultData } =
+    props;
   const [inputData, setInputData] = useState({});
   const [selectedValue, setSelectedValue] = useState({});
 
@@ -20,7 +21,7 @@ const CustomModal = (props) => {
 
   const onSubmitForm = (e) => {
     e.preventDefault();
-    console.log(inputData);
+    onSubmit(inputData);
     close();
   };
 

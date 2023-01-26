@@ -420,12 +420,20 @@ const CONSTANT = {
         label: "Name",
         placeholder: "Name",
         type: "text",
+        validate: true,
       },
       {
-        name: "clientId",
-        label: "Client ID",
-        placeholder: "Client ID",
+        name: "email",
+        label: "Client Email",
+        placeholder: "Client Email",
         type: "text",
+      },
+      {
+        name: "password",
+        label: "Password",
+        placeholder: "Password",
+        type: "text",
+        validate: true,
       },
     ],
     PLANT: [

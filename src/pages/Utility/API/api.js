@@ -39,6 +39,7 @@ export const adminLogin = (payload) => apiCall("/admin/login", "post", payload);
 
 // ========================== CLIENT API ==========================
 export const getAllClient = () => apiCall("/client");
+export const addClient = (payload) => apiCall("/client", "post", payload);
 
 // ========================== DRIVER API ==========================
 export const getAllDriver = () => apiCall("/driver");
