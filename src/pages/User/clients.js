@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import SweetAlert from "react-bootstrap-sweetalert";
 import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
@@ -9,18 +10,21 @@ import CONSTANT, {
   EditButton,
   getTableData,
 } from "../Utility/constnt";
-import { notify } from "../Utility/coustemFunction";
 
 const Clients = () => {
   const [showModel, setShowModel] = useState(false);
   const [clientData, setClientData] = useState([]);
+  const [flag, setFlag] = useState(true);
+  const [confirm_both, setconfirm_both] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+  const [editData, setEditData] = useState({});
   const API_CALL = useHttp();
 
   useEffect(() => {
     (async () => {
       API_CALL.sendRequest(CONSTANT.API.getAllClient, clientDataHandler);
     })();
-  }, []);
+  }, [flag]);
 
   const clientDataHandler = (res) => {
     setClientData(
@@ -32,7 +36,11 @@ const Clients = () => {
           action: (
             <>
               <EditButton />
-              <DeleteButton />
+              <DeleteButton
+                onClick={() => {
+                  openDeleteModal(clientData.id);
+                }}
+              />
             </>
           ),
         };
@@ -42,9 +50,28 @@ const Clients = () => {
 
   const onSubmitForm = (payload) => {
     (async () => {
-      const res = await addClient(payload);
-      console.log(res);
+      API_CALL.sendRequest(
+        CONSTANT.API.addClient,
+        null,
+        payload,
+        "Client Add Successfully"
+      );
+      setFlag(!flag);
     })();
+  };
+
+  const openDeleteModal = (id) => {
+    setconfirm_both(true);
+    setDeleteId(id);
+  };
+
+  const onDeleteClient = () => {
+    const URL = {
+      endpoint: `/client/${deleteId}`,
+      type: "DELETE",
+    };
+    API_CALL.sendRequest(URL, null, null, "Delete Successfully");
+    setFlag(!flag);
   };
 
   return (
@@ -86,6 +113,25 @@ const Clients = () => {
         onSubmit={(data) => onSubmitForm(data)}
         data={CONSTANT.FORM_FIELDS.CLIENT}
       />
+
+      {confirm_both ? (
+        <SweetAlert
+          title="Are you sure?"
+          warning
+          showCancel
+          confirmBtnBsStyle="success"
+          cancelBtnBsStyle="danger"
+          onConfirm={() => {
+            onDeleteClient();
+            setconfirm_both(false);
+          }}
+          onCancel={() => {
+            setconfirm_both(false);
+          }}
+        >
+          You won't be able to revert this!
+        </SweetAlert>
+      ) : null}
     </React.Fragment>
   );
 };
