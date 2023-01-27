@@ -21,6 +21,9 @@ import avatar2 from "../../assets/images/users/avatar-4.jpg";
 import avatar3 from "../../assets/images/users/avatar-5.jpg";
 import avatar4 from "../../assets/images/users/avatar-6.jpg";
 import TrackingSvg from "./SVG/TrackingSvg";
+import TrackIdSvg from "./SVG/TrackIdSvg";
+import CalanderIconSvg from "./SVG/CalanderIconSvg";
+import LocationIconSvg from "./SVG/LocationIconSvg";
 
 const LoadingContainer = () => <div>Loading...</div>;
 
@@ -288,36 +291,35 @@ const Traking = (props) => {
           <CardBody>
             <div className="modal-body">
               <CardTitle className="font-size-12">
-                <div className="d-flex align-items-start">
-                  <i
-                    className="bx bxs-truck me-1"
-                    style={{
-                      fontSize: "25px",
-                    }}
-                  ></i>{" "}
+                <div className="d-flex align-items-center">
+                  <TrackIdSvg />
                   <div className="flex-1">
-                    <div className="font-size-16">#1215sdvsd</div>
+                    <div className="font-size-16 ms-2">#1215sdvsd</div>
                   </div>
                 </div>
               </CardTitle>
 
               <div className="mt-3 d-flex">
-                <strong className="ftext-truncate bold">{"Vehical"}</strong>{" "}
+                <strong className="ftext-truncate font-size-18 text-dark bold">
+                  {"Vehical"}
+                </strong>{" "}
                 &nbsp;
               </div>
 
-              <div className="d-flex align-items-start">
-                <div className="flex-1 overflow-hidden">
-                  <p className="mb-1">{modalData?.Vehical}</p>
-                  <p className="text-truncate mb-0">{modalData?.fuel}</p>
+              <div
+                className="d-flex flex-column"
+                style={{
+                  letterSpacing: "1px",
+                }}
+              >
+                <div className="d-flex">
+                  <p className="m-0">{modalData?.Vehical}</p>
+                  <p className="text-truncate m-0"> ({modalData?.fuel}) </p>
                 </div>
-                <div className="font-size-12 ms-auto">{modalData?.time}</div>
+                <div className="font-size-15">{modalData?.time}</div>
               </div>
+              <hr></hr>
 
-              <div className="d-flex mt-3">
-                <strong className="ftext-truncate bold">{"Driver"}</strong>{" "}
-                &nbsp;
-              </div>
               <div className="d-flex align-items-start">
                 <div className="me-3 align-self-center">
                   <img
@@ -327,40 +329,59 @@ const Traking = (props) => {
                   />
                 </div>
                 <div className="flex-1 overflow-hidden">
-                  <h5 className="font-size-16 mb-1">{modalData?.name}</h5>
+                  <h5 className="font-size-16 mb-1 text-dark">
+                    {modalData?.name}
+                  </h5>
                   <p className="text-truncate mb-0">{modalData?.desc}</p>
                 </div>
               </div>
+              <hr></hr>
 
-              <div className="mt-3 d-flex">
-                <strong className="ftext-truncate bold">{"Time"}</strong> &nbsp;
-              </div>
-              <div className="d-flex justify-content-between align-items-center">
-                <div className=" d-flex flex-column justify-content-center align-items-center">
-                  <i
-                    className="bx bxs-map"
-                    style={{
-                      fontSize: "25px",
-                    }}
-                  ></i>
-                  <p className="text-truncate ml-2">{"1/10/2022"}</p>
+              <div>
+                <div className="d-flex row">
+                  <div className="d-flex align-items-center modalCalender col-5">
+                    <CalanderIconSvg />
+                    <div className="ms-2">
+                      <p className="m-0 font-size-10">01-10-2022</p>
+                      <p className="m-0">08:32 pm</p>
+                    </div>
+                  </div>
+                  <div className="modalCalendertwo d-flex align-items-center col-7">
+                    <div>
+                      <LocationIconSvg />
+                    </div>
+                    <div>
+                      <p className="text m-0 ms-2 font-size-10">
+                        Akshya Nagar 1st Block 1st Cross, Rammurthy nagar,
+                        Bangalore-560016
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div className="mb-4 w-75">
-                  <Progress
-                    className="mb-2 progress-sm"
-                    value={100}
-                    color="primary"
-                    style={{ height: "3px" }}
-                  />
+                <div className="row-">
+                  <div className="col-5 d-flex justify-content-center">
+                    <p className="calenderLine m-0"></p>
+                  </div>
                 </div>
-                <div className="d-flex flex-column justify-content-center align-items-center">
-                  <i
-                    className="bx bxs-map"
-                    style={{
-                      fontSize: "25px",
-                    }}
-                  ></i>
-                  <p className="text-truncate ml-2">{"1/10/2022"}</p>
+                <div className="d-flex row">
+                  <div className="d-flex align-items-center modalCalender col-5">
+                    <CalanderIconSvg />
+                    <div className="ms-2">
+                      <p className="m-0 font-size-10">01-10-2022</p>
+                      <p className="m-0">08:32 pm</p>
+                    </div>
+                  </div>
+                  <div className="modalCalendertwo d-flex align-items-center col-7">
+                    <div>
+                      <LocationIconSvg />
+                    </div>
+                    <div>
+                      <p className="text m-0 ms-2 font-size-10">
+                        Akshya Nagar 1st Block 1st Cross, Rammurthy nagar,
+                        Bangalore-560016
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

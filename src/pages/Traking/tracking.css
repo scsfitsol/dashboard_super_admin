@@ -1,8 +1,3 @@
-/* .vehicleCard {
-  background-color: #003e70 !important;
-  color: #ffff;
-} */
-
 .vehicleCard {
   cursor: pointer;
   position: relative;
@@ -79,4 +74,26 @@
 }
 .selectCard .cardLastIcon_Stroke {
   stroke: #ffff;
+}
+
+/* MODAL */
+.modalCalender {
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.modalCalendertwo .text {
+  font-size: 13px;
+}
+
+.modal {
+  --bs-modal-width: 415px !important;
+}
+
+.calenderLine {
+  content: "";
+  width: 2px;
+  height: 40px;
+  background-color: #f0f0f0;
 }

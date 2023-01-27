@@ -69,6 +69,14 @@ const CONSTANT = {
       endpoint: `/client`,
       type: "POST",
     },
+    deleteClient: {
+      endpoint: `/client`,
+      type: "DELETE",
+    },
+    addClient: {
+      endpoint: `/client`,
+      type: "POST",
+    },
     getAllDriver: {
       endpoint: `/driver`,
       type: "GET",
