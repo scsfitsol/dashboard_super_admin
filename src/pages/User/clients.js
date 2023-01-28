@@ -16,8 +16,7 @@ const Clients = () => {
   const [clientData, setClientData] = useState([]);
   const [flag, setFlag] = useState(true);
   const [confirm_both, setconfirm_both] = useState(false);
-  const [deleteId, setDeleteId] = useState(null);
-  const [editData, setEditData] = useState({});
+  const [actionData, setActionData] = useState({});
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -38,7 +37,7 @@ const Clients = () => {
               <EditButton />
               <DeleteButton
                 onClick={() => {
-                  openDeleteModal(clientData.id);
+                  openDeleteModal(clientData);
                 }}
               />
             </>
@@ -60,14 +59,14 @@ const Clients = () => {
     })();
   };
 
-  const openDeleteModal = (id) => {
+  const openDeleteModal = (editData) => {
     setconfirm_both(true);
-    setDeleteId(id);
+    setActionData(editData);
   };
 
   const onDeleteClient = () => {
     const URL = {
-      endpoint: `/client/${deleteId}`,
+      endpoint: `/client/${editData?.id}/?organizationId=${editData?.organizationId}`,
       type: "DELETE",
     };
     API_CALL.sendRequest(URL, null, null, "Delete Successfully");

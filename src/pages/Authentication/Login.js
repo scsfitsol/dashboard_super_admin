@@ -5,7 +5,7 @@ import { Row, Col, Alert, Container } from "reactstrap";
 
 // Redux
 import { connect } from "react-redux";
-import { withRouter, Link, useHistory } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 // availity-reactstrap-validation
 import { AvForm, AvField } from "availity-reactstrap-validation";
@@ -15,9 +15,7 @@ import { loginUser, apiError, socialLogin } from "../../store/actions";
 
 // import images
 import logo from "../../assets/images/logo-sm-dark.png";
-import { adminLogin } from "../Utility/API/api";
 import authStorage from "../Utility/API/authStroge";
-import notify from "../Utility/coustemFunction";
 import CONSTANT from "../Utility/constnt";
 import useHttp from "../../components/Hook/Use-http";
 
@@ -43,7 +41,8 @@ const Login = (props) => {
   const onSetLoginData = (res) => {
     authStorage.setAuthDetails(res?.token);
     localStorage.setItem("authUser", res?.token);
-    // history.push("/Report");
+    window.history.replaceState(null, null, "Report");
+    window.location.reload();
   };
 
   return (

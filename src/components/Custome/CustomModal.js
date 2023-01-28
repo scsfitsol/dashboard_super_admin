@@ -39,7 +39,7 @@ const CustomModal = (props) => {
                 className="needs-validation"
                 onSubmit={onSubmitForm}
                 style={{
-                  height: "550px",
+                  maxHeight: "550px",
                   overflowY: "scroll",
                   overflowX: "hidden",
                 }}

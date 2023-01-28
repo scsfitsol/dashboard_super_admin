@@ -17,12 +17,9 @@ import NonAuthLayout from "./components/NonAuthLayout";
 
 // Import scss
 import "./assets/scss/theme.scss";
-
-//Toastify css
-import "react-toastify/dist/ReactToastify.css";
-
 import fakeBackend from "./helpers/AuthType/fakeBackend";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Activating fake backend
 fakeBackend();
