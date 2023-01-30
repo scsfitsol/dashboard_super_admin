@@ -27,6 +27,12 @@ export const EditButton = ({ onClick = {} }) => {
   );
 };
 
+export const Category = {
+  1: "Pendding",
+  2: "On Going",
+  3: "Completed",
+};
+
 export const DeleteButton = ({ onClick = {} }) => {
   const [ttop, setttop] = useState(false);
   return (
@@ -65,10 +71,6 @@ const CONSTANT = {
       endpoint: `/client`,
       type: "GET",
     },
-    addClient: {
-      endpoint: `/client`,
-      type: "POST",
-    },
     deleteClient: {
       endpoint: `/client`,
       type: "DELETE",
@@ -81,21 +83,41 @@ const CONSTANT = {
       endpoint: `/driver`,
       type: "GET",
     },
+    addDriver: {
+      endpoint: `/driver`,
+      type: "POST",
+    },
     getAllTransporter: {
       endpoint: `/transporter`,
       type: "GET",
+    },
+    addTransporter: {
+      endpoint: `/transporter`,
+      type: "POST",
     },
     getAllVehicle: {
       endpoint: `/vehicle`,
       type: "GET",
     },
+    addVehicle: {
+      endpoint: `/vehicle`,
+      type: "POST",
+    },
     getAllTrip: {
       endpoint: `/trip`,
       type: "GET",
     },
+    addTrip: {
+      endpoint: `/trip`,
+      type: "POST",
+    },
     getAllPlant: {
       endpoint: `/plant`,
       type: "GET",
+    },
+    addPlant: {
+      endpoint: `/plant`,
+      type: "POST",
     },
   },
 
@@ -131,11 +153,11 @@ const CONSTANT = {
           lable: "User",
           icon: "bx bxs-user-detail",
           submenu: [
-            {
-              id: 1,
-              to: "/admins",
-              lable: "Admins",
-            },
+            // {
+            //   id: 1,
+            //   to: "/admins",
+            //   lable: "Admins",
+            // },
             {
               id: 2,
               to: "/clients",
@@ -257,8 +279,8 @@ const CONSTANT = {
         sort: "asc",
       },
       {
-        label: "Type",
-        field: "vehicleType",
+        label: "Manufacture",
+        field: "manufacture",
         sort: "asc",
       },
       {
@@ -277,15 +299,20 @@ const CONSTANT = {
         sort: "asc",
       },
       {
-        label: "Total KMS Covered",
-        field: "totalKmscovered",
+        label: "Mileage",
+        field: "mileage",
         sort: "asc",
       },
-      {
-        label: "Engine Type",
-        field: "engineType",
-        sort: "asc",
-      },
+      // {
+      //   label: "Total KMS Covered",
+      //   field: "totalKmscovered",
+      //   sort: "asc",
+      // },
+      // {
+      //   label: "Engine Type",
+      //   field: "engineType",
+      //   sort: "asc",
+      // },
       {
         label: "Allocate",
         field: "allocate",
@@ -444,16 +471,15 @@ const CONSTANT = {
         type: "text",
       },
       {
-        name: "drivingLicenseNumber",
-        label: "Driving License Number",
-        placeholder: "Driving License Number",
-        type: "text",
-      },
-      {
-        name: "mobileNumber",
+        name: "mobile",
         label: "Mobile Number",
         placeholder: "Mobile Number",
         type: "text",
+      },
+      {
+        name: "drivingLicense",
+        label: "Driving License",
+        type: "file",
       },
     ],
     CLIENT: [
@@ -480,25 +506,6 @@ const CONSTANT = {
     ],
     PLANT: [
       {
-        name: "name",
-        label: "Name",
-        placeholder: "Name",
-        type: "text",
-      },
-      {
-        name: "clientName",
-        label: "Client Name",
-        placeholder: "Name Name",
-        type: "SingleSelect",
-        options: [
-          { label: "Kirti Jain", value: "Kirti Jain" },
-          { label: "Heer Bhagat", value: "Heer Bhagat" },
-          { label: "Binoya Deo", value: "Binoya Deo" },
-          { label: "Pravin Maharaj", value: "Pravin Maharaj" },
-          { label: "Nishita Batta", value: "Nishita Batta" },
-        ],
-      },
-      {
         name: "unitName",
         label: "Unit Name",
         placeholder: "Unit Name",
@@ -511,7 +518,7 @@ const CONSTANT = {
         type: "text",
       },
       {
-        name: "gstNumber",
+        name: "GST",
         label: "GST Number",
         placeholder: "GST Number",
         type: "text",
@@ -533,7 +540,7 @@ const CONSTANT = {
     ],
     TRANSPORTER: [
       {
-        name: "name",
+        name: "transporterName",
         label: "Name",
         placeholder: "Name",
         type: "text",
@@ -548,38 +555,8 @@ const CONSTANT = {
     VEHICLES: [
       {
         name: "registrationNumber",
-        label: "registrationNumber",
-        placeholder: "registrationNumber",
-        type: "text",
-      },
-      {
-        name: "type",
-        label: "Type",
-        placeholder: "Type",
-        type: "text",
-      },
-      {
-        name: "fuelTank",
-        label: "Fuel Tank",
-        placeholder: "Fuel Tank",
-        type: "SingleSelect",
-        options: [
-          { label: "Petrol", value: "petrol" },
-          { label: "diesel", value: "Diesel" },
-          { label: "CNG", value: "CNG" },
-          { label: "PLG", value: "PLG" },
-        ],
-      },
-      {
-        name: "fuelTank",
-        label: "Fuel Tank",
-        placeholder: "Fuel Tank",
-        type: "text",
-      },
-      {
-        name: "transporterName",
-        label: "Transporter Name",
-        placeholder: "Transporter Name",
+        label: "Registration Number",
+        placeholder: "Registration Number",
         type: "text",
       },
       {
@@ -589,46 +566,46 @@ const CONSTANT = {
         type: "text",
       },
       {
-        name: "totalKMSCovered",
-        label: "Total KMS Covered",
-        placeholder: "Total KMS Covered",
+        name: "fuelType",
+        label: "Fuel Type",
+        placeholder: "Fuel Type",
+        type: "SingleSelect",
+        options: [
+          { label: "Petrol", value: "petrol" },
+          { label: "Diesel", value: "diesel" },
+          { label: "CNG", value: "CNG" },
+          { label: "PLG", value: "PLG" },
+        ],
+      },
+      {
+        name: "manufacture",
+        label: "Manufacture",
+        placeholder: "Manufacture",
         type: "text",
       },
       {
-        name: "engineType",
-        label: "Engine Type",
-        placeholder: "Engine Type",
-        type: "text",
-      },
-      {
-        name: "isAllocate",
+        name: "allocate",
         label: "Allocate",
         placeholder: "Allocate",
         type: "SingleSelect",
         options: [
-          { label: "allocated", value: "Allocated" },
-          { label: "notAllocated", value: "Not Allocated" },
+          { label: "Allocated", value: "true" },
+          { label: "Not Allocated", value: "false" },
         ],
+      },
+      {
+        name: "mileage",
+        label: "Mileage",
+        placeholder: "Mileage",
+        type: "text",
       },
     ],
     TRIP: [
       {
-        name: "clientName",
-        label: "Client Name",
-        placeholder: "Client Name",
-        type: "text",
-      },
-      {
-        name: "transporterName",
-        label: "Transporter Name",
-        placeholder: "Transporter Name",
-        type: "text",
-      },
-      {
-        name: "plantName",
-        label: "Plant Name",
-        placeholder: "Plant Name",
-        type: "text",
+        name: "startDate",
+        label: "Start Date",
+        placeholder: "Start Date",
+        type: "date",
       },
       {
         name: "startTime",
@@ -637,46 +614,40 @@ const CONSTANT = {
         type: "selectTime",
       },
       {
-        name: "source",
-        label: "Source Name",
-        placeholder: "Source Name",
+        name: "sourceLocation",
+        label: "Source Location",
+        placeholder: "Source Location",
         type: "text",
       },
       {
-        name: "destination",
-        label: "Destination",
-        placeholder: "Destination",
+        name: "destinationLocation",
+        label: "Destination Location",
+        placeholder: "Destination Location",
         type: "text",
       },
       {
-        name: "driverName",
-        label: "Driver Name",
-        placeholder: "Driver Name",
-        type: "text",
-      },
-      {
-        name: "driverPhoneNumber",
-        label: "Driver Phone Number",
-        placeholder: "Driver Phone Number",
-        type: "text",
-      },
-      {
-        name: "vehicleNumber",
-        label: "Vehicle Number",
-        placeholder: "Vehicle Number",
-        type: "text",
-      },
-      {
-        name: "loadVehicleCarrying",
-        label: "Load vehicle carrying",
-        placeholder: "Load vehicle carrying",
-        type: "text",
-      },
-      {
-        name: "targetedDate&Time",
-        label: "Targeted Date & Time",
-        placeholder: "Targeted Date & Time",
+        name: "completedDateAndTime",
+        label: "Completed Date & Time",
+        placeholder: "Completed Date & Time",
         type: "selectDate&Time",
+      },
+      {
+        name: "targetedDateAndTime",
+        label: "targeted Date & Time",
+        placeholder: "targeted Date & Time",
+        type: "selectDate&Time",
+      },
+      {
+        name: "weight",
+        label: "Weight",
+        placeholder: "Weight",
+        type: "text",
+      },
+      {
+        name: "targetedDate",
+        label: "Targeted Date",
+        placeholder: "Targeted Date",
+        type: "date",
       },
       {
         name: "status",
@@ -685,15 +656,15 @@ const CONSTANT = {
         type: "text",
       },
       {
-        name: "carbonEmit(LBS)",
-        label: "Carbon emit(LBS)",
-        placeholder: "Carbon emit(LBS)",
+        name: "distanceOfTrip",
+        label: "Distance Of Trip",
+        placeholder: "Distance Of Trip",
         type: "text",
       },
       {
-        name: "CO2Efficiency",
-        label: "CO2 Efficiency",
-        placeholder: "CO2 Efficiency",
+        name: "fuelUserd",
+        label: "Fuel Used",
+        placeholder: "Fuel Used",
         type: "text",
       },
     ],

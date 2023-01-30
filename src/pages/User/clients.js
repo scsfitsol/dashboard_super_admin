@@ -4,7 +4,7 @@ import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
 import useHttp from "../../components/Hook/Use-http";
-import { addClient, getAllClient } from "../Utility/API/api";
+import { getAllClient } from "../Utility/API/api";
 import CONSTANT, {
   DeleteButton,
   EditButton,
@@ -17,6 +17,7 @@ const Clients = () => {
   const [flag, setFlag] = useState(true);
   const [confirm_both, setconfirm_both] = useState(false);
   const [actionData, setActionData] = useState({});
+  const [password, setPassword] = useState();
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -34,10 +35,14 @@ const Clients = () => {
           clientId: clientData.id,
           action: (
             <>
-              <EditButton />
+              <EditButton
+                onClick={() => {
+                  onEditClient(clientData);
+                }}
+              />
               <DeleteButton
                 onClick={() => {
-                  openDeleteModal(clientData);
+                  openConfirmationDeleteModal(clientData);
                 }}
               />
             </>
@@ -49,29 +54,51 @@ const Clients = () => {
 
   const onSubmitForm = (payload) => {
     (async () => {
-      API_CALL.sendRequest(
-        CONSTANT.API.addClient,
-        null,
-        payload,
-        "Client Add Successfully"
-      );
-      setFlag(!flag);
+      if (actionData?.id) {
+        payload.password =
+          password.password === "null" && password.password.length > 0
+            ? password.password
+            : password;
+
+        const URL = {
+          endpoint: `/client/${actionData?.id}/?organizationId=${actionData?.organizationId}`,
+          type: "PATCH",
+        };
+        API_CALL.sendRequest(URL, null, payload, "Client Update Successfully");
+        setFlag(!flag);
+      } else {
+        API_CALL.sendRequest(
+          CONSTANT.API.addClient,
+          null,
+          payload,
+          "Client Add Successfully"
+        );
+        setFlag(!flag);
+      }
     })();
   };
 
-  const openDeleteModal = (editData) => {
+  const openConfirmationDeleteModal = (clientData) => {
     setconfirm_both(true);
-    setActionData(editData);
+    setActionData(clientData);
   };
 
   const onDeleteClient = () => {
     const URL = {
-      endpoint: `/client/${editData?.id}/?organizationId=${editData?.organizationId}`,
+      endpoint: `/client/${actionData?.id}/?organizationId=${actionData?.organizationId}`,
       type: "DELETE",
     };
     API_CALL.sendRequest(URL, null, null, "Delete Successfully");
     setFlag(!flag);
   };
+
+  const onEditClient = (clientData) => {
+    setActionData(clientData);
+    setPassword(clientData?.password);
+    setShowModel(true);
+  };
+
+  delete actionData["password"];
 
   return (
     <React.Fragment>
@@ -94,7 +121,10 @@ const Clients = () => {
         <Button
           color="primary"
           className="btn btn-primary waves-effect waves-light mb-3"
-          onClick={() => setShowModel(true)}
+          onClick={() => {
+            setShowModel(true);
+            setActionData();
+          }}
         >
           Add Client
         </Button>
@@ -111,6 +141,8 @@ const Clients = () => {
         modalTitle="Add Client"
         onSubmit={(data) => onSubmitForm(data)}
         data={CONSTANT.FORM_FIELDS.CLIENT}
+        defaultData={actionData}
+        filedata={false}
       />
 
       {confirm_both ? (

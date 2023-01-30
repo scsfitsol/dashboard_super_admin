@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import SweetAlert from "react-bootstrap-sweetalert";
 import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
@@ -13,6 +14,9 @@ import CONSTANT, {
 const Driver = () => {
   const [showModel, setShowModel] = useState(false);
   const [driverData, setDriverData] = useState([]);
+  const [actionData, setActionData] = useState({});
+  const [confirm_both, setconfirm_both] = useState(false);
+  const [flag, setFlag] = useState(true);
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -29,13 +33,61 @@ const Driver = () => {
           no: index + 1,
           action: (
             <>
-              <EditButton />
-              <DeleteButton />
+              <EditButton
+                onClick={() => {
+                  onEditDriver(driverData);
+                }}
+              />
+              <DeleteButton
+                onClick={() => {
+                  openConfirmationDeleteModal(driverData);
+                }}
+              />
             </>
           ),
         };
       })
     );
+  };
+
+  const openConfirmationDeleteModal = (driverData) => {
+    setconfirm_both(true);
+    setActionData(driverData);
+  };
+
+  const onEditDriver = (driverData) => {
+    setActionData(driverData);
+    setShowModel(true);
+  };
+
+  const onDeleteDriver = () => {
+    const URL = {
+      endpoint: `/driver/${actionData?.id}`,
+      type: "DELETE",
+    };
+    API_CALL.sendRequest(URL, null, null, "Delete Successfully");
+    setFlag(!flag);
+  };
+
+  const onSubmitForm = (payload) => {
+    (async () => {
+      if (actionData?.id) {
+        const URL = {
+          endpoint: `/driver/${actionData?.id}`,
+          type: "PATCH",
+        };
+        API_CALL.sendRequest(URL, null, payload, "Driver Update Successfully");
+        setFlag(!flag);
+      } else {
+        API_CALL.sendRequest(
+          CONSTANT.API.addDriver,
+          null,
+          payload,
+          "Driver Add Successfully"
+        );
+        setFlag(!flag);
+      }
+    })();
   };
 
   return (
@@ -73,8 +125,29 @@ const Driver = () => {
         show={showModel}
         close={() => setShowModel(false)}
         modalTitle="Add Driver"
+        onSubmit={(data) => onSubmitForm(data)}
         data={CONSTANT.FORM_FIELDS.DRIVER}
+        defaultData={actionData}
+        formData={true}
       />
+      {confirm_both ? (
+        <SweetAlert
+          title="Are you sure?"
+          warning
+          showCancel
+          confirmBtnBsStyle="success"
+          cancelBtnBsStyle="danger"
+          onConfirm={() => {
+            onDeleteDriver();
+            setconfirm_both(false);
+          }}
+          onCancel={() => {
+            setconfirm_both(false);
+          }}
+        >
+          You won't be able to revert this!
+        </SweetAlert>
+      ) : null}
     </React.Fragment>
   );
 };

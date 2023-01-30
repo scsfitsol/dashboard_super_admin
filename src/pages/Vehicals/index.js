@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import SweetAlert from "react-bootstrap-sweetalert";
 import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
@@ -12,13 +13,32 @@ import CONSTANT, {
 const Vehicals = () => {
   const [showModel, setShowModel] = useState(false);
   const [vehicleData, setVehicleData] = useState([]);
+  const [actionData, setActionData] = useState({});
+  const [confirm_both, setconfirm_both] = useState(false);
+  const [flag, setFlag] = useState(true);
   const API_CALL = useHttp();
 
   useEffect(() => {
     (async () => {
       API_CALL.sendRequest(CONSTANT.API.getAllVehicle, vehicleDataHandler);
+      API_CALL.sendRequest(
+        CONSTANT.API.getAllTransporter,
+        transporterDataHandler
+      );
     })();
   }, []);
+
+  const transporterDataHandler = (res) => {
+    CONSTANT.FORM_FIELDS.VEHICLES.push({
+      name: "transporterId",
+      label: "Transporter",
+      placeholder: "Transporter",
+      type: "SingleSelect",
+      options: res?.data.map((data) => {
+        return { label: data.transporterName, value: data.id };
+      }),
+    });
+  };
 
   const vehicleDataHandler = (res) => {
     setVehicleData(
@@ -29,13 +49,62 @@ const Vehicals = () => {
           transporterName: vehicleData?.transporter?.transporterName,
           action: (
             <>
-              <EditButton />
-              <DeleteButton />
+              <EditButton
+                onClick={() => {
+                  onEditVehicle(vehicleData);
+                }}
+              />
+              <DeleteButton
+                onClick={() => {
+                  openConfirmationDeleteModal(vehicleData);
+                }}
+              />
             </>
           ),
         };
       })
     );
+  };
+
+  const openConfirmationDeleteModal = (vehicleData) => {
+    setconfirm_both(true);
+    setActionData(vehicleData);
+  };
+
+  const onEditVehicle = (vehicleData) => {
+    setActionData(vehicleData);
+    setShowModel(true);
+  };
+
+  const onDeleteVehicle = () => {
+    const URL = {
+      endpoint: `/vehicle/${actionData?.id}`,
+      type: "DELETE",
+    };
+    API_CALL.sendRequest(URL, null, null, "Delete Successfully");
+    setFlag(!flag);
+  };
+
+  const onSubmitForm = (payload) => {
+    (async () => {
+      console.log("payload", payload);
+      if (actionData?.id) {
+        const URL = {
+          endpoint: `/vehicle/${actionData?.id}`,
+          type: "PATCH",
+        };
+        API_CALL.sendRequest(URL, null, payload, "Vehicle Update Successfully");
+        setFlag(!flag);
+      } else {
+        API_CALL.sendRequest(
+          CONSTANT.API.addVehicle,
+          null,
+          payload,
+          "Vehicle Add Successfully"
+        );
+        setFlag(!flag);
+      }
+    })();
   };
 
   return (
@@ -77,9 +146,29 @@ const Vehicals = () => {
         show={showModel}
         close={() => setShowModel(false)}
         modalTitle="Add Vehicals"
+        onSubmit={(data) => onSubmitForm(data)}
         data={CONSTANT.FORM_FIELDS.VEHICLES}
-        defaultData=""
+        defaultData={actionData}
+        formData={false}
       />
+      {confirm_both ? (
+        <SweetAlert
+          title="Are you sure?"
+          warning
+          showCancel
+          confirmBtnBsStyle="success"
+          cancelBtnBsStyle="danger"
+          onConfirm={() => {
+            onDeleteVehicle();
+            setconfirm_both(false);
+          }}
+          onCancel={() => {
+            setconfirm_both(false);
+          }}
+        >
+          You won't be able to revert this!
+        </SweetAlert>
+      ) : null}
     </React.Fragment>
   );
 };
