@@ -17,18 +17,17 @@ import { loginUser, apiError, socialLogin } from "../../store/actions";
 import logo from "../../assets/images/logo-sm-dark.png";
 
 const Login = (props) => {
-  useEffect(() => {
-    document.body.className = "authentication-bg";
-    // remove classname when component will unmount
-    return function cleanup() {
-      document.body.className = "";
-    };
-  });
+  // useEffect(() => {
+  //   document.body.className = "authentication-bg";
+  //   return function cleanup() {
+  //     document.body.className = "";
+  //   };
+  // });
 
   // handleValidSubmit
-  const handleValidSubmit = (event, values) => {
-    props.loginUser(values, props.history);
-  };
+  // const handleValidSubmit = (event, values) => {
+  //   props.loginUser(values, props.history);
+  // };
 
   return (
     <React.Fragment>
@@ -58,9 +57,9 @@ const Login = (props) => {
                   <div className="p-2">
                     <AvForm
                       className="form-horizontal"
-                      onValidSubmit={(e, v) => {
-                        handleValidSubmit(e, v);
-                      }}
+                      //   onValidSubmit={(e, v) => {
+                      //     handleValidSubmit(e, v);
+                      //   }}
                     >
                       {props.error && typeof props.error === "string" ? (
                         <Alert color="danger">{props.error}</Alert>

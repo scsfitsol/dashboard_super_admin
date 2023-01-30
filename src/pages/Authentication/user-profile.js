@@ -22,24 +22,24 @@ const UserProfile = (props) => {
   const [idx, setidx] = useState(1);
   const { resetProfileFlag } = props;
   useEffect(() => {
-    if (localStorage.getItem("authUser")) {
-      const obj = JSON.parse(localStorage.getItem("authUser"));
-      if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-        setname(obj.displayName);
-        setemail(obj.email);
-        setidx(obj.uid);
-      } else if (
-        process.env.REACT_APP_DEFAULTAUTH === "fake" ||
-        process.env.REACT_APP_DEFAULTAUTH === "jwt"
-      ) {
-        setname(obj.username);
-        setemail(obj.email);
-        setidx(obj.uid);
-      }
-      setTimeout(() => {
-        resetProfileFlag();
-      }, 3000);
-    }
+    // if (localStorage.getItem("authUser")) {
+    //   const obj = JSON.parse(localStorage.getItem("authUser"));
+    //   if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
+    //     setname(obj?.displayName);
+    //     setemail(obj?.email);
+    //     setidx(obj?.uid);
+    //   } else if (
+    //     process.env.REACT_APP_DEFAULTAUTH === "fake" ||
+    //     process.env.REACT_APP_DEFAULTAUTH === "jwt"
+    //   ) {
+    //     setname(obj?.username);
+    //     setemail(obj?.email);
+    //     setidx(obj?.uid);
+    //   }
+    //   setTimeout(() => {
+    //     resetProfileFlag();
+    //   }, 3000);
+    // }
   }, [props.success, resetProfileFlag]);
   function handleValidSubmit(event, values) {
     props.editProfile(values);
