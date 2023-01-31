@@ -103,17 +103,21 @@ const SidebarContent = (props) => {
 
                           {subMenuItem.submenu && (
                             <ul className="sub-menu">
-                              {subMenuItem.submenu.map((dropDownMenuItem) => {
-                                return (
-                                  <li
-                                    key={`dropDownMenuItem${dropDownMenuItem.id}`}
-                                  >
-                                    <Link to={dropDownMenuItem.to}>
-                                      {props.t(dropDownMenuItem.lable)}
-                                    </Link>
-                                  </li>
-                                );
-                              })}
+                              {subMenuItem.submenu.map(
+                                (dropDownMenuItem, index) => {
+                                  return (
+                                    <li
+                                      key={`dropDownMenuItem${
+                                        dropDownMenuItem + index
+                                      }`}
+                                    >
+                                      <Link to={dropDownMenuItem.to}>
+                                        {props.t(dropDownMenuItem.lable)}
+                                      </Link>
+                                    </li>
+                                  );
+                                }
+                              )}
                             </ul>
                           )}
                         </li>

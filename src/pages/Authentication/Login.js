@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 
 import { Row, Col, Alert, Container } from "reactstrap";
 
@@ -15,19 +15,34 @@ import { loginUser, apiError, socialLogin } from "../../store/actions";
 
 // import images
 import logo from "../../assets/images/logo-sm-dark.png";
+import authStorage from "../Utility/API/authStroge";
+import CONSTANT from "../Utility/constnt";
+import useHttp from "../../components/Hook/Use-http";
 
 const Login = (props) => {
-  useEffect(() => {
-    document.body.className = "authentication-bg";
-    // remove classname when component will unmount
-    return function cleanup() {
-      document.body.className = "";
-    };
-  });
+  const [loginData, setLoginData] = useState({});
+  const API_CALL = useHttp();
 
-  // handleValidSubmit
-  const handleValidSubmit = (event, values) => {
-    props.loginUser(values, props.history);
+  const onChangeInput = (e) => {
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
+  };
+
+  const onUserLogin = () => {
+    (async () => {
+      API_CALL.sendRequest(
+        CONSTANT.API.adminLogin,
+        onSetLoginData,
+        loginData,
+        "Login Successfully"
+      );
+    })();
+  };
+
+  const onSetLoginData = (res) => {
+    authStorage.setAuthDetails(res?.token);
+    localStorage.setItem("authUser", res?.token);
+    window.history.replaceState(null, null, "Report");
+    window.location.reload();
   };
 
   return (
@@ -53,9 +68,7 @@ const Login = (props) => {
                   <div className="p-2">
                     <AvForm
                       className="form-horizontal"
-                      onValidSubmit={(e, v) => {
-                        handleValidSubmit(e, v);
-                      }}
+                      onValidSubmit={onUserLogin}
                     >
                       {props.error && typeof props.error === "string" ? (
                         <Alert color="danger">{props.error}</Alert>
@@ -70,6 +83,7 @@ const Login = (props) => {
                           placeholder="Enter email"
                           type="email"
                           required
+                          onChange={onChangeInput}
                         />
                       </div>
 
@@ -81,6 +95,7 @@ const Login = (props) => {
                           type="password"
                           required
                           placeholder="Enter Password"
+                          onChange={onChangeInput}
                         />
                       </div>
 

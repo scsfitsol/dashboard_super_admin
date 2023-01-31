@@ -1,24 +1,44 @@
 import { AvField, AvForm } from "availity-reactstrap-validation";
 import React, { useState } from "react";
-import { Col, Label, Modal, Row } from "reactstrap";
+import { Col, Label, Modal, Row, InputGroup, Input } from "reactstrap";
 import Select from "react-select";
+import Flatpickr from "react-flatpickr";
 
 const CustomModal = (props) => {
-  const { modalType, show, close, modalTitle, data, defaultData } = props;
+  const {
+    modalType,
+    show,
+    close,
+    modalTitle,
+    data,
+    onSubmit,
+    defaultData,
+    formData,
+  } = props;
   const [inputData, setInputData] = useState({});
+  const [selectedValue, setSelectedValue] = useState({});
 
   const onChangeInput = (e) => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
-
   const onSelectValue = (selected, key) => {
-    console.log(selected);
+    setSelectedValue({ ...selectedValue, [key]: selected });
     setInputData({ ...inputData, [key]: selected.value });
   };
-
+  const onChangeFileValue = (e) => {
+    setInputData({ ...inputData, [e.target.name]: e.target.files[0] });
+  };
+  let payload = new FormData();
   const onSubmitForm = (e) => {
     e.preventDefault();
-    console.log(inputData);
+    if (formData) {
+      Object.keys(inputData).map((key) => {
+        payload.append(key, inputData[key]);
+      });
+      onSubmit(payload);
+    } else {
+      onSubmit(inputData);
+    }
     close();
   };
 
@@ -32,7 +52,15 @@ const CustomModal = (props) => {
             </div>
 
             <div>
-              <AvForm className="needs-validation" onSubmit={onSubmitForm}>
+              <AvForm
+                className="needs-validation"
+                onSubmit={onSubmitForm}
+                style={{
+                  maxHeight: "550px",
+                  overflowY: "scroll",
+                  overflowX: "hidden",
+                }}
+              >
                 <Row>
                   <Col md="12">
                     <div className="mb-3 px-3">
@@ -42,13 +70,18 @@ const CustomModal = (props) => {
                           fieldName.type === "number"
                         ) {
                           return (
-                            <div className="mb-4">
+                            <div key={index} className="mb-4">
                               <Label htmlFor="validationCustom01">
                                 {fieldName?.label}
                               </Label>
                               <AvField
                                 name={fieldName?.name}
-                                // value={defaultData[fieldName?.name]}
+                                value={
+                                  defaultData &&
+                                  defaultData !== "null" &&
+                                  defaultData !== "undefined" &&
+                                  defaultData[fieldName?.name]
+                                }
                                 placeholder={fieldName?.placeholder}
                                 type={
                                   fieldName?.type ? fieldName?.type : "text"
@@ -73,15 +106,70 @@ const CustomModal = (props) => {
                           );
                         } else if (fieldName.type === "SingleSelect") {
                           return (
-                            <div className="mb-4">
+                            <div key={index} className="mb-4">
                               <Label>{fieldName?.label}</Label>
                               <Select
-                                value={inputData[fieldName?.name]}
+                                value={selectedValue[fieldName?.name]}
                                 options={fieldName?.options}
+                                selected={"clientName" == fieldName?.name}
                                 classNamePrefix="select2-selection"
                                 onChange={(selected) =>
                                   onSelectValue(selected, fieldName?.name)
                                 }
+                              />
+                            </div>
+                          );
+                        } else if (fieldName.type === "selectTime") {
+                          return (
+                            <div key={index} className="mb-4">
+                              <Label>{fieldName?.label}</Label>
+                              <input
+                                name={fieldName?.name}
+                                className="form-control"
+                                type="time"
+                                defaultValue="13:45:00"
+                                id="example-time-input"
+                                onChange={onChangeInput}
+                              />
+                            </div>
+                          );
+                        } else if (fieldName.type === "date") {
+                          return (
+                            <div key={index} className="mb-4">
+                              <Label>{fieldName?.label}</Label>
+                              <input
+                                name={fieldName?.name}
+                                className="form-control"
+                                type="date"
+                                defaultValue="13:45:00"
+                                id="example-time-input"
+                                onChange={onChangeInput}
+                              />
+                            </div>
+                          );
+                        } else if (fieldName.type === "selectDate&Time") {
+                          return (
+                            <div key={index} className="mb-4">
+                              <Label>{fieldName?.label}</Label>
+                              <input
+                                name={fieldName?.name}
+                                className="form-control"
+                                type="datetime-local"
+                                defaultValue="2019-08-19T13:45:00"
+                                id="example-datetime-local-input"
+                                onChange={onChangeInput}
+                              />
+                            </div>
+                          );
+                        } else if (fieldName.type === "file") {
+                          return (
+                            <div key={index} className="mb-4">
+                              <Label>{fieldName?.label}</Label>
+                              <Input
+                                type={fieldName.type}
+                                className="form-control"
+                                name={fieldName?.name}
+                                onChange={onChangeFileValue}
                               />
                             </div>
                           );
