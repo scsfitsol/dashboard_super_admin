@@ -17,6 +17,7 @@ const Transporter = () => {
   const [actionData, setActionData] = useState({});
   const [confirm_both, setconfirm_both] = useState(false);
   const [flag, setFlag] = useState(true);
+  const [isEdit, setIsEdit] = useState(false);
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -62,6 +63,7 @@ const Transporter = () => {
   const onEditTransporter = (transporterData) => {
     setActionData(transporterData);
     setShowModel(true);
+    setIsEdit(true);
   };
 
   const onDeleteDriver = () => {
@@ -70,6 +72,7 @@ const Transporter = () => {
       type: "DELETE",
     };
     API_CALL.sendRequest(URL, null, null, "Delete Successfully");
+    setIsEdit(false);
     setFlag(!flag);
   };
 
@@ -86,6 +89,7 @@ const Transporter = () => {
           payload,
           "Transporter Update Successfully"
         );
+        setIsEdit(false);
         setFlag(!flag);
       } else {
         API_CALL.sendRequest(
@@ -120,7 +124,11 @@ const Transporter = () => {
         <Button
           color="primary"
           className="btn btn-primary waves-effect waves-light mb-3"
-          onClick={() => setShowModel(true)}
+          onClick={() => {
+            setShowModel(true);
+            setIsEdit(false);
+            setActionData({});
+          }}
         >
           Add Transporter
         </Button>
@@ -141,6 +149,7 @@ const Transporter = () => {
         data={CONSTANT.FORM_FIELDS.TRANSPORTER}
         defaultData={actionData}
         formData={false}
+        isEdit={isEdit}
       />
       {confirm_both ? (
         <SweetAlert

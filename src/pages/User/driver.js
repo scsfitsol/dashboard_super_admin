@@ -17,6 +17,7 @@ const Driver = () => {
   const [actionData, setActionData] = useState({});
   const [confirm_both, setconfirm_both] = useState(false);
   const [flag, setFlag] = useState(true);
+  const [isEdit, setIsEdit] = useState(false);
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -58,6 +59,7 @@ const Driver = () => {
   const onEditDriver = (driverData) => {
     setActionData(driverData);
     setShowModel(true);
+    setIsEdit(true);
   };
 
   const onDeleteDriver = () => {
@@ -77,6 +79,7 @@ const Driver = () => {
           type: "PATCH",
         };
         API_CALL.sendRequest(URL, null, payload, "Driver Update Successfully");
+        setIsEdit(false);
         setFlag(!flag);
       } else {
         API_CALL.sendRequest(
@@ -111,7 +114,11 @@ const Driver = () => {
         <Button
           color="primary"
           className="btn btn-primary waves-effect waves-light mb-3"
-          onClick={() => setShowModel(true)}
+          onClick={() => {
+            setShowModel(true);
+            setIsEdit(false);
+            setActionData({});
+          }}
         >
           Add Drive
         </Button>
@@ -129,6 +136,7 @@ const Driver = () => {
         data={CONSTANT.FORM_FIELDS.DRIVER}
         defaultData={actionData}
         formData={true}
+        isEdit={isEdit}
       />
       {confirm_both ? (
         <SweetAlert

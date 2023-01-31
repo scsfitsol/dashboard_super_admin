@@ -18,6 +18,7 @@ const Trip = () => {
   const [actionData, setActionData] = useState({});
   const [confirm_both, setconfirm_both] = useState(false);
   const [flag, setFlag] = useState(true);
+  const [isEdit, setIsEdit] = useState(false);
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -94,6 +95,7 @@ const Trip = () => {
               <EditButton
                 onClick={() => {
                   onEditTrip(tripData);
+                  setIsEdit(true);
                 }}
               />
               <DeleteButton
@@ -116,6 +118,7 @@ const Trip = () => {
   const onEditTrip = (tripData) => {
     setActionData(tripData);
     setShowModel(true);
+    setIsEdit(true);
   };
 
   const onDeleteDriver = () => {
@@ -135,6 +138,7 @@ const Trip = () => {
           type: "PATCH",
         };
         API_CALL.sendRequest(URL, null, payload, "Driver Update Successfully");
+        setIsEdit(false);
         setFlag(!flag);
       } else {
         API_CALL.sendRequest(
@@ -169,7 +173,11 @@ const Trip = () => {
         <Button
           color="primary"
           className="btn btn-primary waves-effect waves-light mb-3"
-          onClick={() => setShowModel(true)}
+          onClick={() => {
+            setShowModel(true);
+            setIsEdit(false);
+            setActionData({});
+          }}
         >
           Add Trip
         </Button>
@@ -187,6 +195,7 @@ const Trip = () => {
         data={CONSTANT.FORM_FIELDS.TRIP}
         defaultData={actionData}
         formData={false}
+        isEdit={isEdit}
       />
       {confirm_both ? (
         <SweetAlert

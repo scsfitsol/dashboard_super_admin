@@ -16,6 +16,7 @@ const Vehicals = () => {
   const [actionData, setActionData] = useState({});
   const [confirm_both, setconfirm_both] = useState(false);
   const [flag, setFlag] = useState(true);
+  const [isEdit, setIsEdit] = useState(false);
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -74,6 +75,7 @@ const Vehicals = () => {
   const onEditVehicle = (vehicleData) => {
     setActionData(vehicleData);
     setShowModel(true);
+    setIsEdit(true);
   };
 
   const onDeleteVehicle = () => {
@@ -87,13 +89,13 @@ const Vehicals = () => {
 
   const onSubmitForm = (payload) => {
     (async () => {
-      console.log("payload", payload);
       if (actionData?.id) {
         const URL = {
           endpoint: `/vehicle/${actionData?.id}`,
           type: "PATCH",
         };
         API_CALL.sendRequest(URL, null, payload, "Vehicle Update Successfully");
+        setIsEdit(false);
         setFlag(!flag);
       } else {
         API_CALL.sendRequest(
@@ -128,7 +130,11 @@ const Vehicals = () => {
         <Button
           color="primary"
           className="btn btn-primary waves-effect waves-light mb-3"
-          onClick={() => setShowModel(true)}
+          onClick={() => {
+            setShowModel(true);
+            setIsEdit(false);
+            setActionData({});
+          }}
         >
           Add Vehicle
         </Button>
@@ -150,6 +156,7 @@ const Vehicals = () => {
         data={CONSTANT.FORM_FIELDS.VEHICLES}
         defaultData={actionData}
         formData={false}
+        isEdit={isEdit}
       />
       {confirm_both ? (
         <SweetAlert

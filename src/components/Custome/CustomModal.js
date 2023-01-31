@@ -14,9 +14,11 @@ const CustomModal = (props) => {
     onSubmit,
     defaultData,
     formData,
+    isEdit,
   } = props;
   const [inputData, setInputData] = useState({});
   const [selectedValue, setSelectedValue] = useState({});
+  const [isChange, setIsChange] = useState(false);
 
   const onChangeInput = (e) => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
@@ -24,6 +26,7 @@ const CustomModal = (props) => {
   const onSelectValue = (selected, key) => {
     setSelectedValue({ ...selectedValue, [key]: selected });
     setInputData({ ...inputData, [key]: selected.value });
+    setIsChange(true);
   };
   const onChangeFileValue = (e) => {
     setInputData({ ...inputData, [e.target.name]: e.target.files[0] });
@@ -40,6 +43,13 @@ const CustomModal = (props) => {
       onSubmit(inputData);
     }
     close();
+  };
+
+  const onCloseModal = () => {
+    close();
+    setInputData({});
+    setIsChange(false);
+    setSelectedValue({});
   };
 
   return (
@@ -105,11 +115,22 @@ const CustomModal = (props) => {
                             </div>
                           );
                         } else if (fieldName.type === "SingleSelect") {
+                          const OldValue = isEdit
+                            ? defaultData[fieldName?.name]
+                            : null;
                           return (
                             <div key={index} className="mb-4">
                               <Label>{fieldName?.label}</Label>
                               <Select
-                                value={selectedValue[fieldName?.name]}
+                                value={
+                                  isEdit
+                                    ? !isChange
+                                      ? fieldName?.options.filter(
+                                          (e) => e.value === OldValue
+                                        )
+                                      : selectedValue[fieldName?.name]
+                                    : selectedValue[fieldName?.name]
+                                }
                                 options={fieldName?.options}
                                 selected={"clientName" == fieldName?.name}
                                 classNamePrefix="select2-selection"
@@ -186,7 +207,7 @@ const CustomModal = (props) => {
             <div className="modal-footer">
               <button
                 type="button"
-                onClick={close}
+                onClick={onCloseModal}
                 className="btn btn-primary waves-effect"
                 data-dismiss="modal"
               >

@@ -18,6 +18,7 @@ const Clients = () => {
   const [confirm_both, setconfirm_both] = useState(false);
   const [actionData, setActionData] = useState({});
   const [password, setPassword] = useState();
+  const [isEdit, setIsEdit] = useState(false);
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -65,6 +66,7 @@ const Clients = () => {
           type: "PATCH",
         };
         API_CALL.sendRequest(URL, null, payload, "Client Update Successfully");
+        setIsEdit(false);
         setFlag(!flag);
       } else {
         API_CALL.sendRequest(
@@ -96,9 +98,13 @@ const Clients = () => {
     setActionData(clientData);
     setPassword(clientData?.password);
     setShowModel(true);
+    setIsEdit(true);
   };
 
-  delete actionData["password"];
+  actionData &&
+    actionData !== "null" &&
+    actionData !== "undefined" &&
+    delete actionData["password"];
 
   return (
     <React.Fragment>
@@ -123,6 +129,7 @@ const Clients = () => {
           className="btn btn-primary waves-effect waves-light mb-3"
           onClick={() => {
             setShowModel(true);
+            setIsEdit(false);
             setActionData();
           }}
         >
@@ -143,6 +150,7 @@ const Clients = () => {
         data={CONSTANT.FORM_FIELDS.CLIENT}
         defaultData={actionData}
         filedata={false}
+        isEdit={isEdit}
       />
 
       {confirm_both ? (
