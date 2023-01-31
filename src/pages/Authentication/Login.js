@@ -20,19 +20,18 @@ import CONSTANT from "../Utility/constnt";
 import useHttp from "../../components/Hook/Use-http";
 
 const Login = (props) => {
-  const [loginData, setLoginData] = useState({});
   const API_CALL = useHttp();
 
-  const onChangeInput = (e) => {
-    setLoginData({ ...loginData, [e.target.name]: e.target.value });
-  };
-
-  const onUserLogin = () => {
+  const onUserLogin = (e) => {
     (async () => {
+      const payload = {
+        email: e.target.email.value,
+        password: e.target.password.value,
+      };
       API_CALL.sendRequest(
         CONSTANT.API.adminLogin,
         onSetLoginData,
-        loginData,
+        payload,
         "Login Successfully"
       );
     })();
@@ -78,12 +77,10 @@ const Login = (props) => {
                         <AvField
                           name="email"
                           label="Email"
-                          value="admin@themesbrand.com"
                           className="form-control"
                           placeholder="Enter email"
                           type="email"
                           required
-                          onChange={onChangeInput}
                         />
                       </div>
 
@@ -91,11 +88,9 @@ const Login = (props) => {
                         <AvField
                           name="password"
                           label="Password"
-                          value="123456"
                           type="password"
                           required
                           placeholder="Enter Password"
-                          onChange={onChangeInput}
                         />
                       </div>
 
@@ -104,6 +99,7 @@ const Login = (props) => {
                           type="checkbox"
                           className="form-check-input"
                           id="customControlInline"
+                          required
                         />
                         <label
                           className="form-check-label"
