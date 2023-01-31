@@ -17,7 +17,7 @@
 }
 
 .vehicleCard_Text {
-  color: #aaaaaa;
+  color: #848181;
 }
 
 .vehicleCard .truckImage {
@@ -25,7 +25,7 @@
   right: 0;
   top: 30%;
   text-align: end;
-  opacity: 0.6;
+  opacity: 1;
 }
 
 /* For Hover */
@@ -34,6 +34,14 @@
   font-size: 12px;
   font-weight: 600;
   color: #44eb0a;
+}
+.vehicleCard .card_Header_arrow_false img {
+  rotate: rotate(180deg);
+}
+.vehicleCard .card_Header_arrow_false p {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fe0101;
 }
 .vehicleCard:hover {
   color: #ffff;

@@ -8,6 +8,7 @@ import { withTranslation } from "react-i18next";
 import SidebarContent from "./SidebarContent";
 
 import avatar2 from "../../assets/images/users/avatar-2.jpg";
+import { MyData } from "../../pages/Utility/constnt";
 
 const Sidebar = (props) => {
   return (
@@ -25,7 +26,7 @@ const Sidebar = (props) => {
 
             <div className="mt-3">
               <Link to="#" className="text-dark fw-medium font-size-16">
-                Admin Name{" "}
+                {MyData.data.name}
               </Link>
               <p className="text-body mt-1 mb-0 font-size-13">Admin Company</p>
             </div>

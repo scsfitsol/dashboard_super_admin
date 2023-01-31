@@ -15,6 +15,7 @@ import { withRouter, Link } from "react-router-dom";
 
 // users
 import user4 from "../../../assets/images/users/avatar-4.jpg";
+import { MyData } from "../../../pages/Utility/constnt";
 
 const ProfileMenu = (props) => {
   // Declare a new state variable, which we'll call "menu"
@@ -54,7 +55,9 @@ const ProfileMenu = (props) => {
             src={user4}
             alt="Header Avatar"
           />{" "}
-          <span className="d-none d-xl-inline-block ms-1">{username}</span>{" "}
+          <span className="d-none d-xl-inline-block ms-1">
+            {MyData.data.name}
+          </span>{" "}
           <i className="mdi mdi-chevron-down d-none d-xl-inline-block"></i>{" "}
         </DropdownToggle>
         <DropdownMenu className="dropdown-menu-end">

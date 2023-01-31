@@ -15,6 +15,7 @@ import Breadcrumb from "../../components/Common/Breadcrumb";
 import avatar from "../../assets/images/users/avatar-1.jpg";
 // actions
 import { editProfile, resetProfileFlag } from "../../store/actions";
+import { MyData } from "../Utility/constnt";
 
 const UserProfile = (props) => {
   const [email, setemail] = useState("");
@@ -70,11 +71,11 @@ const UserProfile = (props) => {
                       className="avatar-md rounded-circle img-thumbnail"
                     />
                   </div>
-                  <div className="flex-1 align-self-center">
+                  <div className="flex-1 align-self-center ms-3">
                     <div className="text-muted">
-                      <h5>{name}</h5>
-                      <p className="mb-1">{email}</p>
-                      <p className="mb-0">Id no: #{idx}</p>
+                      <h5>{MyData?.data?.name}</h5>
+                      <p className="mb-1">{MyData?.data?.email}</p>
+                      <p className="mb-0">Id no: {MyData?.data?.id}</p>
                     </div>
                   </div>
                 </div>
@@ -95,9 +96,9 @@ const UserProfile = (props) => {
             >
               <div className="form-group">
                 <AvField
-                  name="username"
-                  label="User Name"
-                  value={name}
+                  name="email"
+                  label="User Email"
+                  value={MyData?.data?.email}
                   className="form-control"
                   placeholder="Enter User Name"
                   type="text"

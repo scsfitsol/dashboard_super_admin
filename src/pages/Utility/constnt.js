@@ -27,6 +27,10 @@ export const EditButton = ({ onClick = {} }) => {
   );
 };
 
+export const MyData = {
+  data: {},
+};
+
 export const Category = {
   1: "Pendding",
   2: "On Going",
@@ -66,6 +70,10 @@ const CONSTANT = {
     adminLogin: {
       endpoint: `/admin/login`,
       type: "POST",
+    },
+    getMe: {
+      endpoint: `/admin/getMe`,
+      type: "GET",
     },
     getAllClient: {
       endpoint: `/client`,
@@ -118,6 +126,10 @@ const CONSTANT = {
     addPlant: {
       endpoint: `/plant`,
       type: "POST",
+    },
+    getAnalysis: {
+      endpoint: `/analysis`,
+      type: "GET",
     },
   },
 
@@ -430,11 +442,6 @@ const CONSTANT = {
         sort: "asc",
       },
       {
-        label: "Load vehicle carrying",
-        field: "loadVehicleCarrying",
-        sort: "asc",
-      },
-      {
         label: "Targetted Date & Time",
         field: "targetedDateAndTime",
         sort: "asc",
@@ -571,8 +578,8 @@ const CONSTANT = {
         placeholder: "Fuel Type",
         type: "SingleSelect",
         options: [
-          { label: "Petrol", value: "petrol" },
-          { label: "Diesel", value: "diesel" },
+          { label: "Petrol", value: "Petrol" },
+          { label: "Diesel", value: "Diesel" },
           { label: "CNG", value: "CNG" },
           { label: "PLG", value: "PLG" },
         ],
@@ -589,8 +596,8 @@ const CONSTANT = {
         placeholder: "Allocate",
         type: "SingleSelect",
         options: [
-          { label: "Allocated", value: "true" },
-          { label: "Not Allocated", value: "false" },
+          { label: "Allocated", value: true },
+          { label: "Not Allocated", value: false },
         ],
       },
       {
@@ -653,7 +660,12 @@ const CONSTANT = {
         name: "status",
         label: "Status",
         placeholder: "Status",
-        type: "text",
+        type: "SingleSelect",
+        options: [
+          { label: "Pendding", value: 1 },
+          { label: "On Going", value: 2 },
+          { label: "Completed", value: 3 },
+        ],
       },
       {
         name: "distanceOfTrip",
