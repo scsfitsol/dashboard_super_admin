@@ -16,6 +16,7 @@ const Plants = () => {
   const [actionData, setActionData] = useState({});
   const [confirm_both, setconfirm_both] = useState(false);
   const [flag, setFlag] = useState(true);
+  const [isEdit, setIsEdit] = useState(false);
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -49,6 +50,7 @@ const Plants = () => {
               <EditButton
                 onClick={() => {
                   onEditPlan(plantData);
+                  setIsEdit(true);
                 }}
               />
               <DeleteButton
@@ -70,6 +72,7 @@ const Plants = () => {
   const onEditPlan = (plantData) => {
     setActionData(plantData);
     setShowModel(true);
+    setIsEdit(true);
   };
 
   const onDeleteDriver = () => {
@@ -77,8 +80,12 @@ const Plants = () => {
       endpoint: `/plant/${actionData?.id}`,
       type: "DELETE",
     };
-    API_CALL.sendRequest(URL, null, null, "Delete Successfully");
-    setFlag(!flag);
+    API_CALL.sendRequest(
+      URL,
+      () => setFlag((previos) => !previos),
+      null,
+      "Delete Successfully"
+    );
   };
 
   const onSubmitForm = (payload) => {
@@ -88,16 +95,20 @@ const Plants = () => {
           endpoint: `/plant/${actionData?.id}`,
           type: "PATCH",
         };
-        API_CALL.sendRequest(URL, null, payload, "Plant Update Successfully");
-        setFlag(!flag);
+        API_CALL.sendRequest(
+          URL,
+          () => setFlag((previos) => !previos),
+          payload,
+          "Plant Update Successfully"
+        );
+        setIsEdit(false);
       } else {
         API_CALL.sendRequest(
           CONSTANT.API.addPlant,
-          null,
+          () => setFlag((previos) => !previos),
           payload,
           "Plant Add Successfully"
         );
-        setFlag(!flag);
       }
     })();
   };
@@ -123,7 +134,11 @@ const Plants = () => {
         <Button
           color="primary"
           className="btn btn-primary waves-effect waves-light mb-3"
-          onClick={() => setShowModel(true)}
+          onClick={() => {
+            setShowModel(true);
+            setIsEdit(false);
+            setActionData({});
+          }}
         >
           <i className="bx bx-plus"></i> &nbsp; Add Plant
         </Button>
@@ -141,6 +156,7 @@ const Plants = () => {
         data={CONSTANT.FORM_FIELDS.PLANT}
         defaultData={actionData}
         formData={false}
+        isEdit={isEdit}
       />
       {confirm_both ? (
         <SweetAlert

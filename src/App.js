@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Switch, BrowserRouter as Router } from "react-router-dom";
 import { connect } from "react-redux";
@@ -19,12 +19,27 @@ import NonAuthLayout from "./components/NonAuthLayout";
 import "./assets/scss/theme.scss";
 import fakeBackend from "./helpers/AuthType/fakeBackend";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "./assets/css/ReactToastify.css";
+import CONSTANT, { MyData } from "./pages/Utility/constnt";
+import useHttp from "./components/Hook/Use-http";
 
 // Activating fake backend
 fakeBackend();
 
 const App = (props) => {
+  const API_CALL = useHttp();
+
+  //Get My Data
+  useEffect(() => {
+    (async () => {
+      API_CALL.sendRequest(CONSTANT.API.getMe, getMeDataHandler);
+    })();
+  }, []);
+
+  const getMeDataHandler = (res) => {
+    MyData.data = res.data[0];
+  };
+
   function getLayout() {
     let layoutCls = VerticalLayout;
 

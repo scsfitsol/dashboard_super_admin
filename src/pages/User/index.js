@@ -39,7 +39,7 @@ const Admin = () => {
         modalType="formModal"
         show={showModel}
         close={() => setShowModel(false)}
-        modalTitle="Add Client"
+        modalTitle="Add User"
         data={CONSTANT.FORM_FIELDS.ADMIN}
       />
     </React.Fragment>

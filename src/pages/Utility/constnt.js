@@ -27,6 +27,10 @@ export const EditButton = ({ onClick = {} }) => {
   );
 };
 
+export const MyData = {
+  data: {},
+};
+
 export const Category = {
   1: "Pendding",
   2: "On Going",
@@ -62,10 +66,19 @@ export const DeleteButton = ({ onClick = {} }) => {
 
 const CONSTANT = {
   BASE_URL: process.env.REACT_APP_BASE_URL,
+  // BASE_URL: "https://41d2-43-242-116-53.ngrok.io",
   API: {
     adminLogin: {
       endpoint: `/admin/login`,
       type: "POST",
+    },
+    adminUpdate: {
+      endpoint: `/admin/updateMe`,
+      type: "PATCH",
+    },
+    getMe: {
+      endpoint: `/admin/getMe`,
+      type: "GET",
     },
     getAllClient: {
       endpoint: `/client`,
@@ -118,6 +131,10 @@ const CONSTANT = {
     addPlant: {
       endpoint: `/plant`,
       type: "POST",
+    },
+    getAnalysis: {
+      endpoint: `/analysis`,
+      type: "GET",
     },
   },
 
@@ -430,11 +447,6 @@ const CONSTANT = {
         sort: "asc",
       },
       {
-        label: "Load vehicle carrying",
-        field: "loadVehicleCarrying",
-        sort: "asc",
-      },
-      {
         label: "Targetted Date & Time",
         field: "targetedDateAndTime",
         sort: "asc",
@@ -469,17 +481,26 @@ const CONSTANT = {
         label: "Name",
         placeholder: "Name",
         type: "text",
+        required: true,
       },
       {
         name: "mobile",
         label: "Mobile Number",
         placeholder: "Mobile Number",
         type: "text",
+        required: false,
       },
+      // {
+      //   name: "profilePic",
+      //   label: "Profile Image",
+      //   type: "file",
+      //   required: false,
+      // },
       {
         name: "drivingLicense",
         label: "Driving License",
         type: "file",
+        required: true,
       },
     ],
     CLIENT: [
@@ -488,20 +509,20 @@ const CONSTANT = {
         label: "Name",
         placeholder: "Name",
         type: "text",
-        validate: true,
+        required: true,
       },
       {
         name: "email",
         label: "Client Email",
         placeholder: "Client Email",
         type: "text",
+        required: false,
       },
       {
         name: "password",
         label: "Password",
         placeholder: "Password",
         type: "text",
-        validate: true,
       },
     ],
     PLANT: [
@@ -510,32 +531,54 @@ const CONSTANT = {
         label: "Unit Name",
         placeholder: "Unit Name",
         type: "text",
+        required: true,
       },
       {
         name: "location",
         label: "Location",
         placeholder: "Location",
         type: "text",
+        required: true,
       },
       {
         name: "GST",
         label: "GST Number",
         placeholder: "GST Number",
         type: "text",
+        required: true,
       },
     ],
-    ADMIN: [
+    ADMIN_EDIT: [
       {
-        name: "emailId",
-        label: "Email ID",
-        placeholder: "Email ID",
+        name: "name",
+        label: "Name",
+        placeholder: "Name",
         type: "text",
+        required: false,
       },
       {
-        name: "password",
-        label: "Password",
-        placeholder: "Password",
-        type: "text",
+        name: "panCard",
+        label: "Pan Card",
+        type: "file",
+        required: false,
+      },
+      {
+        name: "aadharCard",
+        label: "Adhara Card",
+        type: "file",
+        required: false,
+      },
+      {
+        name: "anyOtherCompanySpecificId",
+        label: "Other Company Specific Id",
+        type: "file",
+        required: false,
+      },
+      {
+        name: "profilePic",
+        label: "Profile Pic",
+        type: "file",
+        required: false,
       },
     ],
     TRANSPORTER: [
@@ -544,12 +587,14 @@ const CONSTANT = {
         label: "Name",
         placeholder: "Name",
         type: "text",
+        required: true,
       },
       {
         name: "gstNumber",
         label: "GST Number",
         placeholder: "GST Number",
         type: "text",
+        required: true,
       },
     ],
     VEHICLES: [
@@ -558,21 +603,24 @@ const CONSTANT = {
         label: "Registration Number",
         placeholder: "Registration Number",
         type: "text",
+        required: true,
       },
       {
         name: "capacity",
         label: "Capacity",
         placeholder: "Capacity",
         type: "text",
+        required: true,
       },
       {
         name: "fuelType",
         label: "Fuel Type",
         placeholder: "Fuel Type",
         type: "SingleSelect",
+        required: true,
         options: [
-          { label: "Petrol", value: "petrol" },
-          { label: "Diesel", value: "diesel" },
+          { label: "Petrol", value: "Petrol" },
+          { label: "Diesel", value: "Diesel" },
           { label: "CNG", value: "CNG" },
           { label: "PLG", value: "PLG" },
         ],
@@ -582,15 +630,17 @@ const CONSTANT = {
         label: "Manufacture",
         placeholder: "Manufacture",
         type: "text",
+        required: true,
       },
       {
         name: "allocate",
         label: "Allocate",
         placeholder: "Allocate",
         type: "SingleSelect",
+        required: true,
         options: [
-          { label: "Allocated", value: "true" },
-          { label: "Not Allocated", value: "false" },
+          { label: "Allocated", value: true },
+          { label: "Not Allocated", value: false },
         ],
       },
       {
@@ -598,6 +648,7 @@ const CONSTANT = {
         label: "Mileage",
         placeholder: "Mileage",
         type: "text",
+        required: true,
       },
     ],
     TRIP: [
@@ -606,66 +657,82 @@ const CONSTANT = {
         label: "Start Date",
         placeholder: "Start Date",
         type: "date",
+        required: false,
       },
       {
         name: "startTime",
         label: "Start Time",
         placeholder: "Start Time",
         type: "selectTime",
+        required: false,
       },
       {
         name: "sourceLocation",
         label: "Source Location",
         placeholder: "Source Location",
         type: "text",
+        required: false,
       },
       {
         name: "destinationLocation",
         label: "Destination Location",
         placeholder: "Destination Location",
         type: "text",
+        required: false,
       },
       {
         name: "completedDateAndTime",
         label: "Completed Date & Time",
         placeholder: "Completed Date & Time",
         type: "selectDate&Time",
+        required: false,
       },
       {
         name: "targetedDateAndTime",
         label: "targeted Date & Time",
         placeholder: "targeted Date & Time",
         type: "selectDate&Time",
+        required: false,
       },
       {
         name: "weight",
         label: "Weight",
         placeholder: "Weight",
         type: "text",
+        required: false,
       },
       {
         name: "targetedDate",
         label: "Targeted Date",
         placeholder: "Targeted Date",
         type: "date",
+        required: false,
       },
       {
         name: "status",
         label: "Status",
         placeholder: "Status",
-        type: "text",
+        type: "SingleSelect",
+        required: false,
+        options: [
+          { label: "Pendding", value: "1" },
+          { label: "On Going", value: "2" },
+          { label: "Completed", value: "3" },
+        ],
       },
       {
         name: "distanceOfTrip",
         label: "Distance Of Trip",
         placeholder: "Distance Of Trip",
         type: "text",
+        required: false,
       },
       {
         name: "fuelUserd",
         label: "Fuel Used",
         placeholder: "Fuel Used",
         type: "text",
+        required: false,
       },
     ],
   },

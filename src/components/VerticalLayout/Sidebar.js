@@ -8,6 +8,8 @@ import { withTranslation } from "react-i18next";
 import SidebarContent from "./SidebarContent";
 
 import avatar2 from "../../assets/images/users/avatar-2.jpg";
+import { MyData } from "../../pages/Utility/constnt";
+import defaultImage from "../../assets/images/UserImage.jpg";
 
 const Sidebar = (props) => {
   return (
@@ -17,7 +19,9 @@ const Sidebar = (props) => {
           <div className="user-wid text-center py-4">
             <div className="user-img">
               <img
-                src={avatar2}
+                src={
+                  MyData.data.profilePic ? MyData.data.profilePic : defaultImage
+                }
                 alt=""
                 className="avatar-md mx-auto rounded-circle"
               />
@@ -25,7 +29,7 @@ const Sidebar = (props) => {
 
             <div className="mt-3">
               <Link to="#" className="text-dark fw-medium font-size-16">
-                Admin Name{" "}
+                {MyData.data.name}
               </Link>
               <p className="text-body mt-1 mb-0 font-size-13">Admin Company</p>
             </div>

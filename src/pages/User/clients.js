@@ -18,6 +18,7 @@ const Clients = () => {
   const [confirm_both, setconfirm_both] = useState(false);
   const [actionData, setActionData] = useState({});
   const [password, setPassword] = useState();
+  const [isEdit, setIsEdit] = useState(false);
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -64,16 +65,20 @@ const Clients = () => {
           endpoint: `/client/${actionData?.id}/?organizationId=${actionData?.organizationId}`,
           type: "PATCH",
         };
-        API_CALL.sendRequest(URL, null, payload, "Client Update Successfully");
-        setFlag(!flag);
+        API_CALL.sendRequest(
+          URL,
+          () => setFlag((previos) => !previos),
+          payload,
+          "Client Update Successfully"
+        );
+        setIsEdit(false);
       } else {
         API_CALL.sendRequest(
           CONSTANT.API.addClient,
-          null,
+          () => setFlag((previos) => !previos),
           payload,
           "Client Add Successfully"
         );
-        setFlag(!flag);
       }
     })();
   };
@@ -88,17 +93,25 @@ const Clients = () => {
       endpoint: `/client/${actionData?.id}/?organizationId=${actionData?.organizationId}`,
       type: "DELETE",
     };
-    API_CALL.sendRequest(URL, null, null, "Delete Successfully");
-    setFlag(!flag);
+    API_CALL.sendRequest(
+      URL,
+      () => setFlag((previos) => !previos),
+      null,
+      "Delete Successfully"
+    );
   };
 
   const onEditClient = (clientData) => {
     setActionData(clientData);
     setPassword(clientData?.password);
     setShowModel(true);
+    setIsEdit(true);
   };
 
-  delete actionData["password"];
+  actionData &&
+    actionData !== "null" &&
+    actionData !== "undefined" &&
+    delete actionData["password"];
 
   return (
     <React.Fragment>
@@ -123,6 +136,7 @@ const Clients = () => {
           className="btn btn-primary waves-effect waves-light mb-3"
           onClick={() => {
             setShowModel(true);
+            setIsEdit(false);
             setActionData();
           }}
         >
@@ -143,6 +157,7 @@ const Clients = () => {
         data={CONSTANT.FORM_FIELDS.CLIENT}
         defaultData={actionData}
         filedata={false}
+        isEdit={isEdit}
       />
 
       {confirm_both ? (

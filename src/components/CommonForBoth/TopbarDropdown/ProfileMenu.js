@@ -6,6 +6,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
+import defaultImage from "../../../assets/images/UserImage.jpg";
 
 //i18n
 import { withTranslation } from "react-i18next";
@@ -15,6 +16,7 @@ import { withRouter, Link } from "react-router-dom";
 
 // users
 import user4 from "../../../assets/images/users/avatar-4.jpg";
+import { MyData } from "../../../pages/Utility/constnt";
 
 const ProfileMenu = (props) => {
   // Declare a new state variable, which we'll call "menu"
@@ -51,10 +53,12 @@ const ProfileMenu = (props) => {
         >
           <img
             className="rounded-circle header-profile-user"
-            src={user4}
+            src={MyData.data.profilePic ? MyData.data.profilePic : defaultImage}
             alt="Header Avatar"
           />{" "}
-          <span className="d-none d-xl-inline-block ms-1">{username}</span>{" "}
+          <span className="d-none d-xl-inline-block ms-1">
+            {MyData.data.name}
+          </span>{" "}
           <i className="mdi mdi-chevron-down d-none d-xl-inline-block"></i>{" "}
         </DropdownToggle>
         <DropdownMenu className="dropdown-menu-end">

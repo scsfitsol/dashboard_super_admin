@@ -17,6 +17,7 @@ const Transporter = () => {
   const [actionData, setActionData] = useState({});
   const [confirm_both, setconfirm_both] = useState(false);
   const [flag, setFlag] = useState(true);
+  const [isEdit, setIsEdit] = useState(false);
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -62,6 +63,7 @@ const Transporter = () => {
   const onEditTransporter = (transporterData) => {
     setActionData(transporterData);
     setShowModel(true);
+    setIsEdit(true);
   };
 
   const onDeleteDriver = () => {
@@ -69,8 +71,13 @@ const Transporter = () => {
       endpoint: `/transporter/${actionData?.id}`,
       type: "DELETE",
     };
-    API_CALL.sendRequest(URL, null, null, "Delete Successfully");
-    setFlag(!flag);
+    API_CALL.sendRequest(
+      URL,
+      () => setFlag((previos) => !previos),
+      null,
+      "Delete Successfully"
+    );
+    setIsEdit(false);
   };
 
   const onSubmitForm = (payload) => {
@@ -82,19 +89,18 @@ const Transporter = () => {
         };
         API_CALL.sendRequest(
           URL,
-          null,
+          () => setFlag((previos) => !previos),
           payload,
           "Transporter Update Successfully"
         );
-        setFlag(!flag);
+        setIsEdit(false);
       } else {
         API_CALL.sendRequest(
           CONSTANT.API.addTransporter,
-          null,
+          () => setFlag((previos) => !previos),
           payload,
           "Transporter Add Successfully"
         );
-        setFlag(!flag);
       }
     })();
   };
@@ -120,7 +126,11 @@ const Transporter = () => {
         <Button
           color="primary"
           className="btn btn-primary waves-effect waves-light mb-3"
-          onClick={() => setShowModel(true)}
+          onClick={() => {
+            setShowModel(true);
+            setIsEdit(false);
+            setActionData({});
+          }}
         >
           Add Transporter
         </Button>
@@ -136,11 +146,12 @@ const Transporter = () => {
         modalType="formModal"
         show={showModel}
         close={() => setShowModel(false)}
-        modalTitle="Add Client"
+        modalTitle="Add Transporter"
         onSubmit={(data) => onSubmitForm(data)}
         data={CONSTANT.FORM_FIELDS.TRANSPORTER}
         defaultData={actionData}
         formData={false}
+        isEdit={isEdit}
       />
       {confirm_both ? (
         <SweetAlert

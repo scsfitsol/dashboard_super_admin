@@ -18,6 +18,7 @@ const Trip = () => {
   const [actionData, setActionData] = useState({});
   const [confirm_both, setconfirm_both] = useState(false);
   const [flag, setFlag] = useState(true);
+  const [isEdit, setIsEdit] = useState(false);
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -30,6 +31,7 @@ const Trip = () => {
       API_CALL.sendRequest(CONSTANT.API.getAllDriver, driverDataHandler);
       API_CALL.sendRequest(CONSTANT.API.getAllClient, clientDataHandler);
       API_CALL.sendRequest(CONSTANT.API.getAllVehicle, vehiclesDataHandler);
+      API_CALL.sendRequest(CONSTANT.API.getAllPlant, plantDataHandler);
     })();
   }, []);
 
@@ -77,6 +79,17 @@ const Trip = () => {
       }),
     });
   };
+  const plantDataHandler = (res) => {
+    CONSTANT.FORM_FIELDS.TRIP.push({
+      name: "plantId",
+      label: "Plant Name",
+      placeholder: "Plant Name",
+      type: "SingleSelect",
+      options: res?.data.map((data) => {
+        return { label: data.unitName, value: data.id };
+      }),
+    });
+  };
 
   const tripDataHandler = (res) => {
     setTripData(
@@ -85,15 +98,18 @@ const Trip = () => {
           ...tripData,
           no: index + 1,
           clientName: tripData?.client?.name,
+          transporterName: tripData?.transporter?.transporterName,
           driverName: tripData?.driver?.name,
           driverPhoneNumber: tripData?.driver?.mobile,
           vehicleNumber: tripData?.vehicle?.registrationNumber,
+          plantName: tripData?.plant?.unitName,
           status: Category[tripData?.status],
           action: (
             <>
               <EditButton
                 onClick={() => {
                   onEditTrip(tripData);
+                  setIsEdit(true);
                 }}
               />
               <DeleteButton
@@ -116,6 +132,7 @@ const Trip = () => {
   const onEditTrip = (tripData) => {
     setActionData(tripData);
     setShowModel(true);
+    setIsEdit(true);
   };
 
   const onDeleteDriver = () => {
@@ -123,8 +140,12 @@ const Trip = () => {
       endpoint: `/trip/${actionData?.id}`,
       type: "DELETE",
     };
-    API_CALL.sendRequest(URL, null, null, "Delete Successfully");
-    setFlag(!flag);
+    API_CALL.sendRequest(
+      URL,
+      () => setFlag((previos) => !previos),
+      null,
+      "Delete Successfully"
+    );
   };
 
   const onSubmitForm = (payload) => {
@@ -134,16 +155,20 @@ const Trip = () => {
           endpoint: `/trip/${actionData?.id}`,
           type: "PATCH",
         };
-        API_CALL.sendRequest(URL, null, payload, "Driver Update Successfully");
-        setFlag(!flag);
+        API_CALL.sendRequest(
+          URL,
+          () => setFlag((previos) => !previos),
+          payload,
+          "Driver Update Successfully"
+        );
+        setIsEdit(false);
       } else {
         API_CALL.sendRequest(
           CONSTANT.API.addTrip,
-          null,
+          () => setFlag((previos) => !previos),
           payload,
           "Driver Add Successfully"
         );
-        setFlag(!flag);
       }
     })();
   };
@@ -169,7 +194,11 @@ const Trip = () => {
         <Button
           color="primary"
           className="btn btn-primary waves-effect waves-light mb-3"
-          onClick={() => setShowModel(true)}
+          onClick={() => {
+            setShowModel(true);
+            setIsEdit(false);
+            setActionData({});
+          }}
         >
           Add Trip
         </Button>
@@ -187,6 +216,7 @@ const Trip = () => {
         data={CONSTANT.FORM_FIELDS.TRIP}
         defaultData={actionData}
         formData={false}
+        isEdit={isEdit}
       />
       {confirm_both ? (
         <SweetAlert
