@@ -28,6 +28,7 @@ import LocationIconSvg from "./SVG/LocationIconSvg";
 import CONSTANT from "../Utility/constnt";
 import useHttp from "../../components/Hook/Use-http";
 import moment from "moment/moment";
+import defaultImage from "../../assets/images/UserImage.jpg";
 
 const LoadingContainer = () => <div>Loading...</div>;
 
@@ -358,7 +359,7 @@ const Traking = (props) => {
               <div className="d-flex align-items-start">
                 <div className="me-3 align-self-center">
                   <img
-                    src={modalData?.img}
+                    src={modalData?.img ? modalData?.img : defaultImage}
                     alt=""
                     className="avatar-sm rounded-circle"
                   />
