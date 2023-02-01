@@ -9,6 +9,7 @@ import SidebarContent from "./SidebarContent";
 
 import avatar2 from "../../assets/images/users/avatar-2.jpg";
 import { MyData } from "../../pages/Utility/constnt";
+import defaultImage from "../../assets/images/UserImage.jpg";
 
 const Sidebar = (props) => {
   return (
@@ -18,7 +19,9 @@ const Sidebar = (props) => {
           <div className="user-wid text-center py-4">
             <div className="user-img">
               <img
-                src={avatar2}
+                src={
+                  MyData.data.profilePic ? MyData.data.profilePic : defaultImage
+                }
                 alt=""
                 className="avatar-md mx-auto rounded-circle"
               />

@@ -83,8 +83,12 @@ const Vehicals = () => {
       endpoint: `/vehicle/${actionData?.id}`,
       type: "DELETE",
     };
-    API_CALL.sendRequest(URL, null, null, "Delete Successfully");
-    setFlag(!flag);
+    API_CALL.sendRequest(
+      URL,
+      () => setFlag((previos) => !previos),
+      null,
+      "Delete Successfully"
+    );
   };
 
   const onSubmitForm = (payload) => {
@@ -94,17 +98,20 @@ const Vehicals = () => {
           endpoint: `/vehicle/${actionData?.id}`,
           type: "PATCH",
         };
-        API_CALL.sendRequest(URL, null, payload, "Vehicle Update Successfully");
+        API_CALL.sendRequest(
+          URL,
+          () => setFlag((previos) => !previos),
+          payload,
+          "Vehicle Update Successfully"
+        );
         setIsEdit(false);
-        setFlag(!flag);
       } else {
         API_CALL.sendRequest(
           CONSTANT.API.addVehicle,
-          null,
+          () => setFlag((previos) => !previos),
           payload,
           "Vehicle Add Successfully"
         );
-        setFlag(!flag);
       }
     })();
   };

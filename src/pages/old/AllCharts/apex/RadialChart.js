@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
+import useHttp from "../../../../components/Hook/Use-http";
+import CONSTANT from "../../../Utility/constnt";
 
 const RadialChart = () => {
   const series = [44, 55, 67];
+  const API_CALL = useHttp();
+
+  useEffect(() => {
+    (async () => {
+      API_CALL.sendRequest(CONSTANT.API.getAnalysis, analysisDataHandler);
+    })();
+  }, []);
+
+  const analysisDataHandler = (res) => {
+    console.log("getAnalysis", res);
+  };
+
   const options = {
     plotOptions: {
       radialBar: {

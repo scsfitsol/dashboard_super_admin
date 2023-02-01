@@ -51,7 +51,6 @@ const Report = () => {
   }, []);
 
   const analysisDataHandler = (res) => {
-    console.log(res?.data);
     setAnalysisData(res?.data);
   };
 

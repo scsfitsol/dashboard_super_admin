@@ -65,17 +65,20 @@ const Clients = () => {
           endpoint: `/client/${actionData?.id}/?organizationId=${actionData?.organizationId}`,
           type: "PATCH",
         };
-        API_CALL.sendRequest(URL, null, payload, "Client Update Successfully");
+        API_CALL.sendRequest(
+          URL,
+          () => setFlag((previos) => !previos),
+          payload,
+          "Client Update Successfully"
+        );
         setIsEdit(false);
-        setFlag(!flag);
       } else {
         API_CALL.sendRequest(
           CONSTANT.API.addClient,
-          null,
+          () => setFlag((previos) => !previos),
           payload,
           "Client Add Successfully"
         );
-        setFlag(!flag);
       }
     })();
   };
@@ -90,8 +93,12 @@ const Clients = () => {
       endpoint: `/client/${actionData?.id}/?organizationId=${actionData?.organizationId}`,
       type: "DELETE",
     };
-    API_CALL.sendRequest(URL, null, null, "Delete Successfully");
-    setFlag(!flag);
+    API_CALL.sendRequest(
+      URL,
+      () => setFlag((previos) => !previos),
+      null,
+      "Delete Successfully"
+    );
   };
 
   const onEditClient = (clientData) => {

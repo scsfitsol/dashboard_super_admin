@@ -71,9 +71,13 @@ const Transporter = () => {
       endpoint: `/transporter/${actionData?.id}`,
       type: "DELETE",
     };
-    API_CALL.sendRequest(URL, null, null, "Delete Successfully");
+    API_CALL.sendRequest(
+      URL,
+      () => setFlag((previos) => !previos),
+      null,
+      "Delete Successfully"
+    );
     setIsEdit(false);
-    setFlag(!flag);
   };
 
   const onSubmitForm = (payload) => {
@@ -85,20 +89,18 @@ const Transporter = () => {
         };
         API_CALL.sendRequest(
           URL,
-          null,
+          () => setFlag((previos) => !previos),
           payload,
           "Transporter Update Successfully"
         );
         setIsEdit(false);
-        setFlag(!flag);
       } else {
         API_CALL.sendRequest(
           CONSTANT.API.addTransporter,
-          null,
+          () => setFlag((previos) => !previos),
           payload,
           "Transporter Add Successfully"
         );
-        setFlag(!flag);
       }
     })();
   };
@@ -144,7 +146,7 @@ const Transporter = () => {
         modalType="formModal"
         show={showModel}
         close={() => setShowModel(false)}
-        modalTitle="Add Client"
+        modalTitle="Add Transporter"
         onSubmit={(data) => onSubmitForm(data)}
         data={CONSTANT.FORM_FIELDS.TRANSPORTER}
         defaultData={actionData}

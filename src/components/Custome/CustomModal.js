@@ -1,8 +1,6 @@
-import { AvField, AvForm } from "availity-reactstrap-validation";
 import React, { useState } from "react";
-import { Col, Label, Modal, Row, InputGroup, Input } from "reactstrap";
+import { Col, Label, Modal, Row, Input } from "reactstrap";
 import Select from "react-select";
-import Flatpickr from "react-flatpickr";
 
 const CustomModal = (props) => {
   const {
@@ -62,7 +60,7 @@ const CustomModal = (props) => {
             </div>
 
             <div>
-              <AvForm
+              <form
                 className="needs-validation"
                 onSubmit={onSubmitForm}
                 style={{
@@ -84,9 +82,10 @@ const CustomModal = (props) => {
                               <Label htmlFor="validationCustom01">
                                 {fieldName?.label}
                               </Label>
-                              <AvField
+                              <input
+                                autoComplete="no"
                                 name={fieldName?.name}
-                                value={
+                                defaultValue={
                                   defaultData &&
                                   defaultData !== "null" &&
                                   defaultData !== "undefined" &&
@@ -96,19 +95,8 @@ const CustomModal = (props) => {
                                 type={
                                   fieldName?.type ? fieldName?.type : "text"
                                 }
-                                errorMessage={
-                                  fieldName?.errorMessage
-                                    ? fieldName?.errorMessage
-                                    : ""
-                                }
                                 className="form-control"
-                                validate={{
-                                  required: {
-                                    value: fieldName?.validate
-                                      ? fieldName?.validate
-                                      : false,
-                                  },
-                                }}
+                                required={fieldName?.required}
                                 id={"validationCustom" + index}
                                 onChange={onChangeInput}
                               />
@@ -137,6 +125,7 @@ const CustomModal = (props) => {
                                 onChange={(selected) =>
                                   onSelectValue(selected, fieldName?.name)
                                 }
+                                rules={{ required: fieldName?.required }}
                               />
                             </div>
                           );
@@ -151,6 +140,7 @@ const CustomModal = (props) => {
                                 defaultValue="13:45:00"
                                 id="example-time-input"
                                 onChange={onChangeInput}
+                                required={fieldName?.required}
                               />
                             </div>
                           );
@@ -165,6 +155,7 @@ const CustomModal = (props) => {
                                 defaultValue="13:45:00"
                                 id="example-time-input"
                                 onChange={onChangeInput}
+                                required={fieldName?.required}
                               />
                             </div>
                           );
@@ -179,6 +170,7 @@ const CustomModal = (props) => {
                                 defaultValue="2019-08-19T13:45:00"
                                 id="example-datetime-local-input"
                                 onChange={onChangeInput}
+                                required={fieldName?.required}
                               />
                             </div>
                           );
@@ -191,6 +183,7 @@ const CustomModal = (props) => {
                                 className="form-control"
                                 name={fieldName?.name}
                                 onChange={onChangeFileValue}
+                                required={fieldName?.required}
                               />
                             </div>
                           );
@@ -201,25 +194,23 @@ const CustomModal = (props) => {
                     </div>
                   </Col>
                 </Row>
-              </AvForm>
-            </div>
-
-            <div className="modal-footer">
-              <button
-                type="button"
-                onClick={onCloseModal}
-                className="btn btn-primary waves-effect"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="submit"
-                className="btn btn-primary waves-effect waves-light"
-                onClick={onSubmitForm}
-              >
-                Submit
-              </button>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    onClick={onCloseModal}
+                    className="btn btn-primary waves-effect"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn btn-primary waves-effect waves-light"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
             </div>
           </Modal>
         )}

@@ -6,6 +6,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
+import defaultImage from "../../../assets/images/UserImage.jpg";
 
 //i18n
 import { withTranslation } from "react-i18next";
@@ -52,7 +53,7 @@ const ProfileMenu = (props) => {
         >
           <img
             className="rounded-circle header-profile-user"
-            src={user4}
+            src={MyData.data.profilePic ? MyData.data.profilePic : defaultImage}
             alt="Header Avatar"
           />{" "}
           <span className="d-none d-xl-inline-block ms-1">

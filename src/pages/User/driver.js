@@ -67,8 +67,12 @@ const Driver = () => {
       endpoint: `/driver/${actionData?.id}`,
       type: "DELETE",
     };
-    API_CALL.sendRequest(URL, null, null, "Delete Successfully");
-    setFlag(!flag);
+    API_CALL.sendRequest(
+      URL,
+      () => setFlag((previos) => !previos),
+      null,
+      "Delete Successfully"
+    );
   };
 
   const onSubmitForm = (payload) => {
@@ -78,17 +82,20 @@ const Driver = () => {
           endpoint: `/driver/${actionData?.id}`,
           type: "PATCH",
         };
-        API_CALL.sendRequest(URL, null, payload, "Driver Update Successfully");
+        API_CALL.sendRequest(
+          URL,
+          () => setFlag((previos) => !previos),
+          payload,
+          "Driver Update Successfully"
+        );
         setIsEdit(false);
-        setFlag(!flag);
       } else {
         API_CALL.sendRequest(
           CONSTANT.API.addDriver,
-          null,
+          () => setFlag((previos) => !previos),
           payload,
           "Driver Add Successfully"
         );
-        setFlag(!flag);
       }
     })();
   };

@@ -38,7 +38,6 @@ const App = (props) => {
 
   const getMeDataHandler = (res) => {
     MyData.data = res.data[0];
-    console.log(res.data[0]);
   };
 
   function getLayout() {
