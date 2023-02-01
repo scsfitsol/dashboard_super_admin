@@ -1,57 +1,56 @@
-import PropTypes from 'prop-types'
-import React, { Component } from "react"
-import { connect } from "react-redux"
-import { withRouter } from "react-router-dom"
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import {
   changeLayout,
   changeTopbarTheme,
   changeLayoutWidth,
-} from "../../store/actions"
+} from "../../store/actions";
 
 // Other Layout related Component
 
-import Header from "./Header"
-import Footer from "./Footer"
-import Rightbar from "../CommonForBoth/Rightbar"
+import Header from "./Header";
+import Footer from "./Footer";
+import Rightbar from "../CommonForBoth/Rightbar";
 
 class Layout extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       isMenuOpened: false,
-    }
+    };
   }
 
   componentDidMount() {
     if (this.props.isPreloader === true) {
-      document.getElementById("preloader").style.display = "block"
-      document.getElementById("status").style.display = "block"
+      document.getElementById("preloader").style.display = "block";
+      document.getElementById("status").style.display = "block";
 
       setTimeout(function () {
-        document.getElementById("preloader").style.display = "none"
-        document.getElementById("status").style.display = "none"
-      }, 2500)
+        document.getElementById("preloader").style.display = "none";
+        document.getElementById("status").style.display = "none";
+      }, 2500);
     } else {
-      document.getElementById("preloader").style.display = "none"
-      document.getElementById("status").style.display = "none"
+      document.getElementById("preloader").style.display = "none";
+      document.getElementById("status").style.display = "none";
     }
 
     // Scrollto 0,0
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
 
-    const title = this.props.location.pathname
-    let currentage = title.charAt(1).toUpperCase() + title.slice(2)
+    const title = this.props.location.pathname;
+    let currentage = title.charAt(1).toUpperCase() + title.slice(2);
 
-    document.title =
-      currentage + " | Qovex - Responsive Bootstrap 5 Admin Dashboard"
+    document.title = currentage + " | Fitsol Dashboard";
 
-    this.props.changeLayout("horizontal")
+    this.props.changeLayout("horizontal");
     if (this.props.topbarTheme) {
-      this.props.changeTopbarTheme(this.props.topbarTheme)
+      this.props.changeTopbarTheme(this.props.topbarTheme);
     }
     if (this.props.layoutWidth) {
-      this.props.changeLayoutWidth(this.props.layoutWidth)
+      this.props.changeLayoutWidth(this.props.layoutWidth);
     }
   }
 
@@ -59,8 +58,8 @@ class Layout extends Component {
    * Opens the menu - mobile
    */
   openMenu = () => {
-    this.setState({ isMenuOpened: !this.state.isMenuOpened })
-  }
+    this.setState({ isMenuOpened: !this.state.isMenuOpened });
+  };
   render() {
     return (
       <React.Fragment>
@@ -83,21 +82,17 @@ class Layout extends Component {
                 theme={this.props.topbarTheme}
                 isMenuOpened={this.state.isMenuOpened}
                 openLeftMenuCallBack={this.openMenu}
-              >
-              </Header>
-              
+              ></Header>
             </header>
             <div className="main-content">
               {this.props.children}
               <Footer />
             </div>
-
           </div>
-
         </div>
         {this.props.showRightSidebar ? <Rightbar /> : null}
       </React.Fragment>
-    )
+    );
   }
 }
 
@@ -110,16 +105,16 @@ Layout.propTypes = {
   layoutWidth: PropTypes.any,
   location: PropTypes.object,
   showRightSidebar: PropTypes.any,
-  topbarTheme: PropTypes.any
-}
+  topbarTheme: PropTypes.any,
+};
 
-const mapStatetoProps = state => {
+const mapStatetoProps = (state) => {
   return {
     ...state.Layout,
-  }
-}
+  };
+};
 export default connect(mapStatetoProps, {
   changeTopbarTheme,
   changeLayout,
   changeLayoutWidth,
-})(withRouter(Layout))
+})(withRouter(Layout));
