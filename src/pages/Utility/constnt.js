@@ -209,8 +209,8 @@ const CONSTANT = {
         {
           id: 4,
           className: "waves-effect",
-          to: "/Plant",
-          lable: "Plant",
+          to: "/sites",
+          lable: "Sites",
           icon: "bx bxs-factory",
         },
       ],

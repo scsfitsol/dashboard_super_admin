@@ -1,24 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, CardBody, Card, Progress, CardTitle } from "reactstrap";
-import { Link } from "react-router-dom";
-
-//Import Components
-import LineChart from "./line-chart";
-import RevenueChart from "./revenue-chart";
-import SalesAnalytics from "./sales-analytics";
-import ScatterChart from "./scatter-analytics";
-import LatestTransaction from "./latest-transaction";
+import { Row, Col, CardBody, Card, CardTitle } from "reactstrap";
 
 //Import Image
-import widgetImage from "../../assets/images/widget-img.png";
 import Overview from "./Overview";
-import Reviews from "./Reviews";
-import Revenue from "./Revenue";
-import Inbox from "./Inbox";
 import RadialChart from "../old/AllCharts/apex/RadialChart";
-import SplineArea from "../old/AllCharts/apex/SplineArea";
 import CONSTANT from "../Utility/constnt";
 import useHttp from "../../components/Hook/Use-http";
+import HomeChart1 from "../../components/Custome/Charts/HomeChart1";
+import DonutChart from "../old/AllCharts/apex/dountchart";
+import PieChart from "../old/AllCharts/apex/PieChart";
+// import ColumnChartToast from "../old/AllCharts/toastui/ColumnChartToast";
 
 const CardData = [
   {
@@ -35,7 +26,7 @@ const CardData = [
   },
   {
     icon: "bx bxs-factory",
-    name: "Plants",
+    name: "Sites",
     free: 100,
     allocate: 300,
   },
@@ -53,7 +44,6 @@ const Report = () => {
   const analysisDataHandler = (res) => {
     setAnalysisData(res?.data);
   };
-
   return (
     <React.Fragment>
       <div className="page-content">
@@ -81,7 +71,7 @@ const Report = () => {
                   {" "}
                   Carbon Emissions & Efficiency{" "}
                 </CardTitle>
-                <SplineArea />
+                <HomeChart1 />
               </CardBody>
             </Card>
           </Col>
@@ -125,14 +115,36 @@ const Report = () => {
           })}
         </Row>
 
-        <Row>
-          <Overview />
-
+        <Row className="w-100">
           <Col lg={6}>
-            <Card>
+            <Card style={{ height: "450px" }}>
+              <CardBody>
+                <CardTitle className="h4 mb-4">Vehicls</CardTitle>
+                <PieChart />
+              </CardBody>
+            </Card>
+          </Col>
+          <Col lg={6}>
+            <Card style={{ height: "450px" }}>
               <CardBody>
                 <CardTitle className="h4 mb-4">Trip</CardTitle>
                 <RadialChart />
+              </CardBody>
+            </Card>
+          </Col>
+          <Col lg={6}>
+            <Card style={{ height: "500px" }}>
+              <CardBody>
+                <CardTitle className="h4 mb-4">Transport information</CardTitle>
+                <Overview />
+              </CardBody>
+            </Card>
+          </Col>
+          <Col lg={6}>
+            <Card style={{ height: "500px" }}>
+              <CardBody>
+                <CardTitle className="h4 mb-4">Carbon Emotions</CardTitle>
+                <Overview />
               </CardBody>
             </Card>
           </Col>
