@@ -1,21 +1,20 @@
-import React from "react"
-import { Row, Col, Card, CardBody, CardTitle } from "reactstrap"
+import React from "react";
+import { Row, Col, Card, CardBody, CardTitle } from "reactstrap";
 //Import Breadcrumb
-import Breadcrumbs from "../../components/Common/Breadcrumb"
+import Breadcrumbs from "../../components/Common/Breadcrumb";
 
 // import chartJs
-import LineChart from "../AllCharts/chartjs/linechart"
-import DountChart from "../AllCharts/chartjs/dountchart"
-import PieChart from "../AllCharts/chartjs/piechart"
-import BarChart from "../AllCharts/chartjs/barchart"
-import RadarChart from "../AllCharts/chartjs/radarchart"
-import PolarChart from "../AllCharts/chartjs/polarchart"
+import LineChart from "../AllCharts/chartjs/linechart";
+import DountChart from "../AllCharts/chartjs/dountchart";
+import PieChart from "../AllCharts/chartjs/piechart";
+import BarChart from "../AllCharts/chartjs/barchart";
+import RadarChart from "../AllCharts/chartjs/radarchart";
+import PolarChart from "../AllCharts/chartjs/polarchart";
 
 const ChartjsChart = () => {
   return (
     <React.Fragment>
       <div className="page-content">
-
         <Breadcrumbs title="Charts" breadcrumbItem="Chartjs charts" />
         <Row>
           <Col lg={6}>
@@ -160,7 +159,7 @@ const ChartjsChart = () => {
         </Row>{" "}
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default ChartjsChart
+export default ChartjsChart;

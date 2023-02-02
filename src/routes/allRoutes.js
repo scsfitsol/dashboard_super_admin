@@ -50,7 +50,7 @@ const userRoutes = [
   { path: "/trip", component: Trip },
 
   // Plant
-  { path: "/Plant", component: Plants },
+  { path: "/sites", component: Plants },
 
   // //profile
   { path: "/profile", component: UserProfile },
