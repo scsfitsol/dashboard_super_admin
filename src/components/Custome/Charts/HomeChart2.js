@@ -1,6 +1,6 @@
 import React from "react";
 
-import "tui-chart/dist/tui-chart.css";
+// import "tui-chart/dist/tui-chart.css";
 import { PieChart } from "@toast-ui/react-chart";
 import TuiChart from "tui-chart";
 import "./toastui.scss";
@@ -30,7 +30,7 @@ var theme = {
 };
 TuiChart.registerTheme("qovexTheme", theme);
 
-const PieChartToast = (props) => {
+const HomeChart2 = (props) => {
   const data = {
     categories: ["Browser"],
     series: [
@@ -73,4 +73,4 @@ const PieChartToast = (props) => {
     </React.Fragment>
   );
 };
-export default PieChartToast;
+export default HomeChart2;
