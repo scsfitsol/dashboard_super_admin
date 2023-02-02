@@ -60,7 +60,7 @@ const CustomForm = (props) => {
                       </Label>
                       <input
                         name={fieldName?.name}
-                        value={
+                        defaultValue={
                           defaultData &&
                           defaultData !== "null" &&
                           defaultData !== "undefined" &&

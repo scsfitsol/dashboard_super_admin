@@ -4,11 +4,9 @@ import { Card, CardBody, Col, Row } from "reactstrap";
 const Overview = () => {
   return (
     <React.Fragment>
-      <Col xl={6}>
+      <Col xl={12}>
         <Card>
           <CardBody>
-            <h4 className="card-title mb-4">Transporter</h4>
-
             <div>
               <div className="pb-4 border-bottom">
                 <Row className="align-items-center">
@@ -19,13 +17,13 @@ const Overview = () => {
                   <Col xs={4}>
                     <div className="text-end">
                       <div>
-                        60 % <i className="mdi mdi-arrow-up  ms-1"></i>
+                        80 % <i className="mdi mdi-arrow-up  ms-1"></i>
                       </div>
                       <div className="progress progress-sm mt-3">
                         <div
                           className="progress-bar"
                           role="progressbar"
-                          style={{ width: "62%" }}
+                          style={{ width: "80%" }}
                           aria-valuenow="62"
                           aria-valuemin="0"
                           aria-valuemax="100"
@@ -44,14 +42,14 @@ const Overview = () => {
                   <Col xs={4}>
                     <div className="text-end">
                       <div>
-                        90 %{" "}
+                        10 %{" "}
                         <i className="mdi mdi-arrow-up text-success ms-1"></i>
                       </div>
                       <div className="progress progress-sm mt-3">
                         <div
                           className="progress-bar bg-success "
                           role="progressbar"
-                          style={{ width: "90%" }}
+                          style={{ width: "10%" }}
                           aria-valuenow="90"
                           aria-valuemin="0"
                           aria-valuemax="100"
@@ -70,14 +68,14 @@ const Overview = () => {
                   <Col xs={4}>
                     <div className="text-end">
                       <div>
-                        30 %{" "}
+                        70 %{" "}
                         <i className="mdi mdi-arrow-down text-warning ms-1"></i>
                       </div>
                       <div className="progress progress-sm mt-3">
                         <div
                           className="progress-bar bg-warning"
                           role="progressbar"
-                          style={{ width: "30%" }}
+                          style={{ width: "70%" }}
                           aria-valuenow="30"
                           aria-valuemin="0"
                           aria-valuemax="100"
@@ -91,19 +89,19 @@ const Overview = () => {
                 <Row className="align-items-center">
                   <Col xs={8}>
                     <p className="mb-2">WAR LTD.</p>
-                    <h4 className="mb-0">300 Trip</h4>
+                    <h5 className="mb-0">300 Trip</h5>
                   </Col>
                   <Col xs={4}>
                     <div className="text-end">
                       <div>
-                        40 %{" "}
+                        50 %{" "}
                         <i className="mdi mdi-arrow-down text-warning ms-1"></i>
                       </div>
                       <div className="progress progress-sm mt-3">
                         <div
                           className="progress-bar bg-warning"
                           role="progressbar"
-                          style={{ width: "40%" }}
+                          style={{ width: "50%" }}
                           aria-valuenow="40"
                           aria-valuemin="0"
                           aria-valuemax="100"
