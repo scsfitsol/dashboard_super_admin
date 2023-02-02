@@ -40,7 +40,7 @@ const Login = (props) => {
   const onSetLoginData = (res) => {
     authStorage.setAuthDetails(res?.token);
     localStorage.setItem("authUser", res?.token);
-    window.history.replaceState(null, null, "/Report");
+    window.history.replaceState(null, null, "/Dashboard");
     window.location.reload();
   };
 

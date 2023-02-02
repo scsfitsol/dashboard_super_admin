@@ -34,7 +34,7 @@ import Transporter from "../pages/User/transporter";
 
 const userRoutes = [
   // Analytics
-  { path: "/report", component: Report },
+  { path: "/Dashboard", component: Report },
   { path: "/traking", component: Traking },
 
   // User
