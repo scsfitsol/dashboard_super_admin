@@ -127,7 +127,7 @@ const Driver = () => {
             setActionData({});
           }}
         >
-          Add Drive
+          Add Driver
         </Button>
       </div>
       <Table

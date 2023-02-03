@@ -122,7 +122,7 @@ const Vehicals = () => {
         <Row>
           <div className="col-12">
             <div className="page-title-box d-flex align-items-center justify-content-between">
-              <h4 className="page-title mb-0 font-size-18">Vehicals</h4>
+              <h4 className="page-title mb-0 font-size-18">Vehicles</h4>
 
               <div className="page-title-right">
                 <ol className="breadcrumb m-0">
@@ -158,7 +158,7 @@ const Vehicals = () => {
         modalType="formModal"
         show={showModel}
         close={() => setShowModel(false)}
-        modalTitle="Add Vehicals"
+        modalTitle="Add Vehicles"
         onSubmit={(data) => onSubmitForm(data)}
         data={CONSTANT.FORM_FIELDS.VEHICLES}
         defaultData={actionData}
