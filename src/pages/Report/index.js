@@ -117,7 +117,7 @@ const Report = () => {
         <Row>
           <Col lg={12}>
             <Card>
-mb-4               <CardBody>
+              <CardBody>
                 <CardTitle className="h4">
                   {" "}
                   Carbon Emissions & Efficiency{" "}
@@ -138,7 +138,7 @@ mb-4               <CardBody>
                       <div className="avatar-sm font-size-20 me-3">
                         <span className="avatar-title bg-soft-primary text-primary rounded">
                           <i className={data.icon}></i>
-                        
+
                         </span>
                       </div>
                       <div className="flex-1">
@@ -164,7 +164,7 @@ mb-4               <CardBody>
               <CardBody>
                 <div className="mb-4 d-flex align-items-center justify-content-between">
                   <CardTitle className="fs-4">Vehicls</CardTitle>
-                  <ToolTipButton msg="Vehicls"/>
+                  <ToolTipButton id="Vehicls" msg="Vehicls" />
                 </div>
                 <PieChart />
               </CardBody>
@@ -175,7 +175,7 @@ mb-4               <CardBody>
               <CardBody>
                 <div className="mb-4 d-flex align-items-center justify-content-between">
                   <CardTitle className="fs-4">Trip</CardTitle>
-                  <ToolTipButton msg="Trip"/>
+                  <ToolTipButton id="Trip" msg="Trip" />
                 </div>
                 <RadialChart />
               </CardBody>
@@ -186,7 +186,7 @@ mb-4               <CardBody>
               <CardBody>
                 <div className="mb-4 d-flex align-items-center justify-content-between">
                   <CardTitle className="fs-4">Transport information</CardTitle>
-                  <ToolTipButton msg="Transport information"/>
+                  <ToolTipButton id="Transport" msg="Transport information" />
                 </div>
                 <Overview data={Transport} />
               </CardBody>
@@ -197,7 +197,7 @@ mb-4               <CardBody>
               <CardBody>
                 <div className="mb-4 d-flex align-items-center justify-content-between">
                   <CardTitle className="fs-4">Carbon Emotions</CardTitle>
-                  <ToolTipButton msg="Carbon Emotions"/>
+                  <ToolTipButton id="Carbon" msg="Carbon Emotions" />
                 </div>
                 <Overview data={Carbon} />
               </CardBody>

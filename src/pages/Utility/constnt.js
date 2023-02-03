@@ -27,21 +27,21 @@ export const EditButton = ({ onClick = {} }) => {
   );
 };
 
-export const ToolTipButton = ({ msg }) => {
+export const ToolTipButton = ({ id, msg }) => {
   const [ttop, setttop] = useState(false);
   return (
     <>
       <Tooltip
         placement="top"
         isOpen={ttop}
-        target="info"
+        target={id}
         toggle={() => {
           setttop(!ttop);
         }}
       >
         {msg}
       </Tooltip>
-      <i id="info" className="bx bx-info-circle fs-3"></i>
+      <i id={id} className="bx bx-info-circle fs-3"></i>
     </>
   );
 }
