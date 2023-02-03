@@ -27,6 +27,25 @@ export const EditButton = ({ onClick = {} }) => {
   );
 };
 
+export const ToolTipButton = ({ id, msg }) => {
+  const [ttop, setttop] = useState(false);
+  return (
+    <>
+      <Tooltip
+        placement="top"
+        isOpen={ttop}
+        target={id}
+        toggle={() => {
+          setttop(!ttop);
+        }}
+      >
+        {msg}
+      </Tooltip>
+      <i id={id} className="bx bx-info-circle fs-3"></i>
+    </>
+  );
+}
+
 export const MyData = {
   data: {},
 };
@@ -65,8 +84,8 @@ export const DeleteButton = ({ onClick = {} }) => {
 };
 
 const CONSTANT = {
-  BASE_URL: process.env.REACT_APP_BASE_URL,
-  // BASE_URL: "https://41d2-43-242-116-53.ngrok.io",
+  // BASE_URL: process.env.REACT_APP_BASE_URL,
+  BASE_URL: "http://65.1.223.112:3001/api/v1",
   API: {
     adminLogin: {
       endpoint: `/admin/login`,
@@ -146,8 +165,8 @@ const CONSTANT = {
         {
           id: 1,
           className: "waves-effect",
-          to: "/Report",
-          lable: "Report",
+          to: "/Dashboard",
+          lable: "Dashboard",
           icon: "bx bxs-report",
         },
         {
@@ -182,15 +201,17 @@ const CONSTANT = {
             },
             {
               id: 3,
-              to: "/drivers",
-              lable: "Drivers",
-            },
-            {
-              id: 3,
               to: "/transporter",
               lable: "Transporter",
             },
           ],
+        },
+        {
+          id: 2,
+          className: "waves-effect",
+          to: "/drivers",
+          lable: "Drivers",
+          icon: "bx bx-female-sign",
         },
         {
           id: 2,
@@ -518,6 +539,13 @@ const CONSTANT = {
         type: "text",
         required: false,
       },
+      // {
+      //   name: "profilePic",
+      //   label: "Profile Pic",
+      //   placeholder: "Profile Pic",
+      //   type: "file",
+      //   required: false,
+      // },
       {
         name: "password",
         label: "Password",
