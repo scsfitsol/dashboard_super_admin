@@ -31,7 +31,7 @@ const Sidebar = (props) => {
               <Link to="#" className="text-dark fw-medium font-size-16">
                 {MyData.data.name}
               </Link>
-              <p className="text-body mt-1 mb-0 font-size-13">Admin Company</p>
+              {/* <p className="text-body mt-1 mb-0 font-size-13">Admin Company</p> */}
             </div>
           </div>
           <div data-simplebar className="h-100">

@@ -151,7 +151,7 @@ const Plants = () => {
         modalType="formModal"
         show={showModel}
         close={() => setShowModel(false)}
-        modalTitle="Add Plant"
+        modalTitle="Add Sites"
         onSubmit={(data) => onSubmitForm(data)}
         data={CONSTANT.FORM_FIELDS.PLANT}
         defaultData={actionData}
