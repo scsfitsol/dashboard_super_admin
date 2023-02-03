@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d1b8573a.chunk.css",
+    "main.js": "/static/js/main.9a3b1382.chunk.js",
+    "main.js.map": "/static/js/main.9a3b1382.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.6e1e32e3.js",
+    "runtime-main.js.map": "/static/js/runtime-main.6e1e32e3.js.map",
+    "static/js/2.20f4ab0b.chunk.js": "/static/js/2.20f4ab0b.chunk.js",
+    "static/js/2.20f4ab0b.chunk.js.map": "/static/js/2.20f4ab0b.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.d1b8573a.chunk.css.map": "/static/css/main.d1b8573a.chunk.css.map",
+    "static/js/2.20f4ab0b.chunk.js.LICENSE.txt": "/static/js/2.20f4ab0b.chunk.js.LICENSE.txt",
+    "static/media/UserImage.611e8313.jpg": "/static/media/UserImage.611e8313.jpg",
+    "static/media/arrowDown.3560d93b.svg": "/static/media/arrowDown.3560d93b.svg",
+    "static/media/arrowTop.1e4858c4.svg": "/static/media/arrowTop.1e4858c4.svg",
+    "static/media/avatar-1.3921191a.jpg": "/static/media/avatar-1.3921191a.jpg",
+    "static/media/avatar-2.feb0f89d.jpg": "/static/media/avatar-2.feb0f89d.jpg",
+    "static/media/avatar-3.2cfd5ba6.jpg": "/static/media/avatar-3.2cfd5ba6.jpg",
+    "static/media/avatar-4.b23e41d9.jpg": "/static/media/avatar-4.b23e41d9.jpg",
+    "static/media/avatar-5.a5c59cee.jpg": "/static/media/avatar-5.a5c59cee.jpg",
+    "static/media/avatar-6.dc44eabf.jpg": "/static/media/avatar-6.dc44eabf.jpg",
+    "static/media/avatar-7.5ba5195e.jpg": "/static/media/avatar-7.5ba5195e.jpg",
+    "static/media/avatar-8.ad5418a9.jpg": "/static/media/avatar-8.ad5418a9.jpg",
+    "static/media/theme.scss": "/static/media/materialdesignicons-webfont.8632c216.woff",
+    "static/media/error-img.950e7b0b.png": "/static/media/error-img.950e7b0b.png",
+    "static/media/layout-1.f17c992e.jpg": "/static/media/layout-1.f17c992e.jpg",
+    "static/media/layout-2.ce57b1da.jpg": "/static/media/layout-2.ce57b1da.jpg",
+    "static/media/layout-3.bb1ba82a.jpg": "/static/media/layout-3.bb1ba82a.jpg",
+    "static/media/logo-dark.3f82f4ae.png": "/static/media/logo-dark.3f82f4ae.png",
+    "static/media/logo-light.3f82f4ae.png": "/static/media/logo-light.3f82f4ae.png",
+    "static/media/maintenance.406ae084.png": "/static/media/maintenance.406ae084.png",
+    "static/media/truck.bb08f9d8.svg": "/static/media/truck.bb08f9d8.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6e1e32e3.js",
+    "static/js/2.20f4ab0b.chunk.js",
+    "static/css/main.d1b8573a.chunk.css",
+    "static/js/main.9a3b1382.chunk.js"
+  ]
+}

@@ -42,10 +42,10 @@ const useHttp = () => {
           console.log(e);
         }
       } catch (err) {
-        if (err?.response?.data?.msg) {
-          notify.error(err?.response?.data?.msg);
+        if (err?.response?.data?.message) {
+          notify.error(err?.response?.data?.message);
           if (errorHandler) {
-            errorHandler(err?.response?.data?.msg);
+            errorHandler(err?.response?.data?.message);
           }
         } else {
           notify.error("Something Wrong Please Try again");

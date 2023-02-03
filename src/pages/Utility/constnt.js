@@ -41,10 +41,14 @@ export const ToolTipButton = ({ id, msg }) => {
       >
         {msg}
       </Tooltip>
-      <i id={id} className="bx bx-info-circle fs-3"></i>
+      <i
+        id={id}
+        className="bx bx-info-circle fs-3"
+        style={{ cursor: "pointer" }}
+      ></i>
     </>
   );
-}
+};
 
 export const MyData = {
   data: {},
@@ -224,7 +228,7 @@ const CONSTANT = {
           id: 3,
           className: "waves-effect",
           to: "/trip",
-          lable: "trip",
+          lable: "Trips",
           icon: "bx bxs-paste",
         },
         {
@@ -317,7 +321,7 @@ const CONSTANT = {
         sort: "asc",
       },
       {
-        label: "Manufacture",
+        label: "Manufacturer",
         field: "manufacture",
         sort: "asc",
       },
@@ -458,7 +462,7 @@ const CONSTANT = {
         sort: "asc",
       },
       {
-        label: "Driver Phone Number",
+        label: "Driver’s Contact",
         field: "driverPhoneNumber",
         sort: "asc",
       },
@@ -655,7 +659,7 @@ const CONSTANT = {
       },
       {
         name: "manufacture",
-        label: "Manufacture",
+        label: "Manufacturer",
         placeholder: "Manufacture",
         type: "text",
         required: true,

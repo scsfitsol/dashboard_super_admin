@@ -14,7 +14,7 @@ import PieChart from "../old/AllCharts/apex/PieChart";
 const CardData = [
   {
     icon: "bx bxs-truck",
-    name: "Transporter",
+    name: "Transporters",
     count: 80,
   },
   {
@@ -25,7 +25,7 @@ const CardData = [
   {
     icon: "bx bxs-factory",
     name: "Sites",
-    count: 60
+    count: 60,
   },
 ];
 
@@ -35,55 +35,55 @@ const Report = () => {
   const Transport = [
     {
       per: 80,
-      name: '	Sarine',
-      trip: 200
+      name: "	Sarine",
+      trip: 200,
     },
     {
       per: 100,
-      name: 'Lefty',
-      trip: 120
+      name: "Lefty",
+      trip: 120,
     },
     {
       per: 50,
-      name: 'Devondra',
-      trip: 40
+      name: "Devondra",
+      trip: 40,
     },
     {
       per: 30,
-      name: 'Luisa',
-      trip: 210
+      name: "Luisa",
+      trip: 210,
     },
     {
       per: 90,
-      name: 'Chloe',
-      trip: 30
+      name: "Chloe",
+      trip: 30,
     },
   ];
   const Carbon = [
     {
       per: 50,
-      name: 'Darbee',
-      trip: 120
+      name: "Darbee",
+      trip: 120,
     },
     {
       per: 90,
-      name: 'Merrill',
-      trip: 180
+      name: "Merrill",
+      trip: 180,
     },
     {
       per: 70,
-      name: 'Harv',
-      trip: 900
+      name: "Harv",
+      trip: 900,
     },
     {
       per: 10,
-      name: 'Ardelia',
-      trip: 200
+      name: "Ardelia",
+      trip: 200,
     },
     {
       per: 100,
-      name: 'Merry',
-      trip: 100
+      name: "Merry",
+      trip: 100,
     },
   ];
   useEffect(() => {
@@ -138,7 +138,6 @@ const Report = () => {
                       <div className="avatar-sm font-size-20 me-3">
                         <span className="avatar-title bg-soft-primary text-primary rounded">
                           <i className={data.icon}></i>
-
                         </span>
                       </div>
                       <div className="flex-1">
@@ -163,8 +162,11 @@ const Report = () => {
             <Card style={{ height: "450px" }}>
               <CardBody>
                 <div className="mb-4 d-flex align-items-center justify-content-between">
-                  <CardTitle className="fs-4">Vehicls</CardTitle>
-                  <ToolTipButton id="Vehicls" msg="Vehicls" />
+                  <CardTitle className="fs-4">Vehicles</CardTitle>
+                  <ToolTipButton
+                    id="Vehicle"
+                    msg="Showcase the total number of allocated and free vehicles"
+                  />
                 </div>
                 <PieChart />
               </CardBody>
@@ -174,8 +176,11 @@ const Report = () => {
             <Card style={{ height: "450px" }}>
               <CardBody>
                 <div className="mb-4 d-flex align-items-center justify-content-between">
-                  <CardTitle className="fs-4">Trip</CardTitle>
-                  <ToolTipButton id="Trip" msg="Trip" />
+                  <CardTitle className="fs-4">Trips</CardTitle>
+                  <ToolTipButton
+                    id="Trip"
+                    msg="Overall different status of the total number of trips"
+                  />
                 </div>
                 <RadialChart />
               </CardBody>
@@ -185,10 +190,15 @@ const Report = () => {
             <Card style={{ height: "500px" }}>
               <CardBody>
                 <div className="mb-4 d-flex align-items-center justify-content-between">
-                  <CardTitle className="fs-4">Transport information</CardTitle>
-                  <ToolTipButton id="Transport" msg="Transport information" />
+                  <CardTitle className="fs-4">
+                    Transporters Information
+                  </CardTitle>
+                  <ToolTipButton
+                    id="Transport"
+                    msg="Showcase the transporter’s efficiency on the number of trips covered, fuel consumed, etc."
+                  />
                 </div>
-                <Overview data={Transport} />
+                <Overview data={Transport} isPercentage={true} />
               </CardBody>
             </Card>
           </Col>
@@ -196,8 +206,11 @@ const Report = () => {
             <Card style={{ height: "500px" }}>
               <CardBody>
                 <div className="mb-4 d-flex align-items-center justify-content-between">
-                  <CardTitle className="fs-4">Carbon Emotions</CardTitle>
-                  <ToolTipButton id="Carbon" msg="Carbon Emotions" />
+                  <CardTitle className="fs-4">Carbon Emission</CardTitle>
+                  <ToolTipButton
+                    id="Carbon"
+                    msg="Carbon emitted to date on a total number of trips completed by different clients."
+                  />
                 </div>
                 <Overview data={Carbon} />
               </CardBody>
