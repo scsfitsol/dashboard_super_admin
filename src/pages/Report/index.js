@@ -4,7 +4,7 @@ import { Row, Col, CardBody, Card, CardTitle } from "reactstrap";
 //Import Image
 import Overview from "./Overview";
 import RadialChart from "../old/AllCharts/apex/RadialChart";
-import CONSTANT from "../Utility/constnt";
+import CONSTANT, { ToolTipButton } from "../Utility/constnt";
 import useHttp from "../../components/Hook/Use-http";
 import HomeChart1 from "../../components/Custome/Charts/HomeChart1";
 import DonutChart from "../old/AllCharts/apex/dountchart";
@@ -14,27 +14,78 @@ import PieChart from "../old/AllCharts/apex/PieChart";
 const CardData = [
   {
     icon: "bx bxs-truck",
-    name: "Vehicle",
-    free: 100,
-    allocate: 300,
+    name: "Transporter",
+    count: 80,
   },
   {
     icon: "mdi mdi-account-multiple-outline",
     name: "Clients",
-    free: 100,
-    allocate: 300,
+    count: 120,
   },
   {
     icon: "bx bxs-factory",
     name: "Sites",
-    free: 100,
-    allocate: 300,
+    count: 60
   },
 ];
 
 const Report = () => {
   const [analysisData, setAnalysisData] = useState({});
   const API_CALL = useHttp();
+  const Transport = [
+    {
+      per: 80,
+      name: '	Sarine',
+      trip: 200
+    },
+    {
+      per: 100,
+      name: 'Lefty',
+      trip: 120
+    },
+    {
+      per: 50,
+      name: 'Devondra',
+      trip: 40
+    },
+    {
+      per: 30,
+      name: 'Luisa',
+      trip: 210
+    },
+    {
+      per: 90,
+      name: 'Chloe',
+      trip: 30
+    },
+  ];
+  const Carbon = [
+    {
+      per: 50,
+      name: 'Darbee',
+      trip: 120
+    },
+    {
+      per: 90,
+      name: 'Merrill',
+      trip: 180
+    },
+    {
+      per: 70,
+      name: 'Harv',
+      trip: 900
+    },
+    {
+      per: 10,
+      name: 'Ardelia',
+      trip: 200
+    },
+    {
+      per: 100,
+      name: 'Merry',
+      trip: 100
+    },
+  ];
   useEffect(() => {
     (async () => {
       API_CALL.sendRequest(CONSTANT.API.getAnalysis, analysisDataHandler);
@@ -67,7 +118,7 @@ const Report = () => {
           <Col lg={12}>
             <Card>
               <CardBody>
-                <CardTitle className="h4 mb-4">
+                <CardTitle className="h4">
                   {" "}
                   Carbon Emissions & Efficiency{" "}
                 </CardTitle>
@@ -87,6 +138,7 @@ const Report = () => {
                       <div className="avatar-sm font-size-20 me-3">
                         <span className="avatar-title bg-soft-primary text-primary rounded">
                           <i className={data.icon}></i>
+
                         </span>
                       </div>
                       <div className="flex-1">
@@ -96,16 +148,7 @@ const Report = () => {
 
                     <div className="d-flex">
                       <div className="">
-                        <h4 className="mt-4 ">{data?.free}</h4>
-                        <p className="mb-0">
-                          <span className="text-success me-2">Free</span>
-                        </p>
-                      </div>
-                      <div className="align-self-center ms-5">
-                        <h4 className="mt-4 text-warning">{data?.allocate}</h4>
-                        <p className="mb-0">
-                          <span className="text-warning me-2">Allocate</span>
-                        </p>
+                        <h4 className="mt-4 ">{data?.count}</h4>
                       </div>
                     </div>
                   </CardBody>
@@ -119,7 +162,10 @@ const Report = () => {
           <Col lg={6}>
             <Card style={{ height: "450px" }}>
               <CardBody>
-                <CardTitle className="h4 mb-4">Vehicls</CardTitle>
+                <div className="mb-4 d-flex align-items-center justify-content-between">
+                  <CardTitle className="fs-4">Vehicls</CardTitle>
+                  <ToolTipButton id="Vehicls" msg="Vehicls" />
+                </div>
                 <PieChart />
               </CardBody>
             </Card>
@@ -127,7 +173,10 @@ const Report = () => {
           <Col lg={6}>
             <Card style={{ height: "450px" }}>
               <CardBody>
-                <CardTitle className="h4 mb-4">Trip</CardTitle>
+                <div className="mb-4 d-flex align-items-center justify-content-between">
+                  <CardTitle className="fs-4">Trip</CardTitle>
+                  <ToolTipButton id="Trip" msg="Trip" />
+                </div>
                 <RadialChart />
               </CardBody>
             </Card>
@@ -135,16 +184,22 @@ const Report = () => {
           <Col lg={6}>
             <Card style={{ height: "500px" }}>
               <CardBody>
-                <CardTitle className="h4 mb-4">Transport information</CardTitle>
-                <Overview />
+                <div className="mb-4 d-flex align-items-center justify-content-between">
+                  <CardTitle className="fs-4">Transport information</CardTitle>
+                  <ToolTipButton id="Transport" msg="Transport information" />
+                </div>
+                <Overview data={Transport} />
               </CardBody>
             </Card>
           </Col>
           <Col lg={6}>
             <Card style={{ height: "500px" }}>
               <CardBody>
-                <CardTitle className="h4 mb-4">Carbon Emotions</CardTitle>
-                <Overview />
+                <div className="mb-4 d-flex align-items-center justify-content-between">
+                  <CardTitle className="fs-4">Carbon Emotions</CardTitle>
+                  <ToolTipButton id="Carbon" msg="Carbon Emotions" />
+                </div>
+                <Overview data={Carbon} />
               </CardBody>
             </Card>
           </Col>
