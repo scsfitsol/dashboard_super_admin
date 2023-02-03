@@ -32,6 +32,7 @@ const App = (props) => {
   //Get My Data
   useEffect(() => {
     (async () => {
+      // eslint-disable-next-line no-unused-expressions
       localStorage.getItem('authToken') ?
         API_CALL.sendRequest(CONSTANT.API.getMe, getMeDataHandler)
         : null
