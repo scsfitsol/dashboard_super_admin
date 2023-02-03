@@ -397,11 +397,13 @@ const Traking = (props) => {
                     <CalanderIconSvg />
                     <div className="ms-2">
                       <p className="m-0 font-size-10">
-                        {moment(modalData?.startDate).format("DD-MM-YYYY")}
+                        {moment(modalData?.startDateAndTime).format(
+                          "DD-MM-YYYY"
+                        )}
                       </p>
                       <p className="m-0">
                         {" "}
-                        {moment(modalData?.startDate).format("LT")}
+                        {moment(modalData?.startDateAndTime).format("LT")}
                       </p>
                     </div>
                   </div>

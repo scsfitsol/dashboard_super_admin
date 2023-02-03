@@ -55,7 +55,7 @@ export const MyData = {
 };
 
 export const Category = {
-  1: "Pendding",
+  1: "Pending",
   2: "On Going",
   3: "Completed",
 };
@@ -685,19 +685,13 @@ const CONSTANT = {
     ],
     TRIP: [
       {
-        name: "startDate",
-        label: "Start Date",
-        placeholder: "Start Date",
-        type: "date",
+        name: "startDateAndTime",
+        label: "Start Date And Time",
+        placeholder: "start DateAnd Time",
+        type: "selectDate&Time",
         required: false,
       },
-      {
-        name: "startTime",
-        label: "Start Time",
-        placeholder: "Start Time",
-        type: "selectTime",
-        required: false,
-      },
+
       {
         name: "sourceLocation",
         label: "Source Location",
@@ -747,7 +741,7 @@ const CONSTANT = {
         type: "SingleSelect",
         required: false,
         options: [
-          { label: "Pendding", value: "1" },
+          { label: "Pending", value: "1" },
           { label: "On Going", value: "2" },
           { label: "Completed", value: "3" },
         ],

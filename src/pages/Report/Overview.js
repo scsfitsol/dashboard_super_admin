@@ -21,7 +21,7 @@ const Overview = (props) => {
                     <Row className="align-items-center">
                       <Col xs={8}>
                         <p className="mb-2">{data?.name}</p>
-                        <h5 className="mb-0 text-bold">{data?.trip} Trip</h5>
+                        <h5 className="mb-0 text-bold">{data?.trip} Trips</h5>
                       </Col>
                       <Col xs={4}>
                         <div className="text-end">
