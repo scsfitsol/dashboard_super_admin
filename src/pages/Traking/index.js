@@ -266,7 +266,7 @@ const Traking = (props) => {
               <Col lg={12}>
                 <Card>
                   <CardBody>
-                    <CardTitle>Vehical Tracking</CardTitle>
+                    <CardTitle>Vehicle Tracking</CardTitle>
 
                     <div
                       id="gmaps-markers"
@@ -347,7 +347,7 @@ const Traking = (props) => {
 
               <div className="mt-3 d-flex">
                 <strong className="ftext-truncate font-size-18 text-dark bold">
-                  {"Vehical"}
+                  {"Vehicle"}
                 </strong>{" "}
                 &nbsp;
               </div>
