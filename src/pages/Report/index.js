@@ -35,54 +35,54 @@ const Report = () => {
   const Transport = [
     {
       per: 80,
-      name: "	Sarine",
+      name: "AK Logistics",
       trip: 200,
     },
     {
       per: 100,
-      name: "Lefty",
+      name: "SK Delhi Logistics",
       trip: 120,
     },
     {
       per: 50,
-      name: "Devondra",
+      name: "Sehdev Packers And Movers Pvt Ltd",
       trip: 40,
     },
     {
       per: 30,
-      name: "Luisa",
+      name: "AAJ Enterprises",
       trip: 210,
     },
     {
       per: 90,
-      name: "Chloe",
+      name: "Mudra Global",
       trip: 30,
     },
   ];
   const Carbon = [
     {
       per: 50,
-      name: "Darbee",
+      name: "JBM",
       trip: 120,
     },
     {
       per: 90,
-      name: "Merrill",
+      name: "RockMan",
       trip: 180,
     },
     {
       per: 70,
-      name: "Harv",
+      name: "TVS",
       trip: 900,
     },
     {
       per: 10,
-      name: "Ardelia",
+      name: "Motherson",
       trip: 200,
     },
     {
       per: 100,
-      name: "Merry",
+      name: "TATA",
       trip: 100,
     },
   ];
@@ -190,12 +190,10 @@ const Report = () => {
             <Card style={{ height: "500px" }}>
               <CardBody>
                 <div className="mb-4 d-flex align-items-center justify-content-between">
-                  <CardTitle className="fs-4">
-                    Transporters Information
-                  </CardTitle>
+                  <CardTitle className="fs-4">Transporter Efficiency</CardTitle>
                   <ToolTipButton
                     id="Transport"
-                    msg="Showcase the transporter’s efficiency on the number of trips covered, fuel consumed, etc."
+                    msg="Efficiency is calculated based on the number of trips completed, total load carried and total Carbon Emitted"
                   />
                 </div>
                 <Overview data={Transport} isPercentage={true} />
@@ -206,10 +204,12 @@ const Report = () => {
             <Card style={{ height: "500px" }}>
               <CardBody>
                 <div className="mb-4 d-flex align-items-center justify-content-between">
-                  <CardTitle className="fs-4">Carbon Emission</CardTitle>
+                  <CardTitle className="fs-4">
+                    Client Carbon Emissions
+                  </CardTitle>
                   <ToolTipButton
                     id="Carbon"
-                    msg="Carbon emitted to date on a total number of trips completed by different clients."
+                    msg="Carbon emissions till date for each client"
                   />
                 </div>
                 <Overview data={Carbon} />
