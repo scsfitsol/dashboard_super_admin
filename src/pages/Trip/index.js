@@ -1,3 +1,4 @@
+import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { Button, Row } from "reactstrap";
@@ -10,42 +11,35 @@ import CONSTANT, {
   DeleteButton,
   EditButton,
   getTableData,
+  StatusButton,
 } from "../Utility/constnt";
 
 const Trip = () => {
   const [showModel, setShowModel] = useState(false);
+  const [showModel_1, setShowModel_1] = useState(false);
   const [tripData, setTripData] = useState([]);
   const [actionData, setActionData] = useState({});
-  const [confirm_both, setconfirm_both] = useState(false);
+  const [confirm_both, setConfirm_both] = useState(false);
   const [flag, setFlag] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
+  const [plantData, setPlantData] = useState([])
+  const [vehiclesData, setVehiclesData] = useState([])
   const API_CALL = useHttp();
 
   useEffect(() => {
     (async () => {
       API_CALL.sendRequest(CONSTANT.API.getAllTrip, tripDataHandler);
-      API_CALL.sendRequest(
-        CONSTANT.API.getAllTransporter,
-        transporterDataHandler
-      );
+      // API_CALL.sendRequest(
+      //   CONSTANT.API.getAllTransporter,
+      //   transporterDataHandler
+      // );
       API_CALL.sendRequest(CONSTANT.API.getAllDriver, driverDataHandler);
-      API_CALL.sendRequest(CONSTANT.API.getAllClient, clientDataHandler);
+      // API_CALL.sendRequest(CONSTANT.API.getAllClient, clientDataHandler);
       API_CALL.sendRequest(CONSTANT.API.getAllVehicle, vehiclesDataHandler);
       API_CALL.sendRequest(CONSTANT.API.getAllPlant, plantDataHandler);
     })();
-  }, []);
+  }, [flag]);
 
-  const transporterDataHandler = (res) => {
-    CONSTANT.FORM_FIELDS.TRIP.push({
-      name: "transporterId",
-      label: "Transporter",
-      placeholder: "Transporter",
-      type: "SingleSelect",
-      options: res?.data.map((data) => {
-        return { label: data.transporterName, value: data.id };
-      }),
-    });
-  };
   const driverDataHandler = (res) => {
     CONSTANT.FORM_FIELDS.TRIP.push({
       name: "driverId",
@@ -57,18 +51,8 @@ const Trip = () => {
       }),
     });
   };
-  const clientDataHandler = (res) => {
-    CONSTANT.FORM_FIELDS.TRIP.push({
-      name: "clientId",
-      label: "Client Name",
-      placeholder: "Client Name",
-      type: "SingleSelect",
-      options: res?.data.map((data) => {
-        return { label: data.name, value: data.id };
-      }),
-    });
-  };
   const vehiclesDataHandler = (res) => {
+    setVehiclesData(res?.data)
     CONSTANT.FORM_FIELDS.TRIP.push({
       name: "vehicleId",
       label: "Vehicle Name",
@@ -80,6 +64,7 @@ const Trip = () => {
     });
   };
   const plantDataHandler = (res) => {
+    setPlantData(res?.data)
     CONSTANT.FORM_FIELDS.TRIP.push({
       name: "plantId",
       label: "Plant Name",
@@ -90,7 +75,6 @@ const Trip = () => {
       }),
     });
   };
-
   const tripDataHandler = (res) => {
     setTripData(
       res?.data.map((tripData, index) => {
@@ -103,13 +87,25 @@ const Trip = () => {
           driverPhoneNumber: tripData?.driver?.mobile,
           vehicleNumber: tripData?.vehicle?.registrationNumber,
           plantName: tripData?.plant?.unitName,
-          status: Category[tripData?.status],
+          startDateAndTime: moment(tripData?.startDateAndTime).format('DD-MM-YYYY') + " : " + moment(tripData?.startDateAndTime).format('LT'),
+          targetedDateAndTime: moment(tripData?.targetedDateAndTime).format('DD-MM-YYYY') + " : " + moment(tripData?.targetedDateAndTime).format('LT'),
+          statusData: (
+            <>
+              <StatusButton
+                value={tripData?.status}
+                onClick={() => {
+                  onEditTrip(tripData);
+                  onUpdateStatus(true)
+                }} />
+
+            </>
+          ),
           action: (
             <>
               <EditButton
                 onClick={() => {
                   onEditTrip(tripData);
-                  setIsEdit(true);
+                  setShowModel(true);
                 }}
               />
               <DeleteButton
@@ -125,15 +121,18 @@ const Trip = () => {
   };
 
   const openConfirmationDeleteModal = (tripData) => {
-    setconfirm_both(true);
+    setConfirm_both(true);
     setActionData(tripData);
   };
 
   const onEditTrip = (tripData) => {
     setActionData(tripData);
-    setShowModel(true);
     setIsEdit(true);
   };
+
+  const onUpdateStatus = () => {
+    setShowModel_1(true)
+  }
 
   const onDeleteDriver = () => {
     const URL = {
@@ -150,6 +149,10 @@ const Trip = () => {
 
   const onSubmitForm = (payload) => {
     (async () => {
+      const ClientData = plantData.filter((e) => e.id === payload?.plantId)
+      const TransporterData = vehiclesData.filter((e) => e.id === payload?.vehicleId)
+      payload.clientId = ClientData[0]?.client?.id
+      payload.transporterId = TransporterData[0]?.transporter?.id
       if (actionData?.id) {
         const URL = {
           endpoint: `/trip/${actionData?.id}`,
@@ -157,7 +160,7 @@ const Trip = () => {
         };
         API_CALL.sendRequest(
           URL,
-          () => setFlag((previos) => !previos),
+          () => setFlag((previous) => !previous),
           payload,
           "Driver Update Successfully"
         );
@@ -165,7 +168,7 @@ const Trip = () => {
       } else {
         API_CALL.sendRequest(
           CONSTANT.API.addTrip,
-          () => setFlag((previos) => !previos),
+          () => setFlag((previous) => !previous),
           payload,
           "Driver Add Successfully"
         );
@@ -218,6 +221,17 @@ const Trip = () => {
         formData={false}
         isEdit={isEdit}
       />
+      <CustomModal
+        modalType="formModal"
+        show={showModel_1}
+        close={() => setShowModel_1(false)}
+        modalTitle="Add Trip"
+        onSubmit={(data) => onSubmitForm(data)}
+        data={CONSTANT.FORM_FIELDS.TRIP_STATUS}
+        defaultData={actionData}
+        formData={false}
+        isEdit={isEdit}
+      />
       {confirm_both ? (
         <SweetAlert
           title="Are you sure?"
@@ -227,10 +241,10 @@ const Trip = () => {
           cancelBtnBsStyle="danger"
           onConfirm={() => {
             onDeleteDriver();
-            setconfirm_both(false);
+            setConfirm_both(false);
           }}
           onCancel={() => {
-            setconfirm_both(false);
+            setConfirm_both(false);
           }}
         >
           You won't be able to revert this!
