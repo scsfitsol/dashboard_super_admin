@@ -94,22 +94,7 @@ const Login = (props) => {
                         />
                       </div>
 
-                      <div className="form-check">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id="customControlInline"
-                          required
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="customControlInline"
-                        >
-                          Remember me
-                        </label>
-                      </div>
-
-                      <div className="mt-3">
+                      <div className="mt-5">
                         <button
                           className="btn btn-primary w-100 waves-effect waves-light"
                           type="submit"

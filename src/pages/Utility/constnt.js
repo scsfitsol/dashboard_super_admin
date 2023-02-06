@@ -27,6 +27,29 @@ export const EditButton = ({ onClick = {} }) => {
   );
 };
 
+export const ToolTipButton = ({ id, msg }) => {
+  const [ttop, setttop] = useState(false);
+  return (
+    <>
+      <Tooltip
+        placement="top"
+        isOpen={ttop}
+        target={id}
+        toggle={() => {
+          setttop(!ttop);
+        }}
+      >
+        {msg}
+      </Tooltip>
+      <i
+        id={id}
+        className="bx bx-info-circle fs-3"
+        style={{ cursor: "pointer" }}
+      ></i>
+    </>
+  );
+};
+
 export const MyData = {
   data: {},
 };
@@ -78,8 +101,8 @@ export const DeleteButton = ({ onClick = {} }) => {
 };
 
 const CONSTANT = {
-  BASE_URL: process.env.REACT_APP_BASE_URL,
-  // BASE_URL: "https://41d2-43-242-116-53.ngrok.io",
+  // BASE_URL: process.env.REACT_APP_BASE_URL,
+  BASE_URL: "http://65.1.223.112:3001/api/v1",
   API: {
     adminLogin: {
       endpoint: `/admin/login`,
@@ -195,15 +218,17 @@ const CONSTANT = {
             },
             {
               id: 3,
-              to: "/drivers",
-              lable: "Drivers",
-            },
-            {
-              id: 3,
               to: "/transporter",
               lable: "Transporter",
             },
           ],
+        },
+        {
+          id: 2,
+          className: "waves-effect",
+          to: "/drivers",
+          lable: "Drivers",
+          icon: "bx bx-female-sign",
         },
         {
           id: 2,
@@ -216,7 +241,7 @@ const CONSTANT = {
           id: 3,
           className: "waves-effect",
           to: "/trip",
-          lable: "trip",
+          lable: "Trips",
           icon: "bx bxs-paste",
         },
         {
@@ -310,7 +335,7 @@ const CONSTANT = {
         sort: "asc",
       },
       {
-        label: "Manufacture",
+        label: "Manufacturer",
         field: "manufacture",
         sort: "asc",
       },
@@ -456,7 +481,7 @@ const CONSTANT = {
         sort: "asc",
       },
       {
-        label: "Driver Phone Number",
+        label: "Driver’s Contact",
         field: "driverPhoneNumber",
         sort: "asc",
       },
@@ -533,6 +558,13 @@ const CONSTANT = {
         type: "text",
         required: false,
       },
+      // {
+      //   name: "profilePic",
+      //   label: "Profile Pic",
+      //   placeholder: "Profile Pic",
+      //   type: "file",
+      //   required: false,
+      // },
       {
         name: "password",
         label: "Password",
@@ -642,7 +674,7 @@ const CONSTANT = {
       },
       {
         name: "manufacture",
-        label: "Manufacture",
+        label: "Manufacturer",
         placeholder: "Manufacture",
         type: "text",
         required: true,
