@@ -54,11 +54,24 @@ export const MyData = {
   data: {},
 };
 
-export const Category = {
+const Category = {
   1: "Pending",
   2: "On Going",
   3: "Completed",
 };
+
+const STATUS_COLOR = {
+  1: 'bg-soft-danger text-danger p-1',
+  2: 'bg-soft-primary text-primary p-1',
+  3: 'bg-soft-success text-success p-1',
+}
+export const StatusButton = ({ value, onClick = {} }) => {
+  console.log(Category[value])
+  return <span class={STATUS_COLOR[value]} style={{ borderRadius: '4px', cursor: 'pointer' }} onClick={onClick}>{Category[value]}</span>
+}
+
+
+
 
 export const DeleteButton = ({ onClick = {} }) => {
   const [ttop, setttop] = useState(false);
@@ -270,6 +283,7 @@ const CONSTANT = {
         label: "Name",
         field: "name",
         sort: "asc",
+        color: 'success',
       },
       {
         label: "Client ID",
@@ -427,6 +441,11 @@ const CONSTANT = {
         sort: "asc",
       },
       {
+        label: "Status",
+        field: "statusData",
+        sort: "asc",
+      },
+      {
         label: "Client Name",
         field: "clientName",
         sort: "asc",
@@ -442,8 +461,8 @@ const CONSTANT = {
         sort: "asc",
       },
       {
-        label: "Start Time",
-        field: "startTime",
+        label: "Start Date and Time",
+        field: "startDateAndTime",
         sort: "asc",
       },
       {
@@ -476,11 +495,7 @@ const CONSTANT = {
         field: "targetedDateAndTime",
         sort: "asc",
       },
-      {
-        label: "Status",
-        field: "status",
-        sort: "asc",
-      },
+
       {
         label: "Carbon emit(LBS)",
         field: "totalCarbonEmit",
@@ -684,13 +699,6 @@ const CONSTANT = {
       },
     ],
     TRIP: [
-      {
-        name: "startDateAndTime",
-        label: "Start Date And Time",
-        placeholder: "start DateAnd Time",
-        type: "selectDate&Time",
-        required: false,
-      },
 
       {
         name: "sourceLocation",
@@ -707,15 +715,15 @@ const CONSTANT = {
         required: false,
       },
       {
-        name: "completedDateAndTime",
-        label: "Completed Date & Time",
-        placeholder: "Completed Date & Time",
+        name: "startDateAndTime",
+        label: "Start Date And Time",
+        placeholder: "Start Date",
         type: "selectDate&Time",
         required: false,
       },
       {
         name: "targetedDateAndTime",
-        label: "targeted Date & Time",
+        label: "Targeted Date & Time",
         placeholder: "targeted Date & Time",
         type: "selectDate&Time",
         required: false,
@@ -728,12 +736,26 @@ const CONSTANT = {
         required: false,
       },
       {
-        name: "targetedDate",
-        label: "Targeted Date",
-        placeholder: "Targeted Date",
-        type: "date",
+        name: "status",
+        label: "Status",
+        placeholder: "Status",
+        type: "SingleSelect",
+        required: false,
+        options: [
+          { label: "Pending", value: "1" },
+          { label: "On Going", value: "2" },
+        ],
+      },
+      {
+        name: "distanceOfTrip",
+        label: "Distance Of Trip",
+        placeholder: "Distance Of Trip",
+        type: "text",
         required: false,
       },
+
+    ],
+    TRIP_STATUS: [
       {
         name: "status",
         label: "Status",
@@ -747,10 +769,10 @@ const CONSTANT = {
         ],
       },
       {
-        name: "distanceOfTrip",
-        label: "Distance Of Trip",
-        placeholder: "Distance Of Trip",
-        type: "text",
+        name: "completedDateAndTime",
+        label: "Completed Date & Time",
+        placeholder: "Completed Date & Time",
+        type: "selectDate&Time",
         required: false,
       },
       {
@@ -760,8 +782,10 @@ const CONSTANT = {
         type: "text",
         required: false,
       },
-    ],
+    ]
   },
+
+
 };
 
 const STATIC_DATA = {
