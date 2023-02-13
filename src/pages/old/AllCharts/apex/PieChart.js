@@ -1,8 +1,9 @@
 import React from "react"
 import ReactApexChart from "react-apexcharts"
 
-const PieChart = () => {
-  const series = [180, 120]
+const PieChart = (data) => {
+  const series = data?.data ? data?.data :[2,1]  
+
   const options = {
     labels: ["Allocate", "Free"],
     colors: ["#34c38f", "#5b73e8", "#f1b44c", "#50a5f1", "#f46a6a"],

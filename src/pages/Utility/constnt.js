@@ -66,7 +66,6 @@ const STATUS_COLOR = {
   3: 'bg-soft-success text-success p-1',
 }
 export const StatusButton = ({ value, onClick = {} }) => {
-  console.log(Category[value])
   return <span class={STATUS_COLOR[value]} style={{ borderRadius: '4px', cursor: 'pointer' }} onClick={onClick}>{Category[value]}</span>
 }
 

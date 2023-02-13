@@ -16,16 +16,22 @@ const CardData = [
     icon: "bx bxs-truck",
     name: "Transporters",
     count: 80,
+    API_Path1: 'transporter',
+    API_Path2: 'last30DaysTransporter'
   },
   {
     icon: "mdi mdi-account-multiple-outline",
     name: "Clients",
     count: 120,
+    API_Path1: 'last30DaysClient',
+    API_Path2: null
   },
   {
     icon: "bx bxs-factory",
     name: "Sites",
     count: 60,
+    API_Path1: 'plant',
+    API_Path2: 'last30DaysPlant'
   },
 ];
 
@@ -35,7 +41,7 @@ const Report = () => {
   const Transport = [
     {
       per: 80,
-      name: "	Sarine",
+      name: "Sarine",
       trip: 200,
     },
     {
@@ -94,6 +100,8 @@ const Report = () => {
 
   const analysisDataHandler = (res) => {
     setAnalysisData(res?.data);
+    console.log('res?.data', res?.data)
+    console.log('data', [res?.data?.vehicle?.allocatedVehicle, res?.data?.vehicle?.freeVehicle])
   };
   return (
     <React.Fragment>
@@ -147,7 +155,11 @@ const Report = () => {
 
                     <div className="d-flex">
                       <div className="">
-                        <h4 className="mt-4 ">{data?.count}</h4>
+                        {
+                          data?.API_Path2 !== null
+                            ? <h4 className="mt-4 ">{analysisData?.[data?.API_Path1]?.[data?.API_Path2]}</h4>
+                            : <h4 className="mt-4 ">{analysisData?.[data?.API_Path1]}</h4>
+                        }
                       </div>
                     </div>
                   </CardBody>
@@ -168,7 +180,7 @@ const Report = () => {
                     msg="Showcase the total number of allocated and free vehicles"
                   />
                 </div>
-                <PieChart />
+                <PieChart data = {[analysisData?.vehicle?.allocatedVehicle, analysisData?.vehicle?.freeVehicle]}/>
               </CardBody>
             </Card>
           </Col>
@@ -182,7 +194,11 @@ const Report = () => {
                     msg="Overall different status of the total number of trips"
                   />
                 </div>
-                <RadialChart />
+                {console.log(analysisData?.trip?.totalLateTrip)}
+                <RadialChart
+                  data={[analysisData?.trip?.totalLateTrip, analysisData?.trip?.totalOnTimeTrip, analysisData?.trip?.totalEarlyTrip]} 
+                  totalTrip = {analysisData?.trip?.totalLateTrip}
+                  />
               </CardBody>
             </Card>
           </Col>

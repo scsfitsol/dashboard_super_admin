@@ -119,10 +119,6 @@ const Traking = (props) => {
     setSelectCard(index);
   };
 
-  useEffect(() => {
-    console.log(modalData);
-  }, [modalData]);
-
   return (
     <React.Fragment>
       <div className="page-content">

@@ -3,20 +3,10 @@ import ReactApexChart from "react-apexcharts";
 import useHttp from "../../../../components/Hook/Use-http";
 import CONSTANT from "../../../Utility/constnt";
 
-const RadialChart = () => {
-  const series = [44, 55, 67];
-  const API_CALL = useHttp();
-
-  useEffect(() => {
-    (async () => {
-      API_CALL.sendRequest(CONSTANT.API.getAnalysis, analysisDataHandler);
-    })();
-  }, []);
-
-  const analysisDataHandler = (res) => {
-    console.log("getAnalysis", res);
-  };
-
+const RadialChart = (props) => {
+  const {data, totalTrip} = props
+  const series = data ? data :[44, 55, 67]  
+  console.log('totalTrip',totalTrip)
   const options = {
     plotOptions: {
       radialBar: {
@@ -31,14 +21,12 @@ const RadialChart = () => {
             show: true,
             label: "Total",
             formatter: function (w) {
-              // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-              return 249;
+              return +totalTrip;
             },
           },
         },
       },
     },
-    series: [44, 55, 67, 83],
     labels: ["Delayed", "On Time", "Early"],
     colors: ["#d63232", "#3b5de7", "#45cb85"],
   };

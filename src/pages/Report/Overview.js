@@ -25,7 +25,6 @@ const Overview = (props) => {
                       </Col>
                       <Col xs={4}>
                         <div className="text-end">
-                          {console.log(data?.per)}
                           <div>
                             {props.isPercentage ? (
                               <>
