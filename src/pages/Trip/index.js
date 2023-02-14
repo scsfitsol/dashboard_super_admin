@@ -29,12 +29,7 @@ const Trip = () => {
   useEffect(() => {
     (async () => {
       API_CALL.sendRequest(CONSTANT.API.getAllTrip, tripDataHandler);
-      // API_CALL.sendRequest(
-      //   CONSTANT.API.getAllTransporter,
-      //   transporterDataHandler
-      // );
       API_CALL.sendRequest(CONSTANT.API.getAllDriver, driverDataHandler);
-      // API_CALL.sendRequest(CONSTANT.API.getAllClient, clientDataHandler);
       API_CALL.sendRequest(CONSTANT.API.getAllVehicle, vehiclesDataHandler);
       API_CALL.sendRequest(CONSTANT.API.getAllPlant, plantDataHandler);
     })();

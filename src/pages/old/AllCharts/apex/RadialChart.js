@@ -1,12 +1,9 @@
 import React, { useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
-import useHttp from "../../../../components/Hook/Use-http";
-import CONSTANT from "../../../Utility/constnt";
 
 const RadialChart = (props) => {
-  const {data, totalTrip} = props
-  const series = data ? data :[44, 55, 67]  
-  console.log('totalTrip',totalTrip)
+  const { data } = props
+  const series = data ? data : [44, 55, 67]
   const options = {
     plotOptions: {
       radialBar: {
@@ -20,8 +17,11 @@ const RadialChart = (props) => {
           total: {
             show: true,
             label: "Total",
-            formatter: function (w) {
-              return +totalTrip;
+            formatter: function (e) {
+              let sum = e.globals.initialSeries.reduce(function (previousValue, currentValue) {
+                return previousValue + currentValue;
+              });
+              return sum;
             },
           },
         },

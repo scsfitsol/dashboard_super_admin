@@ -50,6 +50,41 @@ export const ToolTipButton = ({ id, msg }) => {
   );
 };
 
+export const TAB_DATA = {
+  CLIENT_TAB: [
+    {
+      name: 'Trip',
+      tabId: 1
+    },
+    {
+      name: 'Site',
+      tabId: 2
+    }
+  ],
+  VEHICLES_TAB: [
+    {
+      name: 'Trip',
+      tabId: 1
+    },
+    {
+      name: 'Site',
+      tabId: 2
+    }
+  ],
+  DRIVER_TAB: [
+    {
+      name: 'Trip',
+      tabId: 1
+    },
+  ],
+  VEHICLES_TAB: [
+    {
+      name: 'Trip',
+      tabId: 1
+    },
+  ],
+}
+
 export const MyData = {
   data: {},
 };
@@ -66,7 +101,7 @@ const STATUS_COLOR = {
   3: 'bg-soft-success text-success p-1',
 }
 export const StatusButton = ({ value, onClick = {} }) => {
-  return <span class={STATUS_COLOR[value]} style={{ borderRadius: '4px', cursor: 'pointer' }} onClick={onClick}>{Category[value]}</span>
+  return <span className={STATUS_COLOR[value]} style={{ borderRadius: '4px', cursor: 'pointer' }} onClick={onClick}>{Category[value]}</span>
 }
 
 
@@ -280,7 +315,7 @@ const CONSTANT = {
       },
       {
         label: "Name",
-        field: "name",
+        field: "clientName",
         sort: "asc",
         color: 'success',
       },
@@ -303,7 +338,7 @@ const CONSTANT = {
       },
       {
         label: "Name",
-        field: "name",
+        field: "driverName",
         sort: "asc",
       },
       {
@@ -330,7 +365,7 @@ const CONSTANT = {
       },
       {
         label: "Registration Number",
-        field: "registrationNumber",
+        field: "RegistrationNumbers",
         sort: "asc",
       },
       {
@@ -387,7 +422,7 @@ const CONSTANT = {
       },
       {
         label: "Name",
-        field: "transporterName",
+        field: "TransporterName",
         sort: "asc",
       },
       {

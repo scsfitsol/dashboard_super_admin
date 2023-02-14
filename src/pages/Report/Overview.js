@@ -8,11 +8,19 @@ const Overview = (props) => {
     2: "bg-primary",
     3: "bg-danger",
     4: "bg-warning",
+    5: "bg-info",
+    6: "bg-success",
+    7: "bg-primary",
+    8: "bg-danger",
+    9: "bg-warning",
+    10: "bg-info",
+    11: "bg-success",
+    12: "bg-primary",
   };
   return (
     <React.Fragment>
       <Col xl={12}>
-        <Card>
+        <Card style={{ height: '400px', overflowY: 'scroll' }}>
           <CardBody>
             {props.data.map((data, index) => {
               return (

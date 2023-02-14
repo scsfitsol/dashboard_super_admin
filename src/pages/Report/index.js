@@ -68,27 +68,62 @@ const Report = () => {
   const Carbon = [
     {
       per: 50,
-      name: "Darbee",
+      name: "January",
       trip: 120,
     },
     {
       per: 90,
-      name: "Merrill",
+      name: "February",
       trip: 180,
     },
     {
       per: 70,
-      name: "Harv",
+      name: "March",
       trip: 900,
     },
     {
       per: 10,
-      name: "Ardelia",
+      name: "April",
       trip: 200,
     },
     {
       per: 100,
-      name: "Merry",
+      name: "May",
+      trip: 100,
+    },
+    {
+      per: 50,
+      name: "June",
+      trip: 120,
+    },
+    {
+      per: 90,
+      name: "July",
+      trip: 180,
+    },
+    {
+      per: 70,
+      name: "August",
+      trip: 900,
+    },
+    {
+      per: 10,
+      name: "September",
+      trip: 200,
+    },
+    {
+      per: 100,
+      name: "October",
+      trip: 100,
+    },
+    {
+      per: 10,
+      name: "November",
+      trip: 200,
+    },
+    {
+      per: 100,
+      name: "December",
       trip: 100,
     },
   ];
@@ -100,8 +135,6 @@ const Report = () => {
 
   const analysisDataHandler = (res) => {
     setAnalysisData(res?.data);
-    console.log('res?.data', res?.data)
-    console.log('data', [res?.data?.vehicle?.allocatedVehicle, res?.data?.vehicle?.freeVehicle])
   };
   return (
     <React.Fragment>
@@ -180,7 +213,7 @@ const Report = () => {
                     msg="Showcase the total number of allocated and free vehicles"
                   />
                 </div>
-                <PieChart data = {[analysisData?.vehicle?.allocatedVehicle, analysisData?.vehicle?.freeVehicle]}/>
+                <PieChart data={Object.keys(analysisData).length > 0 && [+analysisData?.vehicle?.allocatedVehicle, +analysisData?.vehicle?.freeVehicle]} />
               </CardBody>
             </Card>
           </Col>
@@ -194,11 +227,9 @@ const Report = () => {
                     msg="Overall different status of the total number of trips"
                   />
                 </div>
-                {console.log(analysisData?.trip?.totalLateTrip)}
                 <RadialChart
-                  data={[analysisData?.trip?.totalLateTrip, analysisData?.trip?.totalOnTimeTrip, analysisData?.trip?.totalEarlyTrip]} 
-                  totalTrip = {analysisData?.trip?.totalLateTrip}
-                  />
+                  data={Object.keys(analysisData).length > 0 && [+analysisData?.trip?.totalLateTrip, +analysisData?.trip?.totalOnTimeTrip, +analysisData?.trip?.totalEarlyTrip]}
+                />
               </CardBody>
             </Card>
           </Col>

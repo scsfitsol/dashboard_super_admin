@@ -301,7 +301,7 @@ const Traking = (props) => {
         ) : (
           <>
             {" "}
-            <div class="alert alert-danger text-center" role="alert">
+            <div className="alert alert-danger text-center" role="alert">
               No Any On Going Trips Found
             </div>
           </>
