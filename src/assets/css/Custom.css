@@ -30,3 +30,7 @@
 .dataTables_wrapper::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.TableLink:hover {
+  color: #2f4395 !important;
+}
