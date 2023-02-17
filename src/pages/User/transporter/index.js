@@ -41,7 +41,7 @@ const Transporter = () => {
                 return {
                     ...transporterData,
                     no: index + 1,
-                    TransporterName: <NavLink onClick={() => GoToTransposerInfo(transporterData)} style={{ color: "gray", cursor: 'pointer' }} >{transporterData.transporterName}</NavLink>,
+                    TransporterName: <NavLink className="TableLink" onClick={() => GoToTransposerInfo(transporterData)} style={{ color: "gray", cursor: 'pointer' }} >{transporterData.transporterName}</NavLink>,
                     clientId: transporterData.id,
                     action: (
                         <>

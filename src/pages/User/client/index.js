@@ -40,7 +40,7 @@ const Clients = () => {
                 return {
                     ...clientData,
                     no: index + 1,
-                    clientName: <NavLink onClick={() => GoToClientInfo(clientData)} style={{ color: "gray", cursor: 'pointer' }} >{clientData.name}</NavLink>,
+                    clientName: <NavLink className="TableLink" onClick={() => GoToClientInfo(clientData)} style={{ color: "gray", cursor: 'pointer' }} >{clientData.name}</NavLink>,
                     clientId: clientData.id,
                     action: (
                         <>

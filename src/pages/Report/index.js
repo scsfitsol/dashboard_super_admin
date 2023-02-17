@@ -4,10 +4,9 @@ import { Row, Col, CardBody, Card, CardTitle } from "reactstrap";
 //Import Image
 import Overview from "./Overview";
 import RadialChart from "../old/AllCharts/apex/RadialChart";
-import CONSTANT, { ToolTipButton } from "../Utility/constnt";
+import CONSTANT, { MonthName, ToolTipButton } from "../Utility/constnt";
 import useHttp from "../../components/Hook/Use-http";
 import HomeChart1 from "../../components/Custome/Charts/HomeChart1";
-import DonutChart from "../old/AllCharts/apex/dountchart";
 import PieChart from "../old/AllCharts/apex/PieChart";
 // import ColumnChartToast from "../old/AllCharts/toastui/ColumnChartToast";
 
@@ -37,96 +36,10 @@ const CardData = [
 
 const Report = () => {
   const [analysisData, setAnalysisData] = useState({});
+  const [transporterList, setTransporterList] = useState([]);
+  const [tripList, setTripList] = useState([])
   const API_CALL = useHttp();
-  const Transport = [
-    {
-      per: 80,
-      name: "Sarine",
-      trip: 200,
-    },
-    {
-      per: 100,
-      name: "Lefty",
-      trip: 120,
-    },
-    {
-      per: 50,
-      name: "Devondra",
-      trip: 40,
-    },
-    {
-      per: 30,
-      name: "Luisa",
-      trip: 210,
-    },
-    {
-      per: 90,
-      name: "Chloe",
-      trip: 30,
-    },
-  ];
-  const Carbon = [
-    {
-      per: 50,
-      name: "January",
-      trip: 120,
-    },
-    {
-      per: 90,
-      name: "February",
-      trip: 180,
-    },
-    {
-      per: 70,
-      name: "March",
-      trip: 900,
-    },
-    {
-      per: 10,
-      name: "April",
-      trip: 200,
-    },
-    {
-      per: 100,
-      name: "May",
-      trip: 100,
-    },
-    {
-      per: 50,
-      name: "June",
-      trip: 120,
-    },
-    {
-      per: 90,
-      name: "July",
-      trip: 180,
-    },
-    {
-      per: 70,
-      name: "August",
-      trip: 900,
-    },
-    {
-      per: 10,
-      name: "September",
-      trip: 200,
-    },
-    {
-      per: 100,
-      name: "October",
-      trip: 100,
-    },
-    {
-      per: 10,
-      name: "November",
-      trip: 200,
-    },
-    {
-      per: 100,
-      name: "December",
-      trip: 100,
-    },
-  ];
+
   useEffect(() => {
     (async () => {
       API_CALL.sendRequest(CONSTANT.API.getAnalysis, analysisDataHandler);
@@ -135,6 +48,24 @@ const Report = () => {
 
   const analysisDataHandler = (res) => {
     setAnalysisData(res?.data);
+    setTransporterList(
+      res?.data?.transporter?.transporterAnalytics.map((e) => {
+        return {
+          per: e?.utilisationAvg.toFixed(2),
+          name: e?.name,
+          trip: e?.count,
+        }
+      })
+    );
+    setTripList(
+      res?.data?.trip?.lastAllMonthsTripAnalytics.map((e) => {
+        return {
+          per: e?.utilisationAvg.toFixed(2), //Total Trip
+          name: MonthName[e?.month - 1],
+          trip: 10,
+        }
+      })
+    )
   };
   return (
     <React.Fragment>
@@ -245,7 +176,7 @@ const Report = () => {
                     msg="Showcase the transporter’s efficiency on the number of trips covered, fuel consumed, etc."
                   />
                 </div>
-                <Overview data={Transport} isPercentage={true} />
+                <Overview data={transporterList} isPercentage={true} />
               </CardBody>
             </Card>
           </Col>
@@ -259,7 +190,7 @@ const Report = () => {
                     msg="Carbon emitted to date on a total number of trips completed by different clients."
                   />
                 </div>
-                <Overview data={Carbon} />
+                <Overview data={tripList} />
               </CardBody>
             </Card>
           </Col>

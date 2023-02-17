@@ -50,6 +50,8 @@ export const ToolTipButton = ({ id, msg }) => {
   );
 };
 
+export const MonthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
 export const TAB_DATA = {
   CLIENT_TAB: [
     {
@@ -544,6 +546,234 @@ const CONSTANT = {
         label: "Action",
         field: "action",
         sort: "disabled",
+      },
+    ],
+  },
+  DATA_TABLE_COLUME_INFO: {
+    admin: [
+      {
+        label: "No",
+        field: "no",
+        sort: "asc",
+      },
+      {
+        label: "Email ID",
+        field: "email",
+        sort: "asc",
+      },
+      {
+        label: "Action",
+        field: "action",
+        sort: "disabled",
+      },
+    ],
+    client: [
+      {
+        label: "No",
+        field: "no",
+        sort: "asc",
+      },
+      {
+        label: "Name",
+        field: "clientName",
+        sort: "asc",
+        color: 'success',
+      },
+      {
+        label: "Client ID",
+        field: "clientId",
+        sort: "asc",
+      },
+    ],
+    driver: [
+      {
+        label: "No",
+        field: "no",
+        sort: "asc",
+      },
+      {
+        label: "Name",
+        field: "driverName",
+        sort: "asc",
+      },
+      {
+        label: "Driving license",
+        field: "drivingLicense",
+        sort: "asc",
+      },
+      {
+        label: "Mobile Number",
+        field: "mobile",
+        sort: "asc",
+      },
+    ],
+    vehicles: [
+      {
+        label: "No",
+        field: "no",
+        sort: "asc",
+      },
+      {
+        label: "Registration Number",
+        field: "RegistrationNumbers",
+        sort: "asc",
+      },
+      {
+        label: "Manufacturer",
+        field: "manufacture",
+        sort: "asc",
+      },
+      {
+        label: "Fuel Type",
+        field: "fuelType",
+        sort: "asc",
+      },
+      {
+        label: "Transporter Name",
+        field: "transporterName",
+        sort: "asc",
+      },
+      {
+        label: "Capacity",
+        field: "capacity",
+        sort: "asc",
+      },
+      {
+        label: "Mileage",
+        field: "mileage",
+        sort: "asc",
+      },
+      // {
+      //   label: "Total KMS Covered",
+      //   field: "totalKmscovered",
+      //   sort: "asc",
+      // },
+      // {
+      //   label: "Engine Type",
+      //   field: "engineType",
+      //   sort: "asc",
+      // },
+      {
+        label: "Allocate",
+        field: "allocate",
+        sort: "asc",
+      },
+    ],
+    transporter: [
+      {
+        label: "No",
+        field: "no",
+        sort: "asc",
+      },
+      {
+        label: "Name",
+        field: "TransporterName",
+        sort: "asc",
+      },
+      {
+        label: "GST Number",
+        field: "gstNumber",
+        sort: "asc",
+      },
+    ],
+    plant: [
+      {
+        label: "No",
+        field: "no",
+        sort: "asc",
+      },
+      {
+        label: "Client",
+        field: "clientName",
+        sort: "asc",
+      },
+      {
+        label: "Unit Name",
+        field: "unitName",
+        sort: "asc",
+      },
+      {
+        label: "Location",
+        field: "location",
+        sort: "asc",
+      },
+      {
+        label: "GST Number",
+        field: "GST",
+        sort: "asc",
+      },
+    ],
+    trips: [
+      {
+        label: "No",
+        field: "no",
+        sort: "asc",
+      },
+      {
+        label: "Status",
+        field: "statusData",
+        sort: "asc",
+      },
+      {
+        label: "Client Name",
+        field: "clientName",
+        sort: "asc",
+      },
+      {
+        label: "Transporter Name",
+        field: "transporterName",
+        sort: "asc",
+      },
+      {
+        label: "Plant Name",
+        field: "plantName",
+        sort: "asc",
+      },
+      {
+        label: "Start Date and Time",
+        field: "startDateAndTime",
+        sort: "asc",
+      },
+      {
+        label: "Source",
+        field: "sourceLocation",
+        sort: "asc",
+      },
+      {
+        label: "Destination",
+        field: "destinationLocation",
+        sort: "asc",
+      },
+      {
+        label: "Driver Name",
+        field: "driverName",
+        sort: "asc",
+      },
+      {
+        label: "Driver’s Contact",
+        field: "driverPhoneNumber",
+        sort: "asc",
+      },
+      {
+        label: "Vehicle Number",
+        field: "vehicleNumber",
+        sort: "asc",
+      },
+      {
+        label: "Targetted Date & Time",
+        field: "targetedDateAndTime",
+        sort: "asc",
+      },
+
+      {
+        label: "Carbon emit(LBS)",
+        field: "totalCarbonEmit",
+        sort: "asc",
+      },
+      {
+        label: "CO2 Efficiency",
+        field: "Co2efficiency",
+        sort: "asc",
       },
     ],
   },

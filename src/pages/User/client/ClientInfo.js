@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Card, CardBody, Col, Nav, NavItem, Row, TabContent, TabPane, NavLink } from 'reactstrap'
 import classnames from "classnames"
-import { getTableData, StatusButton, TAB_DATA } from '../../Utility/constnt'
+import CONSTANT, { getTableData, StatusButton, TAB_DATA } from '../../Utility/constnt'
 import moment from 'moment'
 import useHttp from '../../../components/Hook/Use-http'
 import Table from '../../../components/Custome/table'
@@ -10,7 +10,6 @@ import { useParams } from 'react-router-dom'
 const ClientInfo = () => {
     let clientId = window.location.pathname.split('/')[2];
     const params = useParams();
-    console.log(params, 'params')
     const [activeTab, setactiveTab] = useState(1)
     const [tripData, setTripData] = useState([]);
     const [plantData, setPlantData] = useState([]);
@@ -132,13 +131,13 @@ const ClientInfo = () => {
                                     <TabPane tabId={1} className="py-3">
                                         <Table
                                             title="Trips List"
-                                            data={{ columns: getTableData("trips")["columns"], rows: tripData }}
+                                            data={{ columns: CONSTANT.DATA_TABLE_COLUME_INFO.trips, rows: tripData }}
                                         />
                                     </TabPane>
                                     <TabPane tabId={2} className="py-3 px-0">
                                         <Table
                                             title="Sites List"
-                                            data={{ columns: getTableData("plant")["columns"], rows: plantData }}
+                                            data={{ columns: CONSTANT.DATA_TABLE_COLUME_INFO.plant, rows: plantData }}
                                         />
                                     </TabPane>
                                 </TabContent>

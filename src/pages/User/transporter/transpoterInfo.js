@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Card, CardBody, Col, Nav, NavItem, Row, TabContent, TabPane, NavLink } from 'reactstrap'
 import classnames from "classnames"
-import { getTableData, StatusButton, TAB_DATA } from '../../Utility/constnt'
+import CONSTANT, { getTableData, StatusButton, TAB_DATA } from '../../Utility/constnt'
 import moment from 'moment'
 import useHttp from '../../../components/Hook/Use-http'
 import Table from '../../../components/Custome/table'
@@ -131,13 +131,13 @@ const TransporterInfo = () => {
                                     <TabPane tabId={1} className="py-3">
                                         <Table
                                             title="Trips List"
-                                            data={{ columns: getTableData("trips")["columns"], rows: tripData }}
+                                            data={{ columns: CONSTANT.DATA_TABLE_COLUME_INFO.trips, rows: tripData }}
                                         />
                                     </TabPane>
                                     <TabPane tabId={2} className="py-3 px-0">
                                         <Table
                                             title="Vehicles List"
-                                            data={{ columns: getTableData("vehicles")["columns"], rows: vehicleData }}
+                                            data={{ columns: CONSTANT.DATA_TABLE_COLUME_INFO.vehicles, rows: vehicleData }}
                                         />
                                     </TabPane>
                                 </TabContent>

@@ -54,7 +54,7 @@ const Vehicals = () => {
         return {
           ...vehicleData,
           no: index + 1,
-          RegistrationNumbers: <NavLink onClick={() => GoToVehicleInfo(vehicleData)} style={{ color: "gray", cursor: 'pointer' }} >{vehicleData?.registrationNumber}</NavLink>,
+          RegistrationNumbers: <NavLink className="TableLink" onClick={() => GoToVehicleInfo(vehicleData)} style={{ color: "gray", cursor: 'pointer' }} >{vehicleData?.registrationNumber}</NavLink>,
           transporterName: vehicleData?.transporter?.transporterName,
           action: (
             <>

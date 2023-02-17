@@ -37,7 +37,7 @@ const Driver = () => {
                 return {
                     ...driverData,
                     no: index + 1,
-                    driverName: <NavLink onClick={() => GoToDriverInfo(driverData)} style={{ color: "gray", cursor: 'pointer' }} >{driverData.name}</NavLink>,
+                    driverName: <NavLink className="TableLink" onClick={() => GoToDriverInfo(driverData)} style={{ color: "gray", cursor: 'pointer' }} >{driverData.name}</NavLink>,
                     action: (
                         <>
                             <EditButton
