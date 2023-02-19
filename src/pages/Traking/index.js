@@ -12,7 +12,7 @@ import {
   Modal,
   Progress,
 } from "reactstrap";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import { Map, InfoWindow, Marker, GoogleApiWrapper, Polyline } from "google-maps-react";
 import "./tracking.css";
 import truckSvg from "../../assets/images/card/truck.svg";
 import topArrow from "../../assets/images/card/arrowTop.svg";
@@ -184,7 +184,7 @@ const Traking = (props) => {
                 ref={elementRef}
               >
                 {vehicaleData.map((Item, index) => (
-                  <Col lg={4} key={Item.id}>
+                  <Col lg={3} key={Item.id}>
                     <Card
                       className={
                         selectCard === index
@@ -274,10 +274,16 @@ const Traking = (props) => {
                         style={{ width: "100%", height: "100%" }}
                         zoom={14}
                       >
+                        <Polyline
+                          path={[
+                            { lat: 21.1702, lng: 72.8311 },
+                            { lat: 12.9716, lng: 77.5946 },
+                            { lat: 8.5199, lng: 76.9413 }
+                          ]} />
                         <Marker
                           title={"The marker`s title will appear as a tooltip."}
                           name={"SOMA"}
-                          position={{ lat: 37.778519, lng: -122.40564 }}
+                          position={{ lat: 12.9716, lng: 77.5946 }}
                         />
                         <Marker name={"Dolores park"} />
                         <InfoWindow>
