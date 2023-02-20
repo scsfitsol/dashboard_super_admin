@@ -25,6 +25,7 @@ const Tracking = () => {
   const [modal_standard, setModal_standard] = useState(false);
   const [modalData, setModalData] = useState({});
   const [selectCard, setSelectCard] = useState(null);
+  const [selectTripData, setSelectTripData] = useState({})
   const [vehicleData, setVehicleData] = useState([]);
   const [arrowDisable, setArrowDisable] = useState(true);
   const elementRef = useRef(null);
@@ -36,11 +37,11 @@ const Tracking = () => {
 
   useEffect(() => {
     (async () => {
-      API_CALL.sendRequest(CONSTANT.API.getAllTrip, vehicleDataHandler);
+      API_CALL.sendRequest(CONSTANT.API.getAllTrip, tripDataHandler);
     })();
   }, []);
 
-  const vehicleDataHandler = (res) => {
+  const tripDataHandler = (res) => {
     setVehicleData(res?.data);
   };
 
@@ -60,7 +61,8 @@ const Tracking = () => {
     }, speed);
   };
 
-  const onClickSelectCard = (index) => {
+  const onClickSelectCard = (Item, index) => {
+    setSelectTripData(Item)
     setSelectCard(index);
   };
 
@@ -136,7 +138,7 @@ const Tracking = () => {
                           ? "selectCard vehicleCard"
                           : "vehicleCard"
                       }
-                      onClick={() => onClickSelectCard(index)}
+                      onClick={() => onClickSelectCard(Item, index)}
                     >
                       <CardBody>
                         <CardTitle className="font-size-12 m-0">
@@ -203,7 +205,7 @@ const Tracking = () => {
                 ))}
               </div>
             </Row>
-           <TrackMap />
+            <TrackMap  data={selectTripData}/>
           </>
         ) : (
           <>

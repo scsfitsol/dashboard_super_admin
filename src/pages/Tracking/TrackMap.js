@@ -17,6 +17,7 @@ const TrackMap = (props) => {
     const API_CALL = useHttp();
     const [mapDataLive, setMapDataLive] = useState([])
     const [tripData, setTripData] = useState([])
+    console.log('TrackMap',props);
     const mapData = [
         {
             position: { lat: 13.693, lng: 79.5946 },
