@@ -23,7 +23,7 @@ import LockScreen from "../pages/AuthenticationInner/auth-lock-screen";
 // Profile
 import UserProfile from "../pages/Authentication/user-profile";
 import Report from "../pages/Report";
-import Traking from "../pages/Traking";
+import Tracking from "../pages/Tracking";
 import Admin from "../pages/User";
 import Vehicals from "../pages/Vehicals";
 import Trip from "../pages/Trip";
@@ -39,7 +39,7 @@ import VehiclesInfo from "../pages/Vehicals/VehiclesInfo";
 const userRoutes = [
   // Analytics
   { path: "/Dashboard", component: Report },
-  { path: "/traking", component: Traking },
+  { path: "/tracking", component: Tracking },
 
   // User
   { path: "/admins", component: Admin },

@@ -208,6 +208,10 @@ const CONSTANT = {
       endpoint: `/analysis`,
       type: "GET",
     },
+    getMapLocation: {
+      endpoint: `/location/15`,
+      type: "GET",
+    },
   },
 
   MENU_ITEM: [
@@ -225,7 +229,7 @@ const CONSTANT = {
         {
           id: 2,
           className: "waves-effect",
-          to: "/traking",
+          to: "/tracking",
           lable: "Track vehicles",
           icon: "bx bxs-map",
         },

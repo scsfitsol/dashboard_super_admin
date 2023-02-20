@@ -1,0 +1,107 @@
+.vehicleCard {
+  cursor: pointer;
+  position: relative;
+  color: #626c76;
+  background-color: #f8f8f8 !important;
+  border-radius: 20px !important;
+}
+
+.vehicleCard .trackId svg {
+  fill: #626c76;
+}
+
+.vehicleCard .trackId p {
+  font-size: 15px;
+  padding-top: 2px;
+  font-weight: 600;
+}
+
+.vehicleCard_Text {
+  color: #848181;
+}
+
+.vehicleCard .truckImage {
+  position: absolute;
+  right: 0;
+  top: 30%;
+  text-align: end;
+  opacity: 1;
+}
+
+/* For Hover */
+
+.vehicleCard .card_Header_arrow p {
+  font-size: 12px;
+  font-weight: 600;
+  color: #44eb0a;
+}
+.vehicleCard .card_Header_arrow_false img {
+  rotate: rotate(180deg);
+}
+.vehicleCard .card_Header_arrow_false p {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fe0101;
+}
+.vehicleCard:hover {
+  color: #ffff;
+  background-color: #003e70 !important;
+}
+.vehicleCard:hover .trackId svg {
+  fill: #ffff !important;
+}
+.vehicleCard:hover .truckImage {
+  opacity: 1;
+}
+.vehicleCard:hover .vehicleCard_Text {
+  color: #ffff;
+}
+.vehicleCard:hover .cardLastIcon {
+  fill: #ffff;
+}
+.vehicleCard:hover .cardLastIcon_Stroke {
+  stroke: #ffff;
+}
+
+/* For Select Card */
+.selectCard {
+  color: #ffff;
+  background-color: #003e70 !important;
+}
+.selectCard .trackId svg {
+  fill: #ffff !important;
+}
+.selectCard .truckImage {
+  opacity: 1;
+}
+.selectCard .vehicleCard_Text {
+  color: #ffff;
+}
+.selectCard .cardLastIcon {
+  fill: #ffff;
+}
+.selectCard .cardLastIcon_Stroke {
+  stroke: #ffff;
+}
+
+/* MODAL */
+.modalCalender {
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.modalCalendertwo .text {
+  font-size: 13px;
+}
+
+.modal {
+  --bs-modal-width: 415px !important;
+}
+
+.calenderLine {
+  content: "";
+  width: 2px;
+  height: 40px;
+  background-color: #f0f0f0;
+}
