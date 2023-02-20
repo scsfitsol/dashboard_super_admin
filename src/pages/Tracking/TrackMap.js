@@ -53,7 +53,7 @@ const TrackMap = (props) => {
             }
         })
         const data = location.filter((data) => data !== undefined)
-        setMapDataLive({ data })
+        setMapDataLive( location.filter((data) => data !== undefined) )
     };
 
     const getAllHandler = (data) => {
@@ -116,17 +116,7 @@ const TrackMap = (props) => {
                             })
                             }
                             <Polyline
-                                path={[
-                                    { lat: 13.693, lng: 79.5946 },
-                                    { lat: 13.5927, lng: 79.3473 },
-                                    { lat: 13.5652, lng: 79.259 },
-                                    { lat: 13.1913, lng: 78.6407 },
-                                    { lat: 13.1918, lng: 78.5786 },
-                                    { lat: 13.1918, lng: 78.5786 },
-                                    { lat: 13.1918, lng: 78.5786 },
-                                    { lat: 13.1984, lng: 78.4828 },
-                                    { lat: 13.1984, lng: 78.4828 }]
-                                }
+                                path={mapDataLive}
                                 fillColor="#0000FF"
                                 fillOpacity={1}
                                 strokeColor="#0000FF"
