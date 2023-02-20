@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import { GoogleApiWrapper, InfoWindow, Map, Marker, Polyline } from "google-maps-react"
-import { Col, Row } from "reactstrap"
+import { Card, CardBody, Col, Row } from "reactstrap"
 import { connect } from "react-redux"
 import useHttp from "../../components/Hook/Use-http"
 import axios from "axios"
@@ -10,6 +10,8 @@ import defaultImage from "../../assets/images/UserImage.jpg";
 import MapTruck from '../../assets/images/MapTruck.png'
 import Slider from "react-rangeslider"
 import "react-rangeslider/lib/index.css"
+import notify from "../Utility/coustemFunction"
+import moment from "moment/moment"
 
 const LoadingContainer = () => <div>Loading...</div>
 
@@ -51,6 +53,10 @@ const TrackMap = (props) => {
             setStartEndLocation([])
         }
         setMapDataLive(mapRoute.map((e) => e.loc))
+
+        if (!mapRoute.length > 0) {
+            notify.error('Tracking Data Not Found')
+        }
     };
 
     return (
@@ -108,20 +114,30 @@ const TrackMap = (props) => {
                                 </div>
                             </InfoWindow>
                         </Map>
-                        <Col md={3} className='MapRangeSlider'>
-                            <div className="p-3">
-                                <Slider
-                                    value={tripStep}
-                                    min={1}
-                                    max={tripData.length}
-                                    // labels={tripData.map((e) => e.time)}
-                                    orientation="horizontal"
-                                    onChange={value => {
-                                        setTripStep(value)
-                                    }}
-                                />
-                            </div>
-                        </Col>
+                        {
+                            mapDataLive.length > 0 &&
+                            <Col md={3} className='MapRangeSlider'>
+                                <div className="p-3">
+                                    <Card>
+                                        <CardBody className="py-0 pt-3 text-start">
+                                            <p>{moment(tripData[tripStep - 1]?.time).format('LL, LT')}</p>
+                                            <p>{tripData[tripStep - 1]?.address}</p>
+
+                                            <Slider
+                                                value={tripStep}
+                                                min={1}
+                                                max={tripData.length}
+                                                // labels={tripData.map((e) => e.time)}
+                                                orientation="horizontal"
+                                                onChange={value => {
+                                                    setTripStep(value)
+                                                }}
+                                            />
+                                        </CardBody>
+                                    </Card>
+                                </div>
+                            </Col>
+                        }
                     </div>
                 </Col>
             </Row>

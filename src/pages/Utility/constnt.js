@@ -268,7 +268,7 @@ const CONSTANT = {
           className: "waves-effect",
           to: "/drivers",
           lable: "Drivers",
-          icon: "bx bx-female-sign",
+          icon: "fas fa-user",
         },
         {
           id: 2,
