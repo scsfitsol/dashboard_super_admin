@@ -23,28 +23,35 @@ import LockScreen from "../pages/AuthenticationInner/auth-lock-screen";
 // Profile
 import UserProfile from "../pages/Authentication/user-profile";
 import Report from "../pages/Report";
-import Traking from "../pages/Traking";
+import Tracking from "../pages/Tracking";
 import Admin from "../pages/User";
-import Clients from "../pages/User/clients";
-import Driver from "../pages/User/driver";
 import Vehicals from "../pages/Vehicals";
 import Trip from "../pages/Trip";
 import Plants from "../pages/Plants";
+import Clients from "../pages/User/client";
+import Driver from "../pages/User/driver";
 import Transporter from "../pages/User/transporter";
+import ClientInfo from "../pages/User/client/ClientInfo";
+import TransporterInfo from "../pages/User/transporter/transpoterInfo";
+import DriverInfo from "../pages/User/driver/DriverInfo";
+import VehiclesInfo from "../pages/Vehicals/VehiclesInfo";
 
 const userRoutes = [
   // Analytics
   { path: "/Dashboard", component: Report },
-  { path: "/traking", component: Traking },
+  { path: "/tracking", component: Tracking },
 
   // User
   { path: "/admins", component: Admin },
   { path: "/clients", component: Clients },
+  { path: "/clientInfo/:clientId", component: (props) => <ClientInfo {...props} /> },
   { path: "/drivers", component: Driver },
-  { path: "/drivers", component: Driver },
+  { path: "/driversInfo/:driversId", component: (props) => <DriverInfo {...props} /> },
   { path: "/transporter", component: Transporter },
+  { path: "/transposerInfo/:transposerId", component: (props) => <TransporterInfo {...props} /> },
   // Vehical
   { path: "/vehicles", component: Vehicals },
+  { path: "/vehiclesInfo/:vehiclesId", component: VehiclesInfo },
 
   // Trip
   { path: "/trip", component: Trip },

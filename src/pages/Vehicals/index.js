@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SweetAlert from "react-bootstrap-sweetalert";
-import { Button, Row } from "reactstrap";
+import { useHistory } from "react-router-dom";
+import { Button, NavLink, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
 import useHttp from "../../components/Hook/Use-http";
@@ -18,6 +19,7 @@ const Vehicals = () => {
   const [flag, setFlag] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
   const API_CALL = useHttp();
+  const history = useHistory()
 
   useEffect(() => {
     (async () => {
@@ -41,12 +43,18 @@ const Vehicals = () => {
     });
   };
 
+
+  const GoToVehicleInfo = (vehicleData) => {
+    history.push(`/vehiclesInfo/${vehicleData?.id}`, { state: { vehicleData: vehicleData } })
+  }
+
   const vehicleDataHandler = (res) => {
     setVehicleData(
       res?.data.map((vehicleData, index) => {
         return {
           ...vehicleData,
           no: index + 1,
+          RegistrationNumbers: <NavLink className="TableLink" onClick={() => GoToVehicleInfo(vehicleData)} style={{ color: "gray", cursor: 'pointer' }} >{vehicleData?.registrationNumber}</NavLink>,
           transporterName: vehicleData?.transporter?.transporterName,
           action: (
             <>

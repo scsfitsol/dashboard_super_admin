@@ -18,7 +18,6 @@ const CustomForm = (props) => {
     setIsChange(true);
   };
   const onChangeFileValue = (e) => {
-    console.log([e.target.name], e.target.files[0]);
     setInputData({ ...inputData, [e.target.name]: e.target.files[0] });
   };
   let payload = new FormData();
@@ -30,7 +29,6 @@ const CustomForm = (props) => {
         payload.append(key, inputData[key]);
       });
 
-      console.log("payload", payload);
       onSubmit(payload);
     } else {
       onSubmit(inputData);
