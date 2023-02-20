@@ -32,7 +32,6 @@ const UserProfile = (props) => {
   }
 
   const onSubmitForm = (payload) => {
-    console.log("payload", payload);
     (async () => {
       API_CALL.sendRequest(
         CONSTANT.API.adminUpdate,

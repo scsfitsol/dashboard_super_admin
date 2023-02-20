@@ -90,9 +90,9 @@ const SidebarContent = (props) => {
                 <Fragment key={`menuItem${menuItem.id}`}>
                   <li className="menu-title">{props.t(menuItem.title)} </li>
                   {menuItem.submenu &&
-                    menuItem.submenu.map((subMenuItem) => {
+                    menuItem.submenu.map((subMenuItem, index) => {
                       return (
-                        <li key={`subMenuItem${subMenuItem.id}`}>
+                        <li key={`subMenuItem${index}`}>
                           <Link
                             to={subMenuItem.to}
                             className={subMenuItem.className}
@@ -107,9 +107,8 @@ const SidebarContent = (props) => {
                                 (dropDownMenuItem, index) => {
                                   return (
                                     <li
-                                      key={`dropDownMenuItem${
-                                        dropDownMenuItem + index
-                                      }`}
+                                      key={`dropDownMenuItem${dropDownMenuItem + index
+                                        }`}
                                     >
                                       <Link to={dropDownMenuItem.to}>
                                         {props.t(dropDownMenuItem.lable)}

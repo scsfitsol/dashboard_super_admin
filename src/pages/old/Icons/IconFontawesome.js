@@ -20,7 +20,7 @@ const IconFontawesome = props => {
           switch (value) {
             case "brands":
               brand +=
-                '<div class="col-xl-3 col-lg-4 col-sm-6"><i class="fab fa-' +
+                '<div className="col-xl-3 col-lg-4 col-sm-6"><i className="fab fa-' +
                 entry.id +
                 '"></i> fab fa-' +
                 entry.id +
@@ -28,7 +28,7 @@ const IconFontawesome = props => {
               break;
             case "solid":
               solid +=
-                '<div class="col-xl-3 col-lg-4 col-sm-6"><i class="fas fa-' +
+                '<div className="col-xl-3 col-lg-4 col-sm-6"><i className="fas fa-' +
                 entry.id +
                 '"></i> fas fa-' +
                 entry.id +
@@ -36,7 +36,7 @@ const IconFontawesome = props => {
               break;
             default:
               regular +=
-                '<div class="col-xl-3 col-lg-4 col-sm-6"><i class="far fa-' +
+                '<div className="col-xl-3 col-lg-4 col-sm-6"><i className="far fa-' +
                 entry.id +
                 '"></i> far fa-' +
                 entry.id +
@@ -54,47 +54,47 @@ const IconFontawesome = props => {
   return (
     <React.Fragment>
       <div className="page-content">
-       
-          <Breadcrumbs title="Icons" breadcrumbItem="Font awesome" />
 
-          <Row>
-            <Col xs="12">
-              <Card>
-                <CardBody>
-                  <h4 className="card-title">Solid</h4>
-                  <p className="card-title-desc mb-2">
-                    Use <code>&lt;i className="fas fa-ad"&gt;&lt;/i&gt;</code>{" "}
-                    <span className="badge badge-success">v 5.13.0</span>.
-                  </p>
-                  <Row className="icon-demo-content" id="solid"></Row>
-                </CardBody>
-              </Card>
-              <Card>
-                <CardBody>
-                  <h4 className="card-title">Regular</h4>
-                  <p className="card-title-desc mb-2">
-                    Use{" "}
-                    <code>
-                      &lt;i className="far fa-address-book"&gt;&lt;/i&gt;
-                    </code>{" "}
-                    <span className="badge badge-success">v 5.13.0</span>.
-                  </p>
-                  <Row className="icon-demo-content" id="regular"></Row>
-                </CardBody>
-              </Card>
-              <Card>
-                <CardBody>
-                  <h4 className="card-title">Brands</h4>
-                  <p className="card-title-desc mb-2">
-                    Use{" "}
-                    <code>&lt;i className="fab fa-500px"&gt;&lt;/i&gt;</code>{" "}
-                    <span className="badge badge-success">v 5.13.0</span>.
-                  </p>
-                  <Row className="icon-demo-content" id="brand"></Row>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
+        <Breadcrumbs title="Icons" breadcrumbItem="Font awesome" />
+
+        <Row>
+          <Col xs="12">
+            <Card>
+              <CardBody>
+                <h4 className="card-title">Solid</h4>
+                <p className="card-title-desc mb-2">
+                  Use <code>&lt;i className="fas fa-ad"&gt;&lt;/i&gt;</code>{" "}
+                  <span className="badge badge-success">v 5.13.0</span>.
+                </p>
+                <Row className="icon-demo-content" id="solid"></Row>
+              </CardBody>
+            </Card>
+            <Card>
+              <CardBody>
+                <h4 className="card-title">Regular</h4>
+                <p className="card-title-desc mb-2">
+                  Use{" "}
+                  <code>
+                    &lt;i className="far fa-address-book"&gt;&lt;/i&gt;
+                  </code>{" "}
+                  <span className="badge badge-success">v 5.13.0</span>.
+                </p>
+                <Row className="icon-demo-content" id="regular"></Row>
+              </CardBody>
+            </Card>
+            <Card>
+              <CardBody>
+                <h4 className="card-title">Brands</h4>
+                <p className="card-title-desc mb-2">
+                  Use{" "}
+                  <code>&lt;i className="fab fa-500px"&gt;&lt;/i&gt;</code>{" "}
+                  <span className="badge badge-success">v 5.13.0</span>.
+                </p>
+                <Row className="icon-demo-content" id="brand"></Row>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
       </div>
     </React.Fragment>
   )

@@ -4,10 +4,9 @@ import { Row, Col, CardBody, Card, CardTitle } from "reactstrap";
 //Import Image
 import Overview from "./Overview";
 import RadialChart from "../old/AllCharts/apex/RadialChart";
-import CONSTANT, { ToolTipButton } from "../Utility/constnt";
+import CONSTANT, { MonthName, ToolTipButton } from "../Utility/constnt";
 import useHttp from "../../components/Hook/Use-http";
 import HomeChart1 from "../../components/Custome/Charts/HomeChart1";
-import DonutChart from "../old/AllCharts/apex/dountchart";
 import PieChart from "../old/AllCharts/apex/PieChart";
 // import ColumnChartToast from "../old/AllCharts/toastui/ColumnChartToast";
 
@@ -16,76 +15,31 @@ const CardData = [
     icon: "bx bxs-truck",
     name: "Transporters",
     count: 80,
+    API_Path1: 'transporter',
+    API_Path2: 'last30DaysTransporter'
   },
   {
     icon: "mdi mdi-account-multiple-outline",
     name: "Clients",
     count: 120,
+    API_Path1: 'last30DaysClient',
+    API_Path2: null
   },
   {
     icon: "bx bxs-factory",
     name: "Sites",
     count: 60,
+    API_Path1: 'plant',
+    API_Path2: 'last30DaysPlant'
   },
 ];
 
 const Report = () => {
   const [analysisData, setAnalysisData] = useState({});
+  const [transporterList, setTransporterList] = useState([]);
+  const [tripList, setTripList] = useState([])
   const API_CALL = useHttp();
-  const Transport = [
-    {
-      per: 80,
-      name: "	Sarine",
-      trip: 200,
-    },
-    {
-      per: 100,
-      name: "Lefty",
-      trip: 120,
-    },
-    {
-      per: 50,
-      name: "Devondra",
-      trip: 40,
-    },
-    {
-      per: 30,
-      name: "Luisa",
-      trip: 210,
-    },
-    {
-      per: 90,
-      name: "Chloe",
-      trip: 30,
-    },
-  ];
-  const Carbon = [
-    {
-      per: 50,
-      name: "Darbee",
-      trip: 120,
-    },
-    {
-      per: 90,
-      name: "Merrill",
-      trip: 180,
-    },
-    {
-      per: 70,
-      name: "Harv",
-      trip: 900,
-    },
-    {
-      per: 10,
-      name: "Ardelia",
-      trip: 200,
-    },
-    {
-      per: 100,
-      name: "Merry",
-      trip: 100,
-    },
-  ];
+
   useEffect(() => {
     (async () => {
       API_CALL.sendRequest(CONSTANT.API.getAnalysis, analysisDataHandler);
@@ -94,6 +48,24 @@ const Report = () => {
 
   const analysisDataHandler = (res) => {
     setAnalysisData(res?.data);
+    setTransporterList(
+      res?.data?.transporter?.transporterAnalytics.map((e) => {
+        return {
+          per: e?.utilisationAvg.toFixed(2),
+          name: e?.name,
+          trip: e?.count,
+        }
+      })
+    );
+    setTripList(
+      res?.data?.trip?.lastAllMonthsTripAnalytics.map((e) => {
+        return {
+          per: e?.utilisationAvg.toFixed(2), //Total Trip
+          name: MonthName[e?.month - 1],
+          trip: 10,
+        }
+      })
+    )
   };
   return (
     <React.Fragment>
@@ -147,7 +119,11 @@ const Report = () => {
 
                     <div className="d-flex">
                       <div className="">
-                        <h4 className="mt-4 ">{data?.count}</h4>
+                        {
+                          data?.API_Path2 !== null
+                            ? <h4 className="mt-4 ">{analysisData?.[data?.API_Path1]?.[data?.API_Path2]}</h4>
+                            : <h4 className="mt-4 ">{analysisData?.[data?.API_Path1]}</h4>
+                        }
                       </div>
                     </div>
                   </CardBody>
@@ -168,7 +144,7 @@ const Report = () => {
                     msg="Showcase the total number of allocated and free vehicles"
                   />
                 </div>
-                <PieChart />
+                <PieChart data={Object.keys(analysisData).length > 0 && [+analysisData?.vehicle?.allocatedVehicle, +analysisData?.vehicle?.freeVehicle]} />
               </CardBody>
             </Card>
           </Col>
@@ -182,7 +158,9 @@ const Report = () => {
                     msg="Overall different status of the total number of trips"
                   />
                 </div>
-                <RadialChart />
+                <RadialChart
+                  data={Object.keys(analysisData).length > 0 && [+analysisData?.trip?.totalLateTrip, +analysisData?.trip?.totalOnTimeTrip, +analysisData?.trip?.totalEarlyTrip]}
+                />
               </CardBody>
             </Card>
           </Col>
@@ -198,7 +176,7 @@ const Report = () => {
                     msg="Showcase the transporter’s efficiency on the number of trips covered, fuel consumed, etc."
                   />
                 </div>
-                <Overview data={Transport} isPercentage={true} />
+                <Overview data={transporterList} isPercentage={true} />
               </CardBody>
             </Card>
           </Col>
@@ -212,7 +190,7 @@ const Report = () => {
                     msg="Carbon emitted to date on a total number of trips completed by different clients."
                   />
                 </div>
-                <Overview data={Carbon} />
+                <Overview data={tripList} />
               </CardBody>
             </Card>
           </Col>
