@@ -4,7 +4,6 @@ import {
   TabContent,
   TabPane,
   Collapse,
-  NavLink,
   NavItem,
   Nav,
   Card,
@@ -14,7 +13,7 @@ import {
   CardTitle,
 } from "reactstrap"
 
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 
 //Import Breadcrumb
 import Breadcrumbs from "../../components/Common/Breadcrumb"
@@ -138,7 +137,7 @@ const UiTabsAccordions = () => {
                       qui irure terry richardson ex squid. Aliquip placeat salvia cillum
                       iphone. Seitan aliquip quis cardigan american apparel, butcher
                       voluptate nisi qui.
-                                            </p>
+                    </p>
                   </TabPane>
                   <TabPane tabId="2" className="p-3">
                     <p className="mb-0">
@@ -149,7 +148,7 @@ const UiTabsAccordions = () => {
                       commodo enim craft beer mlkshk aliquip jean shorts ullamco ad
                       vinyl cillum PBR. Homo nostrud organic, assumenda labore
                       aesthetic magna delectus.
-                                            </p>
+                    </p>
                   </TabPane>
                   <TabPane tabId="3" className="p-3">
                     <p className="mb-0">
@@ -160,7 +159,7 @@ const UiTabsAccordions = () => {
                       salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
                       Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh
                       mi whatever gluten yr.
-                      </p>
+                    </p>
                   </TabPane>
                   <TabPane tabId="4" className="p-3">
                     <p className="mb-0">
@@ -169,7 +168,7 @@ const UiTabsAccordions = () => {
                       cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf
                       cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR,
                       banh mi before they sold out farm-to-table VHS.
-                      </p>
+                    </p>
                   </TabPane>
                 </TabContent>
               </CardBody>
@@ -181,11 +180,11 @@ const UiTabsAccordions = () => {
               <CardBody>
                 <CardTitle className="h4">
                   Justify Tabs
-                  </CardTitle>
+                </CardTitle>
                 <p className="card-title-desc">Use the tab JavaScript plugin—include it individually or
-                                    through the compiled <code className="highlighter-rouge">bootstrap.js</code> file—to
-                                    extend our navigational tabs and pills to create tabbable panes of local
-                                    content, even via dropdown menus.</p>
+                  through the compiled <code className="highlighter-rouge">bootstrap.js</code> file—to
+                  extend our navigational tabs and pills to create tabbable panes of local
+                  content, even via dropdown menus.</p>
 
                 <Nav pills className="nav-justified">
                   <NavItem className="waves-effect waves-light">
@@ -256,7 +255,7 @@ const UiTabsAccordions = () => {
                       qui irure terry richardson ex squid. Aliquip placeat salvia cillum
                       iphone. Seitan aliquip quis cardigan american apparel, butcher
                       voluptate nisi qui.
-                                            </p>
+                    </p>
                   </TabPane>
                   <TabPane tabId="26">
                     <p className="mb-0">
@@ -267,7 +266,7 @@ const UiTabsAccordions = () => {
                       commodo enim craft beer mlkshk aliquip jean shorts ullamco ad
                       vinyl cillum PBR. Homo nostrud organic, assumenda labore
                       aesthetic magna delectus.
-                                            </p>
+                    </p>
                   </TabPane>
                   <TabPane tabId="27">
                     <p className="mb-0">
@@ -278,7 +277,7 @@ const UiTabsAccordions = () => {
                       salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
                       Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh
                       mi whatever gluten yr.
-                                            </p>
+                    </p>
                   </TabPane>
 
                   <TabPane tabId="28">
@@ -289,7 +288,7 @@ const UiTabsAccordions = () => {
                       art party locavore wolf cliche high life echo park Austin. Cred
                       vinyl keffiyeh DIY salvia PBR, banh mi before they sold out
                       farm-to-table VHS.
-                                            </p>
+                    </p>
                   </TabPane>
                 </TabContent>
               </CardBody>
@@ -305,7 +304,7 @@ const UiTabsAccordions = () => {
                 <CardTitle className="h4">Vertical Nav Tabs</CardTitle>
                 <p className="card-title-desc">
                   Example of Vertical nav tabs
-                  </p>
+                </p>
                 <Row>
                   <Col md={3}>
                     <Nav pills className="flex-column">
@@ -374,10 +373,10 @@ const UiTabsAccordions = () => {
                           butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi,
                           qui irure terry richardson ex squid. Aliquip placeat salvia cillum
                           iphone. Seitan aliquip quis cardigan.
-                                                    </p>
+                        </p>
                         <p>Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby
-                        sweater eu banh mi,
-                                                        qui irure terry richardson ex squid.</p>
+                          sweater eu banh mi,
+                          qui irure terry richardson ex squid.</p>
                       </TabPane>
                       <TabPane tabId="16">
                         <p>
@@ -386,10 +385,10 @@ const UiTabsAccordions = () => {
                           sartorial PBR leggings next level wes anderson artisan four loko
                           farm-to-table craft beer twee. Qui photo booth letterpress,
                           commodo enim craft beer mlkshk.
-                                                    </p>
+                        </p>
                         <p className="mb-0"> Qui photo booth letterpress, commodo enim craft beer
-                        mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud
-                                                        organic, assumenda labore aesthetic magna 8-bit</p>
+                          mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud
+                          organic, assumenda labore aesthetic magna 8-bit</p>
                       </TabPane>
                       <TabPane tabId="17">
                         <p>
@@ -399,10 +398,10 @@ const UiTabsAccordions = () => {
                           tattooed craft beer, iphone skateboard locavore carles etsy
                           salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
                           Leggings gentrify squid 8-bit cred.
-                                                    </p>
+                        </p>
                         <p className="mb-0">DIY synth PBR banksy irony.
-                        Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh
-                                                        mi whatever gluten-free.</p>
+                          Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh
+                          mi whatever gluten-free.</p>
                       </TabPane>
                       <TabPane tabId="18">
                         <p>
@@ -412,12 +411,12 @@ const UiTabsAccordions = () => {
                           art party locavore wolf cliche high life echo park Austin. Cred
                           vinyl keffiyeh DIY salvia PBR, banh mi before they sold out
                           farm-to-table.
-                                                    </p>
+                        </p>
                         <p className="mb-0">Fanny pack portland seitan DIY,
-                        art party locavore wolf cliche high life echo park Austin. Cred
-                        vinyl keffiyeh DIY salvia PBR, banh mi before they sold out
-                        farm-to-table.
-                                                    </p>
+                          art party locavore wolf cliche high life echo park Austin. Cred
+                          vinyl keffiyeh DIY salvia PBR, banh mi before they sold out
+                          farm-to-table.
+                        </p>
                       </TabPane>
                     </TabContent>
                   </Col>
@@ -433,7 +432,7 @@ const UiTabsAccordions = () => {
                 <CardTitle className="h4">Custom Tabs</CardTitle>
                 <p className="card-title-desc">
                   Example of custom tabs
-                  </p>
+                </p>
 
                 <Nav tabs className="nav-tabs-custom nav-justified">
                   <NavItem>
@@ -504,7 +503,7 @@ const UiTabsAccordions = () => {
                       qui irure terry richardson ex squid. Aliquip placeat salvia cillum
                       iphone. Seitan aliquip quis cardigan american apparel, butcher
                       voluptate nisi qui.
-                                            </p>
+                    </p>
                   </TabPane>
                   <TabPane tabId="6" className="p-3">
                     <p className="mb-0">
@@ -515,7 +514,7 @@ const UiTabsAccordions = () => {
                       commodo enim craft beer mlkshk aliquip jean shorts ullamco ad
                       vinyl cillum PBR. Homo nostrud organic, assumenda labore
                       aesthetic magna delectus.
-                                            </p>
+                    </p>
                   </TabPane>
                   <TabPane tabId="7" className="p-3">
                     <p className="mb-0">
@@ -526,7 +525,7 @@ const UiTabsAccordions = () => {
                       salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
                       Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh
                       mi whatever gluten-free carles.
-                                            </p>
+                    </p>
                   </TabPane>
 
                   <TabPane tabId="8" className="p-3">
@@ -538,7 +537,7 @@ const UiTabsAccordions = () => {
                       vinyl keffiyeh DIY salvia PBR, banh mi before they sold out
                       farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral,
                       mustache readymade keffiyeh craft.
-                                            </p>
+                    </p>
                   </TabPane>
                 </TabContent>
               </CardBody>
@@ -554,15 +553,15 @@ const UiTabsAccordions = () => {
                 <p className="card-title-desc mb-3">
                   You can use a link with the{" "}
                   <code className="highlighter-rouge">href</code> attribute,
-                    or a button with the{" "}
+                  or a button with the{" "}
                   <code className="highlighter-rouge">data-target</code>{" "}
-                    attribute. In both cases, the{" "}
+                  attribute. In both cases, the{" "}
                   <code className="highlighter-rouge">
                     {" "}
-                      data-toggle="collapse"
-                    </code>{" "}
-                    is required.
-                  </p>
+                    data-toggle="collapse"
+                  </code>{" "}
+                  is required.
+                </p>
 
                 <p className="d-flex flex-wrap gap-2">
                   <Link
@@ -574,7 +573,7 @@ const UiTabsAccordions = () => {
                     className="btn btn-primary"
                   >
                     Link with href
-                    </Link>
+                  </Link>
                   <button
                     onClick={() => {
                       setcol5(!col5)
@@ -584,7 +583,7 @@ const UiTabsAccordions = () => {
                     style={{ cursor: "pointer" }}
                   >
                     Button with data-target
-                    </button>
+                  </button>
                 </p>
                 <Collapse isOpen={col5}>
                   <CardBody>
@@ -592,7 +591,7 @@ const UiTabsAccordions = () => {
                     life accusamus terry richardson ad squid. Nihil anim
                     keffiyeh helvetica, craft beer labore wes anderson cred
                     nesciunt sapiente ea proident.
-                      </CardBody>
+                  </CardBody>
                 </Collapse>
               </CardBody>
             </Card>
@@ -603,7 +602,7 @@ const UiTabsAccordions = () => {
                 <CardTitle className="h4">Accordion example</CardTitle>
                 <p className="card-title-desc">
                   Extend the default collapse behavior to create an accordion.
-                  </p>
+                </p>
                 <div className="accordion" id="accordionExample">
                   <div className="accordion-item">
                     <h2 className="accordion-header" id="headingOne">
@@ -613,20 +612,20 @@ const UiTabsAccordions = () => {
                         }}
                         style={{ cursor: "pointer" }}>
                         Accordion Item #1
-                                                </button>
+                      </button>
                     </h2>
                     <Collapse id="collapseOne" className="accordion-collapse show"
                       isOpen={col1}>
                       <div className="accordion-body">
                         <strong>This is the first item's accordion body.</strong> It is hidden
-                                                    by default, until the collapse plugin adds the appropriate classes that
-                                                    we use to style each element. These classes control the overall
-                                                    appearance, as well as the showing and hiding via CSS transitions. You
-                                                    can modify any of this with custom CSS or overriding our default
-                                                    variables. It's also worth noting that just about any HTML can go within
-                                                    the <code>.accordion-body</code>, though the transition does limit
-                                                    overflow.
-                                                </div>
+                        by default, until the collapse plugin adds the appropriate classes that
+                        we use to style each element. These classes control the overall
+                        appearance, as well as the showing and hiding via CSS transitions. You
+                        can modify any of this with custom CSS or overriding our default
+                        variables. It's also worth noting that just about any HTML can go within
+                        the <code>.accordion-body</code>, though the transition does limit
+                        overflow.
+                      </div>
                     </Collapse>
                   </div>
                   <div className="accordion-item">
@@ -637,19 +636,19 @@ const UiTabsAccordions = () => {
                         }}
                         style={{ cursor: "pointer" }}>
                         Accordion Item #2
-                                                </button>
+                      </button>
                     </h2>
                     <Collapse id="collapseTwo" className="accordion-collapse" isOpen={col2}>
                       <div className="accordion-body">
                         <strong>This is the second item's accordion body.</strong> It is hidden
-                                                    by default, until the collapse plugin adds the appropriate classes that
-                                                    we use to style each element. These classes control the overall
-                                                    appearance, as well as the showing and hiding via CSS transitions. You
-                                                    can modify any of this with custom CSS or overriding our default
-                                                    variables. It's also worth noting that just about any HTML can go within
-                                                    the <code>.accordion-body</code>, though the transition does limit
-                                                    overflow.
-                                                </div>
+                        by default, until the collapse plugin adds the appropriate classes that
+                        we use to style each element. These classes control the overall
+                        appearance, as well as the showing and hiding via CSS transitions. You
+                        can modify any of this with custom CSS or overriding our default
+                        variables. It's also worth noting that just about any HTML can go within
+                        the <code>.accordion-body</code>, though the transition does limit
+                        overflow.
+                      </div>
                     </Collapse>
                   </div>
                   <div className="accordion-item">
@@ -660,19 +659,19 @@ const UiTabsAccordions = () => {
                         }}
                         style={{ cursor: "pointer" }}>
                         Accordion Item #3
-                                                </button>
+                      </button>
                     </h2>
                     <Collapse id="collapseThree" className="accordion-collapse" isOpen={col3}>
                       <div className="accordion-body">
                         <strong>This is the third item's accordion body.</strong> It is hidden
-                                                    by default, until the collapse plugin adds the appropriate classes that
-                                                    we use to style each element. These classes control the overall
-                                                    appearance, as well as the showing and hiding via CSS transitions. You
-                                                    can modify any of this with custom CSS or overriding our default
-                                                    variables. It's also worth noting that just about any HTML can go within
-                                                    the <code>.accordion-body</code>, though the transition does limit
-                                                    overflow.
-                                                </div>
+                        by default, until the collapse plugin adds the appropriate classes that
+                        we use to style each element. These classes control the overall
+                        appearance, as well as the showing and hiding via CSS transitions. You
+                        can modify any of this with custom CSS or overriding our default
+                        variables. It's also worth noting that just about any HTML can go within
+                        the <code>.accordion-body</code>, though the transition does limit
+                        overflow.
+                      </div>
                     </Collapse>
                   </div>
                 </div>

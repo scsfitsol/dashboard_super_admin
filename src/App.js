@@ -23,6 +23,8 @@ import "./assets/css/ReactToastify.css";
 import CONSTANT, { MyData } from "./pages/Utility/constnt";
 import useHttp from "./components/Hook/Use-http";
 
+//Import Css
+import "./assets/css/Custom.css"
 // Activating fake backend
 fakeBackend();
 
@@ -63,7 +65,7 @@ const App = (props) => {
       <Router>
         <Switch>
           {authRoutes.map((route, idx) => (
-            <Authmiddleware
+            < Authmiddleware
               path={route.path}
               layout={NonAuthLayout}
               component={route.component}

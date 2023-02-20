@@ -1,0 +1,36 @@
+.TabDesign {
+  box-shadow: 0 1px 15px rgb(0 0 0 / 4%), 0 1px 6px rgb(0 0 0 / 4%);
+}
+
+.activeTabDesign {
+  background-color: white !important;
+  box-shadow: 0 3px 30px rgb(0 0 0 / 10%), 0 3px 20px rgb(0 0 0 / 10%);
+}
+
+.TabBody {
+  box-shadow: 0px 0px 7px 5px #f3f3f3;
+}
+
+/* TABLE SCROll */
+::-webkit-scrollbar {
+  height: 5px !important;
+}
+
+/* Track */
+.dataTables_wrapper::-webkit-scrollbar-track {
+  background: red;
+}
+
+/* Handle */
+.dataTables_wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.dataTables_wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.TableLink:hover {
+  color: #2f4395 !important;
+}

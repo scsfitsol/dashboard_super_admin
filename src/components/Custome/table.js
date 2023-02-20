@@ -8,7 +8,7 @@ const Table = ({ title, data }) => {
     <React.Fragment>
       <div className="page-content mt-0 pt-0">
         <Row>
-          <Col className="col-12">
+          <Col className="col-12 OverFlowScroll">
             <Card>
               <CardBody>
                 <CardTitle>{title}</CardTitle>
