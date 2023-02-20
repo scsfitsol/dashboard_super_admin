@@ -205,7 +205,7 @@ const Tracking = () => {
                 ))}
               </div>
             </Row>
-            <TrackMap  data={selectTripData}/>
+            <TrackMap data={selectTripData} />
           </>
         ) : (
           <>
