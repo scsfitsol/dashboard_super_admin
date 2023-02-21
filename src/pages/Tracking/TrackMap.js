@@ -4,14 +4,12 @@ import { GoogleApiWrapper, InfoWindow, Map, Marker, Polyline } from "google-maps
 import { Card, CardBody, Col, Row } from "reactstrap"
 import { connect } from "react-redux"
 import useHttp from "../../components/Hook/Use-http"
-import axios from "axios"
-
-import defaultImage from "../../assets/images/UserImage.jpg";
 import MapTruck from '../../assets/images/MapTruck.png'
 import Slider from "react-rangeslider"
 import "react-rangeslider/lib/index.css"
 import notify from "../Utility/coustemFunction"
 import moment from "moment/moment"
+import { map } from "leaflet"
 
 const LoadingContainer = () => <div>Loading...</div>
 
@@ -21,7 +19,8 @@ const TrackMap = (props) => {
     const [tripData, setTripData] = useState([])
     const [mapDataLive, setMapDataLive] = useState([])
     const [startEndLocation, setStartEndLocation] = useState([])
-    const [tripStep, setTripStep] = useState(0)
+    const [tripStep, setTripStep] = useState(1)
+    const [routesBounds, setRoutesBounds] = useState()
 
     useEffect(() => {
         (async () => {
@@ -33,14 +32,14 @@ const TrackMap = (props) => {
             API_CALL.sendRequest(URL, MapLocationHandler);
         })();
     }, [data]);
-
     const MapLocationHandler = (res) => {
         const location = res?.data.map((data) => {
             if (data?.latitude && data?.longtitude) {
                 return {
                     loc: { lat: data?.latitude, lng: data?.longtitude },
                     time: data?.updateLocationTime,
-                    address: data?.detailedAddress
+                    address: data?.detailedAddress,
+                    id: data?.id
                 }
             }
         })
@@ -48,16 +47,38 @@ const TrackMap = (props) => {
         setTripData(mapRoute)
         if (mapRoute.length > 0) {
             setStartEndLocation([mapRoute[0].loc, mapRoute[mapRoute.length - 1].loc]);
+            var directionsService = new props.google.maps.DirectionsService();
+            var directionsRenderer = new props.google.maps.DirectionsRenderer();
+
+
+            directionsRenderer.setMap(map);
+
+
+            var request = {
+                origin: mapRoute[0].loc,
+                destination: mapRoute[mapRoute.length - 1].loc,
+                travelMode: 'DRIVING'
+            };
+
+
+            directionsService.route(request, function (response, status) {
+                if (status == 'OK') {
+                    directionsRenderer.setDirections(response);
+                    setRoutesBounds(response.routes[0].overview_path)
+                }
+            });
         }
         else {
             setStartEndLocation([])
         }
         setMapDataLive(mapRoute.map((e) => e.loc))
 
-        if (!mapRoute.length > 0) {
+        if (Object.keys(data).length > 0 && !mapRoute.length > 0) {
             notify.error('Tracking Data Not Found')
         }
     };
+
+
 
     return (
         <div>
@@ -72,13 +93,13 @@ const TrackMap = (props) => {
                             google={props.google}
                             style={{ width: "100%", height: "50vh", borderRadius: '10px' }}
                             zoom={8}
-                            center={mapDataLive[0]}
+                            center={mapDataLive[0] || { lat: 21.1458, lng: 79.0882 }}
                             fullscreenControl={false}
-
                         >
-                            {startEndLocation.map((e) => {
+                            {startEndLocation.map((e, index) => {
                                 return (
                                     <Marker
+                                        key={index}
                                         title={"The marker`s title will appear as a tooltip."}
                                         name={"SOMA"}
                                         position={e}
@@ -100,8 +121,9 @@ const TrackMap = (props) => {
                                     }}
                                 />
                             }
+
                             <Polyline
-                                path={mapDataLive}
+                                path={routesBounds}
                                 fillColor="#0000FF"
                                 fillOpacity={1}
                                 strokeColor="#0000FF"
@@ -110,7 +132,7 @@ const TrackMap = (props) => {
                             />
                             <InfoWindow>
                                 <div>
-                                    <h1>Surat</h1>
+                                    <p>SURAT</p>
                                 </div>
                             </InfoWindow>
                         </Map>
