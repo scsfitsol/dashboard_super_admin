@@ -57,11 +57,11 @@ const Report = () => {
       })
     );
     setTripList(
-      res?.data?.trip?.lastAllMonthsTripAnalytics.map((e) => {
+      res?.data?.trip?.clientAnalytics.map((e) => {
         return {
-          per: e?.utilisationAvg.toFixed(2), //Total Trip
-          name: MonthName[e?.month - 1],
-          trip: 10,
+          per: e?.client?.carbonEmissionSum.toFixed(2), //Total Trip
+          name: e?.client?.name,
+          trip: e?.client?.count,
         }
       })
     )

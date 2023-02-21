@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.2fd6fa01.chunk.css",
-    "main.js": "/static/js/main.474c6163.chunk.js",
-    "main.js.map": "/static/js/main.474c6163.chunk.js.map",
+    "main.css": "/static/css/main.eccc943d.chunk.css",
+    "main.js": "/static/js/main.2d546512.chunk.js",
+    "main.js.map": "/static/js/main.2d546512.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.6e1e32e3.js",
     "runtime-main.js.map": "/static/js/runtime-main.6e1e32e3.js.map",
     "static/css/2.20aed3d1.chunk.css": "/static/css/2.20aed3d1.chunk.css",
-    "static/js/2.d49d80cf.chunk.js": "/static/js/2.d49d80cf.chunk.js",
-    "static/js/2.d49d80cf.chunk.js.map": "/static/js/2.d49d80cf.chunk.js.map",
+    "static/js/2.983a1a82.chunk.js": "/static/js/2.983a1a82.chunk.js",
+    "static/js/2.983a1a82.chunk.js.map": "/static/js/2.983a1a82.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.20aed3d1.chunk.css.map": "/static/css/2.20aed3d1.chunk.css.map",
-    "static/css/main.2fd6fa01.chunk.css.map": "/static/css/main.2fd6fa01.chunk.css.map",
-    "static/js/2.d49d80cf.chunk.js.LICENSE.txt": "/static/js/2.d49d80cf.chunk.js.LICENSE.txt",
+    "static/css/main.eccc943d.chunk.css.map": "/static/css/main.eccc943d.chunk.css.map",
+    "static/js/2.983a1a82.chunk.js.LICENSE.txt": "/static/js/2.983a1a82.chunk.js.LICENSE.txt",
     "static/media/UserImage.611e8313.jpg": "/static/media/UserImage.611e8313.jpg",
     "static/media/arrowDown.3560d93b.svg": "/static/media/arrowDown.3560d93b.svg",
     "static/media/arrowTop.1e4858c4.svg": "/static/media/arrowTop.1e4858c4.svg",
@@ -36,8 +36,20 @@
   "entrypoints": [
     "static/js/runtime-main.6e1e32e3.js",
     "static/css/2.20aed3d1.chunk.css",
+<<<<<<< HEAD
     "static/js/2.d49d80cf.chunk.js",
     "static/css/main.2fd6fa01.chunk.css",
     "static/js/main.474c6163.chunk.js"
+=======
+<<<<<<< HEAD
+    "static/js/2.d49d80cf.chunk.js",
+    "static/css/main.2fd6fa01.chunk.css",
+    "static/js/main.5a4a86a2.chunk.js"
+=======
+    "static/js/2.983a1a82.chunk.js",
+    "static/css/main.eccc943d.chunk.css",
+    "static/js/main.2d546512.chunk.js"
+>>>>>>> Map_Update
+>>>>>>> development
   ]
 }

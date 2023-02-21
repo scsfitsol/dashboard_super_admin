@@ -19,7 +19,7 @@ const Vectormap = props => {
           initial: {
             fill: props.color,
             stroke: "none",
-            "stroke-width": 0,
+            "strokeWidth": 0,
             "stroke-opacity": 0,
           },
           hover: {
