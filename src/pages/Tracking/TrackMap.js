@@ -20,18 +20,44 @@ const TrackMap = (props) => {
     const [mapDataLive, setMapDataLive] = useState([])
     const [startEndLocation, setStartEndLocation] = useState([])
     const [tripStep, setTripStep] = useState(1)
-    const [routesBounds, setRoutesBounds] = useState()
+    const [routesBounds, setRoutesBounds] = useState()  // Google API response path
+    const [routePath, setRoutePath] = useState([])  // BAckEnd API response path
+    const [startEndLocation2, setStartEndLocation2] = useState([])
+
+    const [placeId, setPlaceId] = useState()
+
+    const startAndEndLocation = () => {
+        // For Demo Place ID
+        (async () => {
+            var geocoder = new props.google.maps.Geocoder();
+            const mapData = data?.sourceId !== undefined &&
+                await Promise.all([data?.sourceId, data?.destinationId].map(async (id) => {
+                    const location = await geocoder.geocode({ placeId: id })
+                    try {
+                        return location?.results[0]?.geometry?.location
+                    }
+                    catch (err) {
+                        console.log(err)
+                    }
+                }))
+            console.log('mapData', mapData)
+            mapData !== false && setStartEndLocation2(mapData)
+        })()
+    }
 
     useEffect(() => {
         (async () => {
+            startAndEndLocation()
             setTripStep(0)
             const URL = {
                 endpoint: `/location/${data.id}`,
                 type: "GET",
             }
             API_CALL.sendRequest(URL, MapLocationHandler);
+            console.log('data', data)
         })();
     }, [data]);
+
     const MapLocationHandler = (res) => {
         const location = res?.data.map((data) => {
             if (data?.latitude && data?.longtitude) {
@@ -45,21 +71,19 @@ const TrackMap = (props) => {
         })
         const mapRoute = location.filter((data) => data?.loc !== undefined)
         setTripData(mapRoute)
+        setRoutePath(mapRoute.map((e) => e.loc))
         if (mapRoute.length > 0) {
             setStartEndLocation([mapRoute[0].loc, mapRoute[mapRoute.length - 1].loc]);
             var directionsService = new props.google.maps.DirectionsService();
             var directionsRenderer = new props.google.maps.DirectionsRenderer();
 
-
             directionsRenderer.setMap(map);
-
 
             var request = {
                 origin: mapRoute[0].loc,
                 destination: mapRoute[mapRoute.length - 1].loc,
                 travelMode: 'DRIVING'
             };
-
 
             directionsService.route(request, function (response, status) {
                 if (status == 'OK') {
@@ -93,10 +117,10 @@ const TrackMap = (props) => {
                             google={props.google}
                             style={{ width: "100%", height: "50vh", borderRadius: '10px' }}
                             zoom={8}
-                            center={mapDataLive[0] || { lat: 21.1458, lng: 79.0882 }}
+                            center={startEndLocation2[0] || { lat: 21.1458, lng: 79.0882 }}
                             fullscreenControl={false}
                         >
-                            {startEndLocation.map((e, index) => {
+                            {startEndLocation2.map((e, index) => {
                                 return (
                                     <Marker
                                         key={index}
@@ -121,9 +145,9 @@ const TrackMap = (props) => {
                                     }}
                                 />
                             }
-
                             <Polyline
-                                path={routesBounds}
+                                // path={routesBounds} 
+                                path={routePath}
                                 fillColor="#0000FF"
                                 fillOpacity={1}
                                 strokeColor="#0000FF"

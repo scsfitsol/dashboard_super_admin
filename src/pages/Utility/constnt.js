@@ -967,20 +967,19 @@ const CONSTANT = {
       },
     ],
     TRIP: [
-
       {
         name: "sourceLocation",
         label: "Source Location",
         placeholder: "Source Location",
-        type: "text",
-        required: false,
+        type: "GoogleAutoComplete",
+        required: true,
       },
       {
         name: "destinationLocation",
         label: "Destination Location",
         placeholder: "Destination Location",
-        type: "text",
-        required: false,
+        type: "GoogleAutoComplete",
+        required: true,
       },
       {
         name: "startDateAndTime",

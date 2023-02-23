@@ -19,7 +19,7 @@ const Transporter = () => {
     const [flag, setFlag] = useState(true);
     const [isEdit, setIsEdit] = useState(false);
     const API_CALL = useHttp();
-    const history = useHistory()
+    // const history = useHistory()
 
     useEffect(() => {
         (async () => {
@@ -31,7 +31,7 @@ const Transporter = () => {
     }, [flag]);
 
     const GoToTransposerInfo = (transporterData) => {
-        history.push(`/transposerInfo/${transporterData?.id}`, { state: { transporterData: transporterData } })
+        // history.push(`/transposerInfo/${transporterData?.id}`, { state: { transporterData: transporterData } })
     }
 
 

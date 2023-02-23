@@ -19,7 +19,7 @@ const Vehicals = () => {
   const [flag, setFlag] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
   const API_CALL = useHttp();
-  const history = useHistory()
+  // const history = useHistory()
 
   useEffect(() => {
     (async () => {
@@ -45,7 +45,7 @@ const Vehicals = () => {
 
 
   const GoToVehicleInfo = (vehicleData) => {
-    history.push(`/vehiclesInfo/${vehicleData?.id}`, { state: { vehicleData: vehicleData } })
+    // history.push(`/vehiclesInfo/${vehicleData?.id}`, { state: { vehicleData: vehicleData } })
   }
 
   const vehicleDataHandler = (res) => {

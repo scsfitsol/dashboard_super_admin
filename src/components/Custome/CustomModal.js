@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Col, Label, Modal, Row, Input } from "reactstrap";
 import Select from "react-select";
-
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import 'react-phone-number-input/style.css'
 const CustomModal = (props) => {
   const {
     modalType,
@@ -29,6 +30,18 @@ const CustomModal = (props) => {
   const onChangeFileValue = (e) => {
     setInputData({ ...inputData, [e.target.name]: e.target.files[0] });
   };
+
+  const onChangeGoogleAddress = (e, fieldName) => {
+    console.log('mapData', e)
+    if (fieldName === 'sourceLocation') {
+      setInputData({ ...inputData, sourceLocation: e?.label, sourceId: e?.value?.place_id })
+    }
+    else {
+      setInputData({ ...inputData, destinationLocation: e?.label, destinationId: e?.value?.place_id })
+    }
+
+  }
+
   let payload = new FormData();
   const onSubmitForm = (e) => {
     e.preventDefault();
@@ -49,6 +62,7 @@ const CustomModal = (props) => {
     setIsChange(false);
     setSelectedValue({});
   };
+
 
   return (
     <>
@@ -114,8 +128,8 @@ const CustomModal = (props) => {
                                   isEdit
                                     ? !isChange
                                       ? fieldName?.options.filter(
-                                          (e) => e.value === OldValue
-                                        )
+                                        (e) => e.value === OldValue
+                                      )
                                       : selectedValue[fieldName?.name]
                                     : selectedValue[fieldName?.name]
                                 }
@@ -142,6 +156,34 @@ const CustomModal = (props) => {
                                 onChange={onChangeInput}
                                 required={fieldName?.required}
                               />
+                            </div>
+                          );
+                        } else if (fieldName.type === "GoogleAutoComplete") {
+                          return (
+                            <div key={index} className="mb-4">
+                              <Label>{fieldName?.label}</Label><br />
+                              <GooglePlacesAutocomplete
+
+                                apiKey={'AIzaSyAIh5rjUYY8SoLb14LUnxrbhD2XnRsF_78'}
+                                apiOptions={{
+                                  types: ['(cities)'],
+                                  componentRestrictions: { country: "IN" },
+                                }}
+                                selectProps={{
+                                  placeholder: fieldName.placeholder,
+                                  onChange: (e) => onChangeGoogleAddress(e, fieldName?.name)
+                                }}
+                              />
+                            </div>
+                          );
+                        } else if (fieldName.type === "mobileNumber") {
+                          return (
+                            <div key={index} className="mb-4">
+                              <Label>{fieldName?.label}</Label><br />
+                              {/* <PhoneInput
+                                country="US"
+                                value={value}
+                                onChange={setValue} /> */}
                             </div>
                           );
                         } else if (fieldName.type === "date") {

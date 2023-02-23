@@ -38,6 +38,7 @@ const Report = () => {
   const [analysisData, setAnalysisData] = useState({});
   const [transporterList, setTransporterList] = useState([]);
   const [tripList, setTripList] = useState([])
+  const [carbonEmissionsData, setCarbonEmissionsData] = useState([])
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -64,6 +65,14 @@ const Report = () => {
           name: e?.client?.name,
           trip: e?.client?.count,
         }
+      })
+    )
+    setCarbonEmissionsData(
+      res?.data?.trip?.lastAllMonthsTripAnalytics.map((e) => {
+        return ({
+          key: MonthName[e.month - 1],
+          value: e.carbonEmissionSum
+        })
       })
     )
   };
@@ -94,7 +103,7 @@ const Report = () => {
                   {" "}
                   Carbon Emissions & Efficiency{" "}
                 </CardTitle>
-                <HomeChart1 />
+                <HomeChart1 data={carbonEmissionsData} />
               </CardBody>
             </Card>
           </Col>

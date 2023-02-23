@@ -18,7 +18,7 @@ const Driver = () => {
     const [confirm_both, setconfirm_both] = useState(false);
     const [flag, setFlag] = useState(true);
     const [isEdit, setIsEdit] = useState(false);
-    const history = useHistory()
+    // const history = useHistory()
     const API_CALL = useHttp();
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const Driver = () => {
     }, []);
 
     const GoToDriverInfo = (driverData) => {
-        history.push(`/driversInfo/${driverData?.id}`, { state: { driverData: driverData } })
+        // history.push(`/driversInfo/${driverData?.id}`)
     }
 
     const driverDataHandler = (res) => {
