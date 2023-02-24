@@ -138,7 +138,9 @@ export const DeleteButton = ({ onClick = {} }) => {
 
 const CONSTANT = {
   // BASE_URL: process.env.REACT_APP_BASE_URL,
-  BASE_URL: "http://65.1.223.112:3001/api/v1",
+  // BASE_URL: "https://backend.fitsolscs.com/api/v1",
+  BASE_URL: "https://staging.fitsolscs.com/api/v1",
+  // BASE_URL: "https://dev.fitsolscs.com/api/v1",
   API: {
     adminLogin: {
       endpoint: `/admin/login`,
