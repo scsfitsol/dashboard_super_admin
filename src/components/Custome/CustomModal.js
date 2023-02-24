@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Col, Label, Modal, Row, Input } from "reactstrap";
 import Select from "react-select";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
-import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 const CustomModal = (props) => {
   const {
     modalType,
@@ -32,14 +33,12 @@ const CustomModal = (props) => {
   };
 
   const onChangeGoogleAddress = (e, fieldName) => {
-    console.log('mapData', e)
     if (fieldName === 'sourceLocation') {
       setInputData({ ...inputData, sourceLocation: e?.label, sourceId: e?.value?.place_id })
     }
     else {
       setInputData({ ...inputData, destinationLocation: e?.label, destinationId: e?.value?.place_id })
     }
-
   }
 
   let payload = new FormData();
@@ -63,6 +62,9 @@ const CustomModal = (props) => {
     setSelectedValue({});
   };
 
+  const onChangeNumber = (value, country, e, formattedValue) => {
+    setInputData({ ...inputData, mobile: value.replace(country.dialCode, ''), countryCode: country.dialCode });
+  }
 
   return (
     <>
@@ -180,10 +182,16 @@ const CustomModal = (props) => {
                           return (
                             <div key={index} className="mb-4">
                               <Label>{fieldName?.label}</Label><br />
-                              {/* <PhoneInput
-                                country="US"
-                                value={value}
-                                onChange={setValue} /> */}
+                              <PhoneInput
+                                inputProps={{
+                                  name: "mobile"
+                                }}
+                                country="in"
+                                onChange={(value, country, e, formattedValue) => onChangeNumber(value, country, e, formattedValue)}
+                                inputStyle={{
+                                  width: '100%'
+                                }}
+                              />
                             </div>
                           );
                         } else if (fieldName.type === "date") {

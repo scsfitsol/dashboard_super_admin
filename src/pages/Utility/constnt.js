@@ -26,6 +26,18 @@ export const EditButton = ({ onClick = {} }) => {
     </>
   );
 };
+export const AllocateAndNotAllocate = (props) => {
+  const { value } = props;
+  const [tip, setTip] = useState()
+  return (
+    <>
+      {value
+        ? <i className="bx bx-check-circle text-success fs-3"></i>
+        : <i className="bx bx-x-circle text-danger fs-3"></i>
+      }
+    </>
+  );
+};
 
 export const ToolTipButton = ({ id, msg }) => {
   const [ttop, setttop] = useState(false);
@@ -103,11 +115,8 @@ const STATUS_COLOR = {
   3: 'bg-soft-success text-success p-1',
 }
 export const StatusButton = ({ value, onClick = {} }) => {
-  return <span className={STATUS_COLOR[value]} style={{ borderRadius: '4px', cursor: 'pointer' }} onClick={onClick}>{Category[value]}</span>
+  return <p className={STATUS_COLOR[value]} style={{ borderRadius: '4px', cursor: 'pointer', width: '80px' }} onClick={onClick}>{Category[value]}</p>
 }
-
-
-
 
 export const DeleteButton = ({ onClick = {} }) => {
   const [ttop, setttop] = useState(false);
@@ -349,7 +358,7 @@ const CONSTANT = {
       },
       {
         label: "Driving license",
-        field: "drivingLicense",
+        field: "drivingLicenseImage",
         sort: "asc",
       },
       {
@@ -390,7 +399,7 @@ const CONSTANT = {
         sort: "asc",
       },
       {
-        label: "Capacity",
+        label: "Capacity (Turn)",
         field: "capacity",
         sort: "asc",
       },
@@ -411,7 +420,7 @@ const CONSTANT = {
       // },
       {
         label: "Allocate",
-        field: "allocate",
+        field: "Allocated",
         sort: "asc",
       },
       {
@@ -717,6 +726,7 @@ const CONSTANT = {
         label: "Status",
         field: "statusData",
         sort: "asc",
+        width: 200
       },
       {
         label: "Client Name",
@@ -795,7 +805,7 @@ const CONSTANT = {
         name: "mobile",
         label: "Mobile Number",
         placeholder: "Mobile Number",
-        type: "text",
+        type: "mobileNumber",
         required: false,
       },
       // {

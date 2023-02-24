@@ -18,43 +18,35 @@ const TrackMap = (props) => {
     const API_CALL = useHttp();
     const [tripData, setTripData] = useState([])
     const [mapDataLive, setMapDataLive] = useState([])
-    const [startEndLocation, setStartEndLocation] = useState([])
     const [tripStep, setTripStep] = useState(1)
     const [routesBounds, setRoutesBounds] = useState()  // Google API response path
     const [routePath, setRoutePath] = useState([])  // BAckEnd API response path
-    const [startEndLocation2, setStartEndLocation2] = useState([])
+    const [startEndLocation, setStartEndLocation] = useState([])
 
-    const [placeId, setPlaceId] = useState()
-
-    const startAndEndLocation = () => {
-        // For Demo Place ID
-        (async () => {
-            var geocoder = new props.google.maps.Geocoder();
-            const mapData = data?.sourceId !== undefined &&
-                await Promise.all([data?.sourceId, data?.destinationId].map(async (id) => {
-                    const location = await geocoder.geocode({ placeId: id })
-                    try {
-                        return location?.results[0]?.geometry?.location
-                    }
-                    catch (err) {
-                        console.log(err)
-                    }
-                }))
-            console.log('mapData', mapData)
-            mapData !== false && setStartEndLocation2(mapData)
-        })()
+    const startAndEndLocation = async () => {
+        var geocoder = new props.google.maps.Geocoder();
+        const mapData = data?.sourceId !== undefined && data?.destinationId !== undefined &&
+            await Promise.all([data?.sourceId, data?.destinationId].map(async (id) => {
+                const location = await geocoder.geocode({ placeId: id })
+                try {
+                    return { lat: location?.results[0]?.geometry?.location.lat(), lng: location?.results[0]?.geometry?.location.lng() }
+                }
+                catch (err) {
+                    console.log(err)
+                }
+            }))
+        mapData !== false && setStartEndLocation(mapData)
     }
 
     useEffect(() => {
         (async () => {
-            startAndEndLocation()
             setTripStep(0)
+            await startAndEndLocation()
             const URL = {
                 endpoint: `/location/${data.id}`,
                 type: "GET",
             }
             API_CALL.sendRequest(URL, MapLocationHandler);
-            console.log('data', data)
         })();
     }, [data]);
 
@@ -71,20 +63,25 @@ const TrackMap = (props) => {
         })
         const mapRoute = location.filter((data) => data?.loc !== undefined)
         setTripData(mapRoute)
-        setRoutePath(mapRoute.map((e) => e.loc))
-        if (mapRoute.length > 0) {
-            setStartEndLocation([mapRoute[0].loc, mapRoute[mapRoute.length - 1].loc]);
+        setRoutePath(mapRoute.reverse().map((e) => e.loc))
+
+        setMapDataLive(mapRoute.map((e) => e.loc))
+
+        if (Object.keys(data).length > 0 && !mapRoute.length > 0) {
+            notify.error('Tracking Data Not Found')
+        }
+
+    };
+
+    useEffect(() => {
+        if (tripData.length > 0) {
             var directionsService = new props.google.maps.DirectionsService();
             var directionsRenderer = new props.google.maps.DirectionsRenderer();
-
-            directionsRenderer.setMap(map);
-
             var request = {
-                origin: mapRoute[0].loc,
-                destination: mapRoute[mapRoute.length - 1].loc,
+                origin: tripData[0].loc,
+                destination: startEndLocation[1],
                 travelMode: 'DRIVING'
             };
-
             directionsService.route(request, function (response, status) {
                 if (status == 'OK') {
                     directionsRenderer.setDirections(response);
@@ -95,14 +92,8 @@ const TrackMap = (props) => {
         else {
             setStartEndLocation([])
         }
-        setMapDataLive(mapRoute.map((e) => e.loc))
 
-        if (Object.keys(data).length > 0 && !mapRoute.length > 0) {
-            notify.error('Tracking Data Not Found')
-        }
-    };
-
-
+    }, [data, tripData])
 
     return (
         <div>
@@ -117,10 +108,10 @@ const TrackMap = (props) => {
                             google={props.google}
                             style={{ width: "100%", height: "50vh", borderRadius: '10px' }}
                             zoom={8}
-                            center={startEndLocation2[0] || { lat: 21.1458, lng: 79.0882 }}
+                            center={routePath[0] || { lat: 21.1458, lng: 79.0882 }}
                             fullscreenControl={false}
                         >
-                            {startEndLocation2.map((e, index) => {
+                            {startEndLocation.map((e, index) => {
                                 return (
                                     <Marker
                                         key={index}
@@ -131,7 +122,16 @@ const TrackMap = (props) => {
                                 )
                             })
                             }
-
+                            {/* <Marker
+                                title={"The marker`s title will appear as a tooltip."}
+                                name={"SOMA"}
+                                position={e}
+                            />
+                            <Marker
+                                title={"The marker`s title will appear as a tooltip."}
+                                name={"SOMA"}
+                                position={routesBounds && routesBounds[routesBounds.length - 1]}
+                            /> */}
                             {
                                 tripStep > 0 &&
                                 <Marker
@@ -145,12 +145,31 @@ const TrackMap = (props) => {
                                     }}
                                 />
                             }
+                            {/* {
+                                <Marker
+                                    title={"The marker`s title will appear as a tooltip."}
+                                    name={"SOMA"}
+                                    position={tripData[0].loc}
+                                    icon={{
+                                        url: MapTruck,
+                                        fillColor: '#EB00FF',
+                                        // scaledSize: new google.maps.Size(60, 60),
+                                    }}
+                                />
+                            } */}
                             <Polyline
-                                // path={routesBounds} 
                                 path={routePath}
                                 fillColor="#0000FF"
                                 fillOpacity={1}
                                 strokeColor="#0000FF"
+                                strokeOpacity={0.8}
+                                strokeWeight={4}
+                            />
+                            <Polyline
+                                path={routesBounds}
+                                fillColor="red"
+                                fillOpacity={1}
+                                strokeColor="red"
                                 strokeOpacity={0.8}
                                 strokeWeight={4}
                             />

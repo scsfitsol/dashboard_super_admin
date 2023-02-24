@@ -6,6 +6,7 @@ import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
 import useHttp from "../../components/Hook/Use-http";
 import CONSTANT, {
+  AllocateAndNotAllocate,
   DeleteButton,
   EditButton,
   getTableData,
@@ -55,6 +56,7 @@ const Vehicals = () => {
           ...vehicleData,
           no: index + 1,
           RegistrationNumbers: <NavLink className="TableLink" onClick={() => GoToVehicleInfo(vehicleData)} style={{ color: "gray", cursor: 'pointer' }} >{vehicleData?.registrationNumber}</NavLink>,
+          Allocated: <AllocateAndNotAllocate value={vehicleData?.allocate} />,
           transporterName: vehicleData?.transporter?.transporterName,
           action: (
             <>
