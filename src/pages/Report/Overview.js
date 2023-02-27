@@ -40,7 +40,7 @@ const Overview = (props) => {
                                 <i className="mdi mdi-arrow-up  ms-1"></i>
                               </>
                             ) : (
-                              <>{data?.per} CO2</>
+                              <>{data?.per} CO2 in Turn</>
                             )}
                           </div>
 
