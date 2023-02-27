@@ -140,7 +140,7 @@ const Plants = () => {
             setActionData({});
           }}
         >
-          <i className="bx bx-plus"></i> &nbsp; Add Plant
+          <i className="bx bx-plus"></i> &nbsp; Add Sites
         </Button>
       </div>
       <Table
@@ -151,7 +151,7 @@ const Plants = () => {
         modalType="formModal"
         show={showModel}
         close={() => setShowModel(false)}
-        modalTitle="Add Sites"
+        modalTitle={isEdit ? "Edit Sites" : "Add Sites"}
         onSubmit={(data) => onSubmitForm(data)}
         data={CONSTANT.FORM_FIELDS.PLANT}
         defaultData={actionData}

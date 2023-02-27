@@ -153,7 +153,7 @@ const Driver = () => {
                 modalType="formModal"
                 show={showModel}
                 close={() => setShowModel(false)}
-                modalTitle="Add Driver"
+                modalTitle={isEdit ? "Edit Driver" : "Add Driver"}
                 onSubmit={(data) => onSubmitForm(data)}
                 data={CONSTANT.FORM_FIELDS.DRIVER}
                 defaultData={actionData}
