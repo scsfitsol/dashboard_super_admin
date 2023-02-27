@@ -1026,6 +1026,17 @@ const CONSTANT = {
         ],
       },
       {
+        name: "type",
+        label: "Type",
+        placeholder: "Type",
+        type: "SingleSelect",
+        required: true,
+        options: [
+          { label: "Sim Based", value: "simBased" },
+          { label: "Ashok Leyland", value: "ashokleyland" },
+        ],
+      },
+      {
         name: "distanceOfTrip",
         label: "Distance Of Trip",
         placeholder: "Distance Of Trip",
