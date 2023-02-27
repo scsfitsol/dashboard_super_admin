@@ -90,7 +90,7 @@ const TransporterInfo = () => {
                     </div>
                 </Row>
                 <Row>
-                    <Col sm={4}>
+                    <Col sm={4} className="d-none">
                         <Card
                             style={{
                                 width: '100%',
