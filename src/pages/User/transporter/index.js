@@ -32,6 +32,7 @@ const Transporter = () => {
 
     const GoToTransposerInfo = (transporterData) => {
         // history.push(`/transposerInfo/${transporterData?.id}`, { state: { transporterData: transporterData } })
+        window.location.assign(`/transposerInfo/${transporterData?.id}`);
     }
 
 

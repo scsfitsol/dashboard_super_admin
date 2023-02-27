@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import SweetAlert from "react-bootstrap-sweetalert";
-import { useHistory } from "react-router-dom";
 import { Button, Modal, NavLink, Row } from "reactstrap";
 import CustomModal from "../../../components/Custome/CustomModal";
 import Table from "../../../components/Custome/table";
@@ -31,6 +30,7 @@ const Driver = () => {
 
     const GoToDriverInfo = (driverData) => {
         // history.push(`/driversInfo/${driverData?.id}`)
+        window.location.assign(`/driversInfo/${driverData?.id}`);
     }
 
     const onOpenLicense = (url) => {

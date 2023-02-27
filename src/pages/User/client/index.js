@@ -30,7 +30,9 @@ const Clients = () => {
         })();
     }, [flag]);
 
+    const state = { ClientData: clientData } 
     const GoToClientInfo = (clientData) => {
+        window.location.assign(`/clientInfo/${clientData?.id}`, state);
         // history.push(`/clientInfo/${clientData?.id}`, { state: { ClientData: clientData } })
     }
 
