@@ -154,7 +154,7 @@ const Transporter = () => {
                 modalType="formModal"
                 show={showModel}
                 close={() => setShowModel(false)}
-                modalTitle="Add Transporter"
+                modalTitle={isEdit ? "Edit Transporter" : "Add Transporter"}
                 onSubmit={(data) => onSubmitForm(data)}
                 data={CONSTANT.FORM_FIELDS.TRANSPORTER}
                 defaultData={actionData}

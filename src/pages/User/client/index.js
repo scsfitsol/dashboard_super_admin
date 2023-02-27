@@ -162,7 +162,7 @@ const Clients = () => {
                 modalType="formModal"
                 show={showModel}
                 close={() => setShowModel(false)}
-                modalTitle="Add Client"
+                modalTitle= {isEdit ? "Edit Client" : "Add Client"}
                 onSubmit={(data) => onSubmitForm(data)}
                 data={CONSTANT.FORM_FIELDS.CLIENT}
                 defaultData={actionData}
