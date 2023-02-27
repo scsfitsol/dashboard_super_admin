@@ -41,6 +41,8 @@ const TrackMap = (props) => {
     useEffect(() => {
         (async () => {
             setTripStep(0)
+            setRoutePath([])
+            setMapDataLive([])
             await startAndEndLocation()
             const URL = {
                 endpoint: `/location/${data.id}`,
