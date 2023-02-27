@@ -209,7 +209,7 @@ const Trip = () => {
         modalType="formModal"
         show={showModel}
         close={() => setShowModel(false)}
-        modalTitle="Add Trip"
+        modalTitle={isEdit ? "Edit Trip" : "Add Trip"}
         onSubmit={(data) => onSubmitForm(data)}
         data={CONSTANT.FORM_FIELDS.TRIP}
         defaultData={actionData}
@@ -220,7 +220,7 @@ const Trip = () => {
         modalType="formModal"
         show={showModel_1}
         close={() => setShowModel_1(false)}
-        modalTitle="Add Trip"
+        modalTitle="Edit Trip"
         onSubmit={(data) => onSubmitForm(data)}
         data={CONSTANT.FORM_FIELDS.TRIP_STATUS}
         defaultData={actionData}
