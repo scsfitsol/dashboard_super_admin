@@ -22,7 +22,7 @@ const Clients = () => {
     const [password, setPassword] = useState();
     const [isEdit, setIsEdit] = useState(false);
     const API_CALL = useHttp();
-    const history = useHistory()
+    // const history = useHistory()
 
     useEffect(() => {
         (async () => {
@@ -30,8 +30,10 @@ const Clients = () => {
         })();
     }, [flag]);
 
+    const state = { ClientData: clientData } 
     const GoToClientInfo = (clientData) => {
-        history.push(`/clientInfo/${clientData?.id}`, { state: { ClientData: clientData } })
+        window.location.assign(`/clientInfo/${clientData?.id}`, state);
+        // history.push(`/clientInfo/${clientData?.id}`, { state: { ClientData: clientData } })
     }
 
     const clientDataHandler = (res) => {

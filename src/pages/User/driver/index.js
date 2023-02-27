@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SweetAlert from "react-bootstrap-sweetalert";
-import { useHistory } from "react-router-dom";
-import { Button, NavLink, Row } from "reactstrap";
+import { Button, Modal, NavLink, Row } from "reactstrap";
 import CustomModal from "../../../components/Custome/CustomModal";
 import Table from "../../../components/Custome/table";
 import useHttp from "../../../components/Hook/Use-http";
@@ -13,12 +12,14 @@ import CONSTANT, {
 
 const Driver = () => {
     const [showModel, setShowModel] = useState(false);
+    const [openLicense, setOpenLicense] = useState(false)
+    const [currentLicenseURL, setCurrentLicenseURL] = useState('')
     const [driverData, setDriverData] = useState([]);
     const [actionData, setActionData] = useState({});
     const [confirm_both, setconfirm_both] = useState(false);
     const [flag, setFlag] = useState(true);
     const [isEdit, setIsEdit] = useState(false);
-    const history = useHistory()
+    // const history = useHistory()
     const API_CALL = useHttp();
 
     useEffect(() => {
@@ -28,16 +29,24 @@ const Driver = () => {
     }, []);
 
     const GoToDriverInfo = (driverData) => {
-        history.push(`/driversInfo/${driverData?.id}`, { state: { driverData: driverData } })
+        // history.push(`/driversInfo/${driverData?.id}`)
+        window.location.assign(`/driversInfo/${driverData?.id}`);
+    }
+
+    const onOpenLicense = (url) => {
+        setOpenLicense(!openLicense)
+        setCurrentLicenseURL(url)
     }
 
     const driverDataHandler = (res) => {
         setDriverData(
             res?.data.map((driverData, index) => {
+
                 return {
                     ...driverData,
                     no: index + 1,
                     driverName: <NavLink className="TableLink" onClick={() => GoToDriverInfo(driverData)} style={{ color: "gray", cursor: 'pointer' }} >{driverData.name}</NavLink>,
+                    drivingLicenseImage: <i onClick={() => onOpenLicense(driverData.drivingLicense)} className="bx bx-info-circle fs-3" style={{ cursor: "pointer" }} ></i>,
                     action: (
                         <>
                             <EditButton
@@ -75,7 +84,7 @@ const Driver = () => {
         };
         API_CALL.sendRequest(
             URL,
-            () => setFlag((previos) => !previos),
+            () => setFlag((previous) => !previous),
             null,
             "Delete Successfully"
         );
@@ -90,7 +99,7 @@ const Driver = () => {
                 };
                 API_CALL.sendRequest(
                     URL,
-                    () => setFlag((previos) => !previos),
+                    () => setFlag((previous) => !previous),
                     payload,
                     "Driver Update Successfully"
                 );
@@ -98,7 +107,7 @@ const Driver = () => {
             } else {
                 API_CALL.sendRequest(
                     CONSTANT.API.addDriver,
-                    () => setFlag((previos) => !previos),
+                    () => setFlag((previous) => !previous),
                     payload,
                     "Driver Add Successfully"
                 );
@@ -169,6 +178,25 @@ const Driver = () => {
                     You won't be able to revert this!
                 </SweetAlert>
             ) : null}
+
+            <Modal
+                size="xl"
+                isOpen={openLicense}
+                toggle={() => {
+                    onOpenLicense()
+                }}
+                scrollable={true}
+                id="staticBackdrop"
+            >
+                <div className="modal-header">
+                    <h5 className="modal-title" id="staticBackdropLabel">Driving License</h5>
+                    <button type="button" className="btn-close"
+                        onClick={() => {
+                            setOpenLicense(false)
+                        }} aria-label="Close"></button>
+                </div>
+                <img src={currentLicenseURL}></img>
+            </Modal>
         </React.Fragment>
     );
 };

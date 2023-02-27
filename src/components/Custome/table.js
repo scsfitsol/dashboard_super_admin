@@ -13,6 +13,7 @@ const Table = ({ title, data }) => {
               <CardBody>
                 <CardTitle>{title}</CardTitle>
                 <MDBDataTable
+                  autoWidth={false}
                   responsive
                   barReverse
                   noRecordsFoundLabel="No Record Found"
