@@ -6,6 +6,7 @@ import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
 import useHttp from "../../components/Hook/Use-http";
 import { getAllTrip } from "../Utility/API/api";
+import Services from "../Utility/API/service";
 import CONSTANT, {
   Category,
   DeleteButton,
@@ -22,8 +23,8 @@ const Trip = () => {
   const [confirm_both, setConfirm_both] = useState(false);
   const [flag, setFlag] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
-  const [plantData, setPlantData] = useState([])
-  const [vehiclesData, setVehiclesData] = useState([])
+  const [plantData, setPlantData] = useState([]);
+  const [vehiclesData, setVehiclesData] = useState([]);
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -47,7 +48,7 @@ const Trip = () => {
     });
   };
   const vehiclesDataHandler = (res) => {
-    setVehiclesData(res?.data)
+    setVehiclesData(res?.data);
     CONSTANT.FORM_FIELDS.TRIP.push({
       name: "vehicleId",
       label: "Vehicle Name",
@@ -59,7 +60,7 @@ const Trip = () => {
     });
   };
   const plantDataHandler = (res) => {
-    setPlantData(res?.data)
+    setPlantData(res?.data);
     CONSTANT.FORM_FIELDS.TRIP.push({
       name: "plantId",
       label: "Plant Name",
@@ -82,17 +83,23 @@ const Trip = () => {
           driverPhoneNumber: tripData?.driver?.mobile,
           vehicleNumber: tripData?.vehicle?.registrationNumber,
           plantName: tripData?.plant?.unitName,
-          startDateAndTime: moment(tripData?.startDateAndTime).format('DD-MM-YYYY') + " : " + moment(tripData?.startDateAndTime).format('LT'),
-          targetedDateAndTime: moment(tripData?.targetedDateAndTime).format('DD-MM-YYYY') + " : " + moment(tripData?.targetedDateAndTime).format('LT'),
+          startDateAndTime:
+            moment(tripData?.startDateAndTime).format("DD-MM-YYYY") +
+            " : " +
+            moment(tripData?.startDateAndTime).format("LT"),
+          targetedDateAndTime:
+            moment(tripData?.targetedDateAndTime).format("DD-MM-YYYY") +
+            " : " +
+            moment(tripData?.targetedDateAndTime).format("LT"),
           statusData: (
             <>
               <StatusButton
                 value={tripData?.status}
                 onClick={() => {
                   onEditTrip(tripData);
-                  onUpdateStatus(true)
-                }} />
-
+                  onUpdateStatus(true);
+                }}
+              />
             </>
           ),
           action: (
@@ -126,8 +133,8 @@ const Trip = () => {
   };
 
   const onUpdateStatus = () => {
-    setShowModel_1(true)
-  }
+    setShowModel_1(true);
+  };
 
   const onDeleteDriver = () => {
     const URL = {
@@ -144,10 +151,12 @@ const Trip = () => {
 
   const onSubmitForm = (payload) => {
     (async () => {
-      const ClientData = plantData.filter((e) => e.id === payload?.plantId)
-      const TransporterData = vehiclesData.filter((e) => e.id === payload?.vehicleId)
-      payload.clientId = ClientData[0]?.client?.id
-      payload.transporterId = TransporterData[0]?.transporter?.id
+      const ClientData = plantData.filter((e) => e.id === payload?.plantId);
+      const TransporterData = vehiclesData.filter(
+        (e) => e.id === payload?.vehicleId
+      );
+      payload.clientId = ClientData[0]?.client?.id;
+      payload.transporterId = TransporterData[0]?.transporter?.id;
       if (actionData?.id) {
         const URL = {
           endpoint: `/trip/${actionData?.id}`,
@@ -170,6 +179,33 @@ const Trip = () => {
       }
     })();
   };
+
+  const callAsynchronousOperation = async (item) => {
+    // setIsEdit(false);
+  };
+
+  // For Update Bulk Status
+  // const updateAllTripToCompleted = () => {
+  //   (async () => {
+  //     for (let i = 0; i < tripData.length; i++) {
+  //       const payload = {
+  //         status: "3",
+  //         driverId: tripData[i]?.driver?.id,
+  //         vehicleId: tripData[i]?.vehicle?.id,
+  //       };
+
+  //       try {
+  //         const res = await Services.patch(
+  //           `/trip/updateTripStatus/${tripData[i]?.id}`,
+  //           payload
+  //         );
+  //         console.log("Success", tripData[i]);
+  //       } catch (err) {
+  //         console.log("Error", tripData[i]);
+  //       }
+  //     }
+  //   })();
+  // };
 
   return (
     <React.Fragment>

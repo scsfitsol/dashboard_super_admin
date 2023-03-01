@@ -20,7 +20,7 @@ const Overview = (props) => {
   return (
     <React.Fragment>
       <Col xl={12}>
-        <Card style={{ height: '400px', overflowY: 'scroll' }}>
+        <Card style={{ height: "400px", overflowY: "scroll" }}>
           <CardBody>
             {props.data.map((data, index) => {
               return (
@@ -40,7 +40,7 @@ const Overview = (props) => {
                                 <i className="mdi mdi-arrow-up  ms-1"></i>
                               </>
                             ) : (
-                              <>{data?.per} CO2 in Turn</>
+                              <>{data?.per} CO2 in Tons</>
                             )}
                           </div>
 

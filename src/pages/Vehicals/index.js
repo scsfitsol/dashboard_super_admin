@@ -44,11 +44,10 @@ const Vehicals = () => {
     });
   };
 
-
   const GoToVehicleInfo = (vehicleData) => {
     // history.push(`/vehiclesInfo/${vehicleData?.id}`, { state: { vehicleData: vehicleData } })
     window.location.assign(`/vehiclesInfo/${vehicleData?.id}`);
-  }
+  };
 
   const vehicleDataHandler = (res) => {
     setVehicleData(
@@ -56,7 +55,15 @@ const Vehicals = () => {
         return {
           ...vehicleData,
           no: index + 1,
-          RegistrationNumbers: <NavLink className="TableLink" onClick={() => GoToVehicleInfo(vehicleData)} style={{ color: "gray", cursor: 'pointer' }} >{vehicleData?.registrationNumber}</NavLink>,
+          RegistrationNumbers: (
+            <NavLink
+              className="TableLink"
+              onClick={() => GoToVehicleInfo(vehicleData)}
+              style={{ color: "gray", cursor: "pointer" }}
+            >
+              {vehicleData?.registrationNumber}
+            </NavLink>
+          ),
           Allocated: <AllocateAndNotAllocate value={vehicleData?.allocate} />,
           transporterName: vehicleData?.transporter?.transporterName,
           action: (
