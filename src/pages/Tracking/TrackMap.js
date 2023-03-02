@@ -123,16 +123,6 @@ const TrackMap = (props) => {
                                 )
                             })
                             }
-                            {/* <Marker
-                                title={"The marker`s title will appear as a tooltip."}
-                                name={"SOMA"}
-                                position={e}
-                            />
-                            <Marker
-                                title={"The marker`s title will appear as a tooltip."}
-                                name={"SOMA"}
-                                position={routesBounds && routesBounds[routesBounds.length - 1]}
-                            /> */}
                             {
                                 tripStep > 0 &&
                                 <Marker
@@ -146,18 +136,6 @@ const TrackMap = (props) => {
                                     }}
                                 />
                             }
-                            {/* {
-                                <Marker
-                                    title={"The marker`s title will appear as a tooltip."}
-                                    name={"SOMA"}
-                                    position={tripData[0].loc}
-                                    icon={{
-                                        url: MapTruck,
-                                        fillColor: '#EB00FF',
-                                        // scaledSize: new google.maps.Size(60, 60),
-                                    }}
-                                />
-                            } */}
                             <Polyline
                                 path={routePath}
                                 fillColor="#0000FF"

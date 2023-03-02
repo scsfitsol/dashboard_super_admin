@@ -1,3 +1,4 @@
+import { MDBBadge } from "mdbreact";
 import { useState } from "react";
 import { Button, Tooltip } from "reactstrap";
 
@@ -130,13 +131,13 @@ const STATUS_COLOR = {
 };
 export const StatusButton = ({ value, onClick = {} }) => {
   return (
-    <p
+    <MDBBadge
       className={STATUS_COLOR[value]}
-      style={{ borderRadius: "4px", cursor: "pointer", width: "80px" }}
+      style={{ borderRadius: "4px", cursor: "pointer", width: "80px", fontSize: '15px' }}
       onClick={onClick}
     >
       {Category[value]}
-    </p>
+    </MDBBadge>
   );
 };
 
@@ -1104,6 +1105,12 @@ const CONSTANT = {
         name: "driverId",
         label: "Driver Name",
         placeholder: "Driver Name",
+        type: "SingleSelect",
+      },
+      {
+        name: "clientId",
+        label: "Client Name",
+        placeholder: "Client Name",
         type: "SingleSelect",
       },
       {
