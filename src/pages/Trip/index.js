@@ -25,6 +25,9 @@ const Trip = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [plantData, setPlantData] = useState([]);
   const [vehiclesData, setVehiclesData] = useState([]);
+  const [vehiclesDataRes, setVehiclesDataRes] = useState([]);
+  const [driverData, setDriverData] = useState([])
+  const [transporterData, setTransporterData] = useState([])
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -33,43 +36,22 @@ const Trip = () => {
       API_CALL.sendRequest(CONSTANT.API.getAllDriver, driverDataHandler);
       API_CALL.sendRequest(CONSTANT.API.getAllVehicle, vehiclesDataHandler);
       API_CALL.sendRequest(CONSTANT.API.getAllPlant, plantDataHandler);
+      API_CALL.sendRequest(CONSTANT.API.getAllTransporter, transporterDataHandler);
     })();
   }, [flag]);
 
   const driverDataHandler = (res) => {
-    CONSTANT.FORM_FIELDS.TRIP.push({
-      name: "driverId",
-      label: "Driver Name",
-      placeholder: "Driver Name",
-      type: "SingleSelect",
-      options: res?.data.map((data) => {
-        return { label: data.name, value: data.id };
-      }),
-    });
+    setDriverData(res?.data)
+  };
+  const transporterDataHandler = (res) => {
+    setTransporterData(res?.data)
   };
   const vehiclesDataHandler = (res) => {
-    setVehiclesData(res?.data);
-    CONSTANT.FORM_FIELDS.TRIP.push({
-      name: "vehicleId",
-      label: "Vehicle Name",
-      placeholder: "Vehicle Name",
-      type: "SingleSelect",
-      options: res?.data.map((data) => {
-        return { label: data.registrationNumber, value: data.id };
-      }),
-    });
+    setVehiclesData(res?.data)
+    setVehiclesDataRes(res?.data);
   };
   const plantDataHandler = (res) => {
     setPlantData(res?.data);
-    CONSTANT.FORM_FIELDS.TRIP.push({
-      name: "plantId",
-      label: "Plant Name",
-      placeholder: "Plant Name",
-      type: "SingleSelect",
-      options: res?.data.map((data) => {
-        return { label: data.unitName, value: data.id };
-      }),
-    });
   };
   const tripDataHandler = (res) => {
     setTripData(
@@ -233,6 +215,9 @@ const Trip = () => {
             setIsEdit(false);
             setActionData({});
           }}
+          style={{
+            zIndex: '99'
+          }}
         >
           Add Trip
         </Button>
@@ -251,6 +236,20 @@ const Trip = () => {
         defaultData={actionData}
         formData={false}
         isEdit={isEdit}
+        option={{
+          vehicleId: vehiclesDataRes.map((data) => {
+            return { label: data.registrationNumber, value: data.id };
+          }),
+          plantId: plantData.map((data) => {
+            return { label: data.unitName, value: data.id };
+          }),
+          driverId: driverData.map((data) => {
+            return { label: data.name, value: data.id };
+          }),
+          transporterId: transporterData.map((data) => {
+            return { label: data.transporterName, value: data.id };
+          }),
+        }}
       />
       <CustomModal
         modalType="formModal"
@@ -263,25 +262,27 @@ const Trip = () => {
         formData={false}
         isEdit={isEdit}
       />
-      {confirm_both ? (
-        <SweetAlert
-          title="Are you sure?"
-          warning
-          showCancel
-          confirmBtnBsStyle="success"
-          cancelBtnBsStyle="danger"
-          onConfirm={() => {
-            onDeleteDriver();
-            setConfirm_both(false);
-          }}
-          onCancel={() => {
-            setConfirm_both(false);
-          }}
-        >
-          You won't be able to revert this!
-        </SweetAlert>
-      ) : null}
-    </React.Fragment>
+      {
+        confirm_both ? (
+          <SweetAlert
+            title="Are you sure?"
+            warning
+            showCancel
+            confirmBtnBsStyle="success"
+            cancelBtnBsStyle="danger"
+            onConfirm={() => {
+              onDeleteDriver();
+              setConfirm_both(false);
+            }}
+            onCancel={() => {
+              setConfirm_both(false);
+            }}
+          >
+            You won't be able to revert this!
+          </SweetAlert>
+        ) : null
+      }
+    </React.Fragment >
   );
 };
 
