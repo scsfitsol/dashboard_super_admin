@@ -28,13 +28,14 @@ export const EditButton = ({ onClick = {} }) => {
 };
 export const AllocateAndNotAllocate = (props) => {
   const { value } = props;
-  const [tip, setTip] = useState()
+  const [tip, setTip] = useState();
   return (
     <>
-      {value
-        ? <i className="bx bx-check-circle text-success fs-3"></i>
-        : <i className="bx bx-x-circle text-danger fs-3"></i>
-      }
+      {value ? (
+        <i className="bx bx-check-circle text-success fs-3"></i>
+      ) : (
+        <i className="bx bx-x-circle text-danger fs-3"></i>
+      )}
     </>
   );
 };
@@ -62,42 +63,55 @@ export const ToolTipButton = ({ id, msg }) => {
   );
 };
 
-export const MonthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+export const MonthName = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 export const TAB_DATA = {
   CLIENT_TAB: [
     {
-      name: 'Trip',
-      tabId: 1
+      name: "Trip",
+      tabId: 1,
     },
     {
-      name: 'Site',
-      tabId: 2
-    }
+      name: "Site",
+      tabId: 2,
+    },
   ],
   VEHICLES_TAB: [
     {
-      name: 'Trip',
-      tabId: 1
+      name: "Trip",
+      tabId: 1,
     },
     {
-      name: 'Site',
-      tabId: 2
-    }
+      name: "Site",
+      tabId: 2,
+    },
   ],
   DRIVER_TAB: [
     {
-      name: 'Trip',
-      tabId: 1
+      name: "Trip",
+      tabId: 1,
     },
   ],
   VEHICLES_TAB: [
     {
-      name: 'Trip',
-      tabId: 1
+      name: "Trip",
+      tabId: 1,
     },
   ],
-}
+};
 
 export const MyData = {
   data: {},
@@ -110,13 +124,21 @@ const Category = {
 };
 
 const STATUS_COLOR = {
-  1: 'bg-soft-danger text-danger p-1',
-  2: 'bg-soft-primary text-primary p-1',
-  3: 'bg-soft-success text-success p-1',
-}
+  1: "bg-soft-danger text-danger p-1",
+  2: "bg-soft-primary text-primary p-1",
+  3: "bg-soft-success text-success p-1",
+};
 export const StatusButton = ({ value, onClick = {} }) => {
-  return <p className={STATUS_COLOR[value]} style={{ borderRadius: '4px', cursor: 'pointer', width: '80px' }} onClick={onClick}>{Category[value]}</p>
-}
+  return (
+    <p
+      className={STATUS_COLOR[value]}
+      style={{ borderRadius: "4px", cursor: "pointer", width: "80px" }}
+      onClick={onClick}
+    >
+      {Category[value]}
+    </p>
+  );
+};
 
 export const DeleteButton = ({ onClick = {} }) => {
   const [ttop, setttop] = useState(false);
@@ -146,9 +168,7 @@ export const DeleteButton = ({ onClick = {} }) => {
 };
 
 const CONSTANT = {
-  // BASE_URL: process.env.REACT_APP_BASE_URL,
-  // BASE_URL: "https://backend.fitsolscs.com/api/v1",
-  BASE_URL: "https://dev.fitsolscs.com/api/v1",
+  BASE_URL: process.env.REACT_APP_BASE_URL,
   API: {
     adminLogin: {
       endpoint: `/admin/login`,
@@ -333,7 +353,7 @@ const CONSTANT = {
         label: "Name",
         field: "clientName",
         sort: "asc",
-        color: 'success',
+        color: "success",
       },
       {
         label: "Client ID",
@@ -400,8 +420,8 @@ const CONSTANT = {
         sort: "asc",
       },
       {
-        label: "Capacity (Turn)",
-        field: "capacity",
+        label: "Co2/Km (kg per km)",
+        field: "co2PerKm",
         sort: "asc",
       },
       {
@@ -591,7 +611,7 @@ const CONSTANT = {
         label: "Name",
         field: "clientName",
         sort: "asc",
-        color: 'success',
+        color: "success",
       },
       {
         label: "Client ID",
@@ -727,7 +747,7 @@ const CONSTANT = {
         label: "Status",
         field: "statusData",
         sort: "asc",
-        width: 200
+        width: 200,
       },
       {
         label: "Client Name",
@@ -873,6 +893,12 @@ const CONSTANT = {
         type: "text",
         required: true,
       },
+      {
+        name: "clientId",
+        label: "Client Name",
+        placeholder: "Client Name",
+        type: "SingleSelect",
+      },
     ],
     ADMIN_EDIT: [
       {
@@ -970,11 +996,31 @@ const CONSTANT = {
         ],
       },
       {
+        name: "co2PerKm",
+        label: "Truck Category",
+        placeholder: "Select",
+        type: "SingleSelect",
+        required: true,
+        options: [
+          { label: "20ft", value: 0.5 },
+          { label: "32ft SA", value: 0.55 },
+          { label: "32ft MA", value: 0.6 },
+          { label: "For pickup", value: 0.3 },
+          { label: "20ft CNG", value: 0.45 },
+        ],
+      },
+      {
         name: "mileage",
         label: "Mileage",
         placeholder: "Mileage",
         type: "text",
         required: true,
+      },
+      {
+        name: "transporterId",
+        label: "Transporter Name",
+        placeholder: "Transporter Name",
+        type: "SingleSelect",
       },
     ],
     TRIP: [
@@ -1042,7 +1088,30 @@ const CONSTANT = {
         type: "text",
         required: false,
       },
-
+      {
+        name: "vehicleId",
+        label: "Vehicle Name",
+        placeholder: "Vehicle Name",
+        type: "SingleSelect",
+      },
+      {
+        name: "plantId",
+        label: "Plant Name",
+        placeholder: "Plant Name",
+        type: "SingleSelect",
+      },
+      {
+        name: "driverId",
+        label: "Driver Name",
+        placeholder: "Driver Name",
+        type: "SingleSelect",
+      },
+      {
+        name: "transporterId",
+        label: "Transporter Name",
+        placeholder: "Transporter Name",
+        type: "SingleSelect",
+      },
     ],
     TRIP_STATUS: [
       {
@@ -1071,10 +1140,8 @@ const CONSTANT = {
         type: "text",
         required: false,
       },
-    ]
+    ],
   },
-
-
 };
 
 const STATIC_DATA = {

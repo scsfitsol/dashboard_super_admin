@@ -1,12 +1,14 @@
-import { AvField, AvForm } from "availity-reactstrap-validation";
 import React, { useState } from "react";
-import { Col, Label, Modal, Row, InputGroup, Input } from "reactstrap";
+import { Col, Label, Row, Input } from "reactstrap";
 import Select from "react-select";
-import Flatpickr from "react-flatpickr";
+import moment from "moment";
 
 const CustomForm = (props) => {
-  const { data, onSubmit, defaultData, formData, isEdit } = props;
-  const [inputData, setInputData] = useState({});
+  const { data, onSubmit, defaultData, formData, isEdit, onChangeFunction = {}, option = {}, } = props;
+  const todayDate = moment(new Date()).format(
+    "YYYY-MM-DDTHH:MM"
+  );
+  const [inputData, setInputData] = useState({ startDateAndTime: todayDate, targetedDateAndTime: todayDate });
   const [selectedValue, setSelectedValue] = useState({});
   const [isChange, setIsChange] = useState(false);
   const onChangeInput = (e) => {
@@ -91,9 +93,9 @@ const CustomForm = (props) => {
                         value={
                           isEdit
                             ? !isChange
-                              ? fieldName?.options.filter(
-                                  (e) => e.value === OldValue
-                                )
+                              ? option[fieldName?.name] || fieldName?.options.filter(
+                                (e) => e.value === OldValue
+                              )
                               : selectedValue[fieldName?.name]
                             : selectedValue[fieldName?.name]
                         }

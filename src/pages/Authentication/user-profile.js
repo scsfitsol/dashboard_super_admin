@@ -75,7 +75,7 @@ const UserProfile = (props) => {
                     <div className="text-muted">
                       <h5>{MyData?.data?.name}</h5>
                       <p className="mb-1">{MyData?.data?.email}</p>
-                      <p className="mb-0">Id no: {MyData?.data?.id}</p>
+                      <p className="mb-0">{MyData?.data?.name}</p>
                     </div>
                   </div>
                 </div>
