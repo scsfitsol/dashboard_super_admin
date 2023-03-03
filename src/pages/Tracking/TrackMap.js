@@ -9,7 +9,6 @@ import Slider from "react-rangeslider"
 import "react-rangeslider/lib/index.css"
 import notify from "../Utility/coustemFunction"
 import moment from "moment/moment"
-import { map } from "leaflet"
 
 const LoadingContainer = () => <div>Loading...</div>
 
@@ -218,7 +217,7 @@ TrackMap.propTypes = {
 
 export default connect(null)(
     GoogleApiWrapper({
-        apiKey: "AIzaSyAIh5rjUYY8SoLb14LUnxrbhD2XnRsF_78",
+        apiKey: process.env.REACT_APP_MAP_KEY,
         LoadingContainer: LoadingContainer,
         v: "3",
     })(TrackMap)

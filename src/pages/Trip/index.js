@@ -6,6 +6,7 @@ import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
 import useHttp from "../../components/Hook/Use-http";
 import { getAllTrip } from "../Utility/API/api";
+import Services from "../Utility/API/service";
 import CONSTANT, {
   Category,
   DeleteButton,
@@ -22,8 +23,11 @@ const Trip = () => {
   const [confirm_both, setConfirm_both] = useState(false);
   const [flag, setFlag] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
-  const [plantData, setPlantData] = useState([])
-  const [vehiclesData, setVehiclesData] = useState([])
+  const [plantData, setPlantData] = useState([]);
+  const [vehiclesData, setVehiclesData] = useState([]);
+  const [vehiclesDataRes, setVehiclesDataRes] = useState([]);
+  const [driverData, setDriverData] = useState([])
+  const [transporterData, setTransporterData] = useState([])
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -32,43 +36,22 @@ const Trip = () => {
       API_CALL.sendRequest(CONSTANT.API.getAllDriver, driverDataHandler);
       API_CALL.sendRequest(CONSTANT.API.getAllVehicle, vehiclesDataHandler);
       API_CALL.sendRequest(CONSTANT.API.getAllPlant, plantDataHandler);
+      API_CALL.sendRequest(CONSTANT.API.getAllTransporter, transporterDataHandler);
     })();
   }, [flag]);
 
   const driverDataHandler = (res) => {
-    CONSTANT.FORM_FIELDS.TRIP.push({
-      name: "driverId",
-      label: "Driver Name",
-      placeholder: "Driver Name",
-      type: "SingleSelect",
-      options: res?.data.map((data) => {
-        return { label: data.name, value: data.id };
-      }),
-    });
+    setDriverData(res?.data)
+  };
+  const transporterDataHandler = (res) => {
+    setTransporterData(res?.data)
   };
   const vehiclesDataHandler = (res) => {
     setVehiclesData(res?.data)
-    CONSTANT.FORM_FIELDS.TRIP.push({
-      name: "vehicleId",
-      label: "Vehicle Name",
-      placeholder: "Vehicle Name",
-      type: "SingleSelect",
-      options: res?.data.map((data) => {
-        return { label: data.registrationNumber, value: data.id };
-      }),
-    });
+    setVehiclesDataRes(res?.data);
   };
   const plantDataHandler = (res) => {
-    setPlantData(res?.data)
-    CONSTANT.FORM_FIELDS.TRIP.push({
-      name: "plantId",
-      label: "Plant Name",
-      placeholder: "Plant Name",
-      type: "SingleSelect",
-      options: res?.data.map((data) => {
-        return { label: data.unitName, value: data.id };
-      }),
-    });
+    setPlantData(res?.data);
   };
   const tripDataHandler = (res) => {
     setTripData(
@@ -82,17 +65,23 @@ const Trip = () => {
           driverPhoneNumber: tripData?.driver?.mobile,
           vehicleNumber: tripData?.vehicle?.registrationNumber,
           plantName: tripData?.plant?.unitName,
-          startDateAndTime: moment(tripData?.startDateAndTime).format('DD-MM-YYYY') + " : " + moment(tripData?.startDateAndTime).format('LT'),
-          targetedDateAndTime: moment(tripData?.targetedDateAndTime).format('DD-MM-YYYY') + " : " + moment(tripData?.targetedDateAndTime).format('LT'),
+          startDateAndTime:
+            moment(tripData?.startDateAndTime).format("DD-MM-YYYY") +
+            " : " +
+            moment(tripData?.startDateAndTime).format("LT"),
+          targetedDateAndTime:
+            moment(tripData?.targetedDateAndTime).format("DD-MM-YYYY") +
+            " : " +
+            moment(tripData?.targetedDateAndTime).format("LT"),
           statusData: (
             <>
               <StatusButton
                 value={tripData?.status}
                 onClick={() => {
                   onEditTrip(tripData);
-                  onUpdateStatus(true)
-                }} />
-
+                  onUpdateStatus(true);
+                }}
+              />
             </>
           ),
           action: (
@@ -126,8 +115,8 @@ const Trip = () => {
   };
 
   const onUpdateStatus = () => {
-    setShowModel_1(true)
-  }
+    setShowModel_1(true);
+  };
 
   const onDeleteDriver = () => {
     const URL = {
@@ -144,10 +133,12 @@ const Trip = () => {
 
   const onSubmitForm = (payload) => {
     (async () => {
-      const ClientData = plantData.filter((e) => e.id === payload?.plantId)
-      const TransporterData = vehiclesData.filter((e) => e.id === payload?.vehicleId)
-      payload.clientId = ClientData[0]?.client?.id
-      payload.transporterId = TransporterData[0]?.transporter?.id
+      const ClientData = plantData.filter((e) => e.id === payload?.plantId);
+      const TransporterData = vehiclesData.filter(
+        (e) => e.id === payload?.vehicleId
+      );
+      payload.clientId = ClientData[0]?.client?.id;
+      payload.transporterId = TransporterData[0]?.transporter?.id;
       if (actionData?.id) {
         const URL = {
           endpoint: `/trip/${actionData?.id}`,
@@ -170,6 +161,33 @@ const Trip = () => {
       }
     })();
   };
+
+  const callAsynchronousOperation = async (item) => {
+    // setIsEdit(false);
+  };
+
+  // For Update Bulk Status
+  // const updateAllTripToCompleted = () => {
+  //   (async () => {
+  //     for (let i = 0; i < tripData.length; i++) {
+  //       const payload = {
+  //         status: "3",
+  //         driverId: tripData[i]?.driver?.id,
+  //         vehicleId: tripData[i]?.vehicle?.id,
+  //       };
+
+  //       try {
+  //         const res = await Services.patch(
+  //           `/trip/updateTripStatus/${tripData[i]?.id}`,
+  //           payload
+  //         );
+  //         console.log("Success", tripData[i]);
+  //       } catch (err) {
+  //         console.log("Error", tripData[i]);
+  //       }
+  //     }
+  //   })();
+  // };
 
   return (
     <React.Fragment>
@@ -197,6 +215,9 @@ const Trip = () => {
             setIsEdit(false);
             setActionData({});
           }}
+          style={{
+            zIndex: '99'
+          }}
         >
           Add Trip
         </Button>
@@ -215,6 +236,20 @@ const Trip = () => {
         defaultData={actionData}
         formData={false}
         isEdit={isEdit}
+        option={{
+          vehicleId: vehiclesDataRes.map((data) => {
+            return { label: data.registrationNumber, value: data.id };
+          }),
+          plantId: plantData.map((data) => {
+            return { label: data.unitName, value: data.id };
+          }),
+          driverId: driverData.map((data) => {
+            return { label: data.name, value: data.id };
+          }),
+          transporterId: transporterData.map((data) => {
+            return { label: data.transporterName, value: data.id };
+          }),
+        }}
       />
       <CustomModal
         modalType="formModal"
@@ -227,25 +262,27 @@ const Trip = () => {
         formData={false}
         isEdit={isEdit}
       />
-      {confirm_both ? (
-        <SweetAlert
-          title="Are you sure?"
-          warning
-          showCancel
-          confirmBtnBsStyle="success"
-          cancelBtnBsStyle="danger"
-          onConfirm={() => {
-            onDeleteDriver();
-            setConfirm_both(false);
-          }}
-          onCancel={() => {
-            setConfirm_both(false);
-          }}
-        >
-          You won't be able to revert this!
-        </SweetAlert>
-      ) : null}
-    </React.Fragment>
+      {
+        confirm_both ? (
+          <SweetAlert
+            title="Are you sure?"
+            warning
+            showCancel
+            confirmBtnBsStyle="success"
+            cancelBtnBsStyle="danger"
+            onConfirm={() => {
+              onDeleteDriver();
+              setConfirm_both(false);
+            }}
+            onCancel={() => {
+              setConfirm_both(false);
+            }}
+          >
+            You won't be able to revert this!
+          </SweetAlert>
+        ) : null
+      }
+    </React.Fragment >
   );
 };
 

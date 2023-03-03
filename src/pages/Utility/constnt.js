@@ -420,8 +420,8 @@ const CONSTANT = {
         sort: "asc",
       },
       {
-        label: "Capacity (Turn)",
-        field: "capacity",
+        label: "Co2/Km (kg per km)",
+        field: "co2PerKm",
         sort: "asc",
       },
       {
@@ -893,6 +893,12 @@ const CONSTANT = {
         type: "text",
         required: true,
       },
+      {
+        name: "clientId",
+        label: "Client Name",
+        placeholder: "Client Name",
+        type: "SingleSelect",
+      },
     ],
     ADMIN_EDIT: [
       {
@@ -990,11 +996,31 @@ const CONSTANT = {
         ],
       },
       {
+        name: "co2PerKm",
+        label: "Truck Category",
+        placeholder: "Select",
+        type: "SingleSelect",
+        required: true,
+        options: [
+          { label: "20ft", value: 0.5 },
+          { label: "32ft SA", value: 0.55 },
+          { label: "32ft MA", value: 0.6 },
+          { label: "For pickup", value: 0.3 },
+          { label: "20ft CNG", value: 0.45 },
+        ],
+      },
+      {
         name: "mileage",
         label: "Mileage",
         placeholder: "Mileage",
         type: "text",
         required: true,
+      },
+      {
+        name: "transporterId",
+        label: "Transporter Name",
+        placeholder: "Transporter Name",
+        type: "SingleSelect",
       },
     ],
     TRIP: [
@@ -1061,6 +1087,30 @@ const CONSTANT = {
         placeholder: "Distance Of Trip",
         type: "text",
         required: false,
+      },
+      {
+        name: "vehicleId",
+        label: "Vehicle Name",
+        placeholder: "Vehicle Name",
+        type: "SingleSelect",
+      },
+      {
+        name: "plantId",
+        label: "Plant Name",
+        placeholder: "Plant Name",
+        type: "SingleSelect",
+      },
+      {
+        name: "driverId",
+        label: "Driver Name",
+        placeholder: "Driver Name",
+        type: "SingleSelect",
+      },
+      {
+        name: "transporterId",
+        label: "Transporter Name",
+        placeholder: "Transporter Name",
+        type: "SingleSelect",
       },
     ],
     TRIP_STATUS: [

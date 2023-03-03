@@ -19,6 +19,7 @@ const Vehicals = () => {
   const [confirm_both, setconfirm_both] = useState(false);
   const [flag, setFlag] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
+  const [transporterData, setTransporterData] = useState([])
   const API_CALL = useHttp();
   // const history = useHistory()
 
@@ -33,22 +34,13 @@ const Vehicals = () => {
   }, []);
 
   const transporterDataHandler = (res) => {
-    CONSTANT.FORM_FIELDS.VEHICLES.push({
-      name: "transporterId",
-      label: "Transporter",
-      placeholder: "Transporter",
-      type: "SingleSelect",
-      options: res?.data.map((data) => {
-        return { label: data.transporterName, value: data.id };
-      }),
-    });
+    setTransporterData(res?.data)
   };
-
 
   const GoToVehicleInfo = (vehicleData) => {
     // history.push(`/vehiclesInfo/${vehicleData?.id}`, { state: { vehicleData: vehicleData } })
     window.location.assign(`/vehiclesInfo/${vehicleData?.id}`);
-  }
+  };
 
   const vehicleDataHandler = (res) => {
     setVehicleData(
@@ -56,7 +48,15 @@ const Vehicals = () => {
         return {
           ...vehicleData,
           no: index + 1,
-          RegistrationNumbers: <NavLink className="TableLink" onClick={() => GoToVehicleInfo(vehicleData)} style={{ color: "gray", cursor: 'pointer' }} >{vehicleData?.registrationNumber}</NavLink>,
+          RegistrationNumbers: (
+            <NavLink
+              className="TableLink"
+              onClick={() => GoToVehicleInfo(vehicleData)}
+              style={{ color: "gray", cursor: "pointer" }}
+            >
+              {vehicleData?.registrationNumber}
+            </NavLink>
+          ),
           Allocated: <AllocateAndNotAllocate value={vehicleData?.allocate} />,
           transporterName: vehicleData?.transporter?.transporterName,
           action: (
@@ -175,6 +175,11 @@ const Vehicals = () => {
         defaultData={actionData}
         formData={false}
         isEdit={isEdit}
+        option={{
+          transporterId: transporterData.map((data) => {
+            return { label: data.transporterName, value: data.id };
+          }),
+        }}
       />
       {confirm_both ? (
         <SweetAlert
