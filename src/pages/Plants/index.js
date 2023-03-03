@@ -17,6 +17,7 @@ const Plants = () => {
   const [confirm_both, setconfirm_both] = useState(false);
   const [flag, setFlag] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
+  const [clientData, setClientData] = useState([])
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -24,18 +25,10 @@ const Plants = () => {
       API_CALL.sendRequest(CONSTANT.API.getAllPlant, plantDataHandler);
       API_CALL.sendRequest(CONSTANT.API.getAllClient, clientDataHandler);
     })();
-  }, []);
+  }, [flag]);
 
   const clientDataHandler = (res) => {
-    CONSTANT.FORM_FIELDS.PLANT.push({
-      name: "clientId",
-      label: "Client Name",
-      placeholder: "Client Name",
-      type: "SingleSelect",
-      options: res?.data.map((data) => {
-        return { label: data.name, value: data.id };
-      }),
-    });
+    setClientData(res?.data);
   };
 
   const plantDataHandler = (res) => {
@@ -157,6 +150,11 @@ const Plants = () => {
         defaultData={actionData}
         formData={false}
         isEdit={isEdit}
+        option={{
+          clientId: clientData.map((data) => {
+            return { label: data?.name, value: data?.id };
+          }),
+        }}
       />
       {confirm_both ? (
         <SweetAlert

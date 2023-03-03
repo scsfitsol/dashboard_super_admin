@@ -4,6 +4,7 @@ import Select from "react-select";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import moment from "moment/moment";
 const CustomModal = (props) => {
   const {
     modalType,
@@ -15,8 +16,13 @@ const CustomModal = (props) => {
     defaultData,
     formData,
     isEdit,
+    onChangeFunction = {},
+    option = {},
   } = props;
-  const [inputData, setInputData] = useState({});
+  const todayDate = moment(new Date()).format(
+    "YYYY-MM-DDTHH:MM"
+  );
+  const [inputData, setInputData] = useState({ startDateAndTime: todayDate, targetedDateAndTime: todayDate });
   const [selectedValue, setSelectedValue] = useState({});
   const [isChange, setIsChange] = useState(false);
 
@@ -129,19 +135,27 @@ const CustomModal = (props) => {
                                 value={
                                   isEdit
                                     ? !isChange
-                                      ? fieldName?.options.filter(
+                                      ? option[fieldName?.name] || fieldName?.options.filter(
                                         (e) => e.value === OldValue
                                       )
                                       : selectedValue[fieldName?.name]
                                     : selectedValue[fieldName?.name]
                                 }
-                                options={fieldName?.options}
+                                options={
+                                  fieldName?.options
+                                    ? fieldName?.options
+                                    : option[fieldName?.name]
+                                      ? option[fieldName?.name]
+                                      : []
+                                }
                                 selected={"clientName" == fieldName?.name}
                                 classNamePrefix="select2-selection"
-                                onChange={(selected) =>
-                                  onSelectValue(selected, fieldName?.name)
-                                }
-                                rules={{ required: fieldName?.required }}
+                                onChange={(selected) => {
+                                  onSelectValue(selected, fieldName?.name);
+                                  if (onChangeFunction[fieldName?.name]) {
+                                    onChangeFunction[fieldName?.name](selected);
+                                  }
+                                }}
                               />
                             </div>
                           );
@@ -165,7 +179,6 @@ const CustomModal = (props) => {
                             <div key={index} className="mb-4">
                               <Label>{fieldName?.label}</Label><br />
                               <GooglePlacesAutocomplete
-
                                 apiKey={'AIzaSyAIh5rjUYY8SoLb14LUnxrbhD2XnRsF_78'}
                                 apiOptions={{
                                   types: ['(cities)'],
@@ -217,7 +230,7 @@ const CustomModal = (props) => {
                                 name={fieldName?.name}
                                 className="form-control"
                                 type="datetime-local"
-                                defaultValue="2019-08-19T13:45:00"
+                                defaultValue={todayDate}
                                 id="example-datetime-local-input"
                                 onChange={onChangeInput}
                                 required={fieldName?.required}

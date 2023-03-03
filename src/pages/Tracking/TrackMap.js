@@ -9,7 +9,6 @@ import Slider from "react-rangeslider"
 import "react-rangeslider/lib/index.css"
 import notify from "../Utility/coustemFunction"
 import moment from "moment/moment"
-import { map } from "leaflet"
 
 const LoadingContainer = () => <div>Loading...</div>
 
@@ -124,16 +123,6 @@ const TrackMap = (props) => {
                                 )
                             })
                             }
-                            {/* <Marker
-                                title={"The marker`s title will appear as a tooltip."}
-                                name={"SOMA"}
-                                position={e}
-                            />
-                            <Marker
-                                title={"The marker`s title will appear as a tooltip."}
-                                name={"SOMA"}
-                                position={routesBounds && routesBounds[routesBounds.length - 1]}
-                            /> */}
                             {
                                 tripStep > 0 &&
                                 <Marker
@@ -147,18 +136,6 @@ const TrackMap = (props) => {
                                     }}
                                 />
                             }
-                            {/* {
-                                <Marker
-                                    title={"The marker`s title will appear as a tooltip."}
-                                    name={"SOMA"}
-                                    position={tripData[0].loc}
-                                    icon={{
-                                        url: MapTruck,
-                                        fillColor: '#EB00FF',
-                                        // scaledSize: new google.maps.Size(60, 60),
-                                    }}
-                                />
-                            } */}
                             <Polyline
                                 path={routePath}
                                 fillColor="#0000FF"
@@ -218,7 +195,7 @@ TrackMap.propTypes = {
 
 export default connect(null)(
     GoogleApiWrapper({
-        apiKey: "AIzaSyAIh5rjUYY8SoLb14LUnxrbhD2XnRsF_78",
+        apiKey: process.env.REACT_APP_MAP_KEY,
         LoadingContainer: LoadingContainer,
         v: "3",
     })(TrackMap)

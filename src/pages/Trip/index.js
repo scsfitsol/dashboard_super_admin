@@ -5,10 +5,7 @@ import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
 import useHttp from "../../components/Hook/Use-http";
-import { getAllTrip } from "../Utility/API/api";
-import Services from "../Utility/API/service";
 import CONSTANT, {
-  Category,
   DeleteButton,
   EditButton,
   getTableData,
@@ -25,6 +22,10 @@ const Trip = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [plantData, setPlantData] = useState([]);
   const [vehiclesData, setVehiclesData] = useState([]);
+  const [vehiclesDataRes, setVehiclesDataRes] = useState([]);
+  const [driverData, setDriverData] = useState([]);
+  const [transporterData, setTransporterData] = useState([]);
+  const [clientData, setClientData] = useState([])
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -33,43 +34,26 @@ const Trip = () => {
       API_CALL.sendRequest(CONSTANT.API.getAllDriver, driverDataHandler);
       API_CALL.sendRequest(CONSTANT.API.getAllVehicle, vehiclesDataHandler);
       API_CALL.sendRequest(CONSTANT.API.getAllPlant, plantDataHandler);
+      API_CALL.sendRequest(CONSTANT.API.getAllClient, clientDataHandler);
+      API_CALL.sendRequest(CONSTANT.API.getAllTransporter, transporterDataHandler);
     })();
   }, [flag]);
 
   const driverDataHandler = (res) => {
-    CONSTANT.FORM_FIELDS.TRIP.push({
-      name: "driverId",
-      label: "Driver Name",
-      placeholder: "Driver Name",
-      type: "SingleSelect",
-      options: res?.data.map((data) => {
-        return { label: data.name, value: data.id };
-      }),
-    });
+    setDriverData(res?.data)
+  };
+  const transporterDataHandler = (res) => {
+    setTransporterData(res?.data)
   };
   const vehiclesDataHandler = (res) => {
-    setVehiclesData(res?.data);
-    CONSTANT.FORM_FIELDS.TRIP.push({
-      name: "vehicleId",
-      label: "Vehicle Name",
-      placeholder: "Vehicle Name",
-      type: "SingleSelect",
-      options: res?.data.map((data) => {
-        return { label: data.registrationNumber, value: data.id };
-      }),
-    });
+    setVehiclesData(res?.data)
+    setVehiclesDataRes(res?.data);
   };
   const plantDataHandler = (res) => {
     setPlantData(res?.data);
-    CONSTANT.FORM_FIELDS.TRIP.push({
-      name: "plantId",
-      label: "Plant Name",
-      placeholder: "Plant Name",
-      type: "SingleSelect",
-      options: res?.data.map((data) => {
-        return { label: data.unitName, value: data.id };
-      }),
-    });
+  };
+  const clientDataHandler = (res) => {
+    setClientData(res?.data);
   };
   const tripDataHandler = (res) => {
     setTripData(
@@ -97,7 +81,7 @@ const Trip = () => {
                 value={tripData?.status}
                 onClick={() => {
                   onEditTrip(tripData);
-                  onUpdateStatus(true);
+                  setShowModel_1(true);
                 }}
               />
             </>
@@ -130,10 +114,6 @@ const Trip = () => {
   const onEditTrip = (tripData) => {
     setActionData(tripData);
     setIsEdit(true);
-  };
-
-  const onUpdateStatus = () => {
-    setShowModel_1(true);
   };
 
   const onDeleteDriver = () => {
@@ -180,33 +160,6 @@ const Trip = () => {
     })();
   };
 
-  const callAsynchronousOperation = async (item) => {
-    // setIsEdit(false);
-  };
-
-  // For Update Bulk Status
-  // const updateAllTripToCompleted = () => {
-  //   (async () => {
-  //     for (let i = 0; i < tripData.length; i++) {
-  //       const payload = {
-  //         status: "3",
-  //         driverId: tripData[i]?.driver?.id,
-  //         vehicleId: tripData[i]?.vehicle?.id,
-  //       };
-
-  //       try {
-  //         const res = await Services.patch(
-  //           `/trip/updateTripStatus/${tripData[i]?.id}`,
-  //           payload
-  //         );
-  //         console.log("Success", tripData[i]);
-  //       } catch (err) {
-  //         console.log("Error", tripData[i]);
-  //       }
-  //     }
-  //   })();
-  // };
-
   return (
     <React.Fragment>
       <div className="page-content">
@@ -233,6 +186,9 @@ const Trip = () => {
             setIsEdit(false);
             setActionData({});
           }}
+          style={{
+            zIndex: '99'
+          }}
         >
           Add Trip
         </Button>
@@ -251,6 +207,23 @@ const Trip = () => {
         defaultData={actionData}
         formData={false}
         isEdit={isEdit}
+        option={{
+          vehicleId: vehiclesDataRes.map((data) => {
+            return { label: data.registrationNumber, value: data.id };
+          }),
+          plantId: plantData.map((data) => {
+            return { label: data.unitName, value: data.id };
+          }),
+          driverId: driverData.map((data) => {
+            return { label: data.name, value: data.id };
+          }),
+          transporterId: transporterData.map((data) => {
+            return { label: data.transporterName, value: data.id };
+          }),
+          clientId: clientData.map((data) => {
+            return { label: data.name, value: data.id };
+          }),
+        }}
       />
       <CustomModal
         modalType="formModal"
@@ -263,25 +236,27 @@ const Trip = () => {
         formData={false}
         isEdit={isEdit}
       />
-      {confirm_both ? (
-        <SweetAlert
-          title="Are you sure?"
-          warning
-          showCancel
-          confirmBtnBsStyle="success"
-          cancelBtnBsStyle="danger"
-          onConfirm={() => {
-            onDeleteDriver();
-            setConfirm_both(false);
-          }}
-          onCancel={() => {
-            setConfirm_both(false);
-          }}
-        >
-          You won't be able to revert this!
-        </SweetAlert>
-      ) : null}
-    </React.Fragment>
+      {
+        confirm_both ? (
+          <SweetAlert
+            title="Are you sure?"
+            warning
+            showCancel
+            confirmBtnBsStyle="success"
+            cancelBtnBsStyle="danger"
+            onConfirm={() => {
+              onDeleteDriver();
+              setConfirm_both(false);
+            }}
+            onCancel={() => {
+              setConfirm_both(false);
+            }}
+          >
+            You won't be able to revert this!
+          </SweetAlert>
+        ) : null
+      }
+    </React.Fragment >
   );
 };
 

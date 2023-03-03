@@ -1,3 +1,4 @@
+import { MDBBadge } from "mdbreact";
 import { useState } from "react";
 import { Button, Tooltip } from "reactstrap";
 
@@ -130,13 +131,13 @@ const STATUS_COLOR = {
 };
 export const StatusButton = ({ value, onClick = {} }) => {
   return (
-    <p
+    <MDBBadge
       className={STATUS_COLOR[value]}
-      style={{ borderRadius: "4px", cursor: "pointer", width: "80px" }}
+      style={{ borderRadius: "4px", cursor: "pointer", width: "80px", fontSize: '15px' }}
       onClick={onClick}
     >
       {Category[value]}
-    </p>
+    </MDBBadge>
   );
 };
 
@@ -893,6 +894,12 @@ const CONSTANT = {
         type: "text",
         required: true,
       },
+      {
+        name: "clientId",
+        label: "Client Name",
+        placeholder: "Client Name",
+        type: "SingleSelect",
+      },
     ],
     ADMIN_EDIT: [
       {
@@ -1010,6 +1017,12 @@ const CONSTANT = {
         type: "text",
         required: true,
       },
+      {
+        name: "transporterId",
+        label: "Transporter Name",
+        placeholder: "Transporter Name",
+        type: "SingleSelect",
+      },
     ],
     TRIP: [
       {
@@ -1075,6 +1088,36 @@ const CONSTANT = {
         placeholder: "Distance Of Trip",
         type: "text",
         required: false,
+      },
+      {
+        name: "vehicleId",
+        label: "Vehicle Name",
+        placeholder: "Vehicle Name",
+        type: "SingleSelect",
+      },
+      {
+        name: "plantId",
+        label: "Plant Name",
+        placeholder: "Plant Name",
+        type: "SingleSelect",
+      },
+      {
+        name: "driverId",
+        label: "Driver Name",
+        placeholder: "Driver Name",
+        type: "SingleSelect",
+      },
+      {
+        name: "clientId",
+        label: "Client Name",
+        placeholder: "Client Name",
+        type: "SingleSelect",
+      },
+      {
+        name: "transporterId",
+        label: "Transporter Name",
+        placeholder: "Transporter Name",
+        type: "SingleSelect",
       },
     ],
     TRIP_STATUS: [
