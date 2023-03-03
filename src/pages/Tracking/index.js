@@ -15,13 +15,14 @@ import TrackingSvg from "./SVG/TrackingSvg";
 import TrackIdSvg from "./SVG/TrackIdSvg";
 import CalanderIconSvg from "./SVG/CalanderIconSvg";
 import LocationIconSvg from "./SVG/LocationIconSvg";
-import CONSTANT from "../Utility/constnt";
+import CONSTANT, { StatusCategory } from "../Utility/constnt";
 import useHttp from "../../components/Hook/Use-http";
 import moment from "moment/moment";
 import defaultImage from "../../assets/images/UserImage.jpg";
 import TrackMap from "./TrackMap";
 
 const Tracking = () => {
+  let TripID = window.location.pathname.split('/')[2];
   const [modal_standard, setModal_standard] = useState(false);
   const [modalData, setModalData] = useState({});
   const [selectCard, setSelectCard] = useState(null);
@@ -30,6 +31,8 @@ const Tracking = () => {
   const [arrowDisable, setArrowDisable] = useState(true);
   const elementRef = useRef(null);
   const API_CALL = useHttp();
+
+  
 
   function openModel(Item) {
     setModal_standard(!modal_standard);
@@ -40,11 +43,9 @@ const Tracking = () => {
       API_CALL.sendRequest(CONSTANT.API.getAllTrip, tripDataHandler);
     })();
   }, []);
-
   const tripDataHandler = (res) => {
-    setVehicleData(res?.data);
+    setVehicleData(res.data.filter((e) => e.status === "3" ? true : false));
   };
-
   const horizontalScroll = (element, speed, distance, step) => {
     let scrollAmount = 0;
     const slideTimer = setInterval(() => {
@@ -60,7 +61,6 @@ const Tracking = () => {
       }
     }, speed);
   };
-
   const onClickSelectCard = (Item, index) => {
     setSelectTripData(Item)
     setSelectCard(index);
@@ -85,7 +85,7 @@ const Tracking = () => {
           </div>
         </Row>
 
-        <Row>
+        <Row className={`${TripID ? 'd-none' : 'd-block'}`}>
           <div className="d-flex justify-content-between align-items-center mt-5 mt-md-0">
             <h4 className="page-title mb-3 font-size-18">Ongoing Trip</h4>
 
@@ -117,7 +117,7 @@ const Tracking = () => {
         </Row>
 
         {vehicleData.length > 0 ? (
-          <>
+          <div className={`${TripID ? 'd-none' : 'd-block'}`}>
             <Row>
               <div
                 style={{
@@ -205,8 +205,7 @@ const Tracking = () => {
                 ))}
               </div>
             </Row>
-            <TrackMap data={selectTripData} />
-          </>
+          </div>
         ) : (
           <>
             {" "}
@@ -215,6 +214,7 @@ const Tracking = () => {
             </div>
           </>
         )}
+        <TrackMap id={selectTripData?.id} />
       </div>
       <Modal
         isOpen={modal_standard}

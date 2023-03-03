@@ -118,7 +118,7 @@ export const MyData = {
   data: {},
 };
 
-const Category = {
+export const StatusCategory = {
   1: "Pending",
   2: "On Going",
   3: "Completed",
@@ -136,7 +136,7 @@ export const StatusButton = ({ value, onClick = {} }) => {
       style={{ borderRadius: "4px", cursor: "pointer", width: "80px", fontSize: '15px' }}
       onClick={onClick}
     >
-      {Category[value]}
+      {StatusCategory[value]}
     </MDBBadge>
   );
 };
@@ -510,6 +510,11 @@ const CONSTANT = {
         label: "No",
         field: "no",
         sort: "asc",
+      },
+      {
+        label: "Map View",
+        field: "mapView",
+        sort: "disabled",
       },
       {
         label: "Status",
