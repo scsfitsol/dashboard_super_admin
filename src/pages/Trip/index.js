@@ -55,6 +55,10 @@ const Trip = () => {
   const clientDataHandler = (res) => {
     setClientData(res?.data);
   };
+  const goToMapPage = (trip) => {
+    window.location.assign(`/tracking/${trip?.id}`);
+  } 
+
   const tripDataHandler = (res) => {
     setTripData(
       res?.data.map((tripData, index) => {
@@ -75,6 +79,7 @@ const Trip = () => {
             moment(tripData?.targetedDateAndTime).format("DD-MM-YYYY") +
             " : " +
             moment(tripData?.targetedDateAndTime).format("LT"),
+          mapView: <i role="button" onClick={() => goToMapPage(tripData)} className="mdi mdi-eye-circle-outline fs-4"></i>,
           statusData: (
             <>
               <StatusButton
