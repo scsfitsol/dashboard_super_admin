@@ -593,6 +593,11 @@ const CONSTANT = {
         sort: "asc",
       },
       {
+        label: "InVoice No",
+        field: "invoiceNumber",
+        sort: "asc",
+      },
+      {
         label: "Action",
         field: "action",
         sort: "disabled",
@@ -1146,6 +1151,12 @@ const CONSTANT = {
         placeholder: "GST Charges",
         type: "text",
       },
+      {
+        name: "invoiceNumber",
+        label: "Invoice Number",
+        placeholder: "Invoice Number",
+        type: "text",
+      },
     ],
     TRIP_STATUS: [
       {
@@ -1173,7 +1184,7 @@ const CONSTANT = {
         placeholder: "Fuel Used",
         type: "text",
         required: false,
-      },
+      }
     ],
   },
 };
