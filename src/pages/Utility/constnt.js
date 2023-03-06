@@ -583,6 +583,16 @@ const CONSTANT = {
         sort: "asc",
       },
       {
+        label: "Fleet Charges",
+        field: "fleetCharges",
+        sort: "asc",
+      },
+      {
+        label: "GST Charges",
+        field: "gstCharges",
+        sort: "asc",
+      },
+      {
         label: "Action",
         field: "action",
         sort: "disabled",
@@ -1123,6 +1133,18 @@ const CONSTANT = {
         label: "Transporter Name",
         placeholder: "Transporter Name",
         type: "SingleSelect",
+      },
+      {
+        name: "fleetCharges",
+        label: "Fleet Charges",
+        placeholder: "Fleet Name",
+        type: "text",
+      },
+      {
+        name: "gstCharges",
+        label: "GST Charges",
+        placeholder: "GST Charges",
+        type: "text",
       },
     ],
     TRIP_STATUS: [
