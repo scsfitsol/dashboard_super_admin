@@ -13,19 +13,21 @@ import moment from "moment/moment"
 const LoadingContainer = () => <div>Loading...</div>
 
 const TrackMap = (props) => {
-    const { data } = props
+    const { id } = props
+
+    let TripID = window.location.pathname.split('/')[2];
     const API_CALL = useHttp();
-    const [tripData, setTripData] = useState([])
+    const [tripOneData, setTripData] = useState([])
+    const [complateRoute, setComplateRoute] = useState([])
     const [mapDataLive, setMapDataLive] = useState([])
     const [tripStep, setTripStep] = useState(1)
     const [routesBounds, setRoutesBounds] = useState()  // Google API response path
-    const [routePath, setRoutePath] = useState([])  // BAckEnd API response path
     const [startEndLocation, setStartEndLocation] = useState([])
 
-    const startAndEndLocation = async () => {
+    const startAndEndLocation = async (trip) => {
         var geocoder = new props.google.maps.Geocoder();
-        const mapData = data?.sourceId !== undefined && data?.destinationId !== undefined &&
-            await Promise.all([data?.sourceId, data?.destinationId].map(async (id) => {
+        const mapData = trip[0]?.sourceId !== undefined && trip[0]?.destinationId !== undefined &&
+            await Promise.all([trip[0]?.sourceId, trip[0]?.destinationId].map(async (id) => {
                 const location = await geocoder.geocode({ placeId: id })
                 try {
                     return { lat: location?.results[0]?.geometry?.location.lat(), lng: location?.results[0]?.geometry?.location.lng() }
@@ -34,53 +36,65 @@ const TrackMap = (props) => {
                     console.log(err)
                 }
             }))
-        mapData !== false && setStartEndLocation(mapData)
+            if(mapData !== false){
+                setStartEndLocation(mapData)
+            }
     }
 
     useEffect(() => {
         (async () => {
             setTripStep(0)
-            setRoutePath([])
             setMapDataLive([])
-            await startAndEndLocation()
+
             const URL = {
-                endpoint: `/location/${data.id}`,
+                endpoint: `/location/${TripID ? TripID : id}`,
                 type: "GET",
             }
             API_CALL.sendRequest(URL, MapLocationHandler);
+            const TripURL = {
+                endpoint: `/trip/${TripID ? TripID : id}`,
+                type: "GET",
+            }
+            API_CALL.sendRequest(TripURL, tripDataHandler);
         })();
-    }, [data]);
+    }, [id, TripID]);
+
+    const tripDataHandler = (res) => {
+        (async () => {
+            setTripData(res?.data)
+            await startAndEndLocation(res?.data)
+        })()
+    }
 
     const MapLocationHandler = (res) => {
-        const location = res?.data.map((data) => {
-            if (data?.latitude && data?.longtitude) {
+        const location = res?.data.map((val) => {
+            if (val?.latitude && val?.longtitude) {
                 return {
-                    loc: { lat: data?.latitude, lng: data?.longtitude },
-                    time: data?.updateLocationTime,
-                    address: data?.detailedAddress,
-                    id: data?.id
+                    loc: { lat: val?.latitude, lng: val?.longtitude },
+                    time: val?.updateLocationTime,
+                    address: val?.detailedAddress,
+                    id: val?.id
                 }
             }
         })
-        const mapRoute = location.filter((data) => data?.loc !== undefined)
-        setTripData(mapRoute)
-        setRoutePath(mapRoute.reverse().map((e) => e.loc))
+        const mapRoute = location.filter((val) => val?.loc !== undefined)
+        setComplateRoute(mapRoute)
 
         setMapDataLive(mapRoute.map((e) => e.loc))
 
-        if (Object.keys(data).length > 0 && !mapRoute.length > 0) {
+        if (Object.keys(tripOneData).length > 0 && !mapRoute.length > 0) {
             notify.error('Tracking Data Not Found')
         }
 
     };
 
     useEffect(() => {
-        if (tripData.length > 0) {
+        if (complateRoute.length > 0 && startEndLocation.length > 0) {
             var directionsService = new props.google.maps.DirectionsService();
             var directionsRenderer = new props.google.maps.DirectionsRenderer();
             var request = {
-                origin: tripData[0].loc,
-                destination: startEndLocation[1],
+                origin: complateRoute[complateRoute.length - 1].loc,
+                destination:  startEndLocation[1],
                 travelMode: 'DRIVING'
             };
             directionsService.route(request, function (response, status) {
@@ -90,11 +104,7 @@ const TrackMap = (props) => {
                 }
             });
         }
-        else {
-            setStartEndLocation([])
-        }
-
-    }, [data, tripData])
+    }, [id, TripID, complateRoute, startEndLocation])
 
     return (
         <div>
@@ -103,13 +113,13 @@ const TrackMap = (props) => {
                     <div
                         id="gmaps-markers"
                         className="gmapsCoustem"
-                        style={{ position: "relative", height: "50vh" }}
+                        style={{ position: "relative", height: ` ${TripID ? '80vh' : '50vh'}` }}
                     >
                         <Map
                             google={props.google}
-                            style={{ width: "100%", height: "50vh", borderRadius: '10px' }}
+                            style={{ width: "100%", height: ` ${TripID ? '80vh' : '50vh'}`, borderRadius: '10px' }}
                             zoom={8}
-                            center={routePath[0] || { lat: 21.1458, lng: 79.0882 }}
+                            center={complateRoute[complateRoute.length-1]?.loc || { lat: 21.1458, lng: 79.0882 }}
                             fullscreenControl={false}
                         >
                             {startEndLocation.map((e, index) => {
@@ -123,16 +133,6 @@ const TrackMap = (props) => {
                                 )
                             })
                             }
-                            {/* <Marker
-                                title={"The marker`s title will appear as a tooltip."}
-                                name={"SOMA"}
-                                position={e}
-                            />
-                            <Marker
-                                title={"The marker`s title will appear as a tooltip."}
-                                name={"SOMA"}
-                                position={routesBounds && routesBounds[routesBounds.length - 1]}
-                            /> */}
                             {
                                 tripStep > 0 &&
                                 <Marker
@@ -146,20 +146,8 @@ const TrackMap = (props) => {
                                     }}
                                 />
                             }
-                            {/* {
-                                <Marker
-                                    title={"The marker`s title will appear as a tooltip."}
-                                    name={"SOMA"}
-                                    position={tripData[0].loc}
-                                    icon={{
-                                        url: MapTruck,
-                                        fillColor: '#EB00FF',
-                                        // scaledSize: new google.maps.Size(60, 60),
-                                    }}
-                                />
-                            } */}
                             <Polyline
-                                path={routePath}
+                                path={complateRoute.reverse().map((e) => e.loc)}
                                 fillColor="#0000FF"
                                 fillOpacity={1}
                                 strokeColor="#0000FF"
@@ -186,13 +174,13 @@ const TrackMap = (props) => {
                                 <div className="p-3">
                                     <Card>
                                         <CardBody className="py-0 pt-3 text-start">
-                                            <p>{moment(tripData[tripStep - 1]?.time).format('LL, LT')}</p>
-                                            <p>{tripData[tripStep - 1]?.address}</p>
+                                            <p>{moment(complateRoute[tripStep - 1]?.time).format('LL, LT')}</p>
+                                            <p>{complateRoute[tripStep - 1]?.address}</p>
 
                                             <Slider
                                                 value={tripStep}
                                                 min={1}
-                                                max={tripData.length}
+                                                max={complateRoute.length}
                                                 // labels={tripData.map((e) => e.time)}
                                                 orientation="horizontal"
                                                 onChange={value => {

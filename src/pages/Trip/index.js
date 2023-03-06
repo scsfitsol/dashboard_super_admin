@@ -5,10 +5,7 @@ import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
 import useHttp from "../../components/Hook/Use-http";
-import { getAllTrip } from "../Utility/API/api";
-import Services from "../Utility/API/service";
 import CONSTANT, {
-  Category,
   DeleteButton,
   EditButton,
   getTableData,
@@ -26,8 +23,9 @@ const Trip = () => {
   const [plantData, setPlantData] = useState([]);
   const [vehiclesData, setVehiclesData] = useState([]);
   const [vehiclesDataRes, setVehiclesDataRes] = useState([]);
-  const [driverData, setDriverData] = useState([])
-  const [transporterData, setTransporterData] = useState([])
+  const [driverData, setDriverData] = useState([]);
+  const [transporterData, setTransporterData] = useState([]);
+  const [clientData, setClientData] = useState([])
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -36,6 +34,7 @@ const Trip = () => {
       API_CALL.sendRequest(CONSTANT.API.getAllDriver, driverDataHandler);
       API_CALL.sendRequest(CONSTANT.API.getAllVehicle, vehiclesDataHandler);
       API_CALL.sendRequest(CONSTANT.API.getAllPlant, plantDataHandler);
+      API_CALL.sendRequest(CONSTANT.API.getAllClient, clientDataHandler);
       API_CALL.sendRequest(CONSTANT.API.getAllTransporter, transporterDataHandler);
     })();
   }, [flag]);
@@ -53,6 +52,13 @@ const Trip = () => {
   const plantDataHandler = (res) => {
     setPlantData(res?.data);
   };
+  const clientDataHandler = (res) => {
+    setClientData(res?.data);
+  };
+  const goToMapPage = (trip) => {
+    window.location.assign(`/tracking/${trip?.id}`);
+  } 
+
   const tripDataHandler = (res) => {
     setTripData(
       res?.data.map((tripData, index) => {
@@ -73,13 +79,14 @@ const Trip = () => {
             moment(tripData?.targetedDateAndTime).format("DD-MM-YYYY") +
             " : " +
             moment(tripData?.targetedDateAndTime).format("LT"),
+          mapView: <i role="button" onClick={() => goToMapPage(tripData)} className="mdi mdi-eye-circle-outline fs-4"></i>,
           statusData: (
             <>
               <StatusButton
                 value={tripData?.status}
                 onClick={() => {
                   onEditTrip(tripData);
-                  onUpdateStatus(true);
+                  setShowModel_1(true);
                 }}
               />
             </>
@@ -112,10 +119,6 @@ const Trip = () => {
   const onEditTrip = (tripData) => {
     setActionData(tripData);
     setIsEdit(true);
-  };
-
-  const onUpdateStatus = () => {
-    setShowModel_1(true);
   };
 
   const onDeleteDriver = () => {
@@ -161,33 +164,6 @@ const Trip = () => {
       }
     })();
   };
-
-  const callAsynchronousOperation = async (item) => {
-    // setIsEdit(false);
-  };
-
-  // For Update Bulk Status
-  // const updateAllTripToCompleted = () => {
-  //   (async () => {
-  //     for (let i = 0; i < tripData.length; i++) {
-  //       const payload = {
-  //         status: "3",
-  //         driverId: tripData[i]?.driver?.id,
-  //         vehicleId: tripData[i]?.vehicle?.id,
-  //       };
-
-  //       try {
-  //         const res = await Services.patch(
-  //           `/trip/updateTripStatus/${tripData[i]?.id}`,
-  //           payload
-  //         );
-  //         console.log("Success", tripData[i]);
-  //       } catch (err) {
-  //         console.log("Error", tripData[i]);
-  //       }
-  //     }
-  //   })();
-  // };
 
   return (
     <React.Fragment>
@@ -248,6 +224,9 @@ const Trip = () => {
           }),
           transporterId: transporterData.map((data) => {
             return { label: data.transporterName, value: data.id };
+          }),
+          clientId: clientData.map((data) => {
+            return { label: data.name, value: data.id };
           }),
         }}
       />

@@ -39,6 +39,7 @@ import VehiclesInfo from "../pages/Vehicals/VehiclesInfo";
 const userRoutes = [
   // Analytics
   { path: "/Dashboard", component: Report },
+  { path: "/tracking/:tripId", component: Tracking },
   { path: "/tracking", component: Tracking },
 
   // User
@@ -59,10 +60,9 @@ const userRoutes = [
   // Plant
   { path: "/sites", component: Plants },
 
-  // //profile
+  // profile
   { path: "/profile", component: UserProfile },
 
-  // this route should be at the end of all other routes
   // { path: "/", exact: true, component: () => <Redirect to="/login" /> },
   { path: "/*", exact: true, component: Pages404 },
 ];

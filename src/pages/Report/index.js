@@ -34,6 +34,8 @@ const CardData = [
   },
 ];
 
+const tripInChartKey = ['totalEarlyTrip', 'totalOnTimeTrip', 'totalLateTrip']
+
 const Report = () => {
   const [analysisData, setAnalysisData] = useState({});
   const [transporterList, setTransporterList] = useState([]);
@@ -167,7 +169,7 @@ const Report = () => {
                   />
                 </div>
                 <RadialChart
-                  data={Object.keys(analysisData).length > 0 && [+analysisData?.trip?.totalLateTrip, +analysisData?.trip?.totalOnTimeTrip, +analysisData?.trip?.totalEarlyTrip]}
+                  data={analysisData?.trip && Object.keys(analysisData?.trip).filter((e) => tripInChartKey.includes(e)).map((e) => { return ({ value: analysisData?.trip[e], label: e }) })}
                 />
               </CardBody>
             </Card>

@@ -1,3 +1,4 @@
+import { MDBBadge } from "mdbreact";
 import { useState } from "react";
 import { Button, Tooltip } from "reactstrap";
 
@@ -117,7 +118,7 @@ export const MyData = {
   data: {},
 };
 
-const Category = {
+export const StatusCategory = {
   1: "Pending",
   2: "On Going",
   3: "Completed",
@@ -130,13 +131,13 @@ const STATUS_COLOR = {
 };
 export const StatusButton = ({ value, onClick = {} }) => {
   return (
-    <p
+    <MDBBadge
       className={STATUS_COLOR[value]}
-      style={{ borderRadius: "4px", cursor: "pointer", width: "80px" }}
+      style={{ borderRadius: "4px", cursor: "pointer", width: "80px", fontSize: '15px' }}
       onClick={onClick}
     >
-      {Category[value]}
-    </p>
+      {StatusCategory[value]}
+    </MDBBadge>
   );
 };
 
@@ -511,6 +512,11 @@ const CONSTANT = {
         sort: "asc",
       },
       {
+        label: "Map View",
+        field: "mapView",
+        sort: "disabled",
+      },
+      {
         label: "Status",
         field: "statusData",
         sort: "asc",
@@ -574,6 +580,16 @@ const CONSTANT = {
       {
         label: "CO2 Efficiency",
         field: "Co2efficiency",
+        sort: "asc",
+      },
+      {
+        label: "Fleet Charges",
+        field: "fleetCharges",
+        sort: "asc",
+      },
+      {
+        label: "GST Charges",
+        field: "gstCharges",
         sort: "asc",
       },
       {
@@ -1107,10 +1123,28 @@ const CONSTANT = {
         type: "SingleSelect",
       },
       {
+        name: "clientId",
+        label: "Client Name",
+        placeholder: "Client Name",
+        type: "SingleSelect",
+      },
+      {
         name: "transporterId",
         label: "Transporter Name",
         placeholder: "Transporter Name",
         type: "SingleSelect",
+      },
+      {
+        name: "fleetCharges",
+        label: "Fleet Charges",
+        placeholder: "Fleet Name",
+        type: "text",
+      },
+      {
+        name: "gstCharges",
+        label: "GST Charges",
+        placeholder: "GST Charges",
+        type: "text",
       },
     ],
     TRIP_STATUS: [
