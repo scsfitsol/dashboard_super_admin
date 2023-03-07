@@ -21,6 +21,7 @@ const apiCall = async (
         return await Services.get(endPoint);
     }
   } catch (error) {
+    debugger
     notify.warning(
       errorMessage.message !== ""
         ? errorMessage.message

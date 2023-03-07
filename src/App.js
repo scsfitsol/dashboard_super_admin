@@ -34,13 +34,15 @@ const App = (props) => {
   //Get My Data
   useEffect(() => {
     (async () => {
-      const test = localStorage.getItem("authToken")
-        ? API_CALL.sendRequest(CONSTANT.API.getMe, getMeDataHandler)
-        : {};
+      if (localStorage.getItem("authToken")) {
+        API_CALL.sendRequest(CONSTANT.API.getMe, getMeDataHandler)
+      }
     })();
   }, []);
 
   const getMeDataHandler = (res) => {
+    debugger
+    console.log('res', res)
     MyData.data = res.data[0];
   };
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import SweetAlert from "react-bootstrap-sweetalert";
-import { useHistory } from "react-router-dom";
 import { Button, Row, NavLink } from "reactstrap";
 import CustomModal from "../../../components/Custome/CustomModal";
 import Table from "../../../components/Custome/table";
@@ -30,10 +29,9 @@ const Clients = () => {
         })();
     }, [flag]);
 
-    const state = { ClientData: clientData } 
+    const state = { ClientData: clientData }
     const GoToClientInfo = (clientData) => {
         window.location.assign(`/clientInfo/${clientData?.id}`, state);
-        // history.push(`/clientInfo/${clientData?.id}`, { state: { ClientData: clientData } })
     }
 
     const clientDataHandler = (res) => {
@@ -162,7 +160,7 @@ const Clients = () => {
                 modalType="formModal"
                 show={showModel}
                 close={() => setShowModel(false)}
-                modalTitle= {isEdit ? "Edit Client" : "Add Client"}
+                modalTitle={isEdit ? "Edit Client" : "Add Client"}
                 onSubmit={(data) => onSubmitForm(data)}
                 data={CONSTANT.FORM_FIELDS.CLIENT}
                 defaultData={actionData}
