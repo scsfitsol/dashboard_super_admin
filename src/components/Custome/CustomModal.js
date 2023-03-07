@@ -5,6 +5,7 @@ import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import moment from "moment/moment";
+import CreatableSelect from 'react-select/creatable';
 const CustomModal = (props) => {
   const {
     modalType,
@@ -132,6 +133,41 @@ const CustomModal = (props) => {
                             <div key={index} className="mb-4">
                               <Label>{fieldName?.label}</Label>
                               <Select
+                                value={
+                                  isEdit
+                                    ? !isChange
+                                      ? option[fieldName?.name] || fieldName?.options.filter(
+                                        (e) => e.value === OldValue
+                                      )
+                                      : selectedValue[fieldName?.name]
+                                    : selectedValue[fieldName?.name]
+                                }
+                                options={
+                                  fieldName?.options
+                                    ? fieldName?.options
+                                    : option[fieldName?.name]
+                                      ? option[fieldName?.name]
+                                      : []
+                                }
+                                selected={"clientName" == fieldName?.name}
+                                classNamePrefix="select2-selection"
+                                onChange={(selected) => {
+                                  onSelectValue(selected, fieldName?.name);
+                                  if (onChangeFunction[fieldName?.name]) {
+                                    onChangeFunction[fieldName?.name](selected);
+                                  }
+                                }}
+                              />
+                            </div>
+                          );
+                        } else if (fieldName.type === "SingleSelectWithCreate") {
+                          const OldValue = isEdit
+                            ? defaultData[fieldName?.name]
+                            : null;
+                          return (
+                            <div key={index} className="mb-4">
+                              <Label>{fieldName?.label}</Label>
+                              <CreatableSelect
                                 value={
                                   isEdit
                                     ? !isChange
