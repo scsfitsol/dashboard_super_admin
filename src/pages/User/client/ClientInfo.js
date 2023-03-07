@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Card, CardBody, Col, Nav, NavItem, Row, TabContent, TabPane, NavLink } from 'reactstrap'
 import classnames from "classnames"
-import CONSTANT, { getTableData, StatusButton, TAB_DATA } from '../../Utility/constnt'
+import CONSTANT, { StatusButton, TAB_DATA } from '../../Utility/constnt'
 import moment from 'moment'
 import useHttp from '../../../components/Hook/Use-http'
 import Table from '../../../components/Custome/table'
-import { useParams } from 'react-router-dom'
 
 const ClientInfo = () => {
     let clientId = window.location.pathname.split('/')[2];
-    const params = useParams();
     const [activeTab, setactiveTab] = useState(1)
     const [tripData, setTripData] = useState([]);
     const [plantData, setPlantData] = useState([]);

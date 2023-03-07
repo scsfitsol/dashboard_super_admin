@@ -253,7 +253,7 @@ const CONSTANT = {
         {
           id: 1,
           className: "waves-effect",
-          to: "/Dashboard",
+          to: "/",
           lable: "Dashboard",
           icon: "bx bxs-report",
         },
@@ -359,6 +359,16 @@ const CONSTANT = {
       {
         label: "Client ID",
         field: "clientId",
+        sort: "asc",
+      },
+      {
+        label: "Mobile No",
+        field: "mobile",
+        sort: "asc",
+      },
+      {
+        label: "Insurance Number",
+        field: "insuranceNumber",
         sort: "asc",
       },
       {
@@ -639,6 +649,16 @@ const CONSTANT = {
         field: "clientId",
         sort: "asc",
       },
+      {
+        label: "Mobile No",
+        field: "mobile",
+        sort: "asc",
+      },
+      {
+        label: "Insurance Number",
+        field: "insuranceNumber",
+        sort: "asc",
+      },
     ],
     driver: [
       {
@@ -878,6 +898,20 @@ const CONSTANT = {
         type: "text",
         required: false,
       },
+      {
+        name: "mobile",
+        label: "Mobile No",
+        placeholder: "Mobile No",
+        type: "mobileNumber",
+        required: false,
+      },
+      {
+        name: "insuranceNumber",
+        label: "Insurance Number",
+        placeholder: "Insurance Number",
+        type: "text",
+        required: false,
+      },
       // {
       //   name: "profilePic",
       //   label: "Profile Pic",
@@ -1113,7 +1147,7 @@ const CONSTANT = {
         name: "vehicleId",
         label: "Vehicle Name",
         placeholder: "Vehicle Name",
-        type: "SingleSelect",
+        type: "SingleSelectWithCreate",
       },
       {
         name: "plantId",
