@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.eccc943d.chunk.css",
-    "main.js": "/static/js/main.228a946b.chunk.js",
-    "main.js.map": "/static/js/main.228a946b.chunk.js.map",
+    "main.css": "/static/css/main.2fd6fa01.chunk.css",
+    "main.js": "/static/js/main.9d3fddad.chunk.js",
+    "main.js.map": "/static/js/main.9d3fddad.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.6e1e32e3.js",
     "runtime-main.js.map": "/static/js/runtime-main.6e1e32e3.js.map",
     "static/css/2.96f8aba4.chunk.css": "/static/css/2.96f8aba4.chunk.css",
-    "static/js/2.5aa4fae1.chunk.js": "/static/js/2.5aa4fae1.chunk.js",
-    "static/js/2.5aa4fae1.chunk.js.map": "/static/js/2.5aa4fae1.chunk.js.map",
+    "static/js/2.605eb4e0.chunk.js": "/static/js/2.605eb4e0.chunk.js",
+    "static/js/2.605eb4e0.chunk.js.map": "/static/js/2.605eb4e0.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.96f8aba4.chunk.css.map": "/static/css/2.96f8aba4.chunk.css.map",
-    "static/css/main.eccc943d.chunk.css.map": "/static/css/main.eccc943d.chunk.css.map",
-    "static/js/2.5aa4fae1.chunk.js.LICENSE.txt": "/static/js/2.5aa4fae1.chunk.js.LICENSE.txt",
+    "static/css/main.2fd6fa01.chunk.css.map": "/static/css/main.2fd6fa01.chunk.css.map",
+    "static/js/2.605eb4e0.chunk.js.LICENSE.txt": "/static/js/2.605eb4e0.chunk.js.LICENSE.txt",
     "static/media/UserImage.611e8313.jpg": "/static/media/UserImage.611e8313.jpg",
-    "static/media/arrowDown.aef1292f.svg": "/static/media/arrowDown.aef1292f.svg",
-    "static/media/arrowTop.c66d90a3.svg": "/static/media/arrowTop.c66d90a3.svg",
+    "static/media/arrowDown.3560d93b.svg": "/static/media/arrowDown.3560d93b.svg",
+    "static/media/arrowTop.1e4858c4.svg": "/static/media/arrowTop.1e4858c4.svg",
     "static/media/avatar-1.3921191a.jpg": "/static/media/avatar-1.3921191a.jpg",
     "static/media/avatar-2.feb0f89d.jpg": "/static/media/avatar-2.feb0f89d.jpg",
     "static/media/avatar-3.2cfd5ba6.jpg": "/static/media/avatar-3.2cfd5ba6.jpg",
@@ -31,13 +31,13 @@
     "static/media/logo-dark.3f82f4ae.png": "/static/media/logo-dark.3f82f4ae.png",
     "static/media/logo-light.3f82f4ae.png": "/static/media/logo-light.3f82f4ae.png",
     "static/media/maintenance.406ae084.png": "/static/media/maintenance.406ae084.png",
-    "static/media/truck.67cb3ec0.svg": "/static/media/truck.67cb3ec0.svg"
+    "static/media/truck.bb08f9d8.svg": "/static/media/truck.bb08f9d8.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.6e1e32e3.js",
     "static/css/2.96f8aba4.chunk.css",
-    "static/js/2.5aa4fae1.chunk.js",
-    "static/css/main.eccc943d.chunk.css",
-    "static/js/main.228a946b.chunk.js"
+    "static/js/2.605eb4e0.chunk.js",
+    "static/css/main.2fd6fa01.chunk.css",
+    "static/js/main.9d3fddad.chunk.js"
   ]
 }
