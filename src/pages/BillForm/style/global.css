@@ -1,0 +1,17 @@
+:root {
+  /* fonts */
+  --font-arial: Arial;
+
+  /* font sizes */
+  --font-size-base: 11px;
+  --font-size-lg: 12px;
+  --font-size-xl: 13px;
+  --font-size-2xl: 14px;
+  --font-size-3xl: 16px;
+  --font-size-4xl: 19px;
+
+  /* Colors */
+  --color-black: #000;
+  --color-palegoldenrod: #c4d79b;
+  --color-lightgoldenrodyellow: #d8e4bc;
+}

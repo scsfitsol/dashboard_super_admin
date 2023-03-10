@@ -527,6 +527,11 @@ const CONSTANT = {
         sort: "disabled",
       },
       {
+        label: "Bill",
+        field: "billDownload",
+        sort: "disabled",
+      },
+      {
         label: "Status",
         field: "statusData",
         sort: "asc",

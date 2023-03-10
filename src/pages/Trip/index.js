@@ -80,6 +80,7 @@ const Trip = () => {
             " : " +
             moment(tripData?.targetedDateAndTime).format("LT"),
           mapView: <i role="button" onClick={() => goToMapPage(tripData)} className="mdi mdi-eye-circle-outline fs-4"></i>,
+          billDownload: <i role="button" className="bx bxs-download fs-4"></i>,
           statusData: (
             <>
               <StatusButton
