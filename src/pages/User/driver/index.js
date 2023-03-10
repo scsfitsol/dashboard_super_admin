@@ -1,9 +1,11 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { Button, Modal, NavLink, Row } from "reactstrap";
 import CustomModal from "../../../components/Custome/CustomModal";
 import Table from "../../../components/Custome/table";
 import useHttp from "../../../components/Hook/Use-http";
+import Services from "../../Utility/API/service";
 import CONSTANT, {
     DeleteButton,
     EditButton,
@@ -19,7 +21,7 @@ const Driver = () => {
     const [confirm_both, setconfirm_both] = useState(false);
     const [flag, setFlag] = useState(true);
     const [isEdit, setIsEdit] = useState(false);
-    // const history = useHistory()
+    const [driverConsent, setDriverConsent] = useState({})
     const API_CALL = useHttp();
 
     useEffect(() => {
@@ -29,7 +31,6 @@ const Driver = () => {
     }, []);
 
     const GoToDriverInfo = (driverData) => {
-        // history.push(`/driversInfo/${driverData?.id}`)
         window.location.assign(`/driversInfo/${driverData?.id}`);
     }
 
@@ -38,32 +39,15 @@ const Driver = () => {
         setCurrentLicenseURL(url)
     }
 
-    const driverDataHandler = (res) => {
-        setDriverData(
-            res?.data.map((driverData, index) => {
 
-                return {
-                    ...driverData,
-                    no: index + 1,
-                    driverName: <NavLink className="TableLink" onClick={() => GoToDriverInfo(driverData)} style={{ color: "gray", cursor: 'pointer' }} >{driverData.name}</NavLink>,
-                    drivingLicenseImage: <i onClick={() => onOpenLicense(driverData.drivingLicense)} className="bx bx-info-circle fs-3" style={{ cursor: "pointer" }} ></i>,
-                    action: (
-                        <>
-                            <EditButton
-                                onClick={() => {
-                                    onEditDriver(driverData);
-                                }}
-                            />
-                            <DeleteButton
-                                onClick={() => {
-                                    openConfirmationDeleteModal(driverData);
-                                }}
-                            />
-                        </>
-                    ),
-                };
-            })
-        );
+    const driverDataHandler = async (res) => {
+        setDriverData(res?.data)
+
+        for (let index = 0; index < res?.data.length; index++) {
+            const consent = await Services.get(`/location/consentApi/${res?.data[index].mobile}`);
+            setDriverConsent((previous) => { return { ...previous, [res?.data[index].mobile]: consent } })
+        }
+
     };
 
     const openConfirmationDeleteModal = (driverData) => {
@@ -147,7 +131,31 @@ const Driver = () => {
             </div>
             <Table
                 title="Driver List"
-                data={{ columns: getTableData("driver")["columns"], rows: driverData }}
+                data={{
+                    columns: getTableData("driver")["columns"], rows: driverData.map((driverData, index) => {
+                        return {
+                            ...driverData,
+                            no: index + 1,
+                            driverName: <NavLink className="TableLink" onClick={() => GoToDriverInfo(driverData)} style={{ color: "gray", cursor: 'pointer' }} >{driverData.name}</NavLink>,
+                            consentValue: driverConsent[driverData.mobile]?.data?.Consent?.status,
+                            drivingLicenseImage: <i onClick={() => onOpenLicense(driverData.drivingLicense)} className="bx bx-info-circle fs-3" style={{ cursor: "pointer" }} ></i>,
+                            action: (
+                                <>
+                                    <EditButton
+                                        onClick={() => {
+                                            onEditDriver(driverData);
+                                        }}
+                                    />
+                                    <DeleteButton
+                                        onClick={() => {
+                                            openConfirmationDeleteModal(driverData);
+                                        }}
+                                    />
+                                </>
+                            ),
+                        };
+                    })
+                }}
             />
             <CustomModal
                 modalType="formModal"

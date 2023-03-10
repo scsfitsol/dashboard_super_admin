@@ -399,6 +399,11 @@ const CONSTANT = {
         sort: "asc",
       },
       {
+        label: "Consent",
+        field: "consentValue",
+        sort: "asc",
+      },
+      {
         label: "Action",
         field: "action",
         sort: "disabled",
