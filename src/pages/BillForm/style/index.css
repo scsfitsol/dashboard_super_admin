@@ -2838,6 +2838,9 @@ table.sheet0 tr.row0 {
 table.sheet0 tr.row1 {
   height: 53.25pt
 }
+table.sheet0 tr.row1 .style95 {
+  margin-top: -20px;
+}
 
 table.sheet0 tr.row2 {
   height: 53.25pt
@@ -2850,6 +2853,9 @@ table.sheet0 tr.row3 {
 table.sheet0 tr.row4 {
   height: 32.25pt
 }
+table.sheet0 tr.row4 .s {
+  padding-left: 10px;
+}
 
 table.sheet0 tr.row5 {
   height: 38.25pt
@@ -2858,6 +2864,9 @@ table.sheet0 tr.row5 {
 table.sheet0 tr.row6 {
   height: 36pt
 }
+table.sheet0 tr.row6 .style54, table.sheet0 tr.row6 .style52, table.sheet0 tr.row11 .style45, table.sheet0 tr.row11 .style46, table.sheet0 tr.row12 .style45, table.sheet0 tr.row12 .style46, table.sheet0 tr.row7 .style65, table.sheet0 tr.row8 .style33, table.sheet0 tr.row8 .style33, table.sheet0 tr.row9 .style33, table.sheet0 tr.row10 .style33, table.sheet0 tr.row11 .style33, table.sheet0 tr.row12 .style33, table.sheet0 tr.row13 .style33, table.sheet0 tr.row14 .style33, table.sheet0 tr.row15 .style33, table.sheet0 tr.row16 .style33, table.sheet0 tr.row17 .style35, table.sheet0 tr.row18 .style29, table.sheet0 tr.row19 .style31, table.sheet0 tr.row20 .style33, table.sheet0 tr.row21 .style35, table.sheet0 tr.row22 .style29, table.sheet0 tr.row19 .style11, table.sheet0 tr.row18 .style11, table.sheet0 tr.row20 .style11, table.sheet0 tr.row7 .style22, table.sheet0 tr.row21 .style11{
+  padding-left: 10px;
+}
 
 table.sheet0 tr.row7 {
   height: 42.75pt
@@ -2865,6 +2874,10 @@ table.sheet0 tr.row7 {
 
 table.sheet0 tr.row9 {
   height: 15pt
+}
+
+table.sheet0 tr.row13 .style10 {
+  text-align: center;
 }
 
 table.sheet0 tr.row17 {
