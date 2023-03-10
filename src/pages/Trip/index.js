@@ -1,16 +1,18 @@
 import moment from "moment/moment";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { Button, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
 import useHttp from "../../components/Hook/Use-http";
+import jsPDF from 'jspdf';
 import CONSTANT, {
   DeleteButton,
   EditButton,
   getTableData,
   StatusButton,
 } from "../Utility/constnt";
+import BillForm from "../BillForm";
 
 const Trip = () => {
   const [showModel, setShowModel] = useState(false);
@@ -26,6 +28,8 @@ const Trip = () => {
   const [driverData, setDriverData] = useState([]);
   const [transporterData, setTransporterData] = useState([]);
   const [clientData, setClientData] = useState([])
+  const [downloadData, setDownloadData] = useState({})
+  const reportTemplateRef = useRef(null);
   const API_CALL = useHttp();
 
   useEffect(() => {
@@ -59,6 +63,26 @@ const Trip = () => {
     window.location.assign(`/tracking/${trip?.id}`);
   }
 
+
+
+  const handleGeneratePdf = () => {
+    const doc = new jsPDF({
+      orientation: 'l',
+      format: [1190, 920],
+      unit: 'px',
+    });
+
+    // Adding the fonts.  
+    doc.setFont('Inter-Regular', 'normal');
+
+    doc.html(reportTemplateRef.current, {
+      async callback(doc) {
+        await doc.save('document');
+      },
+    });
+  };
+
+
   const tripDataHandler = (res) => {
     setTripData(
       res?.data.map((tripData, index) => {
@@ -80,7 +104,12 @@ const Trip = () => {
             " : " +
             moment(tripData?.targetedDateAndTime).format("LT"),
           mapView: <i role="button" onClick={() => goToMapPage(tripData)} className="mdi mdi-eye-circle-outline fs-4"></i>,
-          billDownload: <i role="button" className="bx bxs-download fs-4"></i>,
+          billDownload: <i role="button" className="bx bxs-download fs-4 mt-2"
+            onClick={() => {
+              handleGeneratePdf();
+              setDownloadData(tripData)
+            }}>
+          </i>,
           statusData: (
             <>
               <StatusButton
@@ -270,6 +299,9 @@ const Trip = () => {
           </SweetAlert>
         ) : null
       }
+      <div className="" ref={reportTemplateRef}>
+        <BillForm trip={downloadData} />
+      </div>
     </React.Fragment >
   );
 };

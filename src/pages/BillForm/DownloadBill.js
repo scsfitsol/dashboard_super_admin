@@ -9,7 +9,7 @@ const DownloadBill = () => {
     const handleGeneratePdf = () => {
         const doc = new jsPDF({
             orientation: 'p',
-            format: 'a3',
+            format: [1500, 1900],
             unit: 'px',
         });
 
