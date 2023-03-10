@@ -135,35 +135,42 @@ const Trip = () => {
   };
 
   const onSubmitForm = (payload) => {
-    console.log('payload', payload)
-    // (async () => {
-    //   const ClientData = plantData.filter((e) => e.id === payload?.plantId);
-    //   const TransporterData = vehiclesData.filter(
-    //     (e) => e.id === payload?.vehicleId
-    //   );
-    //   payload.clientId = ClientData[0]?.client?.id;
-    //   payload.transporterId = TransporterData[0]?.transporter?.id;
-    //   if (actionData?.id) {
-    //     const URL = {
-    //       endpoint: `/trip/${actionData?.id}`,
-    //       type: "PATCH",
-    //     };
-    //     API_CALL.sendRequest(
-    //       URL,
-    //       () => setFlag((previous) => !previous),
-    //       payload,
-    //       "Driver Update Successfully"
-    //     );
-    //     setIsEdit(false);
-    //   } else {
-    //     API_CALL.sendRequest(
-    //       CONSTANT.API.addTrip,
-    //       () => setFlag((previous) => !previous),
-    //       payload,
-    //       "Driver Add Successfully"
-    //     );
-    //   }
-    // })();
+    (async () => {
+      if (!parseInt(payload?.vehicleId)) {
+        payload.vehicleRegistrationNumber = payload?.vehicleId
+        payload.vehicleId = null
+      }
+      else {
+        payload.vehicleId = payload?.vehicleId
+      }
+      const ClientData = plantData.filter((e) => e.id === payload?.plantId);
+      const TransporterData = vehiclesData.filter(
+        (e) => e.id === payload?.vehicleId
+      );
+      payload.status = 2;
+      payload.clientId = ClientData[0]?.client?.id;
+      payload.transporterId = TransporterData[0]?.transporter?.id;
+      if (actionData?.id) {
+        const URL = {
+          endpoint: `/trip/${actionData?.id}`,
+          type: "PATCH",
+        };
+        API_CALL.sendRequest(
+          URL,
+          () => setFlag((previous) => !previous),
+          payload,
+          "Driver Update Successfully"
+        );
+        setIsEdit(false);
+      } else {
+        API_CALL.sendRequest(
+          CONSTANT.API.addTrip,
+          () => setFlag((previous) => !previous),
+          payload,
+          "Driver Add Successfully"
+        );
+      }
+    })();
   };
 
   return (
