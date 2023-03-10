@@ -35,14 +35,14 @@ import ClientInfo from "../pages/User/client/ClientInfo";
 import TransporterInfo from "../pages/User/transporter/transpoterInfo";
 import DriverInfo from "../pages/User/driver/DriverInfo";
 import VehiclesInfo from "../pages/Vehicals/VehiclesInfo";
-import Invoice from "../pages/Trip/Invoice";
+// import Invoice from "../pages/Trip/Invoice";
 
 const userRoutes = [
   // Analytics
   { path: "/", component: Report },
   { path: "/tracking/:tripId", component: Tracking },
   { path: "/tracking", component: Tracking },
-  { path: "/invoice", component: Invoice },
+  // { path: "/invoice", component: Invoice },
 
   // User
   { path: "/admins", component: Admin },
