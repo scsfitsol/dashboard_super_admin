@@ -42,7 +42,6 @@ const Report = () => {
   const [tripList, setTripList] = useState([])
   const [carbonEmissionsData, setCarbonEmissionsData] = useState([])
   const API_CALL = useHttp();
-
   useEffect(() => {
     (async () => {
       API_CALL.sendRequest(CONSTANT.API.getAnalysis, analysisDataHandler);
@@ -179,12 +178,10 @@ const Report = () => {
             <Card style={{ height: "500px" }}>
               <CardBody>
                 <div className="mb-4 d-flex align-items-center justify-content-between">
-                  <CardTitle className="fs-4">
-                    Transporters Information
-                  </CardTitle>
+                  <CardTitle className="fs-4">Transporter Efficiency</CardTitle>
                   <ToolTipButton
                     id="Transport"
-                    msg="Showcase the transporter’s efficiency on the number of trips covered, fuel consumed, etc."
+                    msg="Efficiency is calculated based on the number of trips completed, total load carried and total Carbon Emitted"
                   />
                 </div>
                 <Overview data={transporterList} isPercentage={true} />
@@ -195,10 +192,12 @@ const Report = () => {
             <Card style={{ height: "500px" }}>
               <CardBody>
                 <div className="mb-4 d-flex align-items-center justify-content-between">
-                  <CardTitle className="fs-4">Carbon Emission</CardTitle>
+                  <CardTitle className="fs-4">
+                    Client Carbon Emissions
+                  </CardTitle>
                   <ToolTipButton
                     id="Carbon"
-                    msg="Carbon emitted to date on a total number of trips completed by different clients."
+                    msg="Carbon emissions till date for each client"
                   />
                 </div>
                 <Overview data={tripList} />

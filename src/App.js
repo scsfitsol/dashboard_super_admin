@@ -24,7 +24,7 @@ import CONSTANT, { MyData } from "./pages/Utility/constnt";
 import useHttp from "./components/Hook/Use-http";
 
 //Import Css
-import "./assets/css/Custom.css"
+import "./assets/css/Custom.css";
 // Activating fake backend
 fakeBackend();
 
@@ -35,14 +35,12 @@ const App = (props) => {
   useEffect(() => {
     (async () => {
       if (localStorage.getItem("authToken")) {
-        API_CALL.sendRequest(CONSTANT.API.getMe, getMeDataHandler)
+        API_CALL.sendRequest(CONSTANT.API.getMe, getMeDataHandler);
       }
     })();
   }, []);
 
   const getMeDataHandler = (res) => {
-    debugger
-    console.log('res', res)
     MyData.data = res.data[0];
   };
 
@@ -67,7 +65,7 @@ const App = (props) => {
       <Router>
         <Switch>
           {authRoutes.map((route, idx) => (
-            < Authmiddleware
+            <Authmiddleware
               path={route.path}
               layout={NonAuthLayout}
               component={route.component}

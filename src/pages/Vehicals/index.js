@@ -38,7 +38,6 @@ const Vehicals = () => {
   };
 
   const GoToVehicleInfo = (vehicleData) => {
-    // history.push(`/vehiclesInfo/${vehicleData?.id}`, { state: { vehicleData: vehicleData } })
     window.location.assign(`/vehiclesInfo/${vehicleData?.id}`);
   };
 
