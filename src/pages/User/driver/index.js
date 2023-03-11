@@ -18,7 +18,7 @@ const Driver = () => {
     const [currentLicenseURL, setCurrentLicenseURL] = useState('')
     const [driverData, setDriverData] = useState([]);
     const [actionData, setActionData] = useState({});
-    const [confirm_both, setconfirm_both] = useState(false);
+    const [confirm_both, setConfirm_both] = useState(false);
     const [flag, setFlag] = useState(true);
     const [isEdit, setIsEdit] = useState(false);
     const [driverConsent, setDriverConsent] = useState({})
@@ -28,7 +28,7 @@ const Driver = () => {
         (async () => {
             API_CALL.sendRequest(CONSTANT.API.getAllDriver, driverDataHandler);
         })();
-    }, []);
+    }, [flag]);
 
     const GoToDriverInfo = (driverData) => {
         window.location.assign(`/driversInfo/${driverData?.id}`);
@@ -42,7 +42,6 @@ const Driver = () => {
 
     const driverDataHandler = async (res) => {
         setDriverData(res?.data)
-
         for (let index = 0; index < res?.data.length; index++) {
             const consent = await Services.get(`/location/consentApi/${res?.data[index].mobile}`);
             setDriverConsent((previous) => { return { ...previous, [res?.data[index].mobile]: consent } })
@@ -51,7 +50,7 @@ const Driver = () => {
     };
 
     const openConfirmationDeleteModal = (driverData) => {
-        setconfirm_both(true);
+        setConfirm_both(true);
         setActionData(driverData);
     };
 
@@ -138,7 +137,7 @@ const Driver = () => {
                             no: index + 1,
                             driverName: <NavLink className="TableLink" onClick={() => GoToDriverInfo(driverData)} style={{ color: "gray", cursor: 'pointer' }} >{driverData.name}</NavLink>,
                             consentValue: driverConsent[driverData.mobile]?.data?.Consent?.status,
-                            drivingLicenseImage: <i onClick={() => onOpenLicense(driverData.drivingLicense)} className="bx bx-info-circle fs-3" style={{ cursor: "pointer" }} ></i>,
+                            drivingLicenseImage: <i onClick={() => onOpenLicense(driverData.drivingLicense)} className="mdi mdi-eye-circle-outline fs-3" style={{ cursor: "pointer" }} ></i>,
                             action: (
                                 <>
                                     <EditButton
@@ -177,10 +176,10 @@ const Driver = () => {
                     cancelBtnBsStyle="danger"
                     onConfirm={() => {
                         onDeleteDriver();
-                        setconfirm_both(false);
+                        setConfirm_both(false);
                     }}
                     onCancel={() => {
-                        setconfirm_both(false);
+                        setConfirm_both(false);
                     }}
                 >
                     You won't be able to revert this!

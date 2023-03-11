@@ -557,7 +557,7 @@ const CONSTANT = {
         sort: "asc",
       },
       {
-        label: "Start Date and Time",
+        label: "Start Date & Time",
         field: "startDateAndTime",
         sort: "asc",
       },
@@ -890,7 +890,7 @@ const CONSTANT = {
         name: "drivingLicense",
         label: "Driving License",
         type: "file",
-        required: true,
+        required: false,
       },
     ],
     CLIENT: [
