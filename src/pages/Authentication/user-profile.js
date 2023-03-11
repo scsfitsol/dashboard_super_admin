@@ -21,12 +21,10 @@ import useHttp from "../../components/Hook/Use-http";
 import defaultImage from "../../assets/images/UserImage.jpg";
 
 const UserProfile = (props) => {
-  const [email, setemail] = useState("");
-  const [name, setname] = useState("");
-  const [idx, setidx] = useState(1);
   const { resetProfileFlag } = props;
+  const [flag, setFlag] = useState(false)
   const API_CALL = useHttp();
-  useEffect(() => {}, [props.success, resetProfileFlag]);
+  useEffect(() => { }, [props.success, resetProfileFlag, flag]);
   function handleValidSubmit(event, values) {
     props.editProfile(values);
   }
@@ -35,11 +33,20 @@ const UserProfile = (props) => {
     (async () => {
       API_CALL.sendRequest(
         CONSTANT.API.adminUpdate,
-        null,
+        updateMeHandler,
         payload,
         "Your Data Update Successfully"
       );
     })();
+  };
+
+  const updateMeHandler = () => {
+    API_CALL.sendRequest(CONSTANT.API.getMe, getMeDataHandler);
+  }
+
+  const getMeDataHandler = (res) => {
+    MyData.data = res.data[0];
+    setFlag(!flag)
   };
 
   return (
@@ -93,7 +100,7 @@ const UserProfile = (props) => {
               onSubmit={(data) => onSubmitForm(data)}
               defaultData={MyData.data}
               formData={true}
-              // isEdit={isEdit}
+            // isEdit={isEdit}
             />
           </CardBody>
         </Card>

@@ -399,6 +399,11 @@ const CONSTANT = {
         sort: "asc",
       },
       {
+        label: "Consent",
+        field: "consentValue",
+        sort: "asc",
+      },
+      {
         label: "Action",
         field: "action",
         sort: "disabled",
@@ -527,6 +532,11 @@ const CONSTANT = {
         sort: "disabled",
       },
       {
+        label: "Bill",
+        field: "billDownload",
+        sort: "disabled",
+      },
+      {
         label: "Status",
         field: "statusData",
         sort: "asc",
@@ -547,7 +557,7 @@ const CONSTANT = {
         sort: "asc",
       },
       {
-        label: "Start Date and Time",
+        label: "Start Date & Time",
         field: "startDateAndTime",
         sort: "asc",
       },
@@ -880,7 +890,7 @@ const CONSTANT = {
         name: "drivingLicense",
         label: "Driving License",
         type: "file",
-        required: true,
+        required: false,
       },
     ],
     CLIENT: [
