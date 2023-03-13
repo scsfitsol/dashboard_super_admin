@@ -21,13 +21,21 @@ import useHttp from "../../components/Hook/Use-http";
 import defaultImage from "../../assets/images/UserImage.jpg";
 
 const UserProfile = (props) => {
-  const { resetProfileFlag } = props;
   const [flag, setFlag] = useState(false)
+  const [userDetail, setUserDetail] = useState({})
   const API_CALL = useHttp();
-  useEffect(() => { }, [props.success, resetProfileFlag, flag]);
-  function handleValidSubmit(event, values) {
-    props.editProfile(values);
-  }
+  useEffect(() => {
+    (async () => {
+      if (localStorage.getItem("authToken")) {
+        API_CALL.sendRequest(CONSTANT.API.getMe, getMeDataHandler);
+      }
+    })();
+  }, [flag]);
+
+  const getMeDataHandler = (res) => {
+    console.log('first', res.data[0])
+    setUserDetail(res.data[0])
+  };
 
   const onSubmitForm = (payload) => {
     (async () => {
@@ -41,13 +49,8 @@ const UserProfile = (props) => {
   };
 
   const updateMeHandler = () => {
-    API_CALL.sendRequest(CONSTANT.API.getMe, getMeDataHandler);
-  }
-
-  const getMeDataHandler = (res) => {
-    MyData.data = res.data[0];
     setFlag(!flag)
-  };
+  }
 
   return (
     <React.Fragment>
@@ -70,8 +73,8 @@ const UserProfile = (props) => {
                   <div className="ms-3">
                     <img
                       src={
-                        MyData.data.profilePic
-                          ? MyData.data.profilePic
+                        userDetail?.profilePic
+                          ? userDetail?.profilePic
                           : defaultImage
                       }
                       alt=""
@@ -80,9 +83,9 @@ const UserProfile = (props) => {
                   </div>
                   <div className="flex-1 align-self-center ms-3">
                     <div className="text-muted">
-                      <h5>{MyData?.data?.name}</h5>
-                      <p className="mb-1">{MyData?.data?.email}</p>
-                      <p className="mb-0">{MyData?.data?.name}</p>
+                      <h5>{userDetail?.name}</h5>
+                      <p className="mb-1">{userDetail?.email}</p>
+                      <p className="mb-0">{userDetail?.name}</p>
                     </div>
                   </div>
                 </div>
@@ -98,7 +101,7 @@ const UserProfile = (props) => {
             <CustomForm
               data={CONSTANT.FORM_FIELDS.ADMIN_EDIT}
               onSubmit={(data) => onSubmitForm(data)}
-              defaultData={MyData.data}
+              defaultData={userDetail}
               formData={true}
             // isEdit={isEdit}
             />
