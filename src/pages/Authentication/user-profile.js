@@ -22,7 +22,7 @@ const UserProfile = (props) => {
 
   useEffect(() => {
     (async () => {
-      if (localStorage.getItem("authToken")) {
+      if (localStorage.getItem("authUser")) {
         API_CALL.sendRequest(CONSTANT.API.getMe, getMeDataHandler);
       }
     })();
@@ -31,7 +31,6 @@ const UserProfile = (props) => {
   const getMeDataHandler = (res) => {
     setUserDetail(res.data[0]);
     MyData.data = res.data[0];
-    localStorage.setItem('profileData', JSON.stringify(res.data[0]))
   };
 
   const onSubmitForm = (payload) => {
