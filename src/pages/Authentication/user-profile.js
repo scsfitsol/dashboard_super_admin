@@ -1,18 +1,12 @@
 import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import { Row, Col, Card, Alert, CardBody, Button } from "reactstrap";
-
-// availity-reactstrap-validation
-import { AvForm, AvField } from "availity-reactstrap-validation";
-
 // Redux
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 //Import Breadcrumb
 import Breadcrumb from "../../components/Common/Breadcrumb";
-
-import avatar from "../../assets/images/users/avatar-1.jpg";
 // actions
 import { editProfile, resetProfileFlag } from "../../store/actions";
 import CONSTANT, { MyData } from "../Utility/constnt";
@@ -21,20 +15,22 @@ import useHttp from "../../components/Hook/Use-http";
 import defaultImage from "../../assets/images/UserImage.jpg";
 
 const UserProfile = (props) => {
-  const [flag, setFlag] = useState(false)
-  const [userDetail, setUserDetail] = useState({})
+  const [flag, setFlag] = useState(false);
+  const [userDetail, setUserDetail] = useState({});
   const API_CALL = useHttp();
+
+
   useEffect(() => {
     (async () => {
-      if (localStorage.getItem("authToken")) {
+      if (localStorage.getItem("authUser")) {
         API_CALL.sendRequest(CONSTANT.API.getMe, getMeDataHandler);
       }
     })();
   }, [flag]);
 
   const getMeDataHandler = (res) => {
-    console.log('first', res.data[0])
-    setUserDetail(res.data[0])
+    setUserDetail(res.data[0]);
+    MyData.data = res.data[0];
   };
 
   const onSubmitForm = (payload) => {
@@ -55,7 +51,6 @@ const UserProfile = (props) => {
   return (
     <React.Fragment>
       <div className="page-content">
-        {/* Render Breadcrumb */}
         <Breadcrumb title="Fitsol" breadcrumbItem="Profile" />
 
         <Row>

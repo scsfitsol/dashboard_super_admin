@@ -6,8 +6,6 @@ import { withRouter, Link } from "react-router-dom";
 //i18n
 import { withTranslation } from "react-i18next";
 import SidebarContent from "./SidebarContent";
-
-import avatar2 from "../../assets/images/users/avatar-2.jpg";
 import { MyData } from "../../pages/Utility/constnt";
 import defaultImage from "../../assets/images/UserImage.jpg";
 
