@@ -68,7 +68,7 @@ const Trip = () => {
   const handleGeneratePdf = () => {
     const doc = new jsPDF({
       orientation: 'l',
-      format: [1190, 920],
+      format: [1130, 1100],
       unit: 'px',
     });
 
@@ -299,8 +299,10 @@ const Trip = () => {
           </SweetAlert>
         ) : null
       }
-      <div className="" ref={reportTemplateRef}>
-        <BillForm trip={downloadData} />
+      <div className="d-none">
+        <div className="" ref={reportTemplateRef}>
+          <BillForm trip={downloadData} />
+        </div>
       </div>
     </React.Fragment >
   );

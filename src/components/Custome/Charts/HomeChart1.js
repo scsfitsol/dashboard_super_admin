@@ -2,11 +2,13 @@ import React from "react";
 import ReactApexChart from "react-apexcharts";
 
 const HomeChart1 = (props) => {
-  const { data } = props;
+  let { data } = props;
+  // data = data.reverse()
+  console.log('first', data)
   const series = [
     {
       name: "Carbon Emissions",
-      data: data.map((e) => e.value),
+      data: data.map((e) => e.value).reverse(),
     },
   ];
 
@@ -21,12 +23,12 @@ const HomeChart1 = (props) => {
     series: [
       {
         name: "series1",
-        data: data.map((e) => e.key),
+        data: data.map((e) => e.key).reverse(),
       },
     ],
     colors: ["#45cb85", "#eeb902"],
     xaxis: {
-      categories: data.map((e) => e.key),
+      categories: data.map((e) => e.key).reverse(),
     },
     grid: {
       borderColor: "#f1f1f1",
