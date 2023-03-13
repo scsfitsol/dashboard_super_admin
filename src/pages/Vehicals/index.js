@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import SweetAlert from "react-bootstrap-sweetalert";
-import { useHistory } from "react-router-dom";
 import { Button, NavLink, Row } from "reactstrap";
 import CustomModal from "../../components/Custome/CustomModal";
 import Table from "../../components/Custome/table";
@@ -16,7 +15,7 @@ const Vehicals = () => {
   const [showModel, setShowModel] = useState(false);
   const [vehicleData, setVehicleData] = useState([]);
   const [actionData, setActionData] = useState({});
-  const [confirm_both, setconfirm_both] = useState(false);
+  const [confirm_both, setConfirm_both] = useState(false);
   const [flag, setFlag] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
   const [transporterData, setTransporterData] = useState([])
@@ -31,7 +30,7 @@ const Vehicals = () => {
         transporterDataHandler
       );
     })();
-  }, []);
+  }, [flag]);
 
   const transporterDataHandler = (res) => {
     setTransporterData(res?.data)
@@ -78,7 +77,7 @@ const Vehicals = () => {
   };
 
   const openConfirmationDeleteModal = (vehicleData) => {
-    setconfirm_both(true);
+    setConfirm_both(true);
     setActionData(vehicleData);
   };
 
@@ -95,7 +94,7 @@ const Vehicals = () => {
     };
     API_CALL.sendRequest(
       URL,
-      () => setFlag((previos) => !previos),
+      () => setFlag((previous) => !previous),
       null,
       "Delete Successfully"
     );
@@ -110,7 +109,7 @@ const Vehicals = () => {
         };
         API_CALL.sendRequest(
           URL,
-          () => setFlag((previos) => !previos),
+          () => setFlag((previous) => !previous),
           payload,
           "Vehicle Update Successfully"
         );
@@ -118,7 +117,7 @@ const Vehicals = () => {
       } else {
         API_CALL.sendRequest(
           CONSTANT.API.addVehicle,
-          () => setFlag((previos) => !previos),
+          () => setFlag((previous) => !previous),
           payload,
           "Vehicle Add Successfully"
         );
@@ -189,10 +188,10 @@ const Vehicals = () => {
           cancelBtnBsStyle="danger"
           onConfirm={() => {
             onDeleteVehicle();
-            setconfirm_both(false);
+            setConfirm_both(false);
           }}
           onCancel={() => {
-            setconfirm_both(false);
+            setConfirm_both(false);
           }}
         >
           You won't be able to revert this!
